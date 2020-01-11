@@ -23,15 +23,21 @@ export function generateTypeGraphQLImports(sourceFile: SourceFile) {
       "Int",
       "Float",
       "ID",
-      "Resolver",
       "FieldResolver",
-      "Root",
       "Ctx",
       "InputType",
-      "Query",
-      "Mutation",
       "Arg",
       "ArgsType",
+    ].sort(),
+  });
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "@nestjs/graphql",
+    namedImports: [
+      "Resolver",
+      "Root",
+      "Context",
+      "Query",
+      "Mutation",
       "Args",
     ].sort(),
   });

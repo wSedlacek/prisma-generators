@@ -174,7 +174,7 @@ export default async function generateCrudResolverClassFromMapping(
                 name: "ctx",
                 // TODO: import custom `ContextType`
                 type: "any",
-                decorators: [{ name: "Ctx", arguments: [] }],
+                decorators: [{ name: "Context", arguments: [] }],
               },
               ...(!argsTypeName
                 ? []

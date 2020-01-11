@@ -114,7 +114,7 @@ class Photon {
             datamodelPath: path.resolve(__dirname, 'schema.prisma'),
             prismaPath: engineConfig.binaryPath || undefined,
             datasources,
-            generator: { "name": "photon", "provider": "photonjs", "output": "F:\\#Projekty\\#Github\\typegraphql-prisma\\experiments\\prisma\\generated\\photon", "binaryTargets": ["windows", "debian-openssl-1.1.x"], "config": {} },
+            generator: { "name": "photon", "provider": "photonjs", "output": "F:\\#Projekty\\#Github\\typegraphql-prisma-nestjs\\experiments\\prisma\\generated\\photon", "binaryTargets": ["windows", "debian-openssl-1.1.x"], "config": {} },
         });
         this.dmmf = new runtime_1.DMMFClass(exports.dmmf);
         this.fetcher = new PhotonFetcher(this, this.engine, false, internal.hooks);

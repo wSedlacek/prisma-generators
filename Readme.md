@@ -9,7 +9,7 @@ Prisma Framework (formerly called Prisma 2) generator to emit TypeGraphQL type c
 Fist of all, you have to install the generator, as a dev dependency:
 
 ```sh
-npm i -D typegraphql-prisma
+npm i -D typegraphql-prisma-nestjs
 ```
 
 You also need to install its peer deependency - `dataloader` - which is used for batching and caching the calls to `Photon` in the relations resolvers:
@@ -28,15 +28,15 @@ generator photon {
 }
 
 generator typegraphql {
-  provider = "node_modules/typegraphql-prisma/generator.js"
+  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
 }
 ```
 
-Then after running `npx prisma2 generate`, this will emit the generated TypeGraphQL classes to `@generated/typegraphql-prisma` in `node_modules` folder. You can also configure the default output folder, e.g.:
+Then after running `npx prisma2 generate`, this will emit the generated TypeGraphQL classes to `@generated/typegraphql-prisma-nestjs` in `node_modules` folder. You can also configure the default output folder, e.g.:
 
 ```prisma
 generator typegraphql {
-  provider = "node_modules/typegraphql-prisma/generator.js"
+  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
   output   = "../prisma/generated/type-graphql"
 }
 ```
@@ -185,4 +185,4 @@ Currently released version `0.1.x` is just a preview of the upcoming integration
 
 However, the base functionality is working well, so I strongly encourage you to give it a try and play with it. Any feedback about the developers experience, bug reports or ideas about new features or enhancements are very welcome - please feel free to put your two cents into [discussion in the issue](https://github.com/MichalLytek/type-graphql/issues/476).
 
-In near feature, when Prisma SDK will be ready, the `typegraphql-prisma` integration will also allow to use a code-first approach to build a `schema.prisma` and GraphQL schema at once, using classes with decorators as a single source of truth. Stay tuned! :muscle:
+In near feature, when Prisma SDK will be ready, the `typegraphql-prisma-nestjs` integration will also allow to use a code-first approach to build a `schema.prisma` and GraphQL schema at once, using classes with decorators as a single source of truth. Stay tuned! :muscle:
