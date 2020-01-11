@@ -1,4 +1,4 @@
-![integration logo](https://raw.githubusercontent.com/MichalLytek/type-graphql/prisma/img/integration.png)
+![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
 
 # TypeGraphQL & Prisma Framework integration
 
@@ -177,12 +177,12 @@ export class CustomUserResolver {
 
 You can check out the basic integration example on this repo:
 
-https://github.com/MichalLytek/type-graphql/tree/prisma/examples/basic
+https://github.com/EndyKaufman/typegraphql-prisma-nestjs/tree/prisma/examples/basic
 
 ## Feedback
 
 Currently released version `0.1.x` is just a preview of the upcoming integration. For now it lacks customization option - picking/omitting fields of object types to expose in the schema, as well as picking CRUD methods and exposed args.
 
-However, the base functionality is working well, so I strongly encourage you to give it a try and play with it. Any feedback about the developers experience, bug reports or ideas about new features or enhancements are very welcome - please feel free to put your two cents into [discussion in the issue](https://github.com/MichalLytek/type-graphql/issues/476).
+However, the base functionality is working well, so I strongly encourage you to give it a try and play with it. Any feedback about the developers experience, bug reports or ideas about new features or enhancements are very welcome - please feel free to put your two cents into [discussion in the issue](https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues/476).
 
 In near feature, when Prisma SDK will be ready, the `typegraphql-prisma-nestjs` integration will also allow to use a code-first approach to build a `schema.prisma` and GraphQL schema at once, using classes with decorators as a single source of truth. Stay tuned! :muscle:

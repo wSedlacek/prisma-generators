@@ -51,10 +51,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MichalLytek/type-graphql.git"
+    "url": "https://github.com/EndyKaufman/typegraphql-prisma-nestjs.git"
   },
   "bugs": {
-    "url": "https://github.com/MichalLytek/type-graphql/issues"
+    "url": "https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues"
   },
   "keywords": [
     "type-graphql",
@@ -79,5 +79,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/EndyKaufman"
   }
 }
