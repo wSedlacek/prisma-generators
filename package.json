@@ -79,8 +79,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/EndyKaufman"
   }
 }
