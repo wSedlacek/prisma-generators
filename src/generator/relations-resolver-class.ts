@@ -138,6 +138,10 @@ export default async function generateRelationsResolverClassesFromModel(
                 }`,
               ],
             },
+            {
+              name: "ResolveProperty",
+              arguments: [],
+            },
           ],
           parameters: [
             {
