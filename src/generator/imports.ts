@@ -143,6 +143,10 @@ export function generateResolversBarrelFile(
       a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0,
     )
     .forEach(({ modelName, resolverName, argTypeNames }) => {
+      sourceFile.addImportDeclaration({
+        moduleSpecifier: `./${modelName}/${resolverName}`,
+        namedImports: [resolverName].sort(),
+      });
       sourceFile.addExportDeclaration({
         moduleSpecifier: `./${modelName}/${resolverName}`,
         namedExports: [resolverName],
