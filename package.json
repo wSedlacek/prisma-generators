@@ -1,6 +1,6 @@
 {
   "name": "typegraphql-prisma-nestjs",
-  "version": "0.1.2",
+  "version": "0.100.201",
   "scripts": {
     "build": "tsc",
     "check:type": "tsc --noEmit",
