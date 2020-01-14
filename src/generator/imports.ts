@@ -24,7 +24,6 @@ export function generateTypeGraphQLImports(sourceFile: SourceFile) {
       "Float",
       "ID",
       "FieldResolver",
-      "Ctx",
       "InputType",
       "Arg",
       "ArgsType",
@@ -34,6 +33,7 @@ export function generateTypeGraphQLImports(sourceFile: SourceFile) {
     moduleSpecifier: "@nestjs/graphql",
     namedImports: [
       "Resolver",
+      "ResolveProperty",
       "Root",
       "Context",
       "Query",
@@ -153,6 +153,34 @@ export function generateResolversBarrelFile(
         });
       }
     });
+
+  const moduleName =
+    type === "crud" ? "CrudResolversModule" : "RelationsResolversModule";
+  const providers = relationResolversData
+    .sort((a, b) =>
+      a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0,
+    )
+    .map(({ resolverName }) => resolverName);
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "@nestjs/common",
+    namedImports: ["Module"].sort(),
+  });
+  sourceFile.addClass({
+    name: moduleName,
+    isExported: true,
+    decorators: [
+      {
+        name: "Module",
+        arguments: [
+          `{
+  providers: [
+    ${providers.join(`,\n    `)}
+  ]
+}`,
+        ],
+      },
+    ],
+  });
 }
 
 export const generateModelsImports = createImportGenerator(modelsFolderName);
