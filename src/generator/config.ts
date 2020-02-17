@@ -1,4 +1,4 @@
-import { DMMF } from "@prisma/photon/runtime";
+import { DMMF } from "@prisma/client/runtime";
 
 export type BaseKeys = keyof Pick<DMMF.Mapping, "model" | "plural">;
 export const baseKeys: BaseKeys[] = ["model", "plural"];
@@ -11,7 +11,7 @@ export type SupportedQueries = keyof Pick<
   // TODO: uncomment when dmmf update aggregate details
   // "findOne" | "findMany" | "aggregate"
 >;
-export const supportedQueries: SupportedQueries[] = [
+export const supportedQueryActions: SupportedQueries[] = [
   "findOne",
   "findMany",
   // TODO: uncomment when dmmf update aggregate details
@@ -22,7 +22,7 @@ export type SupportedMutations = keyof Pick<
   DMMF.Mapping,
   "create" | "delete" | "update" | "deleteMany" | "updateMany" | "upsert"
 >;
-export const supportedMutations: SupportedMutations[] = [
+export const supportedMutationActions: SupportedMutations[] = [
   "create",
   "delete",
   "update",

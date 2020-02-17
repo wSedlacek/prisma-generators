@@ -142,21 +142,31 @@ export function generateResolversBarrelFile(
     .sort((a, b) =>
       a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0,
     )
-    .forEach(({ modelName, resolverName, argTypeNames }) => {
-      sourceFile.addImportDeclaration({
-        moduleSpecifier: `./${modelName}/${resolverName}`,
-        namedImports: [resolverName].sort(),
-      });
-      sourceFile.addExportDeclaration({
-        moduleSpecifier: `./${modelName}/${resolverName}`,
-        namedExports: [resolverName],
-      });
-      if (argTypeNames.length) {
-        sourceFile.addExportDeclaration({
-          moduleSpecifier: `./${modelName}/args`,
+    .forEach(
+      ({ modelName, resolverName, actionResolverNames, argTypeNames }) => {
+        sourceFile.addImportDeclaration({
+          moduleSpecifier: `./${modelName}/${resolverName}`,
+          namedImports: [resolverName].sort(),
         });
-      }
-    });
+        sourceFile.addExportDeclaration({
+          moduleSpecifier: `./${modelName}/${resolverName}`,
+          namedExports: [resolverName],
+        });
+        if (actionResolverNames) {
+          actionResolverNames.forEach(actionResolverName => {
+            sourceFile.addExportDeclaration({
+              moduleSpecifier: `./${modelName}/${actionResolverName}`,
+              namedExports: [actionResolverName],
+            });
+          });
+        }
+        if (argTypeNames.length) {
+          sourceFile.addExportDeclaration({
+            moduleSpecifier: `./${modelName}/args`,
+          });
+        }
+      },
+    );
 
   const moduleName =
     type === "crud" ? "CrudResolversModule" : "RelationsResolversModule";

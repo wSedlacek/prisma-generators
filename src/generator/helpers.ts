@@ -1,4 +1,4 @@
-import { DMMF } from "@prisma/photon/runtime";
+import { DMMF } from "@prisma/client/runtime";
 
 import { DMMFTypeInfo } from "./types";
 
@@ -92,18 +92,18 @@ export function mapScalarToTypeGraphQLType(scalar: string) {
     case "Float": {
       return scalar;
     }
-    default:
+    default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);
+    }
   }
 }
 
 export function selectInputTypeFromTypes(
   inputTypes: DMMF.SchemaArgInputType[],
 ): DMMF.SchemaArgInputType {
-  // FIXME: *Enum*Filter are currently empty
   return (
-    inputTypes.find(it => it.kind === "enum") ||
     inputTypes.find(it => it.kind === "object") ||
+    inputTypes.find(it => it.kind === "enum") ||
     inputTypes[0]
   );
 }

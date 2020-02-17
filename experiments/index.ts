@@ -18,9 +18,11 @@ import {
   Post,
   // Post as BasePost,
   PostRelationsResolver,
-  PostCrudResolver,
+  FindOnePostResolver,
+  CreateOnePostResolver,
+  UpdateManyPostResolver,
 } from "./prisma/generated/type-graphql";
-import { Photon } from "./prisma/generated/photon";
+import { PrismaClient } from "./prisma/generated/client";
 
 // @ObjectType()
 // class User extends BaseUser {}
@@ -29,14 +31,14 @@ import { Photon } from "./prisma/generated/photon";
 // class Post extends BasePost {}
 
 interface Context {
-  photon: Photon;
+  prisma: PrismaClient;
 }
 
 @Resolver(of => User)
 class UserResolver {
   @Query(returns => [User])
-  async users(@Ctx() { photon }: Context): Promise<User[]> {
-    return photon.users.findMany();
+  async users(@Ctx() { prisma }: Context): Promise<User[]> {
+    return prisma.user.findMany();
   }
 
   @FieldResolver()
@@ -48,8 +50,8 @@ class UserResolver {
 @Resolver(of => Post)
 class PostResolver {
   @Query(returns => [Post])
-  async posts(@Ctx() { photon }: Context): Promise<Post[]> {
-    return photon.posts.findMany();
+  async posts(@Ctx() { prisma }: Context): Promise<Post[]> {
+    return prisma.post.findMany();
   }
 }
 
@@ -61,20 +63,22 @@ async function main() {
       UserCrudResolver,
       PostResolver,
       PostRelationsResolver,
-      PostCrudResolver,
+      FindOnePostResolver,
+      CreateOnePostResolver,
+      UpdateManyPostResolver,
     ],
     validate: false,
     emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
   });
 
-  const photon = new Photon({
+  const prisma = new PrismaClient({
     debug: true,
   });
 
   const server = new ApolloServer({
     schema,
     playground: true,
-    context: (): Context => ({ photon }),
+    context: (): Context => ({ prisma }),
   });
   const { port } = await server.listen(4000);
   console.log(`GraphQL is listening on ${port}!`);

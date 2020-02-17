@@ -1,8 +1,8 @@
 ![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
 
-# TypeGraphQL & Prisma Framework integration
+# TypeGraphQL & Prisma 2 integration
 
-Prisma Framework (formerly called Prisma 2) generator to emit TypeGraphQL type classes and resolvers
+Prisma 2 generator to emit TypeGraphQL type classes and resolvers
 
 ## Installation
 
@@ -12,7 +12,7 @@ Fist of all, you have to install the generator, as a dev dependency:
 npm i -D typegraphql-prisma-nestjs
 ```
 
-You also need to install its peer deependency - `dataloader` - which is used for batching and caching the calls to `Photon` in the relations resolvers:
+You also need to install its peer deependency - `dataloader` - which is used for batching and caching the calls to `Prisma Client` in the relations resolvers:
 
 ```sh
 npm i dataloader
@@ -20,11 +20,11 @@ npm i dataloader
 
 ## Configuration
 
-After installation, you need to update your `schema.prisma` file and add a new generator section below the `photon` one:
+After installation, you need to update your `schema.prisma` file and add a new generator section below the `client` one:
 
 ```prisma
-generator photon {
-  provider = "photonjs"
+generator client {
+  provider = "prisma-client-js"
 }
 
 generator typegraphql {
@@ -100,7 +100,7 @@ export class User {
 
 It will also generates a whole bunch of stuffs based on your `schema.prisma` file - models classes, enums, as well as CRUD resolvers and relations resolver.
 
-CRUD resolvers supports this following methods with args that are 1:1 matching with the `Photon` API:
+CRUD resolvers supports this following methods with args that are 1:1 matching with the `PrismaClient` API:
 
 - findOne
 - findMany
@@ -127,27 +127,29 @@ const schema = await buildSchema({
 });
 ```
 
-When using the generated resolvers, you have to first provide the `Photon` instance into the context, to make it available for the crud and relations resolvers:
+When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
 
 ```ts
-import { Photon } from "@prisma/photon";
+import { PrismaClient } from "@prisma/client";
 
-const photon = new Photon();
+const prisma = new PrismaClient();
 const server = new ApolloServer({
   schema,
   playground: true,
-  context: (): Context => ({ photon }),
+  context: (): Context => ({ prisma }),
 });
 ```
 
-You can also add custom queries and mutations to the schema as always, using the generated `Photon` client:
+### Customization
+
+You can also add custom queries and mutations to the schema as always, using the generated `PrismaClient` client:
 
 ```ts
 @Resolver()
 export class CustomUserResolver {
   @Query(returns => User, { nullable: true })
-  async bestUser(@Ctx() { photon }: Context): Promise<User | null> {
-    return await photon.users.findOne({
+  async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
+    return await prisma.user.findOne({
       where: { email: "bob@prisma.io" },
     });
   }
@@ -162,9 +164,9 @@ export class CustomUserResolver {
   @FieldResolver(type => Post, { nullable: true })
   async favoritePost(
     @Root() user: User,
-    @Ctx() { photon }: Context,
+    @Ctx() { prisma }: Context,
   ): Promise<Post | undefined> {
-    const [favoritePost] = await photon.users
+    const [favoritePost] = await prisma.user
       .findOne({ where: { id: user.id } })
       .posts({ first: 1 });
 
@@ -173,11 +175,33 @@ export class CustomUserResolver {
 }
 ```
 
+If you want to expose only certain Prisma actions, like `findManyUser` or `createOneUser`, you can import resolver classes only for them, instead of the whole model `CrudResolver`.
+Then you just have to put them into the `buildSchema`:
+
+```ts
+import {
+  User,
+  UserRelationsResolver,
+  FindManyUserResolver,
+  CreateOneUserResolver,
+} from "@generated/type-graphql";
+
+const schema = await buildSchema({
+  resolvers: [
+    CustomUserResolver,
+    UserRelationsResolver,
+    FindManyUserResolver,
+    CreateOneUserResolver,
+  ],
+  validate: false,
+});
+```
+
 ## Examples
 
-You can check out the basic integration example on this repo:
+You can check out some integration examples on this repo:
 
-https://github.com/EndyKaufman/typegraphql-prisma-nestjs/tree/prisma/examples/basic
+https://github.com/EndyKaufman/typegraphql-prisma-nestjs/tree/prisma/examples/Readme.md
 
 ## Feedback
 

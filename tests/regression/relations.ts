@@ -3,12 +3,12 @@ import { promises as fs } from "fs";
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
 import { generateCodeFromSchema } from "../helpers/generate-code";
 
-describe("relations", () => {
+describe("relations resolvers generation", () => {
   let outputDirPath: string;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("relations");
-    await fs.mkdir(outputDirPath);
+    outputDirPath = generateArtifactsDirPath("regression-relations");
+    await fs.mkdir(outputDirPath, { recursive: true });
   });
 
   afterEach(async () => {
