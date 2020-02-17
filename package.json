@@ -58,6 +58,7 @@
     "url": "https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues"
   },
   "keywords": [
+    "nestjs",
     "type-graphql",
     "prisma",
     "typegraphql",
