@@ -189,6 +189,9 @@ export function generateResolversBarrelFile(
           `{
   providers: [
     ${providers.join(`,\n    `)}
+  ],
+  exports: [
+    ${providers.join(`,\n    `)}
   ]
 }`,
         ],
