@@ -5,12 +5,12 @@ import path from "path";
 import { noop } from "./helpers";
 import generateEnumFromDef from "./enum";
 import generateObjectTypeClassFromModel from "./object-type-class";
-import generateRelationsResolverClassesFromModel from "./relations-resolver-class";
+import generateRelationsResolverClassesFromModel from "./resolvers/relations";
 import {
   generateOutputTypeClassFromType,
   generateInputTypeClassFromType,
 } from "./type-class";
-import generateCrudResolverClassFromRootType from "./crud-resolver-class";
+import generateCrudResolverClassFromMapping from "./resolvers/full-crud";
 import {
   resolversFolderName,
   relationsResolversFolderName,
@@ -29,12 +29,14 @@ import {
   generateEnumsBarrelFile,
 } from "./imports";
 import saveSourceFile from "../utils/saveSourceFile";
+import { GenerateCodeOptions } from "./options";
 
 export default async function generateCode(
   dmmf: DMMF.Document,
-  baseDirPath: string,
+  options: GenerateCodeOptions,
   log: (msg: string) => void = noop,
 ) {
+  const baseDirPath = options.outputDirPath;
   const project = new Project();
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
   const modelNames = dmmf.datamodel.models.map(model => model.name);
@@ -181,12 +183,13 @@ export default async function generateCode(
   log("Generating crud resolvers...");
   const crudResolversData = await Promise.all(
     dmmf.mappings.map(mapping =>
-      generateCrudResolverClassFromRootType(
+      generateCrudResolverClassFromMapping(
         project,
         baseDirPath,
         mapping,
         rootTypes,
         modelNames,
+        options,
       ),
     ),
   );

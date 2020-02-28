@@ -25,12 +25,7 @@ describe("custom resolvers execution", () => {
         color    Color
       }
     `;
-    await generateCodeFromSchema(prismaSchema, outputDirPath);
-  });
-
-  afterAll(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
+    await generateCodeFromSchema(prismaSchema, { outputDirPath });
   });
 
   it("should be possible to use generated inputs, args and types to build own resolvers", async () => {

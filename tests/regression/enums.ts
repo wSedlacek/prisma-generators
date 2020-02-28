@@ -11,11 +11,6 @@ describe("enums", () => {
     await fs.mkdir(outputDirPath, { recursive: true });
   });
 
-  afterEach(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
-  });
-
   it("should properly generate code for normal enum", async () => {
     const schema = /* prisma */ `
       enum Color {
@@ -25,7 +20,7 @@ describe("enums", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const colorEnumTSFile = await fs.readFile(
       outputDirPath + "/enums/Color.ts",
       { encoding: "utf8" },
@@ -44,7 +39,7 @@ describe("enums", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const roleEnumTSFile = await fs.readFile(outputDirPath + "/enums/Role.ts", {
       encoding: "utf8",
     });

@@ -11,11 +11,6 @@ describe("inputs", () => {
     await fs.mkdir(outputDirPath, { recursive: true });
   });
 
-  afterEach(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
-  });
-
   it("should properly generate input type classes for filtering scalar fields", async () => {
     const schema = /* prisma */ `
       model SampleModel {
@@ -27,7 +22,7 @@ describe("inputs", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const intFilterTSFile = await fs.readFile(
       outputDirPath + "/resolvers/inputs/IntFilter.ts",
       { encoding: "utf8" },
@@ -67,7 +62,7 @@ describe("inputs", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const sampleModelWhereInputTSFile = await fs.readFile(
       outputDirPath + "/resolvers/inputs/SampleModelWhereInput.ts",
       { encoding: "utf8" },
@@ -101,7 +96,7 @@ describe("inputs", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const firstModelWhereInputTSFile = await fs.readFile(
       outputDirPath + "/resolvers/inputs/FirstModelWhereInput.ts",
       { encoding: "utf8" },
@@ -145,7 +140,7 @@ describe("inputs", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const colorEnumFilterTSFile = await fs.readFile(
       outputDirPath + "/resolvers/inputs/ColorFilter.ts",
       { encoding: "utf8" },

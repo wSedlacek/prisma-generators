@@ -19,12 +19,7 @@ describe("picking prisma actions", () => {
         dateField           DateTime
       }
     `;
-    await generateCodeFromSchema(prismaSchema, outputDirPath);
-  });
-
-  afterEach(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
+    await generateCodeFromSchema(prismaSchema, { outputDirPath });
   });
 
   it("should expose in GraphQL schema only actions chosen by single resolvers", async () => {

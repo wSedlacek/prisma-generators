@@ -33,7 +33,7 @@ describe("relations resolvers execution", () => {
         color    Color
       }
     `;
-    await generateCodeFromSchema(prismaSchema, outputDirPath);
+    await generateCodeFromSchema(prismaSchema, { outputDirPath });
     const {
       UserRelationsResolver,
       PostRelationsResolver,
@@ -74,11 +74,6 @@ describe("relations resolvers execution", () => {
       resolvers: [CustomResolver, UserRelationsResolver, PostRelationsResolver],
       validate: false,
     });
-  });
-
-  afterAll(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
   });
 
   it("should properly call PrismaClient on fetching array relations", async () => {

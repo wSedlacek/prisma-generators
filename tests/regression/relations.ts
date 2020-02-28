@@ -11,11 +11,6 @@ describe("relations resolvers generation", () => {
     await fs.mkdir(outputDirPath, { recursive: true });
   });
 
-  afterEach(async () => {
-    await fs.rmdir(outputDirPath, { recursive: true });
-    await new Promise(r => setTimeout(r, 100));
-  });
-
   it("should properly generate resolvers classes for prisma models with cyclic relations", async () => {
     const schema = /* prisma */ `
       model User {
@@ -29,7 +24,7 @@ describe("relations resolvers generation", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const userResolverTSFile = await fs.readFile(
       outputDirPath + "/resolvers/relations/User/UserRelationsResolver.ts",
       { encoding: "utf8" },
@@ -55,7 +50,7 @@ describe("relations resolvers generation", () => {
       }
     `;
 
-    await generateCodeFromSchema(schema, outputDirPath);
+    await generateCodeFromSchema(schema, { outputDirPath });
     const userPostsArgsTSFile = await fs.readFile(
       outputDirPath + "/resolvers/relations/User/args/UserPostsArgs.ts",
       { encoding: "utf8" },
