@@ -206,7 +206,7 @@ const schema = await buildSchema({
 
 You can check out some integration examples on this repo:
 
-https://github.com/EndyKaufman/typegraphql-prisma-nestjs/tree/prisma/examples/Readme.md
+https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example
 
 ## Feedback
 
