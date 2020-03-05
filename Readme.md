@@ -1,3 +1,6 @@
+# Example use NestJS + Prisma2 + Typegraphql
+https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example
+
 ![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
 
 # TypeGraphQL & Prisma 2 integration
