@@ -27,7 +27,11 @@ export function getFieldTSType(typeInfo: DMMFTypeInfo, modelNames: string[]) {
     throw new Error(`Unsupported field type kind: ${typeInfo.kind}`);
   }
   if (typeInfo.isList) {
-    TSType += "[]";
+    if (TSType.includes(" ")) {
+      TSType = `Array<${TSType}>`;
+    } else {
+      TSType += "[]";
+    }
   }
   if (!typeInfo.isRequired) {
     TSType += " | null";
@@ -37,8 +41,8 @@ export function getFieldTSType(typeInfo: DMMFTypeInfo, modelNames: string[]) {
 
 export function mapScalarToTSType(scalar: string) {
   switch (scalar) {
-    case "ID": {
-      // TODO: detect proper type of id field
+    case "ID":
+    case "UUID": {
       return "string";
     }
     case "String": {
@@ -85,6 +89,10 @@ export function mapScalarToTypeGraphQLType(scalar: string) {
   switch (scalar) {
     case "DateTime": {
       return "Date";
+    }
+    // TODO: use proper uuid graphql scalar
+    case "UUID": {
+      return "String";
     }
     case "Boolean":
     case "String":

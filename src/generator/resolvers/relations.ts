@@ -23,7 +23,6 @@ import {
 import {
   generateTypeGraphQLImports,
   generateArgsImports,
-  generateDataloaderImport,
   generateModelsImports,
   generateArgsBarrelFile,
 } from "../imports";
@@ -39,9 +38,23 @@ export default async function generateRelationsResolverClassesFromModel(
   modelNames: string[],
 ): Promise<GeneratedResolverData> {
   const resolverName = `${model.name}RelationsResolver`;
-  const relationFields = model.fields.filter(field => field.relationName);
-  const idField = model.fields.find(field => field.isId)!;
   const rootArgName = camelCase(model.name);
+  const relationFields = model.fields.filter(field => field.relationName);
+  const uniqueFields =
+    model.idFields.length > 0
+      ? model.fields.filter(field => model.idFields.includes(field.name))
+      : (model.uniqueFields as string[][]).length > 0
+      ? model.fields.filter(field =>
+          // taking first unique group is enough to fetch entity
+          (model.uniqueFields as string[][])[0].includes(field.name),
+        )
+      : [
+          model.fields.find(field => field.isId)! ??
+            model.fields.find(field => field.isUnique)!,
+        ].filter(Boolean);
+  if (uniqueFields.length === 0) {
+    throw new Error(`Unable to find unique fields for ${model.name}!`);
+  }
 
   const resolverDirPath = path.resolve(
     baseDirPath,
@@ -91,7 +104,6 @@ export default async function generateRelationsResolverClassesFromModel(
   }
 
   generateTypeGraphQLImports(sourceFile);
-  generateDataloaderImport(sourceFile);
   generateModelsImports(
     sourceFile,
     [...relationFields.map(field => field.type), model.name],
@@ -110,19 +122,6 @@ export default async function generateRelationsResolverClassesFromModel(
     ],
     methods: methodsInfo.map<OptionalKind<MethodDeclarationStructure>>(
       ({ field, fieldType, fieldDocs, argsTypeName }) => {
-        const [
-          createDataLoaderGetterFunctionName,
-          dataLoaderGetterInCtxName,
-        ] = createDataLoaderGetterCreationStatement(
-          sourceFile,
-          model.name,
-          camelCase(model.name),
-          field.name,
-          idField.name,
-          getFieldTSType(idField, modelNames),
-          fieldType,
-        );
-
         return {
           name: field.name,
           isAsync: true,
@@ -167,10 +166,13 @@ export default async function generateRelationsResolverClassesFromModel(
           ],
           // TODO: refactor to AST
           statements: [
-            `ctx.${dataLoaderGetterInCtxName} = ctx.${dataLoaderGetterInCtxName} || ${createDataLoaderGetterFunctionName}(ctx.prisma);`,
-            `return ctx.${dataLoaderGetterInCtxName}(${
-              argsTypeName ? "args" : "{}"
-            }).load(${rootArgName}.${idField.name});`,
+            `return ctx.prisma.${camelCase(model.name)}.findOne({
+              where: {
+                ${uniqueFields
+                  .map(field => `${field.name}: ${rootArgName}.${field.name},`)
+                  .join("\n")}
+              },
+            }).${field.name}(${argsTypeName ? "args" : "{}"});`,
           ],
         };
       },
@@ -179,54 +181,4 @@ export default async function generateRelationsResolverClassesFromModel(
 
   await saveSourceFile(sourceFile);
   return { modelName: model.name, resolverName, argTypeNames };
-}
-
-function createDataLoaderGetterCreationStatement(
-  sourceFile: SourceFile,
-  modelName: string,
-  collectionName: string,
-  relationFieldName: string,
-  idFieldName: string,
-  rootKeyType: string,
-  fieldType: string,
-) {
-  // TODO: use `mappings`
-  const dataLoaderName = `${camelCase(modelName)}${pascalCase(
-    relationFieldName,
-  )}DataLoader`;
-  const dataLoaderGetterInCtxName = `get${pascalCase(dataLoaderName)}`;
-  const functionName = `create${pascalCase(dataLoaderGetterInCtxName)}`;
-
-  sourceFile.addFunction({
-    name: functionName,
-    parameters: [
-      // TODO: import PrismaClient type
-      { name: "prisma", type: "any" },
-    ],
-    statements: [
-      // TODO: refactor to AST
-      `const argsToDataLoaderMap = new Map<string, DataLoader<${rootKeyType}, ${fieldType}>>();
-      return function ${dataLoaderGetterInCtxName}(args: any) {
-        const argsJSON = JSON.stringify(args);
-        let ${dataLoaderName} = argsToDataLoaderMap.get(argsJSON);
-        if (!${dataLoaderName}) {
-          ${dataLoaderName} = new DataLoader<${rootKeyType}, ${fieldType}>(async keys => {
-            const fetchedData: any[] = await prisma.${collectionName}.findMany({
-              where: { ${idFieldName}: { in: keys } },
-              select: {
-                ${idFieldName}: true,
-                ${relationFieldName}: args,
-              },
-            });
-            return keys
-              .map(key => fetchedData.find(data => data.${idFieldName} === key)!)
-              .map(data => data.${relationFieldName});
-          });
-          argsToDataLoaderMap.set(argsJSON, ${dataLoaderName});
-        }
-        return ${dataLoaderName};
-      }`,
-    ],
-  });
-  return [functionName, dataLoaderGetterInCtxName];
 }

@@ -34,33 +34,8 @@ export class UserPostsArgs {
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: Post 1`] = `
 "import { Arg, Args, ArgsType, Ctx, Field, FieldResolver, Float, ID, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, registerEnumType } from \\"type-graphql\\";
-import DataLoader from \\"dataloader\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
-
-function createGetPostAuthorDataLoader(prisma: any) {
-  const argsToDataLoaderMap = new Map<string, DataLoader<string, User | null>>();
-  return function getPostAuthorDataLoader(args: any) {
-    const argsJSON = JSON.stringify(args);
-    let postAuthorDataLoader = argsToDataLoaderMap.get(argsJSON);
-    if (!postAuthorDataLoader) {
-      postAuthorDataLoader = new DataLoader<string, User | null>(async keys => {
-        const fetchedData: any[] = await prisma.post.findMany({
-          where: { uuid: { in: keys } },
-          select: {
-            uuid: true,
-            author: args,
-          },
-        });
-        return keys
-          .map(key => fetchedData.find(data => data.uuid === key)!)
-          .map(data => data.author);
-      });
-      argsToDataLoaderMap.set(argsJSON, postAuthorDataLoader);
-    }
-    return postAuthorDataLoader;
-  }
-}
 
 @Resolver(_of => Post)
 export class PostRelationsResolver {
@@ -69,8 +44,11 @@ export class PostRelationsResolver {
     description: \\"author field doc\\",
   })
   async author(@Root() post: Post, @Ctx() ctx: any): Promise<User | null> {
-    ctx.getPostAuthorDataLoader = ctx.getPostAuthorDataLoader || createGetPostAuthorDataLoader(ctx.prisma);
-    return ctx.getPostAuthorDataLoader({}).load(post.uuid);
+    return ctx.prisma.post.findOne({
+      where: {
+        uuid: post.uuid,
+      },
+    }).author({});
   }
 }
 "
@@ -78,34 +56,9 @@ export class PostRelationsResolver {
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: User 1`] = `
 "import { Arg, Args, ArgsType, Ctx, Field, FieldResolver, Float, ID, InputType, Int, Mutation, ObjectType, Query, Resolver, Root, registerEnumType } from \\"type-graphql\\";
-import DataLoader from \\"dataloader\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
-
-function createGetUserPostsDataLoader(prisma: any) {
-  const argsToDataLoaderMap = new Map<string, DataLoader<number, Post[] | null>>();
-  return function getUserPostsDataLoader(args: any) {
-    const argsJSON = JSON.stringify(args);
-    let userPostsDataLoader = argsToDataLoaderMap.get(argsJSON);
-    if (!userPostsDataLoader) {
-      userPostsDataLoader = new DataLoader<number, Post[] | null>(async keys => {
-        const fetchedData: any[] = await prisma.user.findMany({
-          where: { id: { in: keys } },
-          select: {
-            id: true,
-            posts: args,
-          },
-        });
-        return keys
-          .map(key => fetchedData.find(data => data.id === key)!)
-          .map(data => data.posts);
-      });
-      argsToDataLoaderMap.set(argsJSON, userPostsDataLoader);
-    }
-    return userPostsDataLoader;
-  }
-}
 
 @Resolver(_of => User)
 export class UserRelationsResolver {
@@ -114,8 +67,11 @@ export class UserRelationsResolver {
     description: undefined,
   })
   async posts(@Root() user: User, @Ctx() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | null> {
-    ctx.getUserPostsDataLoader = ctx.getUserPostsDataLoader || createGetUserPostsDataLoader(ctx.prisma);
-    return ctx.getUserPostsDataLoader(args).load(user.id);
+    return ctx.prisma.user.findOne({
+      where: {
+        id: user.id,
+      },
+    }).posts(args);
   }
 }
 "

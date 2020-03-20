@@ -43,13 +43,6 @@ export function generateTypeGraphQLImports(sourceFile: SourceFile) {
   });
 }
 
-export function generateDataloaderImport(sourceFile: SourceFile) {
-  sourceFile.addImportDeclaration({
-    moduleSpecifier: "dataloader",
-    defaultImport: "DataLoader",
-  });
-}
-
 export function generateArgsBarrelFile(
   sourceFile: SourceFile,
   argsTypeNames: string[],
@@ -120,14 +113,21 @@ export function generateOutputsBarrelFile(
   );
 }
 
-export function generateIndexFile(sourceFile: SourceFile) {
+export function generateIndexFile(
+  sourceFile: SourceFile,
+  hasSomeRelations: boolean,
+) {
   sourceFile.addExportDeclarations([
     { moduleSpecifier: `./${enumsFolderName}` },
     { moduleSpecifier: `./${modelsFolderName}` },
     { moduleSpecifier: `./${resolversFolderName}/${crudResolversFolderName}` },
-    {
-      moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
-    },
+    ...(hasSomeRelations
+      ? [
+          {
+            moduleSpecifier: `./${resolversFolderName}/${relationsResolversFolderName}`,
+          },
+        ]
+      : []),
     { moduleSpecifier: `./${resolversFolderName}/${inputsFolderName}` },
     { moduleSpecifier: `./${resolversFolderName}/${outputsFolderName}` },
   ]);

@@ -7,7 +7,8 @@ type Numeric = Float
 
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["windows", "debian-openssl-1.1.x"]
+  // binaryTargets = ["windows", "debian-openssl-1.1.x"]
+  binaryTargets = ["windows"]
   output        = "../prisma/generated/client"
 }
 
@@ -55,7 +56,7 @@ enum PostKind {
 }
 
 model Post {
-  uuid      String    @default(cuid()) @id
+  uuid      String    @default(uuid()) @id
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   published Boolean
@@ -64,4 +65,20 @@ model Post {
   author    User
   // coAuthor  User?
   kind      PostKind?
+}
+
+model Category {
+  name   String
+  slug   String
+  number Int
+
+  @@unique([slug, number])
+}
+
+model Patient {
+  firstName String
+  lastName  String
+  email     String
+
+  @@id([firstName, lastName])
 }
