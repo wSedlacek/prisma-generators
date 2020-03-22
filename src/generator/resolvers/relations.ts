@@ -128,18 +128,15 @@ export default async function generateRelationsResolverClassesFromModel(
           returnType: `Promise<${fieldType}>`,
           decorators: [
             {
-              name: "FieldResolver",
+              name: "ResolveField",
               arguments: [
+                `'${field.name}'`,
                 `_type => ${getTypeGraphQLType(field, modelNames)}`,
                 `{
                   nullable: ${!field.isRequired},
                   description: ${fieldDocs ? `"${fieldDocs}"` : "undefined"},
                 }`,
               ],
-            },
-            {
-              name: "ResolveProperty",
-              arguments: [],
             },
           ],
           parameters: [
