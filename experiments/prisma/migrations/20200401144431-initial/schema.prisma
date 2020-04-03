@@ -62,7 +62,8 @@ model Post {
   published Boolean
   title     String
   content   String?
-  author    User
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  Int
   // coAuthor  User?
   kind      PostKind?
 }
@@ -79,6 +80,23 @@ model Patient {
   firstName String
   lastName  String
   email     String
+
+  @@id([firstName, lastName])
+}
+
+model Movie {
+  directorFirstName String
+  directorLastName  String
+  director          Director @relation(fields: [directorFirstName, directorLastName], references: [firstName, lastName])
+  title             String
+
+  @@id([directorFirstName, directorLastName, title])
+}
+
+model Director {
+  firstName String
+  lastName  String
+  movies    Movie[]
 
   @@id([firstName, lastName])
 }

@@ -278,6 +278,52 @@
       "arity": "Required"
     },
     {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Post",
+          "field": "author"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Post",
+          "field": "author"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[authorId]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Post",
+          "field": "author"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Post",
+      "field": "authorId",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
       "tag": "CreateField",
       "model": "Post",
       "field": "kind",
@@ -367,6 +413,148 @@
         "path": {
           "tag": "Model",
           "model": "Patient"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[firstName, lastName]"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Movie"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Movie",
+      "field": "directorFirstName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Movie",
+      "field": "directorLastName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Movie",
+      "field": "director",
+      "type": "Director",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Movie",
+          "field": "director"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Movie",
+          "field": "director"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[directorFirstName, directorLastName]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Movie",
+          "field": "director"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[firstName, lastName]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Movie",
+      "field": "title",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Movie"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "Movie"
+        },
+        "directive": "id"
+      },
+      "argument": "",
+      "value": "[directorFirstName, directorLastName, title]"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "Director"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Director",
+      "field": "firstName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Director",
+      "field": "lastName",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Director",
+      "field": "movies",
+      "type": "Movie",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "Director"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "Director"
         },
         "directive": "id"
       },

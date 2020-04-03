@@ -1,6 +1,6 @@
-import { PrismaClient } from "./prisma/generated/client";
+import { PrismaClient, PostKind } from "./prisma/generated/client";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({});
 
 async function main() {
   await prisma.post.deleteMany({});
@@ -21,7 +21,7 @@ async function main() {
           {
             title: "Post title 1",
             content: "Content 1",
-            kind: "BLOG",
+            kind: PostKind.BLOG,
             createdAt: new Date("2019-08-16"),
             published: true,
             updatedAt: new Date("2019-08-17"),
@@ -29,7 +29,7 @@ async function main() {
           {
             title: "Post title 2",
             content: "Content 2",
-            kind: "ADVERT",
+            kind: PostKind.ADVERT,
             createdAt: new Date("2019-08-17"),
             published: false,
           },
@@ -50,7 +50,7 @@ async function main() {
           {
             title: "Post title 3",
             content: "Content 3",
-            kind: "BLOG",
+            kind: PostKind.BLOG,
             createdAt: new Date("2019-08-16"),
             published: true,
             updatedAt: new Date("2019-08-17"),
@@ -58,14 +58,14 @@ async function main() {
           {
             title: "Post title 4",
             content: "Content 4",
-            kind: "ADVERT",
+            kind: PostKind.ADVERT,
             createdAt: new Date("2019-08-17"),
             published: false,
           },
           {
             title: "Post title 5",
             content: "Content 5",
-            kind: "BLOG",
+            kind: PostKind.BLOG,
             createdAt: new Date("2019-08-16"),
             published: true,
             updatedAt: new Date("2019-08-17"),
@@ -102,6 +102,28 @@ async function main() {
       email: "test2@test.test",
       firstName: "John",
       lastName: "Bravo",
+    },
+  });
+
+  await prisma.director.create({
+    data: {
+      firstName: "Bob",
+      lastName: "Nolan",
+      movies: {
+        create: [{ title: "Hello World" }, { title: "Hello World 2" }],
+      },
+    },
+  });
+
+  await prisma.movie.create({
+    data: {
+      title: "Hello World 3",
+      director: {
+        create: {
+          firstName: "Alice",
+          lastName: "Allen",
+        },
+      },
     },
   });
 

@@ -1,5 +1,5 @@
 import { EnumMemberStructure, OptionalKind, Project } from "ts-morph";
-import { DMMF } from "@prisma/client/runtime";
+import { DMMF } from "@prisma/client/runtime/dmmf-types";
 import path from "path";
 
 import { generateTypeGraphQLImports } from "./imports";
@@ -18,8 +18,10 @@ export default async function generateEnumFromDef(
   });
   generateTypeGraphQLImports(sourceFile);
 
-  const documentation =
-    enumDef.documentation && enumDef.documentation.replace("\r", "");
+  // FIXME: remove when issue fixed: https://github.com/prisma/prisma2/issues/1987
+  const documentation = undefined as string | undefined;
+  // const documentation =
+  //   enumDef.documentation && enumDef.documentation.split("\\r")[0].slice(2);
   sourceFile.addEnum({
     isExported: true,
     name: enumDef.name,
