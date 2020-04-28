@@ -56,7 +56,7 @@ export default async function generateArgsTypeClassFromArgs(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.ArgsType",
+        name: "ArgsType",
         arguments: [],
       },
     ],
@@ -72,7 +72,7 @@ export default async function generateArgsTypeClassFromArgs(
         trailingTrivia: "\r\n",
         decorators: [
           {
-            name: "TypeGraphQL.Field",
+            name: "Field",
             arguments: [
               `_type => ${getTypeGraphQLType(
                 inputType as DMMFTypeInfo,

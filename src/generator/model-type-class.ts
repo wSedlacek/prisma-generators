@@ -59,7 +59,7 @@ export default async function generateObjectTypeClassFromModel(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.ObjectType",
+        name: "ObjectType",
         arguments: [
           // `"${model.name}"`,
           // `"${getBaseModelTypeName(model.name)}"`,
@@ -89,7 +89,7 @@ export default async function generateObjectTypeClassFromModel(
               ? []
               : [
                   {
-                    name: "TypeGraphQL.Field",
+                    name: "Field",
                     arguments: [
                       `_type => ${getTypeGraphQLType(field, modelNames)}`,
                       `{

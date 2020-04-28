@@ -64,7 +64,7 @@ export default async function generateActionResolverClass(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.Resolver",
+        name: "Resolver",
         arguments: [`_of => ${model.name}`],
       },
     ],

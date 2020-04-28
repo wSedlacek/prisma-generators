@@ -40,7 +40,7 @@ export default async function generateEnumFromDef(
 
   // TODO: refactor to AST
   sourceFile.addStatements([
-    `TypeGraphQL.registerEnumType(${enumDef.name}, {
+    `registerEnumType(${enumDef.name}, {
       name: "${enumDef.name}",
       description: ${documentation ? `"${documentation}"` : "undefined"},
     });`,

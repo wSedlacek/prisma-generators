@@ -101,7 +101,7 @@ export function mapScalarToTypeGraphQLType(scalar: string) {
     case "ID":
     case "Int":
     case "Float": {
-      return `TypeGraphQL.${scalar}`;
+      return `${scalar}`;
     }
     default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);

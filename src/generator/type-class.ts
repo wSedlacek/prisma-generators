@@ -66,7 +66,7 @@ export async function generateOutputTypeClassFromType(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.ObjectType",
+        name: "ObjectType",
         arguments: [
           `{
             isAbstract: true,
@@ -88,7 +88,7 @@ export async function generateOutputTypeClassFromType(
           trailingTrivia: "\r\n",
           decorators: [
             {
-              name: "TypeGraphQL.Field",
+              name: "Field",
               arguments: [
                 `_type => ${getTypeGraphQLType(
                   field.outputType as DMMFTypeInfo,
@@ -120,7 +120,7 @@ export async function generateOutputTypeClassFromType(
           trailingTrivia: "\r\n",
           decorators: [
             {
-              name: "TypeGraphQL.Field",
+              name: "Field",
               arguments: [
                 `_type => ${getTypeGraphQLType(
                   fieldInfo.outputType as DMMFTypeInfo,
@@ -138,12 +138,12 @@ export async function generateOutputTypeClassFromType(
               name: "ctx",
               // TODO: import custom `ContextType`
               type: "any",
-              decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
+              decorators: [{ name: "Context", arguments: [] }],
             },
             {
               name: "args",
               type: fieldInfo.argsTypeName,
-              decorators: [{ name: "TypeGraphQL.Args", arguments: [] }],
+              decorators: [{ name: "Args", arguments: [] }],
             },
           ],
           statements: [
@@ -192,7 +192,7 @@ export async function generateInputTypeClassFromType(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.InputType",
+        name: "InputType",
         arguments: [
           `{
             isAbstract: true,
@@ -212,7 +212,7 @@ export async function generateInputTypeClassFromType(
           trailingTrivia: "\r\n",
           decorators: [
             {
-              name: "TypeGraphQL.Field",
+              name: "Field",
               arguments: [
                 `_type => ${getTypeGraphQLType(
                   inputType as DMMFTypeInfo,

@@ -110,7 +110,7 @@ export default async function generateRelationsResolverClassesFromModel(
     isExported: true,
     decorators: [
       {
-        name: "TypeGraphQL.Resolver",
+        name: "Resolver",
         arguments: [`_of => ${getBaseModelTypeName(model.name)}`],
       },
     ],
