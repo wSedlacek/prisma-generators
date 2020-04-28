@@ -8,7 +8,7 @@
           "ADMIN"
         ],
         "dbName": null,
-        "documentation": "/ Role enum comment\\r\\nUSER = \"User\"\\r\\nADMIN = \"Admin\"\\r"
+        "documentation": "Role enum comment\\r"
       },
       {
         "name": "PostKind",
@@ -28,11 +28,11 @@
           {
             "name": "id",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": true,
+            "isReadOnly": false,
             "type": "Int",
             "default": {
               "name": "autoincrement",
@@ -40,16 +40,16 @@
             },
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "/ User model field comment\\r"
+            "documentation": "User model field comment\\r"
           },
           {
             "name": "email",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": true,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -57,11 +57,11 @@
           {
             "name": "name",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": false,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -69,11 +69,11 @@
           {
             "name": "age",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -81,11 +81,11 @@
           {
             "name": "balance",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Float",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -93,11 +93,11 @@
           {
             "name": "amount",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Float",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -105,13 +105,14 @@
           {
             "name": "posts",
             "kind": "object",
-            "dbNames": [],
             "isList": true,
             "isRequired": false,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Post",
             "relationName": "PostToUser",
+            "relationFromFields": [],
             "relationToFields": [],
             "relationOnDelete": "NONE",
             "isGenerated": false,
@@ -120,19 +121,18 @@
           {
             "name": "role",
             "kind": "enum",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Role",
             "isGenerated": false,
-            "isUpdatedAt": false,
-            "documentation": "maybePosts  Post[]?\\r"
+            "isUpdatedAt": false
           }
         ],
         "isGenerated": false,
-        "documentation": "/ User model comment\\r\\naddress     Address\\r\\naddress2 embed {\\r\\nstreet  String\\r\\nzipCode String\\r\\n}\\r",
+        "documentation": "User model comment\\r\\n@@TypeGraphQL.type(\"Client\")\\r",
         "idFields": [],
         "uniqueFields": []
       },
@@ -144,11 +144,11 @@
           {
             "name": "uuid",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": true,
+            "isReadOnly": false,
             "type": "String",
             "default": {
               "name": "uuid",
@@ -160,11 +160,11 @@
           {
             "name": "createdAt",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "DateTime",
             "default": {
               "name": "now",
@@ -176,11 +176,11 @@
           {
             "name": "updatedAt",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "DateTime",
             "isGenerated": false,
             "isUpdatedAt": true
@@ -188,11 +188,11 @@
           {
             "name": "published",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Boolean",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -200,11 +200,11 @@
           {
             "name": "title",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -212,11 +212,11 @@
           {
             "name": "content",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": false,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -224,13 +224,16 @@
           {
             "name": "author",
             "kind": "object",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "User",
             "relationName": "PostToUser",
+            "relationFromFields": [
+              "authorId"
+            ],
             "relationToFields": [
               "id"
             ],
@@ -241,11 +244,11 @@
           {
             "name": "authorId",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": true,
             "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -253,15 +256,14 @@
           {
             "name": "kind",
             "kind": "enum",
-            "dbNames": [],
             "isList": false,
             "isRequired": false,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "PostKind",
             "isGenerated": false,
-            "isUpdatedAt": false,
-            "documentation": "coAuthor  User?\\r"
+            "isUpdatedAt": false
           }
         ],
         "isGenerated": false,
@@ -276,11 +278,11 @@
           {
             "name": "name",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -288,11 +290,11 @@
           {
             "name": "slug",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -300,11 +302,11 @@
           {
             "name": "number",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Int",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -327,11 +329,11 @@
           {
             "name": "firstName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -339,11 +341,11 @@
           {
             "name": "lastName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -351,11 +353,11 @@
           {
             "name": "email",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -376,11 +378,11 @@
           {
             "name": "directorFirstName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": true,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -388,11 +390,11 @@
           {
             "name": "directorLastName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": true,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -400,13 +402,17 @@
           {
             "name": "director",
             "kind": "object",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Director",
             "relationName": "DirectorToMovie",
+            "relationFromFields": [
+              "directorFirstName",
+              "directorLastName"
+            ],
             "relationToFields": [
               "firstName",
               "lastName"
@@ -418,11 +424,11 @@
           {
             "name": "title",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -444,11 +450,11 @@
           {
             "name": "firstName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -456,11 +462,11 @@
           {
             "name": "lastName",
             "kind": "scalar",
-            "dbNames": [],
             "isList": false,
             "isRequired": true,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "String",
             "isGenerated": false,
             "isUpdatedAt": false
@@ -468,13 +474,14 @@
           {
             "name": "movies",
             "kind": "object",
-            "dbNames": [],
             "isList": true,
             "isRequired": false,
             "isUnique": false,
             "isId": false,
+            "isReadOnly": false,
             "type": "Movie",
             "relationName": "DirectorToMovie",
+            "relationFromFields": [],
             "relationToFields": [],
             "relationOnDelete": "NONE",
             "isGenerated": false,
@@ -8029,18 +8036,6 @@
           },
           {
             "name": "content",
-            "inputType": [
-              {
-                "type": "OrderByArg",
-                "isList": false,
-                "isRequired": false,
-                "kind": "enum"
-              }
-            ],
-            "isRelationFilter": false
-          },
-          {
-            "name": "author",
             "inputType": [
               {
                 "type": "OrderByArg",

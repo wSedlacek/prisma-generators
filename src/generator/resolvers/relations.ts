@@ -16,7 +16,7 @@ import {
   argsFolderName,
 } from "../config";
 import {
-  generateTypeGraphQLImports,
+  generateTypeGraphQLImport,
   generateArgsImports,
   generateModelsImports,
   generateArgsBarrelFile,
@@ -97,7 +97,7 @@ export default async function generateRelationsResolverClassesFromModel(
     await saveSourceFile(barrelExportSourceFile);
   }
 
-  generateTypeGraphQLImports(sourceFile);
+  generateTypeGraphQLImport(sourceFile);
   generateModelsImports(
     sourceFile,
     [...relationFields.map(field => field.type), model.name],
@@ -110,7 +110,7 @@ export default async function generateRelationsResolverClassesFromModel(
     isExported: true,
     decorators: [
       {
-        name: "Resolver",
+        name: "TypeGraphQL.Resolver",
         arguments: [`_of => ${getBaseModelTypeName(model.name)}`],
       },
     ],

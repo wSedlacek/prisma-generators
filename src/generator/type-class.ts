@@ -1,4 +1,9 @@
-import { PropertyDeclarationStructure, OptionalKind, Project } from "ts-morph";
+import {
+  PropertyDeclarationStructure,
+  OptionalKind,
+  Project,
+  MethodDeclarationStructure,
+} from "ts-morph";
 import { DMMF } from "@prisma/client/runtime/dmmf-types";
 import path from "path";
 
@@ -6,35 +11,62 @@ import {
   getFieldTSType,
   getTypeGraphQLType,
   selectInputTypeFromTypes,
+  camelCase,
+  pascalCase,
 } from "./helpers";
 import { DMMFTypeInfo } from "./types";
 import { outputsFolderName, inputsFolderName } from "./config";
 import {
-  generateTypeGraphQLImports,
+  generateTypeGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
+  generateArgsImports,
 } from "./imports";
 import saveSourceFile from "../utils/saveSourceFile";
+import generateArgsTypeClassFromArgs from "./args-class";
 
 export async function generateOutputTypeClassFromType(
   project: Project,
   dirPath: string,
   type: DMMF.OutputType,
   modelNames: string[],
-): Promise<void> {
-  const filePath = path.resolve(dirPath, outputsFolderName, `${type.name}.ts`);
+): Promise<string[]> {
+  const fileDirPath = path.resolve(dirPath, outputsFolderName);
+  const filePath = path.resolve(fileDirPath, `${type.name}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
 
-  generateTypeGraphQLImports(sourceFile);
+  const fieldsInfo = await Promise.all(
+    type.fields.map(async field => {
+      let argsTypeName: string | undefined;
+      if (field.args.length > 0) {
+        argsTypeName = await generateArgsTypeClassFromArgs(
+          project,
+          fileDirPath,
+          field.args,
+          `${type.name}${pascalCase(field.name)}`,
+          modelNames,
+          2,
+        );
+      }
+      return { ...field, argsTypeName };
+    }),
+  );
+
+  const fieldArgsTypeNames = fieldsInfo
+    .filter(it => it.argsTypeName)
+    .map(it => it.argsTypeName!);
+
+  generateTypeGraphQLImport(sourceFile);
+  generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
 
   sourceFile.addClass({
     name: type.name,
     isExported: true,
     decorators: [
       {
-        name: "ObjectType",
+        name: "TypeGraphQL.ObjectType",
         arguments: [
           `{
             isAbstract: true,
@@ -43,8 +75,9 @@ export async function generateOutputTypeClassFromType(
         ],
       },
     ],
-    properties: type.fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
+    properties: fieldsInfo
+      .filter(it => it.args.length === 0)
+      .map<OptionalKind<PropertyDeclarationStructure>>(field => {
         const isRequired = field.outputType.isRequired;
 
         return {
@@ -55,7 +88,7 @@ export async function generateOutputTypeClassFromType(
           trailingTrivia: "\r\n",
           decorators: [
             {
-              name: "Field",
+              name: "TypeGraphQL.Field",
               arguments: [
                 `_type => ${getTypeGraphQLType(
                   field.outputType as DMMFTypeInfo,
@@ -69,11 +102,60 @@ export async function generateOutputTypeClassFromType(
             },
           ],
         };
-      },
-    ),
+      }),
+    methods: fieldsInfo
+      // TODO: allow also for other fields args
+      .filter(it => it.args.length > 0 && type.name.startsWith("Aggregate"))
+      .map<OptionalKind<MethodDeclarationStructure>>(fieldInfo => {
+        const isRequired = fieldInfo.outputType.isRequired;
+        // TODO: make it more future-proof
+        const collectionName = camelCase(type.name.replace("Aggregate", ""));
+
+        return {
+          name: fieldInfo.name,
+          type: getFieldTSType(
+            fieldInfo.outputType as DMMFTypeInfo,
+            modelNames,
+          ),
+          trailingTrivia: "\r\n",
+          decorators: [
+            {
+              name: "TypeGraphQL.Field",
+              arguments: [
+                `_type => ${getTypeGraphQLType(
+                  fieldInfo.outputType as DMMFTypeInfo,
+                  modelNames,
+                )}`,
+                `{
+                  nullable: ${!isRequired},
+                  description: undefined
+                }`,
+              ],
+            },
+          ],
+          parameters: [
+            {
+              name: "ctx",
+              // TODO: import custom `ContextType`
+              type: "any",
+              decorators: [{ name: "TypeGraphQL.Ctx", arguments: [] }],
+            },
+            {
+              name: "args",
+              type: fieldInfo.argsTypeName,
+              decorators: [{ name: "TypeGraphQL.Args", arguments: [] }],
+            },
+          ],
+          statements: [
+            `return ctx.prisma.${collectionName}.${fieldInfo.name}(args);`,
+          ],
+        };
+      }),
   });
 
   await saveSourceFile(sourceFile);
+
+  return fieldArgsTypeNames;
 }
 
 export async function generateInputTypeClassFromType(
@@ -87,7 +169,7 @@ export async function generateInputTypeClassFromType(
     overwrite: true,
   });
 
-  generateTypeGraphQLImports(sourceFile);
+  generateTypeGraphQLImport(sourceFile);
   generateInputsImports(
     sourceFile,
     type.fields
@@ -110,7 +192,7 @@ export async function generateInputTypeClassFromType(
     isExported: true,
     decorators: [
       {
-        name: "InputType",
+        name: "TypeGraphQL.InputType",
         arguments: [
           `{
             isAbstract: true,
@@ -130,7 +212,7 @@ export async function generateInputTypeClassFromType(
           trailingTrivia: "\r\n",
           decorators: [
             {
-              name: "Field",
+              name: "TypeGraphQL.Field",
               arguments: [
                 `_type => ${getTypeGraphQLType(
                   inputType as DMMFTypeInfo,

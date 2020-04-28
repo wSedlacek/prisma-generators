@@ -32,7 +32,7 @@ export function generateCrudResolverClassMethodDeclaration(
     returnType: `Promise<${returnTSType}>`,
     decorators: [
       {
-        name: operationKind,
+        name: `${operationKind}`,
         arguments: [
           `_returns => ${getTypeGraphQLType(
             method.outputType as DMMFTypeInfo,
@@ -62,10 +62,16 @@ export function generateCrudResolverClassMethodDeclaration(
             },
           ]),
     ],
-    statements: [
-      `return ctx.prisma.${collectionName}.${actionName}(${
-        argsTypeName ? "args" : ""
-      });`,
-    ],
+    statements:
+      actionName === "aggregate"
+        ? [
+            // it will expose field resolvers automatically
+            `return new ${returnTSType}();`,
+          ]
+        : [
+            `return ctx.prisma.${collectionName}.${actionName}(${
+              argsTypeName ? "args" : ""
+            });`,
+          ],
   };
 }

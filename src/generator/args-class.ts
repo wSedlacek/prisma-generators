@@ -11,7 +11,7 @@ import {
 import { DMMFTypeInfo } from "./types";
 import { argsFolderName } from "./config";
 import {
-  generateTypeGraphQLImports,
+  generateTypeGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
 } from "./imports";
@@ -19,27 +19,28 @@ import saveSourceFile from "../utils/saveSourceFile";
 
 export default async function generateArgsTypeClassFromArgs(
   project: Project,
-  resolverDirPath: string,
+  generateDirPath: string,
   args: DMMF.SchemaArg[],
   methodName: string,
   modelNames: string[],
+  inputImportsLevel = 3,
 ) {
   const name = `${pascalCase(methodName)}Args`;
 
-  const dirPath = path.resolve(resolverDirPath, argsFolderName);
+  const dirPath = path.resolve(generateDirPath, argsFolderName);
   const filePath = path.resolve(dirPath, `${name}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
 
-  generateTypeGraphQLImports(sourceFile);
+  generateTypeGraphQLImport(sourceFile);
   generateInputsImports(
     sourceFile,
     args
       .map(arg => selectInputTypeFromTypes(arg.inputType))
       .filter(argType => argType.kind === "object")
       .map(argType => argType.type as string),
-    3,
+    inputImportsLevel,
   );
   generateEnumsImports(
     sourceFile,
@@ -55,7 +56,7 @@ export default async function generateArgsTypeClassFromArgs(
     isExported: true,
     decorators: [
       {
-        name: "ArgsType",
+        name: "TypeGraphQL.ArgsType",
         arguments: [],
       },
     ],
@@ -71,7 +72,7 @@ export default async function generateArgsTypeClassFromArgs(
         trailingTrivia: "\r\n",
         decorators: [
           {
-            name: "Field",
+            name: "TypeGraphQL.Field",
             arguments: [
               `_type => ${getTypeGraphQLType(
                 inputType as DMMFTypeInfo,

@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`outputs should properly generate args type classes for aggregate: AggregateSampleCountArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { SampleOrderByInput } from \\"../../inputs/SampleOrderByInput\\";
+import { SampleWhereInput } from \\"../../inputs/SampleWhereInput\\";
+import { SampleWhereUniqueInput } from \\"../../inputs/SampleWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class AggregateSampleCountArgs {
+  @TypeGraphQL.Field(_type => SampleWhereInput, { nullable: true })
+  where?: SampleWhereInput | null;
+
+  @TypeGraphQL.Field(_type => SampleOrderByInput, { nullable: true })
+  orderBy?: SampleOrderByInput | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  skip?: number | null;
+
+  @TypeGraphQL.Field(_type => SampleWhereUniqueInput, { nullable: true })
+  after?: SampleWhereUniqueInput | null;
+
+  @TypeGraphQL.Field(_type => SampleWhereUniqueInput, { nullable: true })
+  before?: SampleWhereUniqueInput | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  first?: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  last?: number | null;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { AggregateSampleCountArgs } from \\"./args/AggregateSampleCountArgs\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class AggregateSample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined
+  })
+  count(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: AggregateSampleCountArgs) {
+    return ctx.prisma.sample.count(args);
+  }
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class BatchPayload {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+}
+"
+`;

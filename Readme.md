@@ -18,8 +18,8 @@ npm i -D typegraphql-prisma-nestjs
 `typegraphql-prisma` is designed to work only with selected version of `prisma`, so please install this version if you don't have it already installed:
 
 ```sh
-npm i -D @prisma/cli@2.0.0-beta.1
-npm i @prisma/client@2.0.0-beta.1
+npm i -D @prisma/cli@2.0.0-beta.2
+npm i @prisma/client@2.0.0-beta.2
 ```
 
 Also, be aware that due to usage of some newer Node.js features, you also have to use **Node.js v10.12 or newer**.
@@ -72,29 +72,29 @@ export enum PostKind {
   BLOG = "BLOG",
   ADVERT = "ADVERT",
 }
-registerEnumType(PostKind, {
+TypeGraphQL.registerEnumType(PostKind, {
   name: "PostKind",
   description: undefined,
 });
 
-@ObjectType({
+@TypeGraphQL.ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @Field(_type => String, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined,
   })
   id!: string;
 
-  @Field(_type => String, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: false,
     description: undefined,
   })
   email!: string;
 
-  @Field(_type => String, {
+  @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined,
   })

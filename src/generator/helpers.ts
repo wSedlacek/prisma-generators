@@ -95,11 +95,13 @@ export function mapScalarToTypeGraphQLType(scalar: string) {
       return "String";
     }
     case "Boolean":
-    case "String":
+    case "String": {
+      return scalar;
+    }
     case "ID":
     case "Int":
     case "Float": {
-      return scalar;
+      return `TypeGraphQL.${scalar}`;
     }
     default: {
       throw new Error(`Unrecognized scalar type: ${scalar}`);
@@ -141,4 +143,21 @@ export function getMappedActionName(
       return methodName;
     }
   }
+}
+
+const attributeRegex = /(@@TypeGraphQL\.)+([A-z])+(\(")+([A-z])+("\))+/;
+const attributeArgsRegex = /(?:\(")+([A-Za-z])+(?:"\))+/;
+const attributeKindRegex = /(?:\.)+([A-Za-z])+(?:\()+/;
+
+export function parseDocumentationAttributes(
+  documentation: string | undefined,
+  expectedAttributeKind: string,
+) {
+  const attribute = documentation?.match(attributeRegex)?.[0];
+  const attributeKind = attribute?.match(attributeKindRegex)?.[0]?.slice(1, -1);
+  if (attributeKind !== expectedAttributeKind) {
+    return;
+  }
+  const attributeArgs = attribute?.match(attributeArgsRegex)?.[0]?.slice(1, -1);
+  return attributeArgs;
 }
