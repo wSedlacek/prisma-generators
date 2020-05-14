@@ -18,8 +18,14 @@ npm i -D typegraphql-prisma-nestjs
 `typegraphql-prisma` is designed to work only with selected version of `prisma`, so please install this version if you don't have it already installed:
 
 ```sh
-npm i -D @prisma/cli@2.0.0-beta.2
-npm i @prisma/client@2.0.0-beta.2
+npm i -D @prisma/cli@2.0.0-beta.5
+npm i @prisma/client@2.0.0-beta.5
+```
+
+To support Prisma `Json` scalar, you also need to install the GraphQL JSON scalar:
+
+```sh
+npm i graphql-type-json
 ```
 
 Also, be aware that due to usage of some newer Node.js features, you also have to use **Node.js v10.12 or newer**.
@@ -150,10 +156,9 @@ const server = new ApolloServer({
 
 ### Nest JS
 
-Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work well with Nest JS. In order to use generated resolvers, you need to use this fork:
-https://github.com/EndyKaufman/typegraphql-prisma-nestjs
+In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/type-graphql/tree/prisma/examples/3-nest-js).
 
-This is likely to change in the future - either by merging the fork back to this repository or by providing [more TypeGraphQL-ish integration for NestJS](https://github.com/MichalLytek/type-graphql/issues/135#issuecomment-474568922) that gonna work with standard TypeGraphQL constructs.
+Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
 
 ### Customization
 
@@ -198,7 +203,7 @@ import {
   User,
   UserRelationsResolver,
   FindManyUserResolver,
-  CreateOneUserResolver,
+  CreateUserResolver,
 } from "@generated/type-graphql";
 
 const schema = await buildSchema({
@@ -206,10 +211,29 @@ const schema = await buildSchema({
     CustomUserResolver,
     UserRelationsResolver,
     FindManyUserResolver,
-    CreateOneUserResolver,
+    CreateUserResolver,
   ],
   validate: false,
 });
+```
+
+You can also change the name of the model types exposed in GraphQL Schema. To achieve this, just put the `@@TypeGraphQL.type` comment above the model definition in `schema.prisma` file, e.g:
+
+```prisma
+// @@TypeGraphQL.type("Client")
+model User {
+  id     Int     @default(autoincrement()) @id
+  email  String  @unique
+  posts  Post[]
+}
+```
+
+Be aware that this feature changes the name everywhere in the schema, so you can import `FindManyClientResolver` (not `FindManyUserResolver`), as well as only `ClientUpdateInput` is available (not `UserUpdateInput`), which means that the GraphQL queries/mutations will also be renamed, e.g.:
+
+```graphql
+type Mutation {
+  createClient(data: ClientCreateInput!): Client!
+}
 ```
 
 ## Examples

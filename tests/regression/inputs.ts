@@ -18,12 +18,24 @@ describe("inputs", () => {
 
   it("should properly generate input type classes for filtering scalar fields", async () => {
     const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
       model SampleModel {
-        intIdField    Int       @id @default(autoincrement())
-        stringField   String
-        floatField    Float
-        booleanField  Boolean
-        dateField     DateTime
+        intIdField            Int     @id @default(autoincrement())
+        stringField           String  @unique
+        optionalStringField   String?
+        intField              Int
+        optionalIntField      Int?
+        floatField            Float
+        optionalFloatField    Float?
+        booleanField          Boolean
+        optionalBooleanField  Boolean?
+        dateField             DateTime
+        optionalDateField     DateTime?
+        jsonField             Json
+        optionalJsonField     Json?
       }
     `;
 
@@ -31,34 +43,65 @@ describe("inputs", () => {
     const intFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/IntFilter.ts",
     );
+    const nullableIntFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableIntFilter.ts",
+    );
     const stringFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/StringFilter.ts",
+    );
+    const nullableStringFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableStringFilter.ts",
     );
     const floatFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/FloatFilter.ts",
     );
+    const nullableFloatFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableFloatFilter.ts",
+    );
     const booleanFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/BooleanFilter.ts",
+    );
+    const nullableBooleanFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableBooleanFilter.ts",
     );
     const dateTimeFilterTSFile = await readGeneratedFile(
       "/resolvers/inputs/DateTimeFilter.ts",
     );
+    const nullableDateTimeFilterTSFile = await readGeneratedFile(
+      "/resolvers/inputs/NullableDateTimeFilter.ts",
+    );
 
     expect(intFilterTSFile).toMatchSnapshot("IntFilter");
+    expect(nullableIntFilterTSFile).toMatchSnapshot("NullableIntFilter");
     expect(stringFilterTSFile).toMatchSnapshot("StringFilter");
+    expect(nullableStringFilterTSFile).toMatchSnapshot("NullableStringFilter");
     expect(floatFilterTSFile).toMatchSnapshot("FloatFilter");
+    expect(nullableFloatFilterTSFile).toMatchSnapshot("NullableFloatFilter");
     expect(booleanFilterTSFile).toMatchSnapshot("BooleanFilter");
+    expect(nullableBooleanFilterTSFile).toMatchSnapshot(
+      "NullableBooleanFilter",
+    );
     expect(dateTimeFilterTSFile).toMatchSnapshot("DateTimeFilter");
+    expect(nullableDateTimeFilterTSFile).toMatchSnapshot(
+      "NullableDateTimeFilter",
+    );
   });
 
   it("should properly generate input type classes for filtering models by fields", async () => {
     const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
       model SampleModel {
-        intIdField    Int       @id @default(autoincrement())
-        stringField   String    @unique
-        floatField    Float
-        booleanField  Boolean
-        dateField     DateTime
+        intIdField          Int     @id @default(autoincrement())
+        stringField         String  @unique
+        optionalStringField String?
+        intField            Int
+        floatField          Float
+        booleanField        Boolean
+        dateField           DateTime
+        jsonField           Json
       }
     `;
 
@@ -240,5 +283,42 @@ describe("inputs", () => {
     ).toMatchSnapshot(
       "DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
     );
+  });
+
+  it("should properly generate input type classes when model is renamed", async () => {
+    const schema = /* prisma */ `
+      // @@TypeGraphQL.type("Example")
+      model SampleModel {
+        intIdField    Int       @id @default(autoincrement())
+        stringField   String    @unique
+        floatField    Float
+        booleanField  Boolean
+        dateField     DateTime
+        other         OtherModel @relation(fields: [otherId], references: [id])
+        otherId       Int
+      }
+
+      model OtherModel {
+        id    Int     @id @default(autoincrement())
+        name  String
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const exampleWhereInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/ExampleWhereInput.ts",
+    );
+    const exampleWhereUniqueInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/ExampleWhereUniqueInput.ts",
+    );
+    const exampleOrderByInputTSFile = await readGeneratedFile(
+      "/resolvers/inputs/ExampleOrderByInput.ts",
+    );
+
+    expect(exampleWhereInputTSFile).toMatchSnapshot("ExampleWhereInput");
+    expect(exampleWhereUniqueInputTSFile).toMatchSnapshot(
+      "ExampleWhereUniqueInput",
+    );
+    expect(exampleOrderByInputTSFile).toMatchSnapshot("ExampleOrderByInput");
   });
 });

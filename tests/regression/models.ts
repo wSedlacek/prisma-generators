@@ -18,6 +18,10 @@ describe("models", () => {
 
   it("should properly generate object type class for prisma model with different scalar fields types", async () => {
     const schema = /* prisma */ `
+      datasource db {
+        provider = "postgresql"
+        url      = env("DATABASE_URL")
+      }
       model User {
         intIdField          Int     @id @default(autoincrement())
         stringField         String  @unique
@@ -26,6 +30,7 @@ describe("models", () => {
         floatField          Float
         booleanField        Boolean
         dateField           DateTime
+        jsonField           Json
       }
     `;
 
@@ -78,14 +83,6 @@ describe("models", () => {
   });
 
   it("should properly generate object type classes for prisma models with self relations", async () => {
-    // const schema = /* prisma */ `
-    //   model Service {
-    //     id            Int       @default(autoincrement()) @id
-    //     name          String
-    //     sourceService Service?  @relation("serviceToService", fields: [id], references: [id])
-    //     services      Service[] @relation("serviceToService")
-    //   }
-    // `;
     const schema = /* prisma */ `
       model Service {
         id            Int       @default(autoincrement()) @id
@@ -124,5 +121,28 @@ describe("models", () => {
     const userModelTSFile = await readGeneratedFile("/models/User.ts");
 
     expect(userModelTSFile).toMatchSnapshot("User");
+  });
+
+  it("should properly generate object type classes for prisma models with cyclic relations when models are renamed", async () => {
+    const schema = /* prisma */ `
+      // @@TypeGraphQL.type("Client")
+      model User {
+        id     Int    @id @default(autoincrement())
+        posts  Post[]
+      }
+      // @@TypeGraphQL.type("Article")
+      model Post {
+        id        Int   @id @default(autoincrement())
+        author    User  @relation(fields: [authorId], references: [id])
+        authorId  Int
+      }
+    `;
+
+    await generateCodeFromSchema(schema, { outputDirPath });
+    const clientModelTSFile = await readGeneratedFile("/models/Client.ts");
+    const articleModelTSFile = await readGeneratedFile("/models/Article.ts");
+
+    expect(clientModelTSFile).toMatchSnapshot("Client");
+    expect(articleModelTSFile).toMatchSnapshot("Article");
   });
 });

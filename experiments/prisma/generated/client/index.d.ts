@@ -16,8 +16,8 @@ export { PrismaClientInitializationError }
 export { PrismaClientValidationError }
 
 /**
- * Query Engine version: 2fb8f444d9cdf7c0beee7b041194b42d7a9ce1e6
- * Prisma Client JS version: 2.0.0-beta.3
+ * Query Engine version: 0c2ec197653b278b2978845ef958db88824cd82e
+ * Prisma Client JS version: 2.0.0-beta.5
  */
 export declare type PrismaVersion = {
   client: string
@@ -383,7 +383,7 @@ export type UserGetPayload<
   ? User
   : S extends undefined
   ? never
-  : S extends FindManyUserArgs
+  : S extends UserArgs | FindManyUserArgs
   ? 'include' extends U
     ? User  & {
       [P in TrueKeys<S['include']>]:
@@ -780,6 +780,7 @@ export type Post = {
   content: string | null
   authorId: number
   kind: PostKind | null
+  metadata: object
 }
 
 export type PostSelect = {
@@ -792,6 +793,7 @@ export type PostSelect = {
   author?: boolean | UserArgs
   authorId?: boolean
   kind?: boolean
+  metadata?: boolean
 }
 
 export type PostInclude = {
@@ -805,7 +807,7 @@ export type PostGetPayload<
   ? Post
   : S extends undefined
   ? never
-  : S extends FindManyPostArgs
+  : S extends PostArgs | FindManyPostArgs
   ? 'include' extends U
     ? Post  & {
       [P in TrueKeys<S['include']>]:
@@ -1212,7 +1214,7 @@ export type CategoryGetPayload<
   ? Category
   : S extends undefined
   ? never
-  : S extends FindManyCategoryArgs
+  : S extends CategoryArgs | FindManyCategoryArgs
   ? 'include' extends U
     ? Category 
   : 'select' extends U
@@ -1585,7 +1587,7 @@ export type PatientGetPayload<
   ? Patient
   : S extends undefined
   ? never
-  : S extends FindManyPatientArgs
+  : S extends PatientArgs | FindManyPatientArgs
   ? 'include' extends U
     ? Patient 
   : 'select' extends U
@@ -1963,7 +1965,7 @@ export type MovieGetPayload<
   ? Movie
   : S extends undefined
   ? never
-  : S extends FindManyMovieArgs
+  : S extends MovieArgs | FindManyMovieArgs
   ? 'include' extends U
     ? Movie  & {
       [P in TrueKeys<S['include']>]:
@@ -2373,7 +2375,7 @@ export type DirectorGetPayload<
   ? Director
   : S extends undefined
   ? never
-  : S extends FindManyDirectorArgs
+  : S extends DirectorArgs | FindManyDirectorArgs
   ? 'include' extends U
     ? Director  & {
       [P in TrueKeys<S['include']>]:
@@ -2771,6 +2773,7 @@ export type PostWhereInput = {
   content?: string | NullableStringFilter | null
   authorId?: number | IntFilter | null
   kind?: PostKind | NullablePostKindFilter | null
+  metadata?: object | JsonFilter | null
   AND?: Enumerable<PostWhereInput> | null
   OR?: Enumerable<PostWhereInput> | null
   NOT?: Enumerable<PostWhereInput> | null
@@ -2877,6 +2880,7 @@ export type PostCreateWithoutAuthorInput = {
   title: string
   content?: string | null
   kind?: PostKind | null
+  metadata: object
 }
 
 export type PostCreateManyWithoutAuthorInput = {
@@ -2902,6 +2906,7 @@ export type PostUpdateWithoutAuthorDataInput = {
   title?: string | null
   content?: string | null
   kind?: PostKind | null
+  metadata?: object | null
 }
 
 export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
@@ -2918,6 +2923,7 @@ export type PostScalarWhereInput = {
   content?: string | NullableStringFilter | null
   authorId?: number | IntFilter | null
   kind?: PostKind | NullablePostKindFilter | null
+  metadata?: object | JsonFilter | null
   AND?: Enumerable<PostScalarWhereInput> | null
   OR?: Enumerable<PostScalarWhereInput> | null
   NOT?: Enumerable<PostScalarWhereInput> | null
@@ -2931,6 +2937,7 @@ export type PostUpdateManyDataInput = {
   title?: string | null
   content?: string | null
   kind?: PostKind | null
+  metadata?: object | null
 }
 
 export type PostUpdateManyWithWhereNestedInput = {
@@ -2999,6 +3006,7 @@ export type PostCreateInput = {
   title: string
   content?: string | null
   kind?: PostKind | null
+  metadata: object
   author: UserCreateOneWithoutPostsInput
 }
 
@@ -3032,6 +3040,7 @@ export type PostUpdateInput = {
   title?: string | null
   content?: string | null
   kind?: PostKind | null
+  metadata?: object | null
   author?: UserUpdateOneRequiredWithoutPostsInput | null
 }
 
@@ -3043,6 +3052,7 @@ export type PostUpdateManyMutationInput = {
   title?: string | null
   content?: string | null
   kind?: PostKind | null
+  metadata?: object | null
 }
 
 export type CategoryCreateInput = {
@@ -3269,6 +3279,10 @@ export type NullablePostKindFilter = {
   notIn?: Enumerable<PostKind> | null
 }
 
+export type JsonFilter = {
+
+}
+
 export type FloatFilter = {
   equals?: number | null
   not?: number | FloatFilter | null
@@ -3318,6 +3332,7 @@ export type PostOrderByInput = {
   content?: OrderByArg | null
   authorId?: OrderByArg | null
   kind?: OrderByArg | null
+  metadata?: OrderByArg | null
 }
 
 export type CategoryOrderByInput = {

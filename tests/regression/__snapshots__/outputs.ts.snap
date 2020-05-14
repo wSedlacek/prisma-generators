@@ -1,7 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`outputs should properly generate aggregate classes for renamed model: AggregateExample 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { AggregateExampleCountArgs } from \\"./args/AggregateExampleCountArgs\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class AggregateExample {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined
+  })
+  count(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: AggregateExampleCountArgs) {
+    return ctx.prisma.sample.count(args);
+  }
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: AggregateExampleCountArgs 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { ExampleOrderByInput } from \\"../../inputs/ExampleOrderByInput\\";
+import { ExampleWhereInput } from \\"../../inputs/ExampleWhereInput\\";
+import { ExampleWhereUniqueInput } from \\"../../inputs/ExampleWhereUniqueInput\\";
+
+@TypeGraphQL.ArgsType()
+export class AggregateExampleCountArgs {
+  @TypeGraphQL.Field(_type => ExampleWhereInput, { nullable: true })
+  where?: ExampleWhereInput | null;
+
+  @TypeGraphQL.Field(_type => ExampleOrderByInput, { nullable: true })
+  orderBy?: ExampleOrderByInput | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  skip?: number | null;
+
+  @TypeGraphQL.Field(_type => ExampleWhereUniqueInput, { nullable: true })
+  after?: ExampleWhereUniqueInput | null;
+
+  @TypeGraphQL.Field(_type => ExampleWhereUniqueInput, { nullable: true })
+  before?: ExampleWhereUniqueInput | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  first?: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  last?: number | null;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: outputs args index 1`] = `
+"export { AggregateExampleCountArgs } from \\"./AggregateExampleCountArgs\\";
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: outputs index 1`] = `
+"export { AggregateExample } from \\"./AggregateExample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export * from \\"./args\\";
+"
+`;
+
 exports[`outputs should properly generate args type classes for aggregate: AggregateSampleCountArgs 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
 import { SampleOrderByInput } from \\"../../inputs/SampleOrderByInput\\";
 import { SampleWhereInput } from \\"../../inputs/SampleWhereInput\\";
 import { SampleWhereUniqueInput } from \\"../../inputs/SampleWhereUniqueInput\\";
@@ -32,8 +99,14 @@ export class AggregateSampleCountArgs {
 "
 `;
 
+exports[`outputs should properly generate args type classes for aggregate: outputs args index 1`] = `
+"export { AggregateSampleCountArgs } from \\"./AggregateSampleCountArgs\\";
+"
+`;
+
 exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
 import { AggregateSampleCountArgs } from \\"./args/AggregateSampleCountArgs\\";
 
 @TypeGraphQL.ObjectType({
@@ -54,6 +127,7 @@ export class AggregateSample {
 
 exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -66,5 +140,12 @@ export class BatchPayload {
   })
   count!: number;
 }
+"
+`;
+
+exports[`outputs should properly generate output type classes: outputs index 1`] = `
+"export { AggregateSample } from \\"./AggregateSample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export * from \\"./args\\";
 "
 `;

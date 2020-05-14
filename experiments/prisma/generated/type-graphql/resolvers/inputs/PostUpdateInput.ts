@@ -1,5 +1,6 @@
 import * as TypeGraphQL from "type-graphql";
-import { UserUpdateOneRequiredWithoutPostsInput } from "../inputs/UserUpdateOneRequiredWithoutPostsInput";
+import GraphQLJSON from "graphql-type-json";
+import { ClientUpdateOneRequiredWithoutPostsInput } from "../inputs/ClientUpdateOneRequiredWithoutPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
 @TypeGraphQL.InputType({
@@ -49,9 +50,15 @@ export class PostUpdateInput {
   })
   kind?: keyof typeof PostKind | null;
 
-  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutPostsInput, {
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
     nullable: true,
     description: undefined
   })
-  author?: UserUpdateOneRequiredWithoutPostsInput | null;
+  metadata?: object | null;
+
+  @TypeGraphQL.Field(_type => ClientUpdateOneRequiredWithoutPostsInput, {
+    nullable: true,
+    description: undefined
+  })
+  author?: ClientUpdateOneRequiredWithoutPostsInput | null;
 }

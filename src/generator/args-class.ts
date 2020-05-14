@@ -7,6 +7,7 @@ import {
   getTypeGraphQLType,
   pascalCase,
   selectInputTypeFromTypes,
+  getInputTypeName,
 } from "./helpers";
 import { DMMFTypeInfo } from "./types";
 import { argsFolderName } from "./config";
@@ -14,19 +15,20 @@ import {
   generateTypeGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
+  generateGraphQLScalarImport,
 } from "./imports";
 import saveSourceFile from "../utils/saveSourceFile";
+import { DmmfDocument } from "./dmmf/dmmf-document";
 
 export default async function generateArgsTypeClassFromArgs(
   project: Project,
   generateDirPath: string,
   args: DMMF.SchemaArg[],
   methodName: string,
-  modelNames: string[],
+  dmmfDocument: DmmfDocument,
   inputImportsLevel = 3,
 ) {
   const name = `${pascalCase(methodName)}Args`;
-
   const dirPath = path.resolve(generateDirPath, argsFolderName);
   const filePath = path.resolve(dirPath, `${name}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -34,12 +36,13 @@ export default async function generateArgsTypeClassFromArgs(
   });
 
   generateTypeGraphQLImport(sourceFile);
+  generateGraphQLScalarImport(sourceFile);
   generateInputsImports(
     sourceFile,
     args
       .map(arg => selectInputTypeFromTypes(arg.inputType))
       .filter(argType => argType.kind === "object")
-      .map(argType => argType.type as string),
+      .map(argType => getInputTypeName(argType.type as string, dmmfDocument)),
     inputImportsLevel,
   );
   generateEnumsImports(
@@ -66,7 +69,7 @@ export default async function generateArgsTypeClassFromArgs(
 
       return {
         name: arg.name,
-        type: getFieldTSType(inputType as DMMFTypeInfo, modelNames),
+        type: getFieldTSType(inputType as DMMFTypeInfo, dmmfDocument),
         hasExclamationToken: !isOptional,
         hasQuestionToken: isOptional,
         trailingTrivia: "\r\n",
@@ -76,7 +79,7 @@ export default async function generateArgsTypeClassFromArgs(
             arguments: [
               `_type => ${getTypeGraphQLType(
                 inputType as DMMFTypeInfo,
-                modelNames,
+                dmmfDocument,
               )}`,
               `{ nullable: ${isOptional} }`,
             ],
