@@ -5,9 +5,9 @@ import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
 
 @ArgsType()
 export class UpdateManyMovieArgs {
-  @Field(_type => MovieUpdateManyMutationInput, { nullable: false })
+  @Field(() => MovieUpdateManyMutationInput, { nullable: false })
   data!: MovieUpdateManyMutationInput;
 
-  @Field(_type => MovieWhereInput, { nullable: true })
+  @Field(() => MovieWhereInput, { nullable: true })
   where?: MovieWhereInput | undefined;
 }

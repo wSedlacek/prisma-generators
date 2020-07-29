@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`enums should properly generate code for enum with docs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 
 /** Role enum doc */
 export enum Role {
   USER = \\"USER\\",
   ADMIN = \\"ADMIN\\"
 }
-TypeGraphQL.registerEnumType(Role, {
+registerEnumType(Role, {
   name: \\"Role\\",
   description: \\"Role enum doc\\",
 });
@@ -16,14 +16,14 @@ TypeGraphQL.registerEnumType(Role, {
 `;
 
 exports[`enums should properly generate code for normal enum 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum Color {
   RED = \\"RED\\",
   GREEN = \\"GREEN\\",
   BLUE = \\"BLUE\\"
 }
-TypeGraphQL.registerEnumType(Color, {
+registerEnumType(Color, {
   name: \\"Color\\",
   description: undefined,
 });

@@ -5,9 +5,9 @@ import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 
 @ArgsType()
 export class UpdateManyClientArgs {
-  @Field(_type => ClientUpdateManyMutationInput, { nullable: false })
+  @Field(() => ClientUpdateManyMutationInput, { nullable: false })
   data!: ClientUpdateManyMutationInput;
 
-  @Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 }

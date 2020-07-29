@@ -1,0 +1,7 @@
+schema: 'generated-schema.graphql'
+documents: 'query.graphql'
+extensions:
+  endpoints:
+    local:
+      url: 'localhost:4000/graphql'
+      introspect: false

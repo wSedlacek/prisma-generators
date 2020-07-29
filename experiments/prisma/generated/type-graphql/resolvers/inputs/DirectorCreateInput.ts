@@ -8,19 +8,19 @@ import { MovieCreateManyWithoutDirectorInput } from "../inputs/MovieCreateManyWi
   description: undefined,
 })
 export class DirectorCreateInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   firstName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   lastName!: string;
 
-  @Field(_type => MovieCreateManyWithoutDirectorInput, {
+  @Field(() => MovieCreateManyWithoutDirectorInput, {
     nullable: true,
     description: undefined
   })

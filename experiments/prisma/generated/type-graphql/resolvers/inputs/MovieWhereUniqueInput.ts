@@ -8,7 +8,7 @@ import { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from "../in
   description: undefined,
 })
 export class MovieWhereUniqueInput {
-  @Field(_type => DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
+  @Field(() => DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })

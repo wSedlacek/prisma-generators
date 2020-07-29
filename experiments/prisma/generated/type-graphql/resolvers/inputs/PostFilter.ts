@@ -8,19 +8,19 @@ import { PostWhereInput } from "../inputs/PostWhereInput";
   description: undefined,
 })
 export class PostFilter {
-  @Field(_type => PostWhereInput, {
+  @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined
   })
   every?: PostWhereInput | undefined;
 
-  @Field(_type => PostWhereInput, {
+  @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined
   })
   some?: PostWhereInput | undefined;
 
-  @Field(_type => PostWhereInput, {
+  @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined
   })

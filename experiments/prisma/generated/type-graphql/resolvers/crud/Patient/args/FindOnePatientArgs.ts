@@ -4,6 +4,6 @@ import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput
 
 @ArgsType()
 export class FindOnePatientArgs {
-  @Field(_type => PatientWhereUniqueInput, { nullable: false })
+  @Field(() => PatientWhereUniqueInput, { nullable: false })
   where!: PatientWhereUniqueInput;
 }

@@ -5,9 +5,9 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @ArgsType()
 export class UpdateDirectorArgs {
-  @Field(_type => DirectorUpdateInput, { nullable: false })
+  @Field(() => DirectorUpdateInput, { nullable: false })
   data!: DirectorUpdateInput;
 
-  @Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @Field(() => DirectorWhereUniqueInput, { nullable: false })
   where!: DirectorWhereUniqueInput;
 }

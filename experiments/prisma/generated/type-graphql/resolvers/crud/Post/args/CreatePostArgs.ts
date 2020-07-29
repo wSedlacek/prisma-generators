@@ -4,6 +4,6 @@ import { PostCreateInput } from "../../../inputs/PostCreateInput";
 
 @ArgsType()
 export class CreatePostArgs {
-  @Field(_type => PostCreateInput, { nullable: false })
+  @Field(() => PostCreateInput, { nullable: false })
   data!: PostCreateInput;
 }

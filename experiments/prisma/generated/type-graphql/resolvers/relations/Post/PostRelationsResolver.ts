@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { Client } from "../../../models/Client";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class PostRelationsResolver {
-  @ResolveField(_type => Client, {
+  @ResolveField(() => Client, {
     nullable: false,
     description: undefined,
   })

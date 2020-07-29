@@ -8,7 +8,7 @@ import { FirstNameLastNameCompoundUniqueInput } from "../inputs/FirstNameLastNam
   description: undefined,
 })
 export class DirectorWhereUniqueInput {
-  @Field(_type => FirstNameLastNameCompoundUniqueInput, {
+  @Field(() => FirstNameLastNameCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })

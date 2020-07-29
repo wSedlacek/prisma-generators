@@ -1,19 +1,19 @@
-import { promises as fs } from "fs";
-import directoryTree from "directory-tree";
+import { promises as fs } from 'fs';
+import directoryTree from 'directory-tree';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { stringifyDirectoryTrees } from "../helpers/structure";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { stringifyDirectoryTrees } from '../helpers/structure';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 
-describe("structure", () => {
+describe('structure', () => {
   let outputDirPath: string;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("regression-structure");
+    outputDirPath = generateArtifactsDirPath('regression-structure');
     await fs.mkdir(outputDirPath, { recursive: true });
   });
 
-  it("should generate proper folders structure and file names for complex datamodel", async () => {
+  it('should generate proper folders structure and file names for complex datamodel', async () => {
     const schema = /* prisma */ `
       enum Color {
         RED
@@ -39,14 +39,14 @@ describe("structure", () => {
     await generateCodeFromSchema(schema, { outputDirPath });
     const directoryStructure = directoryTree(outputDirPath);
     const directoryStructureString =
-      "\n[type-graphql]\n" +
+      '\n[type-graphql]\n' +
       stringifyDirectoryTrees(directoryStructure.children, 2);
 
     // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again
-    expect(directoryStructureString).toMatchSnapshot("structure");
+    expect(directoryStructureString).toMatchSnapshot('structure');
   });
 
-  it("should generate proper folders and file names when model is renamed", async () => {
+  it('should generate proper folders and file names when model is renamed', async () => {
     const schema = /* prisma */ `
       enum Color {
         RED
@@ -74,10 +74,10 @@ describe("structure", () => {
     await generateCodeFromSchema(schema, { outputDirPath });
     const directoryStructure = directoryTree(outputDirPath);
     const directoryStructureString =
-      "\n[type-graphql]\n" +
+      '\n[type-graphql]\n' +
       stringifyDirectoryTrees(directoryStructure.children, 2);
 
     // FIXME: replace with `.toMatchInlineSnapshot()` when it starts working again
-    expect(directoryStructureString).toMatchSnapshot("structure");
+    expect(directoryStructureString).toMatchSnapshot('structure');
   });
 });

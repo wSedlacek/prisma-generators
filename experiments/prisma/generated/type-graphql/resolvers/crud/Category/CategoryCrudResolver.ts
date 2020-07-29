@@ -14,9 +14,9 @@ import { Category } from "../../../models/Category";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class CategoryCrudResolver {
-  @Query(_returns => Category, {
+  @Query(() => Category, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.findOne(args);
   }
 
-  @Query(_returns => [Category], {
+  @Query(() => [Category], {
     nullable: false,
     description: undefined
   })
@@ -32,7 +32,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.findMany(args);
   }
 
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: false,
     description: undefined
   })
@@ -40,7 +40,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.create(args);
   }
 
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.delete(args);
   }
 
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: true,
     description: undefined
   })
@@ -56,7 +56,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -64,7 +64,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -72,7 +72,7 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.updateMany(args);
   }
 
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: false,
     description: undefined
   })
@@ -80,12 +80,12 @@ export class CategoryCrudResolver {
     return ctx.prisma.category.upsert(args);
   }
 
-  @Query(_returns => AggregateCategory, {
+  @Query(() => AggregateCategory, {
     nullable: false,
     description: undefined
   })
   async aggregateCategory(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateCategoryArgs): Promise<AggregateCategory> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

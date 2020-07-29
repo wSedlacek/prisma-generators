@@ -10,19 +10,19 @@ import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
   description: undefined,
 })
 export class PostUpsertWithWhereUniqueWithoutAuthorInput {
-  @Field(_type => PostWhereUniqueInput, {
+  @Field(() => PostWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: PostWhereUniqueInput;
 
-  @Field(_type => PostUpdateWithoutAuthorDataInput, {
+  @Field(() => PostUpdateWithoutAuthorDataInput, {
     nullable: false,
     description: undefined
   })
   update!: PostUpdateWithoutAuthorDataInput;
 
-  @Field(_type => PostCreateWithoutAuthorInput, {
+  @Field(() => PostCreateWithoutAuthorInput, {
     nullable: false,
     description: undefined
   })

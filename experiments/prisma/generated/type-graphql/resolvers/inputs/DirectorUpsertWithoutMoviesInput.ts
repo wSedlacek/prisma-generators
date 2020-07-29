@@ -9,13 +9,13 @@ import { DirectorUpdateWithoutMoviesDataInput } from "../inputs/DirectorUpdateWi
   description: undefined,
 })
 export class DirectorUpsertWithoutMoviesInput {
-  @Field(_type => DirectorUpdateWithoutMoviesDataInput, {
+  @Field(() => DirectorUpdateWithoutMoviesDataInput, {
     nullable: false,
     description: undefined
   })
   update!: DirectorUpdateWithoutMoviesDataInput;
 
-  @Field(_type => DirectorCreateWithoutMoviesInput, {
+  @Field(() => DirectorCreateWithoutMoviesInput, {
     nullable: false,
     description: undefined
   })

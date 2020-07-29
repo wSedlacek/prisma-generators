@@ -8,19 +8,19 @@ import { OrderByArg } from "../../enums/OrderByArg";
   description: undefined,
 })
 export class CategoryOrderByInput {
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   name?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   slug?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })

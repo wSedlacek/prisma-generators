@@ -13,13 +13,13 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class ClientWhereInput {
-  @Field(_type => IntFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
   id?: IntFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
@@ -27,7 +27,7 @@ export class ClientWhereInput {
 
   name?: NullableStringFilter | undefined;
 
-  @Field(_type => IntFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
@@ -35,7 +35,7 @@ export class ClientWhereInput {
 
   balance?: FloatFilter | undefined;
 
-  @Field(_type => FloatFilter, {
+  @Field(() => FloatFilter, {
     nullable: true,
     description: undefined
   })
@@ -43,31 +43,31 @@ export class ClientWhereInput {
 
   posts?: PostFilter | undefined;
 
-  @Field(_type => RoleFilter, {
+  @Field(() => RoleFilter, {
     nullable: true,
     description: undefined
   })
   role?: RoleFilter | undefined;
 
-  @Field(_type => [ClientWhereInput], {
+  @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: ClientWhereInput[] | undefined;
 
-  @Field(_type => [ClientWhereInput], {
+  @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: ClientWhereInput[] | undefined;
 
-  @Field(_type => [ClientWhereInput], {
+  @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
   NOT?: ClientWhereInput[] | undefined;
 
-  @Field(_type => NullableStringFilter, {
+  @Field(() => NullableStringFilter, {
     nullable: true,
     description: undefined
   })
@@ -79,7 +79,7 @@ export class ClientWhereInput {
     this.name = name;
   }
 
-  @Field(_type => FloatFilter, {
+  @Field(() => FloatFilter, {
     nullable: true,
     description: undefined
   })
@@ -91,7 +91,7 @@ export class ClientWhereInput {
     this.balance = balance;
   }
 
-  @Field(_type => PostFilter, {
+  @Field(() => PostFilter, {
     nullable: true,
     description: undefined
   })

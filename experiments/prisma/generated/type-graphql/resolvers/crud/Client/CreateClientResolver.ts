@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { CreateClientArgs } from "./args/CreateClientArgs";
 import { Client } from "../../../models/Client";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class CreateClientResolver {
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })

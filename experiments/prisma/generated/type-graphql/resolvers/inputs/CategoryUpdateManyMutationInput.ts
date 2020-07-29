@@ -7,19 +7,19 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class CategoryUpdateManyMutationInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   name?: string | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   slug?: string | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })

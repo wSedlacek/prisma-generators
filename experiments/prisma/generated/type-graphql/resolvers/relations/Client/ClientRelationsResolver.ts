@@ -3,9 +3,9 @@ import { Client } from "../../../models/Client";
 import { Post } from "../../../models/Post";
 import { ClientPostsArgs } from "./args/ClientPostsArgs";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class ClientRelationsResolver {
-  @ResolveField(_type => [Post], {
+  @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
   })

@@ -1,20 +1,19 @@
-import { DMMF as PrismaDMMF } from "@prisma/client/runtime/dmmf-types";
+import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
 
-import generateCode from "../generator/generate-code";
+import generateCode from '../generator/generate-code';
 
-export default async function generate(
-  dmmfJSONPath: string,
-  outputTSFilePath: string,
-) {
-  console.log("Loading datamodel...");
+const generate = async (dmmfJSONPath: string, outputTSFilePath: string) => {
+  console.log('Loading datamodel...');
   const dmmf = require(dmmfJSONPath) as PrismaDMMF.Document;
 
   await generateCode(
     dmmf,
     {
       outputDirPath: outputTSFilePath,
-      relativePrismaOutputPath: "../client",
+      relativePrismaOutputPath: '../client',
     },
-    console.log,
+    console.log
   );
-}
+};
+
+export default generate;

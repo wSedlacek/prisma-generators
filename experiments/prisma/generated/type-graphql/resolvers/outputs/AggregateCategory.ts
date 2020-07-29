@@ -11,31 +11,31 @@ import { CategorySumAggregateOutputType } from "../outputs/CategorySumAggregateO
   description: undefined,
 })
 export class AggregateCategory {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   count!: number;
 
-  @Field(_type => CategoryAvgAggregateOutputType, {
+  @Field(() => CategoryAvgAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   avg?: CategoryAvgAggregateOutputType | undefined;
 
-  @Field(_type => CategorySumAggregateOutputType, {
+  @Field(() => CategorySumAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   sum?: CategorySumAggregateOutputType | undefined;
 
-  @Field(_type => CategoryMinAggregateOutputType, {
+  @Field(() => CategoryMinAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   min?: CategoryMinAggregateOutputType | undefined;
 
-  @Field(_type => CategoryMaxAggregateOutputType, {
+  @Field(() => CategoryMaxAggregateOutputType, {
     nullable: true,
     description: undefined
   })

@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindOnePatientArgs } from "./args/FindOnePatientArgs";
 import { Patient } from "../../../models/Patient";
 
-@Resolver(_of => Patient)
+@Resolver(() => Patient)
 export class FindOnePatientResolver {
-  @Query(_returns => Patient, {
+  @Query(() => Patient, {
     nullable: true,
     description: undefined
   })

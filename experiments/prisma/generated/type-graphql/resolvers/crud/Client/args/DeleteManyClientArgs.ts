@@ -4,6 +4,6 @@ import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 
 @ArgsType()
 export class DeleteManyClientArgs {
-  @Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 }

@@ -4,6 +4,6 @@ import { PostWhereInput } from "../../../inputs/PostWhereInput";
 
 @ArgsType()
 export class DeleteManyPostArgs {
-  @Field(_type => PostWhereInput, { nullable: true })
+  @Field(() => PostWhereInput, { nullable: true })
   where?: PostWhereInput | undefined;
 }

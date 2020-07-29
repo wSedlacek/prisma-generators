@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { DeleteDirectorArgs } from "./args/DeleteDirectorArgs";
 import { Director } from "../../../models/Director";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class DeleteDirectorResolver {
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: true,
     description: undefined
   })

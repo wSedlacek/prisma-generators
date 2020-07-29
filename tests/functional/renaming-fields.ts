@@ -1,20 +1,20 @@
-import "reflect-metadata";
-import { promises as fs } from "fs";
-import { buildSchema } from "type-graphql";
-import { graphql } from "graphql";
+import 'reflect-metadata';
+import { promises as fs } from 'fs';
+import { buildSchema } from 'type-graphql';
+import { graphql } from 'graphql';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 
-describe("crud resolvers execution", () => {
+describe('crud resolvers execution', () => {
   let outputDirPath: string;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("renaming-fields");
+    outputDirPath = generateArtifactsDirPath('renaming-fields');
     await fs.mkdir(outputDirPath, { recursive: true });
   });
 
-  it("should properly resolve aliased field values from prisma model values", async () => {
+  it('should properly resolve aliased field values from prisma model values', async () => {
     const prismaSchema = /* prisma */ `
       model User {
         id           Int       @id @default(autoincrement())
@@ -25,7 +25,7 @@ describe("crud resolvers execution", () => {
     `;
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
     const { UserCrudResolver } = require(outputDirPath +
-      "/resolvers/crud/User/UserCrudResolver.ts");
+      '/resolvers/crud/User/UserCrudResolver.ts');
     const graphQLSchema = await buildSchema({
       resolvers: [UserCrudResolver],
       validate: false,
@@ -43,8 +43,8 @@ describe("crud resolvers execution", () => {
       user: {
         findOne: jest.fn().mockResolvedValue({
           id: 1,
-          dateOfBirth: new Date("2019-12-31T14:16:02.572Z"),
-          name: "John",
+          dateOfBirth: new Date('2019-12-31T14:16:02.572Z'),
+          name: 'John',
         }),
       },
     };
@@ -54,10 +54,10 @@ describe("crud resolvers execution", () => {
     });
 
     expect(errors).toBeUndefined();
-    expect(data).toMatchSnapshot("user mocked response");
+    expect(data).toMatchSnapshot('user mocked response');
   });
 
-  it("should properly map aliased input field values to prisma input values", async () => {
+  it('should properly map aliased input field values to prisma input values', async () => {
     const prismaSchema = /* prisma */ `
       model User {
         id           Int       @id @default(autoincrement())
@@ -68,7 +68,7 @@ describe("crud resolvers execution", () => {
     `;
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
     const { UserCrudResolver } = require(outputDirPath +
-      "/resolvers/crud/User/UserCrudResolver.ts");
+      '/resolvers/crud/User/UserCrudResolver.ts');
     const graphQLSchema = await buildSchema({
       resolvers: [UserCrudResolver],
       validate: false,
@@ -92,7 +92,7 @@ describe("crud resolvers execution", () => {
 
     expect(errors).toBeUndefined();
     expect(prismaMock.user.findMany.mock.calls).toMatchSnapshot(
-      "findManyUser call args",
+      'findManyUser call args'
     );
   });
 });

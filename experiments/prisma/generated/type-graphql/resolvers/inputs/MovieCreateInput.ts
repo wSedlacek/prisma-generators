@@ -8,13 +8,13 @@ import { DirectorCreateOneWithoutMoviesInput } from "../inputs/DirectorCreateOne
   description: undefined,
 })
 export class MovieCreateInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   title!: string;
 
-  @Field(_type => DirectorCreateOneWithoutMoviesInput, {
+  @Field(() => DirectorCreateOneWithoutMoviesInput, {
     nullable: false,
     description: undefined
   })

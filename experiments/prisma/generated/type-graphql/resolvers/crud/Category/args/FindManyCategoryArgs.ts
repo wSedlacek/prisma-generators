@@ -7,21 +7,21 @@ import { CategoryDistinctFieldEnum } from "../../../../enums/CategoryDistinctFie
 
 @ArgsType()
 export class FindManyCategoryArgs {
-  @Field(_type => CategoryWhereInput, { nullable: true })
+  @Field(() => CategoryWhereInput, { nullable: true })
   where?: CategoryWhereInput | undefined;
 
-  @Field(_type => CategoryOrderByInput, { nullable: true })
+  @Field(() => CategoryOrderByInput, { nullable: true })
   orderBy?: CategoryOrderByInput | undefined;
 
-  @Field(_type => CategoryWhereUniqueInput, { nullable: true })
+  @Field(() => CategoryWhereUniqueInput, { nullable: true })
   cursor?: CategoryWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [CategoryDistinctFieldEnum], { nullable: true })
+  @Field(() => [CategoryDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof CategoryDistinctFieldEnum> | undefined;
 }

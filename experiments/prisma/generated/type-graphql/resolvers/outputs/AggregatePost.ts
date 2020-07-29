@@ -11,31 +11,31 @@ import { PostSumAggregateOutputType } from "../outputs/PostSumAggregateOutputTyp
   description: undefined,
 })
 export class AggregatePost {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   count!: number;
 
-  @Field(_type => PostAvgAggregateOutputType, {
+  @Field(() => PostAvgAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   avg?: PostAvgAggregateOutputType | undefined;
 
-  @Field(_type => PostSumAggregateOutputType, {
+  @Field(() => PostSumAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   sum?: PostSumAggregateOutputType | undefined;
 
-  @Field(_type => PostMinAggregateOutputType, {
+  @Field(() => PostMinAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   min?: PostMinAggregateOutputType | undefined;
 
-  @Field(_type => PostMaxAggregateOutputType, {
+  @Field(() => PostMaxAggregateOutputType, {
     nullable: true,
     description: undefined
   })

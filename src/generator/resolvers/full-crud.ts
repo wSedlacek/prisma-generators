@@ -1,8 +1,8 @@
-import { OptionalKind, MethodDeclarationStructure, Project } from "ts-morph";
-import path from "path";
+import { OptionalKind, MethodDeclarationStructure, Project } from 'ts-morph';
+import path from 'path';
 
-import { camelCase, pascalCase } from "../helpers";
-import { GeneratedResolverData } from "../types";
+import { camelCase, pascalCase } from '../helpers';
+import { GeneratedResolverData } from '../types';
 import {
   baseKeys,
   ModelKeys,
@@ -11,8 +11,8 @@ import {
   resolversFolderName,
   crudResolversFolderName,
   argsFolderName,
-} from "../config";
-import generateArgsTypeClassFromArgs from "../args-class";
+} from '../config';
+import generateArgsTypeClassFromArgs from '../args-class';
 import {
   generateTypeGraphQLImport,
   generateArgsImports,
@@ -20,15 +20,15 @@ import {
   generateOutputsImports,
   generateArgsBarrelFile,
   generateGraphQLFieldsImport,
-} from "../imports";
-import saveSourceFile from "../../utils/saveSourceFile";
-import generateActionResolverClass from "./separate-action";
-import { GenerateCodeOptions } from "../options";
-import { generateCrudResolverClassMethodDeclaration } from "./helpers";
-import { DmmfDocument } from "../dmmf/dmmf-document";
-import { DMMF } from "../dmmf/types";
+} from '../imports';
+import saveSourceFile from '../../utils/saveSourceFile';
+import generateActionResolverClass from './separate-action';
+import { GenerateCodeOptions } from '../options';
+import { generateCrudResolverClassMethodDeclaration } from './helpers';
+import { DmmfDocument } from '../dmmf/dmmf-document';
+import { DMMF } from '../dmmf/types';
 
-export default async function generateCrudResolverClassFromMapping(
+const generateCrudResolverClassFromMapping = async (
   project: Project,
   baseDirPath: string,
   mapping: DMMF.Mapping,
@@ -36,8 +36,8 @@ export default async function generateCrudResolverClassFromMapping(
   types: DMMF.OutputType[],
   modelNames: string[],
   options: GenerateCodeOptions,
-  dmmfDocument: DmmfDocument,
-): Promise<GeneratedResolverData> {
+  dmmfDocument: DmmfDocument
+): Promise<GeneratedResolverData> => {
   const resolverName = `${model.typeName}CrudResolver`;
   const collectionName = camelCase(mapping.model);
 
@@ -45,7 +45,7 @@ export default async function generateCrudResolverClassFromMapping(
     baseDirPath,
     resolversFolderName,
     crudResolversFolderName,
-    model.typeName,
+    model.typeName
   );
   const filePath = path.resolve(resolverDirPath, `${resolverName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -56,19 +56,21 @@ export default async function generateCrudResolverClassFromMapping(
   generateGraphQLFieldsImport(sourceFile);
 
   const methodsInfo = await Promise.all(
-    mapping.actions.map(async action => {
-      const type = types.find(type =>
-        type.fields.some(field => field.name === action.fieldName),
+    mapping.actions.map(async (action) => {
+      const type = types.find((type) =>
+        type.fields.some((field) => field.name === action.fieldName)
       );
       if (!type) {
         throw new Error(
-          `Cannot find type with field ${action.fieldName} in root types definitions!`,
+          `Cannot find type with field ${action.fieldName} in root types definitions!`
         );
       }
-      const method = type.fields.find(field => field.name === action.fieldName);
+      const method = type.fields.find(
+        (field) => field.name === action.fieldName
+      );
       if (!method) {
         throw new Error(
-          `Cannot find field ${action.fieldName} in output types definitions!`,
+          `Cannot find field ${action.fieldName} in output types definitions!`
         );
       }
       const outputTypeName = method.outputType.type as string;
@@ -80,9 +82,9 @@ export default async function generateCrudResolverClassFromMapping(
           resolverDirPath,
           method.args,
           `${pascalCase(
-            `${action.kind}${dmmfDocument.getModelTypeName(mapping.model)}`,
+            `${action.kind}${dmmfDocument.getModelTypeName(mapping.model)}`
           )}Args`,
-          dmmfDocument,
+          dmmfDocument
         );
       }
 
@@ -92,23 +94,23 @@ export default async function generateCrudResolverClassFromMapping(
         outputTypeName,
         argsTypeName,
       };
-    }),
+    })
   );
   const argTypeNames = methodsInfo
-    .filter(it => it.argsTypeName !== undefined)
-    .map(it => it.argsTypeName!);
+    .filter((it) => it.argsTypeName !== undefined)
+    .map((it) => it.argsTypeName!);
 
   if (argTypeNames.length) {
     const barrelExportSourceFile = project.createSourceFile(
-      path.resolve(resolverDirPath, argsFolderName, "index.ts"),
+      path.resolve(resolverDirPath, argsFolderName, 'index.ts'),
       undefined,
-      { overwrite: true },
+      { overwrite: true }
     );
     generateArgsBarrelFile(
       barrelExportSourceFile,
       methodsInfo
-        .filter(it => it.argsTypeName !== undefined)
-        .map(it => it.argsTypeName!),
+        .filter((it) => it.argsTypeName !== undefined)
+        .map((it) => it.argsTypeName!)
     );
     await saveSourceFile(barrelExportSourceFile);
   }
@@ -116,23 +118,25 @@ export default async function generateCrudResolverClassFromMapping(
   generateArgsImports(sourceFile, argTypeNames, 0);
 
   const distinctOutputTypesNames = [
-    ...new Set(methodsInfo.map(it => it.outputTypeName)),
+    ...new Set(methodsInfo.map((it) => it.outputTypeName)),
   ];
   generateModelsImports(
     sourceFile,
     distinctOutputTypesNames
-      .filter(typeName => modelNames.includes(typeName))
-      .map(typeName =>
+      .filter((typeName) => modelNames.includes(typeName))
+      .map((typeName) =>
         dmmfDocument.isModelName(typeName)
           ? dmmfDocument.getModelTypeName(typeName)!
-          : typeName,
+          : typeName
       ),
-    3,
+    3
   );
   generateOutputsImports(
     sourceFile,
-    distinctOutputTypesNames.filter(typeName => !modelNames.includes(typeName)),
-    2,
+    distinctOutputTypesNames.filter(
+      (typeName) => !modelNames.includes(typeName)
+    ),
+    2
   );
 
   sourceFile.addClass({
@@ -140,8 +144,8 @@ export default async function generateCrudResolverClassFromMapping(
     isExported: true,
     decorators: [
       {
-        name: "Resolver",
-        arguments: [`_of => ${model.typeName}`],
+        name: 'Resolver',
+        arguments: [`() => ${model.typeName}`],
       },
     ],
     methods: await Promise.all(
@@ -154,9 +158,9 @@ export default async function generateCrudResolverClassFromMapping(
             argsTypeName,
             collectionName,
             dmmfDocument,
-            mapping,
-          ),
-      ),
+            mapping
+          )
+      )
     ),
   });
 
@@ -173,9 +177,9 @@ export default async function generateCrudResolverClassFromMapping(
         collectionName,
         modelNames,
         mapping,
-        dmmfDocument,
-      ),
-    ),
+        dmmfDocument
+      )
+    )
   );
 
   await saveSourceFile(sourceFile);
@@ -185,4 +189,6 @@ export default async function generateCrudResolverClassFromMapping(
     actionResolverNames,
     argTypeNames,
   };
-}
+};
+
+export default generateCrudResolverClassFromMapping;

@@ -8,25 +8,25 @@ import { Role } from "../../enums/Role";
   description: undefined,
 })
 export class RoleFilter {
-  @Field(_type => Role, {
+  @Field(() => Role, {
     nullable: true,
     description: undefined
   })
   equals?: keyof typeof Role | undefined;
 
-  @Field(_type => Role, {
+  @Field(() => Role, {
     nullable: true,
     description: undefined
   })
   not?: keyof typeof Role | undefined;
 
-  @Field(_type => [Role], {
+  @Field(() => [Role], {
     nullable: true,
     description: undefined
   })
   in?: Array<keyof typeof Role> | undefined;
 
-  @Field(_type => [Role], {
+  @Field(() => [Role], {
     nullable: true,
     description: undefined
   })

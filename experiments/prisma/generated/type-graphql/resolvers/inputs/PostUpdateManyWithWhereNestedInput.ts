@@ -9,13 +9,13 @@ import { PostUpdateManyDataInput } from "../inputs/PostUpdateManyDataInput";
   description: undefined,
 })
 export class PostUpdateManyWithWhereNestedInput {
-  @Field(_type => PostScalarWhereInput, {
+  @Field(() => PostScalarWhereInput, {
     nullable: false,
     description: undefined
   })
   where!: PostScalarWhereInput;
 
-  @Field(_type => PostUpdateManyDataInput, {
+  @Field(() => PostUpdateManyDataInput, {
     nullable: false,
     description: undefined
   })

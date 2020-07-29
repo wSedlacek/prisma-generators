@@ -4,6 +4,6 @@ import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 
 @ArgsType()
 export class DeleteManyDirectorArgs {
-  @Field(_type => DirectorWhereInput, { nullable: true })
+  @Field(() => DirectorWhereInput, { nullable: true })
   where?: DirectorWhereInput | undefined;
 }

@@ -8,7 +8,7 @@ import { SlugNumberCompoundUniqueInput } from "../inputs/SlugNumberCompoundUniqu
   description: undefined,
 })
 export class CategoryWhereUniqueInput {
-  @Field(_type => SlugNumberCompoundUniqueInput, {
+  @Field(() => SlugNumberCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })

@@ -7,7 +7,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class CategoryMinAggregateOutputType {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })

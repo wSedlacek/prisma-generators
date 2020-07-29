@@ -4,6 +4,6 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @ArgsType()
 export class DeleteDirectorArgs {
-  @Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @Field(() => DirectorWhereUniqueInput, { nullable: false })
   where!: DirectorWhereUniqueInput;
 }

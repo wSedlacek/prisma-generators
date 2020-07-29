@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { DeletePostArgs } from "./args/DeletePostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class DeletePostResolver {
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: true,
     description: undefined
   })

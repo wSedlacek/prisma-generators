@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { DeleteCategoryArgs } from "./args/DeleteCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class DeleteCategoryResolver {
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: true,
     description: undefined
   })

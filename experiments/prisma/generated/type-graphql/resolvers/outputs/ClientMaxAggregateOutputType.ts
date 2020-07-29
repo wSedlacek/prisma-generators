@@ -7,25 +7,25 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class ClientMaxAggregateOutputType {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   id!: number;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   age!: number;
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
   balance!: number;
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })

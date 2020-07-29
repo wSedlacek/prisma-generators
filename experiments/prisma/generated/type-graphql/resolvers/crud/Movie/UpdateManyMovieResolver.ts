@@ -3,9 +3,9 @@ import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class UpdateManyMovieResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

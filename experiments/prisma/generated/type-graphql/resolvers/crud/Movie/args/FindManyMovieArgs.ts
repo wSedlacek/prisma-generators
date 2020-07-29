@@ -7,21 +7,21 @@ import { MovieDistinctFieldEnum } from "../../../../enums/MovieDistinctFieldEnum
 
 @ArgsType()
 export class FindManyMovieArgs {
-  @Field(_type => MovieWhereInput, { nullable: true })
+  @Field(() => MovieWhereInput, { nullable: true })
   where?: MovieWhereInput | undefined;
 
-  @Field(_type => MovieOrderByInput, { nullable: true })
+  @Field(() => MovieOrderByInput, { nullable: true })
   orderBy?: MovieOrderByInput | undefined;
 
-  @Field(_type => MovieWhereUniqueInput, { nullable: true })
+  @Field(() => MovieWhereUniqueInput, { nullable: true })
   cursor?: MovieWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [MovieDistinctFieldEnum], { nullable: true })
+  @Field(() => [MovieDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof MovieDistinctFieldEnum> | undefined;
 }

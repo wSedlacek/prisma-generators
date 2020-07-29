@@ -11,13 +11,13 @@ import { Role } from "../enums/Role";
 })
 export class Client {
   /** User model field doc */
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: "User model field doc",
   })
   id!: number;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
@@ -26,7 +26,7 @@ export class Client {
   /** renamed field doc */
   name?: string | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -34,7 +34,7 @@ export class Client {
 
   balance!: number;
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined,
   })
@@ -42,14 +42,14 @@ export class Client {
 
   posts?: Post[] | undefined;
 
-  @Field(_type => Role, {
+  @Field(() => Role, {
     nullable: false,
     description: undefined,
   })
   role!: keyof typeof Role;
 
   /** renamed field doc */
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: "renamed field doc",
   })
@@ -57,7 +57,7 @@ export class Client {
     return this.name;
   }
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined,
   })

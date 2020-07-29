@@ -3,9 +3,9 @@ import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
 import { DirectorMoviesArgs } from "./args/DirectorMoviesArgs";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class DirectorRelationsResolver {
-  @ResolveField(_type => [Movie], {
+  @ResolveField(() => [Movie], {
     nullable: true,
     description: undefined,
   })

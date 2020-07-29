@@ -7,21 +7,21 @@ import { DirectorDistinctFieldEnum } from "../../../../enums/DirectorDistinctFie
 
 @ArgsType()
 export class AggregateDirectorArgs {
-  @Field(_type => DirectorWhereInput, { nullable: true })
+  @Field(() => DirectorWhereInput, { nullable: true })
   where?: DirectorWhereInput | undefined;
 
-  @Field(_type => DirectorOrderByInput, { nullable: true })
+  @Field(() => DirectorOrderByInput, { nullable: true })
   orderBy?: DirectorOrderByInput | undefined;
 
-  @Field(_type => DirectorWhereUniqueInput, { nullable: true })
+  @Field(() => DirectorWhereUniqueInput, { nullable: true })
   cursor?: DirectorWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [DirectorDistinctFieldEnum], { nullable: true })
+  @Field(() => [DirectorDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof DirectorDistinctFieldEnum> | undefined;
 }

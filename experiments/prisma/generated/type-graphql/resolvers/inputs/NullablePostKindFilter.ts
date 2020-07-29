@@ -8,25 +8,25 @@ import { PostKind } from "../../enums/PostKind";
   description: undefined,
 })
 export class NullablePostKindFilter {
-  @Field(_type => PostKind, {
+  @Field(() => PostKind, {
     nullable: true,
     description: undefined
   })
   equals?: keyof typeof PostKind | undefined;
 
-  @Field(_type => PostKind, {
+  @Field(() => PostKind, {
     nullable: true,
     description: undefined
   })
   not?: keyof typeof PostKind | undefined;
 
-  @Field(_type => [PostKind], {
+  @Field(() => [PostKind], {
     nullable: true,
     description: undefined
   })
   in?: Array<keyof typeof PostKind> | undefined;
 
-  @Field(_type => [PostKind], {
+  @Field(() => [PostKind], {
     nullable: true,
     description: undefined
   })

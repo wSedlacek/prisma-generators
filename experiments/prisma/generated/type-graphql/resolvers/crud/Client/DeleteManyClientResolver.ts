@@ -3,9 +3,9 @@ import { DeleteManyClientArgs } from "./args/DeleteManyClientArgs";
 import { Client } from "../../../models/Client";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class DeleteManyClientResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

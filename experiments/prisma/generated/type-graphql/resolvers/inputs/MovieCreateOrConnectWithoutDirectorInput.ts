@@ -9,13 +9,13 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
   description: undefined,
 })
 export class MovieCreateOrConnectWithoutDirectorInput {
-  @Field(_type => MovieWhereUniqueInput, {
+  @Field(() => MovieWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: MovieWhereUniqueInput;
 
-  @Field(_type => MovieCreateWithoutDirectorInput, {
+  @Field(() => MovieCreateWithoutDirectorInput, {
     nullable: false,
     description: undefined
   })

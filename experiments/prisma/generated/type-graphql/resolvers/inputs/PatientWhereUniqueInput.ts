@@ -8,7 +8,7 @@ import { FirstNameLastNameCompoundUniqueInput } from "../inputs/FirstNameLastNam
   description: undefined,
 })
 export class PatientWhereUniqueInput {
-  @Field(_type => FirstNameLastNameCompoundUniqueInput, {
+  @Field(() => FirstNameLastNameCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })

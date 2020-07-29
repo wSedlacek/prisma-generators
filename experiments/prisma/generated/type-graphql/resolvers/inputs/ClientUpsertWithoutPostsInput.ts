@@ -9,13 +9,13 @@ import { ClientUpdateWithoutPostsDataInput } from "../inputs/ClientUpdateWithout
   description: undefined,
 })
 export class ClientUpsertWithoutPostsInput {
-  @Field(_type => ClientUpdateWithoutPostsDataInput, {
+  @Field(() => ClientUpdateWithoutPostsDataInput, {
     nullable: false,
     description: undefined
   })
   update!: ClientUpdateWithoutPostsDataInput;
 
-  @Field(_type => ClientCreateWithoutPostsInput, {
+  @Field(() => ClientCreateWithoutPostsInput, {
     nullable: false,
     description: undefined
   })

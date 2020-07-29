@@ -3,9 +3,9 @@ import { DeleteManyPostArgs } from "./args/DeleteManyPostArgs";
 import { Post } from "../../../models/Post";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class DeleteManyPostResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

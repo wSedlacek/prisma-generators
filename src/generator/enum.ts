@@ -1,17 +1,17 @@
-import { EnumMemberStructure, OptionalKind, Project } from "ts-morph";
-import path from "path";
+import { EnumMemberStructure, OptionalKind, Project } from 'ts-morph';
+import path from 'path';
 
-import { generateTypeGraphQLImport } from "./imports";
-import { enumsFolderName } from "./config";
-import saveSourceFile from "../utils/saveSourceFile";
-import { DMMF } from "./dmmf/types";
-import { cleanDocsString } from "./helpers";
+import { generateTypeGraphQLImport } from './imports';
+import { enumsFolderName } from './config';
+import saveSourceFile from '../utils/saveSourceFile';
+import { DMMF } from './dmmf/types';
+import { cleanDocsString } from './helpers';
 
-export default async function generateEnumFromDef(
+const generateEnumFromDef = async (
   project: Project,
   baseDirPath: string,
-  enumDef: DMMF.Enum,
-) {
+  enumDef: DMMF.Enum
+) => {
   const dirPath = path.resolve(baseDirPath, enumsFolderName);
   const filePath = path.resolve(dirPath, `${enumDef.name}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -27,12 +27,12 @@ export default async function generateEnumFromDef(
       docs: [{ description: documentation }],
     }),
     members: enumDef.values.map<OptionalKind<EnumMemberStructure>>(
-      enumValue => ({
+      (enumValue) => ({
         name: enumValue,
         value: enumValue,
         // TODO: add support for string enums (values)
         // TODO: add support for enum members docs
-      }),
+      })
     ),
   });
 
@@ -40,9 +40,11 @@ export default async function generateEnumFromDef(
   sourceFile.addStatements([
     `registerEnumType(${enumDef.name}, {
       name: "${enumDef.name}",
-      description: ${documentation ? `"${documentation}"` : "undefined"},
+      description: ${documentation ? `"${documentation}"` : 'undefined'},
     });`,
   ]);
 
   await saveSourceFile(sourceFile);
-}
+};
+
+export default generateEnumFromDef;

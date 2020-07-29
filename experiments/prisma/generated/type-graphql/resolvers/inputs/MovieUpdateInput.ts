@@ -8,13 +8,13 @@ import { DirectorUpdateOneRequiredWithoutMoviesInput } from "../inputs/DirectorU
   description: undefined,
 })
 export class MovieUpdateInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   title?: string | undefined;
 
-  @Field(_type => DirectorUpdateOneRequiredWithoutMoviesInput, {
+  @Field(() => DirectorUpdateOneRequiredWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })

@@ -1,26 +1,26 @@
-import generateCode from "../../src/generator/generate-code";
-import getPrismaClientDmmfFromPrismaSchema from "./dmmf";
-import { GenerateCodeOptions } from "../../src/generator/options";
+import generateCode from '../../src/generator/generate-code';
+import getPrismaClientDmmfFromPrismaSchema from './dmmf';
+import { GenerateCodeOptions } from '../../src/generator/options';
 
-type SupportedPreviewFeatures = "aggregations" | "distinct" | "connectOrCreate";
+type SupportedPreviewFeatures = 'aggregations' | 'distinct' | 'connectOrCreate';
 
 interface GenerateCodeFromSchemaOptions
-  extends Omit<GenerateCodeOptions, "relativePrismaOutputPath"> {
+  extends Omit<GenerateCodeOptions, 'relativePrismaOutputPath'> {
   enabledPreviewFeatures?: SupportedPreviewFeatures[];
 }
 
-export async function generateCodeFromSchema(
+export const generateCodeFromSchema = async (
   schema: string,
-  options: GenerateCodeFromSchemaOptions,
-): Promise<void> {
+  options: GenerateCodeFromSchemaOptions
+): Promise<void> => {
   await generateCode(
     await getPrismaClientDmmfFromPrismaSchema(
       schema,
-      options.enabledPreviewFeatures,
+      options.enabledPreviewFeatures
     ),
     {
       ...options,
-      relativePrismaOutputPath: "../../helpers/prisma-client-mock",
-    },
+      relativePrismaOutputPath: '../../helpers/prisma-client-mock',
+    }
   );
-}
+};

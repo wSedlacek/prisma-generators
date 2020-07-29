@@ -14,61 +14,61 @@ import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
   description: undefined,
 })
 export class PostUpdateManyWithoutAuthorInput {
-  @Field(_type => [PostCreateWithoutAuthorInput], {
+  @Field(() => [PostCreateWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   create?: PostCreateWithoutAuthorInput[] | undefined;
 
-  @Field(_type => [PostWhereUniqueInput], {
+  @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
-  @Field(_type => [PostWhereUniqueInput], {
+  @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   set?: PostWhereUniqueInput[] | undefined;
 
-  @Field(_type => [PostWhereUniqueInput], {
+  @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   disconnect?: PostWhereUniqueInput[] | undefined;
 
-  @Field(_type => [PostWhereUniqueInput], {
+  @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   delete?: PostWhereUniqueInput[] | undefined;
 
-  @Field(_type => [PostUpdateWithWhereUniqueWithoutAuthorInput], {
+  @Field(() => [PostUpdateWithWhereUniqueWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | undefined;
 
-  @Field(_type => [PostUpdateManyWithWhereNestedInput], {
+  @Field(() => [PostUpdateManyWithWhereNestedInput], {
     nullable: true,
     description: undefined
   })
   updateMany?: PostUpdateManyWithWhereNestedInput[] | undefined;
 
-  @Field(_type => [PostScalarWhereInput], {
+  @Field(() => [PostScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   deleteMany?: PostScalarWhereInput[] | undefined;
 
-  @Field(_type => [PostUpsertWithWhereUniqueWithoutAuthorInput], {
+  @Field(() => [PostUpsertWithWhereUniqueWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
 
-  @Field(_type => [PostCreateOrConnectWithoutUserInput], {
+  @Field(() => [PostCreateOrConnectWithoutUserInput], {
     nullable: true,
     description: undefined
   })

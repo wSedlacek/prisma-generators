@@ -14,9 +14,9 @@ import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class PostCrudResolver {
-  @Query(_returns => Post, {
+  @Query(() => Post, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.findOne(args);
   }
 
-  @Query(_returns => [Post], {
+  @Query(() => [Post], {
     nullable: false,
     description: undefined
   })
@@ -32,7 +32,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.findMany(args);
   }
 
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: false,
     description: undefined
   })
@@ -40,7 +40,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.create(args);
   }
 
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.delete(args);
   }
 
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: true,
     description: undefined
   })
@@ -56,7 +56,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -64,7 +64,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -72,7 +72,7 @@ export class PostCrudResolver {
     return ctx.prisma.post.updateMany(args);
   }
 
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: false,
     description: undefined
   })
@@ -80,12 +80,12 @@ export class PostCrudResolver {
     return ctx.prisma.post.upsert(args);
   }
 
-  @Query(_returns => AggregatePost, {
+  @Query(() => AggregatePost, {
     nullable: false,
     description: undefined
   })
   async aggregatePost(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregatePostArgs): Promise<AggregatePost> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

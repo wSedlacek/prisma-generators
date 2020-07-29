@@ -14,9 +14,9 @@ import { Client } from "../../../models/Client";
 import { AggregateClient } from "../../outputs/AggregateClient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class ClientCrudResolver {
-  @Query(_returns => Client, {
+  @Query(() => Client, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class ClientCrudResolver {
     return ctx.prisma.user.findOne(args);
   }
 
-  @Query(_returns => [Client], {
+  @Query(() => [Client], {
     nullable: false,
     description: undefined
   })
@@ -32,16 +32,15 @@ export class ClientCrudResolver {
     return ctx.prisma.user.findMany(args);
   }
 
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
   async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<Client> {
-    console.log(args.data)
     return ctx.prisma.user.create(args);
   }
 
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
@@ -49,7 +48,7 @@ export class ClientCrudResolver {
     return ctx.prisma.user.delete(args);
   }
 
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
@@ -57,7 +56,7 @@ export class ClientCrudResolver {
     return ctx.prisma.user.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -65,7 +64,7 @@ export class ClientCrudResolver {
     return ctx.prisma.user.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -73,7 +72,7 @@ export class ClientCrudResolver {
     return ctx.prisma.user.updateMany(args);
   }
 
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
@@ -81,12 +80,12 @@ export class ClientCrudResolver {
     return ctx.prisma.user.upsert(args);
   }
 
-  @Query(_returns => AggregateClient, {
+  @Query(() => AggregateClient, {
     nullable: false,
     description: undefined
   })
   async aggregateClient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateClientArgs): Promise<AggregateClient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

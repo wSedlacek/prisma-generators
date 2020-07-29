@@ -1,22 +1,22 @@
-import { promises as fs } from "fs";
+import { promises as fs } from 'fs';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 import createReadGeneratedFile, {
   ReadGeneratedFile,
-} from "../helpers/read-file";
+} from '../helpers/read-file';
 
-describe("models", () => {
+describe('models', () => {
   let outputDirPath: string;
   let readGeneratedFile: ReadGeneratedFile;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("regression-models");
+    outputDirPath = generateArtifactsDirPath('regression-models');
     await fs.mkdir(outputDirPath, { recursive: true });
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
-  it("should properly generate object type class for prisma model with different scalar fields types", async () => {
+  it('should properly generate object type class for prisma model with different scalar fields types', async () => {
     const schema = /* prisma */ `
       datasource db {
         provider = "postgresql"
@@ -35,12 +35,12 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+    const userModelTSFile = await readGeneratedFile('/models/User.ts');
 
-    expect(userModelTSFile).toMatchSnapshot("User");
+    expect(userModelTSFile).toMatchSnapshot('User');
   });
 
-  it("should properly generate object type class for prisma model with enum and alias fields types", async () => {
+  it('should properly generate object type class for prisma model with enum and alias fields types', async () => {
     const schema = /* prisma */ `
       type Numeric = Float
 
@@ -56,12 +56,12 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+    const userModelTSFile = await readGeneratedFile('/models/User.ts');
 
-    expect(userModelTSFile).toMatchSnapshot("User");
+    expect(userModelTSFile).toMatchSnapshot('User');
   });
 
-  it("should properly generate object type classes for prisma models with cyclic relations", async () => {
+  it('should properly generate object type classes for prisma models with cyclic relations', async () => {
     const schema = /* prisma */ `
       model User {
         id     Int    @id @default(autoincrement())
@@ -75,14 +75,14 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userModelTSFile = await readGeneratedFile("/models/User.ts");
-    const postModelTSFile = await readGeneratedFile("/models/Post.ts");
+    const userModelTSFile = await readGeneratedFile('/models/User.ts');
+    const postModelTSFile = await readGeneratedFile('/models/Post.ts');
 
-    expect(userModelTSFile).toMatchSnapshot("User");
-    expect(postModelTSFile).toMatchSnapshot("Post");
+    expect(userModelTSFile).toMatchSnapshot('User');
+    expect(postModelTSFile).toMatchSnapshot('Post');
   });
 
-  it("should properly generate object type classes for prisma models with self relations", async () => {
+  it('should properly generate object type classes for prisma models with self relations', async () => {
     const schema = /* prisma */ `
       model Service {
         id            Int       @default(autoincrement()) @id
@@ -94,12 +94,12 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const serviceModelTSFile = await readGeneratedFile("/models/Service.ts");
+    const serviceModelTSFile = await readGeneratedFile('/models/Service.ts');
 
-    expect(serviceModelTSFile).toMatchSnapshot("Service");
+    expect(serviceModelTSFile).toMatchSnapshot('Service');
   });
 
-  it("should properly generate object type class for prisma model with descriptions", async () => {
+  it('should properly generate object type class for prisma model with descriptions', async () => {
     const schema = /* prisma */ `
       /// User model doc
       model User {
@@ -118,12 +118,12 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+    const userModelTSFile = await readGeneratedFile('/models/User.ts');
 
-    expect(userModelTSFile).toMatchSnapshot("User");
+    expect(userModelTSFile).toMatchSnapshot('User');
   });
 
-  it("should properly generate object type classes for prisma models with cyclic relations when models are renamed", async () => {
+  it('should properly generate object type classes for prisma models with cyclic relations when models are renamed', async () => {
     const schema = /* prisma */ `
       /// @@TypeGraphQL.type("Client")
       model User {
@@ -139,14 +139,14 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const clientModelTSFile = await readGeneratedFile("/models/Client.ts");
-    const articleModelTSFile = await readGeneratedFile("/models/Article.ts");
+    const clientModelTSFile = await readGeneratedFile('/models/Client.ts');
+    const articleModelTSFile = await readGeneratedFile('/models/Article.ts');
 
-    expect(clientModelTSFile).toMatchSnapshot("Client");
-    expect(articleModelTSFile).toMatchSnapshot("Article");
+    expect(clientModelTSFile).toMatchSnapshot('Client');
+    expect(articleModelTSFile).toMatchSnapshot('Article');
   });
 
-  it("should properly generate object type class for prisma model with renamed fields", async () => {
+  it('should properly generate object type class for prisma model with renamed fields', async () => {
     const schema = /* prisma */ `
       model User {
         id           Int       @id @default(autoincrement())
@@ -167,8 +167,8 @@ describe("models", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
-    const userModelTSFile = await readGeneratedFile("/models/User.ts");
+    const userModelTSFile = await readGeneratedFile('/models/User.ts');
 
-    expect(userModelTSFile).toMatchSnapshot("User");
+    expect(userModelTSFile).toMatchSnapshot('User');
   });
 });

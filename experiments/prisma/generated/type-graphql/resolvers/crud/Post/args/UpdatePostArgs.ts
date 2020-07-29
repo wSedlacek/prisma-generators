@@ -5,9 +5,9 @@ import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @ArgsType()
 export class UpdatePostArgs {
-  @Field(_type => PostUpdateInput, { nullable: false })
+  @Field(() => PostUpdateInput, { nullable: false })
   data!: PostUpdateInput;
 
-  @Field(_type => PostWhereUniqueInput, { nullable: false })
+  @Field(() => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 }

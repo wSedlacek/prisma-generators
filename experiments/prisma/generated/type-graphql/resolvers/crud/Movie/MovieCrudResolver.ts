@@ -14,9 +14,9 @@ import { Movie } from "../../../models/Movie";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class MovieCrudResolver {
-  @Query(_returns => Movie, {
+  @Query(() => Movie, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.findOne(args);
   }
 
-  @Query(_returns => [Movie], {
+  @Query(() => [Movie], {
     nullable: false,
     description: undefined
   })
@@ -32,7 +32,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.findMany(args);
   }
 
-  @Mutation(_returns => Movie, {
+  @Mutation(() => Movie, {
     nullable: false,
     description: undefined
   })
@@ -40,7 +40,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.create(args);
   }
 
-  @Mutation(_returns => Movie, {
+  @Mutation(() => Movie, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.delete(args);
   }
 
-  @Mutation(_returns => Movie, {
+  @Mutation(() => Movie, {
     nullable: true,
     description: undefined
   })
@@ -56,7 +56,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -64,7 +64,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -72,7 +72,7 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.updateMany(args);
   }
 
-  @Mutation(_returns => Movie, {
+  @Mutation(() => Movie, {
     nullable: false,
     description: undefined
   })
@@ -80,12 +80,12 @@ export class MovieCrudResolver {
     return ctx.prisma.movie.upsert(args);
   }
 
-  @Query(_returns => AggregateMovie, {
+  @Query(() => AggregateMovie, {
     nullable: false,
     description: undefined
   })
   async aggregateMovie(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateMovieArgs): Promise<AggregateMovie> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

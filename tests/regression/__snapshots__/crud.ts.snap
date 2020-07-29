@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`crud should properly generate actions resolver classes for prisma model: CreateOneUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class CreateUserResolver {
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
     return ctx.prisma.user.create(args);
   }
 }
@@ -19,18 +19,18 @@ export class CreateUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteManyUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class DeleteManyUserResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 }
@@ -38,17 +38,17 @@ export class DeleteManyUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: DeleteUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class DeleteUserResolver {
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async deleteUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteUserArgs): Promise<User | undefined> {
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.delete(args);
   }
 }
@@ -56,17 +56,17 @@ export class DeleteUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindManyUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class FindManyUserResolver {
-  @TypeGraphQL.Query(_returns => [User], {
+  @Query(() => [User], {
     nullable: false,
     description: undefined
   })
-  async users(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
+  async users(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
     return ctx.prisma.user.findMany(args);
   }
 }
@@ -74,17 +74,17 @@ export class FindManyUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: FindOneUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class FindOneUserResolver {
-  @TypeGraphQL.Query(_returns => User, {
+  @Query(() => User, {
     nullable: true,
     description: undefined
   })
-  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | undefined> {
+  async user(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 }
@@ -92,7 +92,10 @@ export class FindOneUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: Index 1`] = `
-"export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
+"import { UserCrudResolver } from \\"./User/UserCrudResolver\\";
+import { Module } from \\"@nestjs/common\\";
+
+export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
 export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
 export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
 export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
@@ -103,22 +106,33 @@ export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
 export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
 export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
 export * from \\"./User/args\\";
+
+@Module({
+  providers: [
+    UserCrudResolver
+  ],
+  exports: [
+    UserCrudResolver
+  ]
+})
+export class CrudResolversModule {
+}
 "
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateManyUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
 import { User } from \\"../../../models/User\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UpdateManyUserResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 }
@@ -126,17 +140,17 @@ export class UpdateManyUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpdateUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UpdateUserResolver {
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async updateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateUserArgs): Promise<User | undefined> {
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.update(args);
   }
 }
@@ -144,17 +158,17 @@ export class UpdateUserResolver {
 `;
 
 exports[`crud should properly generate actions resolver classes for prisma model: UpsertUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UpsertUserResolver {
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async upsertUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertUserArgs): Promise<User> {
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
     return ctx.prisma.user.upsert(args);
   }
 }
@@ -162,106 +176,106 @@ export class UpsertUserResolver {
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: AggregateUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class AggregateUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereInput, { nullable: true })
+  @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserOrderByInput, { nullable: true })
+  @Field(() => UserOrderByInput, { nullable: true })
   orderBy?: UserOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: true })
+  @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: CreateUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class CreateUserArgs {
-  @TypeGraphQL.Field(_type => UserCreateInput, { nullable: false })
+  @Field(() => UserCreateInput, { nullable: false })
   data!: UserCreateInput;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: DeleteManyUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteManyUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereInput, { nullable: true })
+  @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: DeleteUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: false })
+  @Field(() => UserWhereUniqueInput, { nullable: false })
   where!: UserWhereUniqueInput;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: FindManyUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindManyUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereInput, { nullable: true })
+  @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserOrderByInput, { nullable: true })
+  @Field(() => UserOrderByInput, { nullable: true })
   orderBy?: UserOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: true })
+  @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: FindOneUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindOneUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: false })
+  @Field(() => UserWhereUniqueInput, { nullable: false })
   where!: UserWhereUniqueInput;
 }
 "
@@ -281,62 +295,62 @@ export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpdateManyUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserUpdateManyMutationInput } from \\"../../../inputs/UserUpdateManyMutationInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpdateManyUserArgs {
-  @TypeGraphQL.Field(_type => UserUpdateManyMutationInput, { nullable: false })
+  @Field(() => UserUpdateManyMutationInput, { nullable: false })
   data!: UserUpdateManyMutationInput;
 
-  @TypeGraphQL.Field(_type => UserWhereInput, { nullable: true })
+  @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpdateUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpdateUserArgs {
-  @TypeGraphQL.Field(_type => UserUpdateInput, { nullable: false })
+  @Field(() => UserUpdateInput, { nullable: false })
   data!: UserUpdateInput;
 
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: false })
+  @Field(() => UserWhereUniqueInput, { nullable: false })
   where!: UserWhereUniqueInput;
 }
 "
 `;
 
 exports[`crud should properly generate args classes for every method of crud resolver: UpsertUserArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
 import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpsertUserArgs {
-  @TypeGraphQL.Field(_type => UserWhereUniqueInput, { nullable: false })
+  @Field(() => UserWhereUniqueInput, { nullable: false })
   where!: UserWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => UserCreateInput, { nullable: false })
+  @Field(() => UserCreateInput, { nullable: false })
   create!: UserCreateInput;
 
-  @TypeGraphQL.Field(_type => UserUpdateInput, { nullable: false })
+  @Field(() => UserUpdateInput, { nullable: false })
   update!: UserUpdateInput;
 }
 "
 `;
 
 exports[`crud should properly generate resolver class for single prisma model: UserCrudResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
@@ -352,78 +366,78 @@ import { User } from \\"../../../models/User\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserCrudResolver {
-  @TypeGraphQL.Query(_returns => User, {
+  @Query(() => User, {
     nullable: true,
     description: undefined
   })
-  async user(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | undefined> {
+  async user(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [User], {
+  @Query(() => [User], {
     nullable: false,
     description: undefined
   })
-  async users(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
+  async users(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
     return ctx.prisma.user.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
     return ctx.prisma.user.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async deleteUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteUserArgs): Promise<User | undefined> {
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async updateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateUserArgs): Promise<User | undefined> {
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async upsertUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertUserArgs): Promise<User> {
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
     return ctx.prisma.user.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateUser, {
+  @Query(() => AggregateUser, {
     nullable: false,
     description: undefined
   })
-  async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+  async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith(\\"_\\"))
@@ -446,7 +460,7 @@ export class UserCrudResolver {
 `;
 
 exports[`crud should properly generate resolver class when cannot pluralize model name: StaffCrudResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
@@ -462,78 +476,78 @@ import { Staff } from \\"../../../models/Staff\\";
 import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => Staff)
+@Resolver(() => Staff)
 export class StaffCrudResolver {
-  @TypeGraphQL.Query(_returns => Staff, {
+  @Query(() => Staff, {
     nullable: true,
     description: undefined
   })
-  async findOneStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneStaffArgs): Promise<Staff | undefined> {
+  async findOneStaff(@Context() ctx: any, @Args() args: FindOneStaffArgs): Promise<Staff | undefined> {
     return ctx.prisma.staff.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [Staff], {
+  @Query(() => [Staff], {
     nullable: false,
     description: undefined
   })
-  async findManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyStaffArgs): Promise<Staff[]> {
+  async findManyStaff(@Context() ctx: any, @Args() args: FindManyStaffArgs): Promise<Staff[]> {
     return ctx.prisma.staff.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Staff, {
+  @Mutation(() => Staff, {
     nullable: false,
     description: undefined
   })
-  async createStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateStaffArgs): Promise<Staff> {
+  async createStaff(@Context() ctx: any, @Args() args: CreateStaffArgs): Promise<Staff> {
     return ctx.prisma.staff.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Staff, {
+  @Mutation(() => Staff, {
     nullable: true,
     description: undefined
   })
-  async deleteStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteStaffArgs): Promise<Staff | undefined> {
+  async deleteStaff(@Context() ctx: any, @Args() args: DeleteStaffArgs): Promise<Staff | undefined> {
     return ctx.prisma.staff.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Staff, {
+  @Mutation(() => Staff, {
     nullable: true,
     description: undefined
   })
-  async updateStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateStaffArgs): Promise<Staff | undefined> {
+  async updateStaff(@Context() ctx: any, @Args() args: UpdateStaffArgs): Promise<Staff | undefined> {
     return ctx.prisma.staff.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyStaffArgs): Promise<BatchPayload> {
+  async deleteManyStaff(@Context() ctx: any, @Args() args: DeleteManyStaffArgs): Promise<BatchPayload> {
     return ctx.prisma.staff.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyStaffArgs): Promise<BatchPayload> {
+  async updateManyStaff(@Context() ctx: any, @Args() args: UpdateManyStaffArgs): Promise<BatchPayload> {
     return ctx.prisma.staff.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Staff, {
+  @Mutation(() => Staff, {
     nullable: false,
     description: undefined
   })
-  async upsertStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertStaffArgs): Promise<Staff> {
+  async upsertStaff(@Context() ctx: any, @Args() args: UpsertStaffArgs): Promise<Staff> {
     return ctx.prisma.staff.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateStaff, {
+  @Query(() => AggregateStaff, {
     nullable: false,
     description: undefined
   })
-  async aggregateStaff(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+  async aggregateStaff(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith(\\"_\\"))
@@ -556,17 +570,17 @@ export class StaffCrudResolver {
 `;
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: FindOneUserResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class FindOneUserResolver {
-  @TypeGraphQL.Query(_returns => User, {
+  @Query(() => User, {
     nullable: true,
     description: undefined
   })
-  async findOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | undefined> {
+  async findOneUser(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 }
@@ -574,7 +588,7 @@ export class FindOneUserResolver {
 `;
 
 exports[`crud should properly generate resolver class when useOriginalMapping is used: UserCrudResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
@@ -590,78 +604,78 @@ import { User } from \\"../../../models/User\\";
 import { AggregateUser } from \\"../../outputs/AggregateUser\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserCrudResolver {
-  @TypeGraphQL.Query(_returns => User, {
+  @Query(() => User, {
     nullable: true,
     description: undefined
   })
-  async findOneUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneUserArgs): Promise<User | undefined> {
+  async findOneUser(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [User], {
+  @Query(() => [User], {
     nullable: false,
     description: undefined
   })
-  async findManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyUserArgs): Promise<User[]> {
+  async findManyUser(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
     return ctx.prisma.user.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async createUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateUserArgs): Promise<User> {
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
     return ctx.prisma.user.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async deleteUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteUserArgs): Promise<User | undefined> {
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: true,
     description: undefined
   })
-  async updateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateUserArgs): Promise<User | undefined> {
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | undefined> {
     return ctx.prisma.user.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => User, {
+  @Mutation(() => User, {
     nullable: false,
     description: undefined
   })
-  async upsertUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertUserArgs): Promise<User> {
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
     return ctx.prisma.user.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateUser, {
+  @Query(() => AggregateUser, {
     nullable: false,
     description: undefined
   })
-  async aggregateUser(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+  async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith(\\"_\\"))
@@ -684,17 +698,17 @@ export class UserCrudResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateOneClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { CreateClientArgs } from \\"./args/CreateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class CreateClientResolver {
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
-  async createClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateClientArgs): Promise<Client> {
+  async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<Client> {
     return ctx.prisma.user.create(args);
   }
 }
@@ -702,17 +716,17 @@ export class CreateClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { DeleteClientArgs } from \\"./args/DeleteClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class DeleteClientResolver {
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
-  async deleteClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteClientArgs): Promise<Client | undefined> {
+  async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.delete(args);
   }
 }
@@ -720,18 +734,18 @@ export class DeleteClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteManyClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class DeleteManyClientResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
+  async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 }
@@ -739,17 +753,17 @@ export class DeleteManyClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindManyClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class FindManyClientResolver {
-  @TypeGraphQL.Query(_returns => [Client], {
+  @Query(() => [Client], {
     nullable: false,
     description: undefined
   })
-  async clients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyClientArgs): Promise<Client[]> {
+  async clients(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<Client[]> {
     return ctx.prisma.user.findMany(args);
   }
 }
@@ -757,17 +771,17 @@ export class FindManyClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindOneClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { FindOneClientArgs } from \\"./args/FindOneClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class FindOneClientResolver {
-  @TypeGraphQL.Query(_returns => Client, {
+  @Query(() => Client, {
     nullable: true,
     description: undefined
   })
-  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | undefined> {
+  async client(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 }
@@ -775,7 +789,10 @@ export class FindOneClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: Index 1`] = `
-"export { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
+"import { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
+import { Module } from \\"@nestjs/common\\";
+
+export { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
 export { FindOneClientResolver } from \\"./Client/FindOneClientResolver\\";
 export { FindManyClientResolver } from \\"./Client/FindManyClientResolver\\";
 export { CreateClientResolver } from \\"./Client/CreateClientResolver\\";
@@ -786,21 +803,32 @@ export { UpdateManyClientResolver } from \\"./Client/UpdateManyClientResolver\\"
 export { UpsertClientResolver } from \\"./Client/UpsertClientResolver\\";
 export { AggregateClientResolver } from \\"./Client/AggregateClientResolver\\";
 export * from \\"./Client/args\\";
+
+@Module({
+  providers: [
+    ClientCrudResolver
+  ],
+  exports: [
+    ClientCrudResolver
+  ]
+})
+export class CrudResolversModule {
+}
 "
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class UpdateClientResolver {
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
-  async updateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateClientArgs): Promise<Client | undefined> {
+  async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.update(args);
   }
 }
@@ -808,18 +836,18 @@ export class UpdateClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateManyClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class UpdateManyClientResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
+  async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 }
@@ -827,17 +855,17 @@ export class UpdateManyClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpsertClientResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
 import { Client } from \\"../../../models/Client\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class UpsertClientResolver {
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
-  async upsertClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertClientArgs): Promise<Client> {
+  async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<Client> {
     return ctx.prisma.user.upsert(args);
   }
 }
@@ -845,106 +873,106 @@ export class UpsertClientResolver {
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: AggregateClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class AggregateClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientOrderByInput, { nullable: true })
+  @Field(() => ClientOrderByInput, { nullable: true })
   orderBy?: ClientOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: true })
+  @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: CreateClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class CreateClientArgs {
-  @TypeGraphQL.Field(_type => ClientCreateInput, { nullable: false })
+  @Field(() => ClientCreateInput, { nullable: false })
   data!: ClientCreateInput;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteManyClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteManyClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindManyClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindManyClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientOrderByInput, { nullable: true })
+  @Field(() => ClientOrderByInput, { nullable: true })
   orderBy?: ClientOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: true })
+  @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindOneClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindOneClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }
 "
@@ -964,62 +992,62 @@ export { UpsertClientArgs } from \\"./UpsertClientArgs\\";
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpdateClientArgs {
-  @TypeGraphQL.Field(_type => ClientUpdateInput, { nullable: false })
+  @Field(() => ClientUpdateInput, { nullable: false })
   data!: ClientUpdateInput;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateManyClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientUpdateManyMutationInput } from \\"../../../inputs/ClientUpdateManyMutationInput\\";
 import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpdateManyClientArgs {
-  @TypeGraphQL.Field(_type => ClientUpdateManyMutationInput, { nullable: false })
+  @Field(() => ClientUpdateManyMutationInput, { nullable: false })
   data!: ClientUpdateManyMutationInput;
 
-  @TypeGraphQL.Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpsertClientArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
 import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
 import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpsertClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => ClientCreateInput, { nullable: false })
+  @Field(() => ClientCreateInput, { nullable: false })
   create!: ClientCreateInput;
 
-  @TypeGraphQL.Field(_type => ClientUpdateInput, { nullable: false })
+  @Field(() => ClientUpdateInput, { nullable: false })
   update!: ClientUpdateInput;
 }
 "
 `;
 
 exports[`crud when model is renamed should properly generate resolver class for single prisma model: ClientCrudResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import graphqlFields from \\"graphql-fields\\";
 import { GraphQLResolveInfo } from \\"graphql\\";
 import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
@@ -1035,78 +1063,78 @@ import { Client } from \\"../../../models/Client\\";
 import { AggregateClient } from \\"../../outputs/AggregateClient\\";
 import { BatchPayload } from \\"../../outputs/BatchPayload\\";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(() => Client)
 export class ClientCrudResolver {
-  @TypeGraphQL.Query(_returns => Client, {
+  @Query(() => Client, {
     nullable: true,
     description: undefined
   })
-  async findOneClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | undefined> {
+  async findOneClient(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [Client], {
+  @Query(() => [Client], {
     nullable: false,
     description: undefined
   })
-  async findManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyClientArgs): Promise<Client[]> {
+  async findManyClient(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<Client[]> {
     return ctx.prisma.user.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
-  async createClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateClientArgs): Promise<Client> {
+  async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<Client> {
     return ctx.prisma.user.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
-  async deleteClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteClientArgs): Promise<Client | undefined> {
+  async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })
-  async updateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateClientArgs): Promise<Client | undefined> {
+  async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
+  async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
+  async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: false,
     description: undefined
   })
-  async upsertClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertClientArgs): Promise<Client> {
+  async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<Client> {
     return ctx.prisma.user.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateClient, {
+  @Query(() => AggregateClient, {
     nullable: false,
     description: undefined
   })
-  async aggregateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: AggregateClientArgs): Promise<AggregateClient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+  async aggregateClient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateClientArgs): Promise<AggregateClient> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith(\\"_\\"))

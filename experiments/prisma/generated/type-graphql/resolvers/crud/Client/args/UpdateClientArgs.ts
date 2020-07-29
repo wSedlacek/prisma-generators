@@ -5,9 +5,9 @@ import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 
 @ArgsType()
 export class UpdateClientArgs {
-  @Field(_type => ClientUpdateInput, { nullable: false })
+  @Field(() => ClientUpdateInput, { nullable: false })
   data!: ClientUpdateInput;
 
-  @Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }

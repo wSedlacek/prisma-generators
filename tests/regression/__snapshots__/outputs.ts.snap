@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`outputs should properly generate aggregate classes for model with lowercase name: AggregateExample 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class AggregateExample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -26,16 +26,16 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs should properly generate aggregate classes for renamed model: AggregateExample 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class AggregateExample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -51,16 +51,16 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class AggregateSample {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -70,16 +70,16 @@ export class AggregateSample {
 `;
 
 exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class BatchPayload {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -95,22 +95,22 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleAvgAggregateOutputType 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class SampleAvgAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
@@ -120,22 +120,22 @@ export class SampleAvgAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleMaxAggregateOutputType 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class SampleMaxAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
@@ -145,22 +145,22 @@ export class SampleMaxAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleMinAggregateOutputType 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class SampleMinAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
@@ -170,22 +170,22 @@ export class SampleMinAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleSumAggregateOutputType 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class SampleSumAggregateOutputType {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })

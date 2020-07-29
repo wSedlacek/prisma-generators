@@ -4,6 +4,6 @@ import { DirectorCreateInput } from "../../../inputs/DirectorCreateInput";
 
 @ArgsType()
 export class CreateDirectorArgs {
-  @Field(_type => DirectorCreateInput, { nullable: false })
+  @Field(() => DirectorCreateInput, { nullable: false })
   data!: DirectorCreateInput;
 }

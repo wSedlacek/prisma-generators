@@ -6,12 +6,12 @@ import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInp
 
 @ArgsType()
 export class UpsertDirectorArgs {
-  @Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @Field(() => DirectorWhereUniqueInput, { nullable: false })
   where!: DirectorWhereUniqueInput;
 
-  @Field(_type => DirectorCreateInput, { nullable: false })
+  @Field(() => DirectorCreateInput, { nullable: false })
   create!: DirectorCreateInput;
 
-  @Field(_type => DirectorUpdateInput, { nullable: false })
+  @Field(() => DirectorUpdateInput, { nullable: false })
   update!: DirectorUpdateInput;
 }

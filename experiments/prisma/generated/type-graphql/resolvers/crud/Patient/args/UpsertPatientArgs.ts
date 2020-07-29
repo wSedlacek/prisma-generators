@@ -6,12 +6,12 @@ import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput
 
 @ArgsType()
 export class UpsertPatientArgs {
-  @Field(_type => PatientWhereUniqueInput, { nullable: false })
+  @Field(() => PatientWhereUniqueInput, { nullable: false })
   where!: PatientWhereUniqueInput;
 
-  @Field(_type => PatientCreateInput, { nullable: false })
+  @Field(() => PatientCreateInput, { nullable: false })
   create!: PatientCreateInput;
 
-  @Field(_type => PatientUpdateInput, { nullable: false })
+  @Field(() => PatientUpdateInput, { nullable: false })
   update!: PatientUpdateInput;
 }

@@ -9,13 +9,13 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
   description: undefined,
 })
 export class DirectorCreateOrConnectWithoutMovieInput {
-  @Field(_type => DirectorWhereUniqueInput, {
+  @Field(() => DirectorWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: DirectorWhereUniqueInput;
 
-  @Field(_type => DirectorCreateWithoutMoviesInput, {
+  @Field(() => DirectorCreateWithoutMoviesInput, {
     nullable: false,
     description: undefined
   })

@@ -5,14 +5,14 @@ import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { Client } from "../../../models/Client";
 import { AggregateClient } from "../../outputs/AggregateClient";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class AggregateClientResolver {
-  @Query(_returns => AggregateClient, {
+  @Query(() => AggregateClient, {
     nullable: false,
     description: undefined
   })
   async aggregateClient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateClientArgs): Promise<AggregateClient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

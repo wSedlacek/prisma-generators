@@ -3,9 +3,9 @@ import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { Director } from "../../../models/Director";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class UpdateManyDirectorResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class MovieRelationsResolver {
-  @ResolveField(_type => Director, {
+  @ResolveField(() => Director, {
     nullable: false,
     description: undefined,
   })

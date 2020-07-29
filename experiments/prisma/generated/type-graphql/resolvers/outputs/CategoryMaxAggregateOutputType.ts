@@ -7,7 +7,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class CategoryMaxAggregateOutputType {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })

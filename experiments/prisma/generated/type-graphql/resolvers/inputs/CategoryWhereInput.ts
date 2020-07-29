@@ -9,37 +9,37 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class CategoryWhereInput {
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   name?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   slug?: StringFilter | undefined;
 
-  @Field(_type => IntFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
   number?: IntFilter | undefined;
 
-  @Field(_type => [CategoryWhereInput], {
+  @Field(() => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: CategoryWhereInput[] | undefined;
 
-  @Field(_type => [CategoryWhereInput], {
+  @Field(() => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: CategoryWhereInput[] | undefined;
 
-  @Field(_type => [CategoryWhereInput], {
+  @Field(() => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })

@@ -9,37 +9,37 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class DirectorWhereInput {
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   firstName?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   lastName?: StringFilter | undefined;
 
-  @Field(_type => MovieFilter, {
+  @Field(() => MovieFilter, {
     nullable: true,
     description: undefined
   })
   movies?: MovieFilter | undefined;
 
-  @Field(_type => [DirectorWhereInput], {
+  @Field(() => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: DirectorWhereInput[] | undefined;
 
-  @Field(_type => [DirectorWhereInput], {
+  @Field(() => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: DirectorWhereInput[] | undefined;
 
-  @Field(_type => [DirectorWhereInput], {
+  @Field(() => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })

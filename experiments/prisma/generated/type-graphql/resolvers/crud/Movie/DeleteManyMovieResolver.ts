@@ -3,9 +3,9 @@ import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class DeleteManyMovieResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

@@ -4,6 +4,6 @@ import { ClientCreateInput } from "../../../inputs/ClientCreateInput";
 
 @ArgsType()
 export class CreateClientArgs {
-  @Field(_type => ClientCreateInput, { nullable: false })
+  @Field(() => ClientCreateInput, { nullable: false })
   data!: ClientCreateInput;
 }

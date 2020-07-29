@@ -1,21 +1,21 @@
-import { Project } from "ts-morph";
-import path from "path";
+import { Project } from 'ts-morph';
+import path from 'path';
 
-import { pascalCase } from "../helpers";
-import { resolversFolderName, crudResolversFolderName } from "../config";
+import { pascalCase } from '../helpers';
+import { resolversFolderName, crudResolversFolderName } from '../config';
 import {
   generateTypeGraphQLImport,
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
   generateGraphQLFieldsImport,
-} from "../imports";
-import saveSourceFile from "../../utils/saveSourceFile";
-import { generateCrudResolverClassMethodDeclaration } from "./helpers";
-import { DmmfDocument } from "../dmmf/dmmf-document";
-import { DMMF } from "../dmmf/types";
+} from '../imports';
+import saveSourceFile from '../../utils/saveSourceFile';
+import { generateCrudResolverClassMethodDeclaration } from './helpers';
+import { DmmfDocument } from '../dmmf/dmmf-document';
+import { DMMF } from '../dmmf/types';
 
-export default async function generateActionResolverClass(
+const generateActionResolverClass = async (
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
@@ -26,8 +26,8 @@ export default async function generateActionResolverClass(
   collectionName: string,
   modelNames: string[],
   mapping: DMMF.Mapping,
-  dmmfDocument: DmmfDocument,
-): Promise<string> {
+  dmmfDocument: DmmfDocument
+): Promise<string> => {
   const actionResolverName = `${pascalCase(action.kind)}${
     model.typeName
   }Resolver`;
@@ -35,7 +35,7 @@ export default async function generateActionResolverClass(
     baseDirPath,
     resolversFolderName,
     crudResolversFolderName,
-    model.typeName,
+    model.typeName
   );
   const filePath = path.resolve(resolverDirPath, `${actionResolverName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -52,18 +52,18 @@ export default async function generateActionResolverClass(
   generateModelsImports(
     sourceFile,
     [model.name, outputTypeName]
-      .filter(name => modelNames.includes(name))
-      .map(typeName =>
+      .filter((name) => modelNames.includes(name))
+      .map((typeName) =>
         dmmfDocument.isModelName(typeName)
           ? dmmfDocument.getModelTypeName(typeName)!
-          : typeName,
+          : typeName
       ),
-    3,
+    3
   );
   generateOutputsImports(
     sourceFile,
-    [outputTypeName].filter(name => !modelNames.includes(name)),
-    2,
+    [outputTypeName].filter((name) => !modelNames.includes(name)),
+    2
   );
 
   sourceFile.addClass({
@@ -71,8 +71,8 @@ export default async function generateActionResolverClass(
     isExported: true,
     decorators: [
       {
-        name: "Resolver",
-        arguments: [`_of => ${model.typeName}`],
+        name: 'Resolver',
+        arguments: [`() => ${model.typeName}`],
       },
     ],
     methods: [
@@ -83,11 +83,13 @@ export default async function generateActionResolverClass(
         argsTypeName,
         collectionName,
         dmmfDocument,
-        mapping,
+        mapping
       ),
     ],
   });
 
   await saveSourceFile(sourceFile);
   return actionResolverName;
-}
+};
+
+export default generateActionResolverClass;

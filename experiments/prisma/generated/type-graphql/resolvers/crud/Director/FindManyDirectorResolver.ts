@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindManyDirectorArgs } from "./args/FindManyDirectorArgs";
 import { Director } from "../../../models/Director";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class FindManyDirectorResolver {
-  @Query(_returns => [Director], {
+  @Query(() => [Director], {
     nullable: false,
     description: undefined
   })

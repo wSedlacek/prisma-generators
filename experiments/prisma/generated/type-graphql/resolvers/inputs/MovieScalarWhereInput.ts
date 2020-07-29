@@ -8,37 +8,37 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class MovieScalarWhereInput {
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   directorFirstName?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   directorLastName?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   title?: StringFilter | undefined;
 
-  @Field(_type => [MovieScalarWhereInput], {
+  @Field(() => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: MovieScalarWhereInput[] | undefined;
 
-  @Field(_type => [MovieScalarWhereInput], {
+  @Field(() => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: MovieScalarWhereInput[] | undefined;
 
-  @Field(_type => [MovieScalarWhereInput], {
+  @Field(() => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })

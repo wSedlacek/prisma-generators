@@ -7,21 +7,21 @@ import { UserDistinctFieldEnum } from "../../../../enums/UserDistinctFieldEnum";
 
 @ArgsType()
 export class FindManyClientArgs {
-  @Field(_type => ClientWhereInput, { nullable: true })
+  @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @Field(_type => ClientOrderByInput, { nullable: true })
+  @Field(() => ClientOrderByInput, { nullable: true })
   orderBy?: ClientOrderByInput | undefined;
 
-  @Field(_type => ClientWhereUniqueInput, { nullable: true })
+  @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [UserDistinctFieldEnum], { nullable: true })
+  @Field(() => [UserDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof UserDistinctFieldEnum> | undefined;
 }

@@ -4,6 +4,6 @@ import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 
 @ArgsType()
 export class DeleteManyCategoryArgs {
-  @Field(_type => CategoryWhereInput, { nullable: true })
+  @Field(() => CategoryWhereInput, { nullable: true })
   where?: CategoryWhereInput | undefined;
 }

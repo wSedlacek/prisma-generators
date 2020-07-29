@@ -4,6 +4,6 @@ import { PatientCreateInput } from "../../../inputs/PatientCreateInput";
 
 @ArgsType()
 export class CreatePatientArgs {
-  @Field(_type => PatientCreateInput, { nullable: false })
+  @Field(() => PatientCreateInput, { nullable: false })
   data!: PatientCreateInput;
 }

@@ -7,49 +7,49 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class IntFilter {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   equals?: number | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   not?: number | undefined;
 
-  @Field(_type => [Int], {
+  @Field(() => [Int], {
     nullable: true,
     description: undefined
   })
   in?: number[] | undefined;
 
-  @Field(_type => [Int], {
+  @Field(() => [Int], {
     nullable: true,
     description: undefined
   })
   notIn?: number[] | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   lt?: number | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   lte?: number | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   gt?: number | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })

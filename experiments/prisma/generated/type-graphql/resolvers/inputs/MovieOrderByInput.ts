@@ -8,19 +8,19 @@ import { OrderByArg } from "../../enums/OrderByArg";
   description: undefined,
 })
 export class MovieOrderByInput {
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   directorFirstName?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   directorLastName?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })

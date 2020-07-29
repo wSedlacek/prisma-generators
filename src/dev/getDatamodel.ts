@@ -1,17 +1,23 @@
-import fs from "fs";
-import path from "path";
-import { promisify } from "util";
+import fs from 'fs/promises';
+import path from 'path';
 
-const readFile = promisify(fs.readFile);
-const exists = promisify(fs.exists);
+export const getDatamodel = async (cwd: string): Promise<string> => {
+  const datamodelPath = await (async () => {
+    try {
+      const potentialPath = path.join(cwd, 'project.prisma');
+      await fs.access(potentialPath);
 
-export async function getDatamodel(cwd: string): Promise<string> {
-  let datamodelPath = path.join(cwd, "project.prisma");
-  if (!(await exists(datamodelPath))) {
-    datamodelPath = path.join(cwd, "schema.prisma");
-  }
-  if (!(await exists(datamodelPath))) {
-    throw new Error(`Could not find ${datamodelPath}`);
-  }
-  return readFile(datamodelPath, "utf-8");
-}
+      return potentialPath;
+    } catch {
+      const potentialPath = path.join(cwd, 'schema.prisma');
+
+      await fs.access(potentialPath).catch(() => {
+        throw new Error(`Could not find ${potentialPath}`);
+      });
+
+      return potentialPath;
+    }
+  })();
+
+  return fs.readFile(datamodelPath, 'utf-8');
+};

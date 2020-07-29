@@ -6,12 +6,12 @@ import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
 @ArgsType()
 export class UpsertMovieArgs {
-  @Field(_type => MovieWhereUniqueInput, { nullable: false })
+  @Field(() => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 
-  @Field(_type => MovieCreateInput, { nullable: false })
+  @Field(() => MovieCreateInput, { nullable: false })
   create!: MovieCreateInput;
 
-  @Field(_type => MovieUpdateInput, { nullable: false })
+  @Field(() => MovieUpdateInput, { nullable: false })
   update!: MovieUpdateInput;
 }

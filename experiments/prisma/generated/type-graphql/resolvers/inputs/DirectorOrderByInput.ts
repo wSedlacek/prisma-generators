@@ -8,13 +8,13 @@ import { OrderByArg } from "../../enums/OrderByArg";
   description: undefined,
 })
 export class DirectorOrderByInput {
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   firstName?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })

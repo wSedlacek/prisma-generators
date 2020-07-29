@@ -7,21 +7,21 @@ import { PostDistinctFieldEnum } from "../../../../enums/PostDistinctFieldEnum";
 
 @ArgsType()
 export class FindManyPostArgs {
-  @Field(_type => PostWhereInput, { nullable: true })
+  @Field(() => PostWhereInput, { nullable: true })
   where?: PostWhereInput | undefined;
 
-  @Field(_type => PostOrderByInput, { nullable: true })
+  @Field(() => PostOrderByInput, { nullable: true })
   orderBy?: PostOrderByInput | undefined;
 
-  @Field(_type => PostWhereUniqueInput, { nullable: true })
+  @Field(() => PostWhereUniqueInput, { nullable: true })
   cursor?: PostWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [PostDistinctFieldEnum], { nullable: true })
+  @Field(() => [PostDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof PostDistinctFieldEnum> | undefined;
 }

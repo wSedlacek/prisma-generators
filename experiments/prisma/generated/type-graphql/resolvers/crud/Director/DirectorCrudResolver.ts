@@ -14,9 +14,9 @@ import { Director } from "../../../models/Director";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class DirectorCrudResolver {
-  @Query(_returns => Director, {
+  @Query(() => Director, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.findOne(args);
   }
 
-  @Query(_returns => [Director], {
+  @Query(() => [Director], {
     nullable: false,
     description: undefined
   })
@@ -32,7 +32,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.findMany(args);
   }
 
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: false,
     description: undefined
   })
@@ -40,7 +40,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.create(args);
   }
 
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.delete(args);
   }
 
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: true,
     description: undefined
   })
@@ -56,7 +56,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -64,7 +64,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -72,7 +72,7 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.updateMany(args);
   }
 
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: false,
     description: undefined
   })
@@ -80,12 +80,12 @@ export class DirectorCrudResolver {
     return ctx.prisma.director.upsert(args);
   }
 
-  @Query(_returns => AggregateDirector, {
+  @Query(() => AggregateDirector, {
     nullable: false,
     description: undefined
   })
   async aggregateDirector(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

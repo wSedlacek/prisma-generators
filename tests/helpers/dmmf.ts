@@ -1,14 +1,16 @@
-import { DMMF } from "@prisma/client/runtime/dmmf-types";
-import { GetDMMFOptions } from "@prisma/sdk";
-const PrismaClientGeneratorBuild = require("@prisma/client/generator-build");
+import { DMMF } from '@prisma/client/runtime/dmmf-types';
+import { GetDMMFOptions } from '@prisma/sdk';
+const PrismaClientGeneratorBuild = require('@prisma/client/generator-build');
 
-function getDMMF(options: GetDMMFOptions): Promise<DMMF.Document> {
+const getDMMF = (options: GetDMMFOptions): Promise<DMMF.Document> => {
   return PrismaClientGeneratorBuild.getDMMF(options);
-}
+};
 
-export default async function getPrismaClientDmmfFromPrismaSchema(
+const getPrismaClientDmmfFromPrismaSchema = async (
   prismaSchema: string,
-  enableExperimental?: string[],
-): Promise<DMMF.Document> {
+  enableExperimental?: string[]
+): Promise<DMMF.Document> => {
   return await getDMMF({ datamodel: prismaSchema, enableExperimental });
-}
+};
+
+export default getPrismaClientDmmfFromPrismaSchema;

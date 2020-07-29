@@ -1,22 +1,22 @@
-import { getFieldTSType, getTypeGraphQLType } from "../helpers";
-import { DmmfDocument } from "../dmmf/dmmf-document";
-import { DMMF } from "../dmmf/types";
+import { getFieldTSType, getTypeGraphQLType } from '../helpers';
+import { DmmfDocument } from '../dmmf/dmmf-document';
+import { DMMF } from '../dmmf/types';
 
-export function generateCrudResolverClassMethodDeclaration(
+export const generateCrudResolverClassMethodDeclaration = (
   action: DMMF.Action,
   typeName: string,
   method: DMMF.SchemaField,
   argsTypeName: string | undefined,
   collectionName: string,
   dmmfDocument: DmmfDocument,
-  mapping: DMMF.Mapping,
-) {
+  mapping: DMMF.Mapping
+) => {
   const returnTSType = getFieldTSType(
     method.outputType,
     dmmfDocument,
     false,
     mapping.model,
-    typeName,
+    typeName
   );
 
   return {
@@ -27,11 +27,11 @@ export function generateCrudResolverClassMethodDeclaration(
       {
         name: `${action.operation}`,
         arguments: [
-          `_returns => ${getTypeGraphQLType(
+          `() => ${getTypeGraphQLType(
             method.outputType,
             dmmfDocument,
             mapping.model,
-            typeName,
+            typeName
           )}`,
           `{
             nullable: ${!method.outputType.isRequired},
@@ -42,17 +42,17 @@ export function generateCrudResolverClassMethodDeclaration(
     ],
     parameters: [
       {
-        name: "ctx",
+        name: 'ctx',
         // TODO: import custom `ContextType`
-        type: "any",
-        decorators: [{ name: "Context", arguments: [] }],
+        type: 'any',
+        decorators: [{ name: 'Context', arguments: [] }],
       },
-      ...(action.kind === "aggregate"
+      ...(action.kind === 'aggregate'
         ? [
             {
-              name: "info",
-              type: "GraphQLResolveInfo",
-              decorators: [{ name: "Info", arguments: [] }],
+              name: 'info',
+              type: 'GraphQLResolveInfo',
+              decorators: [{ name: 'Info', arguments: [] }],
             },
           ]
         : []),
@@ -60,16 +60,16 @@ export function generateCrudResolverClassMethodDeclaration(
         ? []
         : [
             {
-              name: "args",
+              name: 'args',
               type: argsTypeName,
-              decorators: [{ name: "Args", arguments: [] }],
+              decorators: [{ name: 'Args', arguments: [] }],
             },
           ]),
     ],
     statements:
-      action.kind === "aggregate"
+      action.kind === 'aggregate'
         ? [
-            `function transformFields(fields: Record<string, any>): Record<string, any> {
+            `const transformFields = (fields: Record<string, any>): Record<string, any> => {
               return Object.fromEntries(
                 Object.entries(fields)
                   .filter(([key, value]) => !key.startsWith("_"))
@@ -88,8 +88,8 @@ export function generateCrudResolverClassMethodDeclaration(
           ]
         : [
             `return ctx.prisma.${collectionName}.${action.kind}(${
-              argsTypeName ? "args" : ""
+              argsTypeName ? 'args' : ''
             });`,
           ],
   };
-}
+};

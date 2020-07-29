@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class UpdateCategoryResolver {
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: true,
     description: undefined
   })

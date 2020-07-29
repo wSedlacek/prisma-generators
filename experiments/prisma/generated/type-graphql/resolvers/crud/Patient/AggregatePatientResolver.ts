@@ -5,14 +5,14 @@ import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
 import { Patient } from "../../../models/Patient";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
 
-@Resolver(_of => Patient)
+@Resolver(() => Patient)
 export class AggregatePatientResolver {
-  @Query(_returns => AggregatePatient, {
+  @Query(() => AggregatePatient, {
     nullable: false,
     description: undefined
   })
   async aggregatePatient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregatePatientArgs): Promise<AggregatePatient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

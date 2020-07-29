@@ -1,9 +1,16 @@
-import "reflect-metadata";
-import { Resolver, Query, FieldResolver, Ctx, Args } from "type-graphql";
+import 'reflect-metadata';
+import {
+  Resolver,
+  Query,
+  Field,
+  Context,
+  Args,
+  ResolveField,
+} from '@nestjs/graphql';
 
-import { NestFactory } from "@nestjs/core";
-import { Module, Logger, ValidationPipe } from "@nestjs/common";
-import { GraphQLModule } from "@nestjs/graphql";
+import { NestFactory } from '@nestjs/core';
+import { Module, Logger, ValidationPipe } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import {
   Client,
@@ -26,8 +33,8 @@ import {
   DirectorRelationsResolver,
   MovieRelationsResolver,
   FindManyClientArgs,
-} from "./prisma/generated/type-graphql";
-import { PrismaClient } from "./prisma/generated/client";
+} from './prisma/generated/type-graphql';
+import { PrismaClient } from './prisma/generated/client';
 
 // @ObjectType()
 // class User extends BaseUser {}
@@ -35,48 +42,45 @@ import { PrismaClient } from "./prisma/generated/client";
 // @ObjectType()
 // class Post extends BasePost {}
 
-interface Context {
+interface ContextType {
   prisma: PrismaClient;
 }
 
-@Resolver(of => Client)
+@Resolver(() => Client)
 class ClientResolver {
-  @Query(returns => [Client])
-  async allClients(@Ctx() { prisma }: Context): Promise<Client[]> {
+  @Query(() => [Client])
+  async allClients(@Context() { prisma }: ContextType): Promise<Client[]> {
     return (await prisma.user.findMany()) as Client[];
   }
 
-  @Query(returns => [Client])
+  @Query(() => [Client])
   async customFindClientsWithArgs(
     @Args() args: FindManyClientArgs,
-    @Ctx() { prisma }: Context,
+    @Context() { prisma }: ContextType
   ) {
     return prisma.user.findMany(args);
   }
 
-  @FieldResolver()
+  @ResolveField()
   hello(): string {
-    return "world!";
+    return 'world!';
   }
 }
 
-@Resolver(of => Post)
+@Resolver(() => Post)
 class PostResolver {
-  @Query(returns => [Post])
-  async allPosts(@Ctx() { prisma }: Context): Promise<Post[]> {
+  @Query(() => [Post])
+  async allPosts(@Context() { prisma }: ContextType): Promise<Post[]> {
     return (await prisma.post.findMany()) as Post[];
   }
 }
 
-const prisma = new PrismaClient({
-  // see dataloader for relations in action
-  log: ["query"],
-});
+const prisma = new PrismaClient({ log: ['query'] });
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      context: (): Context => ({ prisma }),
+      context: (): ContextType => ({ prisma }),
       autoSchemaFile: true,
       playground: true,
     }),
@@ -101,17 +105,19 @@ const prisma = new PrismaClient({
 })
 class AppModule {}
 
-async function main() {
+const main = async () => {
   const app = await NestFactory.create(AppModule, {});
   const port = 4000;
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      transformOptions: { enableImplicitConversion: true },
-    }),
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
+    })
   );
   await app.listen(port);
   Logger.log(`GraphQL is listening on ${port}!`);
-}
+};
 
 main().catch(console.error);

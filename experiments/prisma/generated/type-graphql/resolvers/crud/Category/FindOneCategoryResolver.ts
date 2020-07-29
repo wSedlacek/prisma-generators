@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindOneCategoryArgs } from "./args/FindOneCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class FindOneCategoryResolver {
-  @Query(_returns => Category, {
+  @Query(() => Category, {
     nullable: true,
     description: undefined
   })

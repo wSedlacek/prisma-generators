@@ -6,12 +6,12 @@ import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 
 @ArgsType()
 export class UpsertClientArgs {
-  @Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 
-  @Field(_type => ClientCreateInput, { nullable: false })
+  @Field(() => ClientCreateInput, { nullable: false })
   create!: ClientCreateInput;
 
-  @Field(_type => ClientUpdateInput, { nullable: false })
+  @Field(() => ClientUpdateInput, { nullable: false })
   update!: ClientUpdateInput;
 }

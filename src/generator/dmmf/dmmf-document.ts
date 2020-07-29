@@ -1,12 +1,12 @@
-import { DMMF as PrismaDMMF } from "@prisma/client/runtime/dmmf-types";
-import { DMMF } from "./types";
+import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
+import { DMMF } from './types';
 import {
   transformDatamodel,
   transformSchema,
   transformMappings,
   transformBareModel,
-} from "./transform";
-import { GenerateCodeOptions } from "../options";
+} from './transform';
+import { GenerateCodeOptions } from '../options';
 
 export class DmmfDocument implements DMMF.Document {
   private models: DMMF.Model[];
@@ -16,7 +16,7 @@ export class DmmfDocument implements DMMF.Document {
 
   constructor(
     { datamodel, schema, mappings }: PrismaDMMF.Document,
-    options: GenerateCodeOptions,
+    options: GenerateCodeOptions
   ) {
     this.models = datamodel.models.map(transformBareModel);
     this.datamodel = transformDatamodel(datamodel, this);
@@ -26,16 +26,16 @@ export class DmmfDocument implements DMMF.Document {
 
   getModelTypeName(modelName: string): string | undefined {
     return this.models.find(
-      it => it.name.toLocaleLowerCase() === modelName.toLocaleLowerCase(),
+      (it) => it.name.toLocaleLowerCase() === modelName.toLocaleLowerCase()
     )?.typeName;
   }
 
   isModelName(typeName: string): boolean {
-    return this.models.some(it => it.name === typeName);
+    return this.models.some((it) => it.name === typeName);
   }
 
   getModelFieldAlias(modelName: string, fieldName: string): string | undefined {
-    const model = this.models.find(it => it.name === modelName);
-    return model?.fields.find(it => it.name === fieldName)?.typeFieldAlias;
+    const model = this.models.find((it) => it.name === modelName);
+    return model?.fields.find((it) => it.name === fieldName)?.typeFieldAlias;
   }
 }

@@ -2,13 +2,14 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { CreatePostArgs } from "./args/CreatePostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class CreatePostResolver {
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: false,
     description: undefined
   })
   async createPost(@Context() ctx: any, @Args() args: CreatePostArgs): Promise<Post> {
+    console.log(args.data)
     return ctx.prisma.post.create(args);
   }
 }

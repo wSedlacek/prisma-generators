@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class UpsertPostResolver {
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: false,
     description: undefined
   })

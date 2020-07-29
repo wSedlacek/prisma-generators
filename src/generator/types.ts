@@ -1,4 +1,4 @@
-import { DMMF } from "./dmmf/types";
+import { DMMF } from './dmmf/types';
 
 export interface DMMFTypeInfo {
   // type: string | OutputType | Enum;

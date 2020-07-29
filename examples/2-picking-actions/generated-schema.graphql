@@ -4,11 +4,23 @@
 # -----------------------------------------------
 
 type AggregatePost {
-  count(cursor: PostWhereUniqueInput, orderBy: PostOrderByInput, skip: Int, take: Int, where: PostWhereInput): Int!
+  count(
+    cursor: PostWhereUniqueInput
+    orderBy: PostOrderByInput
+    skip: Int
+    take: Int
+    where: PostWhereInput
+  ): Int!
 }
 
 type AggregateUser {
-  count(cursor: UserWhereUniqueInput, orderBy: UserOrderByInput, skip: Int, take: Int, where: UserWhereInput): Int!
+  count(
+    cursor: UserWhereUniqueInput
+    orderBy: UserOrderByInput
+    skip: Int
+    take: Int
+    where: UserWhereInput
+  ): Int!
 }
 
 input BooleanFilter {
@@ -100,9 +112,21 @@ type Query {
   aggregatePost: AggregatePost!
   aggregateUser: AggregateUser!
   post(where: PostWhereUniqueInput!): Post
-  posts(cursor: PostWhereUniqueInput, orderBy: PostOrderByInput, skip: Int, take: Int, where: PostWhereInput): [Post!]!
+  posts(
+    cursor: PostWhereUniqueInput
+    orderBy: PostOrderByInput
+    skip: Int
+    take: Int
+    where: PostWhereInput
+  ): [Post!]!
   user(where: UserWhereUniqueInput!): User
-  users(cursor: UserWhereUniqueInput, orderBy: UserOrderByInput, skip: Int, take: Int, where: UserWhereInput): [User!]!
+  users(
+    cursor: UserWhereUniqueInput
+    orderBy: UserOrderByInput
+    skip: Int
+    take: Int
+    where: UserWhereInput
+  ): [User!]!
 }
 
 input StringFilter {
@@ -123,7 +147,13 @@ type User {
   email: String!
   id: String!
   name: String
-  posts(cursor: PostWhereUniqueInput, orderBy: PostOrderByInput, skip: Int, take: Int, where: PostWhereInput): [Post!]
+  posts(
+    cursor: PostWhereUniqueInput
+    orderBy: PostOrderByInput
+    skip: Int
+    take: Int
+    where: PostWhereInput
+  ): [Post!]
 }
 
 input UserOrderByInput {

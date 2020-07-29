@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class UpsertCategoryResolver {
-  @Mutation(_returns => Category, {
+  @Mutation(() => Category, {
     nullable: false,
     description: undefined
   })

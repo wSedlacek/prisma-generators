@@ -1,9 +1,9 @@
-const baseConfig = require("./jest.config");
+const baseConfig = require('./jest.config');
 
 module.exports = {
   ...baseConfig,
-  testMatch: ["<rootDir>/tests/**/*integration.ts"],
+  testMatch: ['<rootDir>/tests/**/*integration.ts'],
   testPathIgnorePatterns: baseConfig.testPathIgnorePatterns.filter(
-    it => it !== "<rootDir>/tests/.*integration.*",
+    (it) => it !== '<rootDir>/tests/.*integration.*'
   ),
 };

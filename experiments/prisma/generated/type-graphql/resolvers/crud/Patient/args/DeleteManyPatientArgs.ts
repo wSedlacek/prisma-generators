@@ -4,6 +4,6 @@ import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 
 @ArgsType()
 export class DeleteManyPatientArgs {
-  @Field(_type => PatientWhereInput, { nullable: true })
+  @Field(() => PatientWhereInput, { nullable: true })
   where?: PatientWhereInput | undefined;
 }

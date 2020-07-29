@@ -1,8 +1,8 @@
-import "reflect-metadata";
-import { buildSchema } from "type-graphql";
-import { ApolloServer } from "apollo-server";
-import path from "path";
-import { PrismaClient } from "@prisma/client";
+import 'reflect-metadata';
+import { buildSchema } from 'type-graphql';
+import { ApolloServer } from 'apollo-server';
+import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
 import {
   UserRelationsResolver,
@@ -15,13 +15,13 @@ import {
   AggregateUserResolver,
   // PostCrudResolver,
   // UserCrudResolver,
-} from "./prisma/generated/type-graphql";
+} from './prisma/generated/type-graphql';
 
 interface Context {
   prisma: PrismaClient;
 }
 
-async function main() {
+const main = async () => {
   const schema = await buildSchema({
     resolvers: [
       UserRelationsResolver,
@@ -35,7 +35,7 @@ async function main() {
       FindManyUserResolver,
       AggregateUserResolver,
     ],
-    emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
+    emitSchemaFile: path.resolve(__dirname, './generated-schema.graphql'),
     validate: false,
   });
 
@@ -47,6 +47,6 @@ async function main() {
   });
   const { port } = await server.listen(4000);
   console.log(`GraphQL is listening on ${port}!`);
-}
+};
 
 main().catch(console.error);

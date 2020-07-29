@@ -3,30 +3,30 @@ import {
   OptionalKind,
   Project,
   GetAccessorDeclarationStructure,
-} from "ts-morph";
-import path from "path";
+} from 'ts-morph';
+import path from 'path';
 
-import { cleanDocsString } from "./helpers";
+import { cleanDocsString } from './helpers';
 import {
   generateTypeGraphQLImport,
   generateModelsImports,
   generateEnumsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
-} from "./imports";
-import { modelsFolderName } from "./config";
-import saveSourceFile from "../utils/saveSourceFile";
-import { DMMF } from "./dmmf/types";
-import { DmmfDocument } from "./dmmf/dmmf-document";
-import { GenerateCodeOptions } from "./options";
+} from './imports';
+import { modelsFolderName } from './config';
+import saveSourceFile from '../utils/saveSourceFile';
+import { DMMF } from './dmmf/types';
+import { DmmfDocument } from './dmmf/dmmf-document';
+import { GenerateCodeOptions } from './options';
 
-export default async function generateObjectTypeClassFromModel(
+const generateObjectTypeClassFromModel = async (
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
-) {
+  options: GenerateCodeOptions
+) => {
   const dirPath = path.resolve(baseDirPath, modelsFolderName);
   const filePath = path.resolve(dirPath, `${model.typeName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
@@ -39,19 +39,19 @@ export default async function generateObjectTypeClassFromModel(
   generateModelsImports(
     sourceFile,
     model.fields
-      .filter(field => field.kind === "object")
-      .filter(field => field.type !== model.name)
-      .map(field =>
+      .filter((field) => field.kind === 'object')
+      .filter((field) => field.type !== model.name)
+      .map((field) =>
         dmmfDocument.isModelName(field.type)
           ? dmmfDocument.getModelTypeName(field.type)!
-          : field.type,
-      ),
+          : field.type
+      )
   );
   generateEnumsImports(
     sourceFile,
     model.fields
-      .filter(field => field.kind === "enum")
-      .map(field => field.type),
+      .filter((field) => field.kind === 'enum')
+      .map((field) => field.type)
   );
 
   const modelDocs = cleanDocsString(model.documentation);
@@ -61,17 +61,17 @@ export default async function generateObjectTypeClassFromModel(
     isExported: true,
     decorators: [
       {
-        name: "ObjectType",
+        name: 'ObjectType',
         arguments: [
           `{
             isAbstract: true,
-            description: ${modelDocs ? `"${modelDocs}"` : "undefined"},
+            description: ${modelDocs ? `"${modelDocs}"` : 'undefined'},
           }`,
         ],
       },
     ],
     properties: model.fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
+      (field) => {
         const isOptional = !!field.relationName || !field.isRequired;
         const fieldDocs = cleanDocsString(field.documentation);
 
@@ -80,19 +80,19 @@ export default async function generateObjectTypeClassFromModel(
           type: field.fieldTSType,
           hasExclamationToken: !isOptional,
           hasQuestionToken: isOptional,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           decorators: [
             ...(field.relationName || field.typeFieldAlias
               ? []
               : [
                   {
-                    name: "Field",
+                    name: 'Field',
                     arguments: [
-                      `_type => ${field.typeGraphQLType}`,
+                      `() => ${field.typeGraphQLType}`,
                       `{
                         nullable: ${isOptional},
                         description: ${
-                          fieldDocs ? `"${fieldDocs}"` : "undefined"
+                          fieldDocs ? `"${fieldDocs}"` : 'undefined'
                         },
                       }`,
                     ],
@@ -103,25 +103,25 @@ export default async function generateObjectTypeClassFromModel(
             docs: [{ description: fieldDocs }],
           }),
         };
-      },
+      }
     ),
     getAccessors: model.fields
-      .filter(field => field.typeFieldAlias && !field.relationName)
-      .map<OptionalKind<GetAccessorDeclarationStructure>>(field => {
+      .filter((field) => field.typeFieldAlias && !field.relationName)
+      .map<OptionalKind<GetAccessorDeclarationStructure>>((field) => {
         const fieldDocs = cleanDocsString(field.documentation);
 
         return {
           name: field.typeFieldAlias!,
           returnType: field.fieldTSType,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           decorators: [
             {
-              name: "Field",
+              name: 'Field',
               arguments: [
-                `_type => ${field.typeGraphQLType}`,
+                `() => ${field.typeGraphQLType}`,
                 `{
                   nullable: ${!field.isRequired},
-                  description: ${fieldDocs ? `"${fieldDocs}"` : "undefined"},
+                  description: ${fieldDocs ? `"${fieldDocs}"` : 'undefined'},
                 }`,
               ],
             },
@@ -138,4 +138,6 @@ export default async function generateObjectTypeClassFromModel(
   });
 
   await saveSourceFile(sourceFile);
-}
+};
+
+export default generateObjectTypeClassFromModel;

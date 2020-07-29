@@ -7,19 +7,19 @@ import { JsonValue, InputJsonValue } from "../../client";
   description: undefined,
 })
 export class Patient {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   firstName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   lastName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })

@@ -7,13 +7,13 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class SlugNumberCompoundUniqueInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   slug!: string;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })

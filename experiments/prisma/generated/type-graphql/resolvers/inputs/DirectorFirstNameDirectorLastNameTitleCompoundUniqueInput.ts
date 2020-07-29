@@ -7,19 +7,19 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   directorFirstName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   directorLastName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })

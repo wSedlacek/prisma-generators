@@ -5,11 +5,11 @@ import {
   MethodDeclarationStructure,
   GetAccessorDeclarationStructure,
   SetAccessorDeclarationStructure,
-} from "ts-morph";
-import path from "path";
+} from 'ts-morph';
+import path from 'path';
 
-import { camelCase } from "./helpers";
-import { outputsFolderName, inputsFolderName } from "./config";
+import { camelCase } from './helpers';
+import { outputsFolderName, inputsFolderName } from './config';
 import {
   generateTypeGraphQLImport,
   generateInputsImports,
@@ -18,28 +18,28 @@ import {
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
   generateOutputsImports,
-} from "./imports";
-import saveSourceFile from "../utils/saveSourceFile";
-import generateArgsTypeClassFromArgs from "./args-class";
-import { DmmfDocument } from "./dmmf/dmmf-document";
-import { DMMF } from "./dmmf/types";
-import { GenerateCodeOptions } from "./options";
+} from './imports';
+import saveSourceFile from '../utils/saveSourceFile';
+import generateArgsTypeClassFromArgs from './args-class';
+import { DmmfDocument } from './dmmf/dmmf-document';
+import { DMMF } from './dmmf/types';
+import { GenerateCodeOptions } from './options';
 
-export async function generateOutputTypeClassFromType(
+export const generateOutputTypeClassFromType = async (
   project: Project,
   dirPath: string,
   type: DMMF.OutputType,
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
-) {
+  options: GenerateCodeOptions
+) => {
   const fileDirPath = path.resolve(dirPath, outputsFolderName);
   const filePath = path.resolve(fileDirPath, `${type.typeName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
   const fieldArgsTypeNames = type.fields
-    .filter(it => it.argsTypeName)
-    .map(it => it.argsTypeName!);
+    .filter((it) => it.argsTypeName)
+    .map((it) => it.argsTypeName!);
 
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
@@ -55,14 +55,14 @@ export async function generateOutputTypeClassFromType(
   generateOutputsImports(
     sourceFile,
     type.fields
-      .filter(field => field.outputType.kind === "object")
-      .map(field => field.outputType.type),
-    1,
+      .filter((field) => field.outputType.kind === 'object')
+      .map((field) => field.outputType.type),
+    1
   );
 
   // TODO: move to the root level
   await Promise.all(
-    type.fields.map(async field => {
+    type.fields.map(async (field) => {
       if (field.argsTypeName) {
         await generateArgsTypeClassFromArgs(
           project,
@@ -70,10 +70,10 @@ export async function generateOutputTypeClassFromType(
           field.args,
           field.argsTypeName,
           dmmfDocument,
-          2,
+          2
         );
       }
-    }),
+    })
   );
 
   // const propertyFields = type.name.includes("Aggregate") ? [] : type.fields;
@@ -84,7 +84,7 @@ export async function generateOutputTypeClassFromType(
     isExported: true,
     decorators: [
       {
-        name: "ObjectType",
+        name: 'ObjectType',
         arguments: [
           `{
             isAbstract: true,
@@ -95,7 +95,7 @@ export async function generateOutputTypeClassFromType(
     ],
     // properties: propertyFields.map<OptionalKind<PropertyDeclarationStructure>>(
     properties: type.fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
+      (field) => {
         const isRequired = field.outputType.isRequired;
 
         return {
@@ -103,12 +103,12 @@ export async function generateOutputTypeClassFromType(
           type: field.fieldTSType,
           hasExclamationToken: isRequired,
           hasQuestionToken: !isRequired,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           decorators: [
             {
-              name: "Field",
+              name: 'Field',
               arguments: [
-                `_type => ${field.typeGraphQLType}`,
+                `() => ${field.typeGraphQLType}`,
                 `{
                   nullable: ${!isRequired},
                   description: undefined
@@ -117,7 +117,7 @@ export async function generateOutputTypeClassFromType(
             },
           ],
         };
-      },
+      }
     ),
     // methods: methodFields
     //   // TODO: allow also for other fields args
@@ -135,7 +135,7 @@ export async function generateOutputTypeClassFromType(
     //       {
     //         name: "Field",
     //         arguments: [
-    //           `_type => ${getTypeGraphQLType(
+    //           `() => ${getTypeGraphQLType(
     //             fieldInfo.outputType as DMMFTypeInfo,
     //             dmmfDocument,
     //           )}`,
@@ -167,19 +167,19 @@ export async function generateOutputTypeClassFromType(
   });
 
   await saveSourceFile(sourceFile);
-}
+};
 
-export async function generateInputTypeClassFromType(
+export const generateInputTypeClassFromType = async (
   project: Project,
   dirPath: string,
   inputType: DMMF.InputType,
   _dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
-): Promise<void> {
+  options: GenerateCodeOptions
+): Promise<void> => {
   const filePath = path.resolve(
     dirPath,
     inputsFolderName,
-    `${inputType.typeName}.ts`,
+    `${inputType.typeName}.ts`
   );
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
@@ -191,20 +191,20 @@ export async function generateInputTypeClassFromType(
   generateInputsImports(
     sourceFile,
     inputType.fields
-      .filter(field => field.selectedInputType.kind === "object")
-      .map(field => field.selectedInputType.type)
-      .filter(fieldType => fieldType !== inputType.typeName),
+      .filter((field) => field.selectedInputType.kind === 'object')
+      .map((field) => field.selectedInputType.type)
+      .filter((fieldType) => fieldType !== inputType.typeName)
   );
   generateEnumsImports(
     sourceFile,
     inputType.fields
-      .map(field => field.selectedInputType)
-      .filter(fieldType => fieldType.kind === "enum")
-      .map(fieldType => fieldType.type as string),
-    2,
+      .map((field) => field.selectedInputType)
+      .filter((fieldType) => fieldType.kind === 'enum')
+      .map((fieldType) => fieldType.type as string),
+    2
   );
 
-  const fields = inputType.fields.map(field => {
+  const fields = inputType.fields.map((field) => {
     const hasMappedName = field.name !== field.typeName;
     return {
       ...field,
@@ -217,7 +217,7 @@ export async function generateInputTypeClassFromType(
     isExported: true,
     decorators: [
       {
-        name: "InputType",
+        name: 'InputType',
         arguments: [
           `{
             isAbstract: true,
@@ -227,21 +227,21 @@ export async function generateInputTypeClassFromType(
       },
     ],
     properties: fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      field => {
+      (field) => {
         const isOptional = !field.selectedInputType.isRequired;
         return {
           name: field.name,
           type: field.fieldTSType,
           hasExclamationToken: !isOptional,
           hasQuestionToken: isOptional,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           decorators: field.hasMappedName
             ? []
             : [
                 {
-                  name: "Field",
+                  name: 'Field',
                   arguments: [
-                    `_type => ${field.typeGraphQLType}`,
+                    `() => ${field.typeGraphQLType}`,
                     `{
                       nullable: ${isOptional},
                       description: undefined
@@ -250,23 +250,23 @@ export async function generateInputTypeClassFromType(
                 },
               ],
         };
-      },
+      }
     ),
     getAccessors: fields
-      .filter(field => field.hasMappedName)
-      .map<OptionalKind<GetAccessorDeclarationStructure>>(field => {
+      .filter((field) => field.hasMappedName)
+      .map<OptionalKind<GetAccessorDeclarationStructure>>((field) => {
         return {
           name: field.typeName,
           type: field.fieldTSType,
           hasExclamationToken: field.selectedInputType.isRequired,
           hasQuestionToken: !field.selectedInputType.isRequired,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           statements: [`return this.${field.name};`],
           decorators: [
             {
-              name: "Field",
+              name: 'Field',
               arguments: [
-                `_type => ${field.typeGraphQLType}`,
+                `() => ${field.typeGraphQLType}`,
                 `{
                   nullable: ${!field.selectedInputType.isRequired},
                   description: undefined
@@ -277,14 +277,14 @@ export async function generateInputTypeClassFromType(
         };
       }),
     setAccessors: fields
-      .filter(field => field.hasMappedName)
-      .map<OptionalKind<SetAccessorDeclarationStructure>>(field => {
+      .filter((field) => field.hasMappedName)
+      .map<OptionalKind<SetAccessorDeclarationStructure>>((field) => {
         return {
           name: field.typeName,
           type: field.fieldTSType,
           hasExclamationToken: field.selectedInputType.isRequired,
           hasQuestionToken: !field.selectedInputType.isRequired,
-          trailingTrivia: "\r\n",
+          trailingTrivia: '\r\n',
           parameters: [{ name: field.name, type: field.fieldTSType }],
           statements: [`this.${field.name} = ${field.name};`],
         };
@@ -292,4 +292,4 @@ export async function generateInputTypeClassFromType(
   });
 
   await saveSourceFile(sourceFile);
-}
+};

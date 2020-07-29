@@ -5,9 +5,9 @@ import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInp
 
 @ArgsType()
 export class UpdateCategoryArgs {
-  @Field(_type => CategoryUpdateInput, { nullable: false })
+  @Field(() => CategoryUpdateInput, { nullable: false })
   data!: CategoryUpdateInput;
 
-  @Field(_type => CategoryWhereUniqueInput, { nullable: false })
+  @Field(() => CategoryWhereUniqueInput, { nullable: false })
   where!: CategoryWhereUniqueInput;
 }

@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { Director } from "../../../models/Director";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class UpdateDirectorResolver {
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: true,
     description: undefined
   })

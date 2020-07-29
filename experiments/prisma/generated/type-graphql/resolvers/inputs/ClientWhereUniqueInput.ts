@@ -7,13 +7,13 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class ClientWhereUniqueInput {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined
   })
   id?: number | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })

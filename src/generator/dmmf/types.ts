@@ -31,7 +31,7 @@ export namespace DMMF {
     // additional props
     typeName: string;
   }
-  export type FieldKind = "scalar" | "object" | "enum";
+  export type FieldKind = 'scalar' | 'object' | 'enum';
   export interface Field {
     kind: FieldKind;
     name: string;
@@ -155,19 +155,19 @@ export namespace DMMF {
     name: string;
     fieldName: string;
     kind: ModelAction;
-    operation: "Query" | "Mutation";
+    operation: 'Query' | 'Mutation';
   }
   export enum ModelAction {
-    findOne = "findOne",
-    findMany = "findMany",
-    create = "create",
-    update = "update",
-    updateMany = "updateMany",
-    upsert = "upsert",
-    delete = "delete",
-    deleteMany = "deleteMany",
+    findOne = 'findOne',
+    findMany = 'findMany',
+    create = 'create',
+    update = 'update',
+    updateMany = 'updateMany',
+    upsert = 'upsert',
+    delete = 'delete',
+    deleteMany = 'deleteMany',
     // additional props
-    aggregate = "aggregate",
+    aggregate = 'aggregate',
   }
 }
 export interface BaseField {

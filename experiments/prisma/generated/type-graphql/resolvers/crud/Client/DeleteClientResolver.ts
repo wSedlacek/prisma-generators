@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { DeleteClientArgs } from "./args/DeleteClientArgs";
 import { Client } from "../../../models/Client";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class DeleteClientResolver {
-  @Mutation(_returns => Client, {
+  @Mutation(() => Client, {
     nullable: true,
     description: undefined
   })

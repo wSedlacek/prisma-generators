@@ -9,13 +9,13 @@ import { MovieUpdateManyDataInput } from "../inputs/MovieUpdateManyDataInput";
   description: undefined,
 })
 export class MovieUpdateManyWithWhereNestedInput {
-  @Field(_type => MovieScalarWhereInput, {
+  @Field(() => MovieScalarWhereInput, {
     nullable: false,
     description: undefined
   })
   where!: MovieScalarWhereInput;
 
-  @Field(_type => MovieUpdateManyDataInput, {
+  @Field(() => MovieUpdateManyDataInput, {
     nullable: false,
     description: undefined
   })

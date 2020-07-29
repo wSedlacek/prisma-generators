@@ -3,9 +3,9 @@ import { DeleteManyPatientArgs } from "./args/DeleteManyPatientArgs";
 import { Patient } from "../../../models/Patient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Patient)
+@Resolver(() => Patient)
 export class DeleteManyPatientResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

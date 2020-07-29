@@ -4,6 +4,6 @@ import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInp
 
 @ArgsType()
 export class FindOneCategoryArgs {
-  @Field(_type => CategoryWhereUniqueInput, { nullable: false })
+  @Field(() => CategoryWhereUniqueInput, { nullable: false })
   where!: CategoryWhereUniqueInput;
 }

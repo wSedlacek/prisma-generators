@@ -5,14 +5,14 @@ import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { Category } from "../../../models/Category";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class AggregateCategoryResolver {
-  @Query(_returns => AggregateCategory, {
+  @Query(() => AggregateCategory, {
     nullable: false,
     description: undefined
   })
   async aggregateCategory(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateCategoryArgs): Promise<AggregateCategory> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

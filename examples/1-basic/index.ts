@@ -1,4 +1,4 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 import {
   Resolver,
   Query,
@@ -6,10 +6,10 @@ import {
   FieldResolver,
   Ctx,
   Root,
-} from "type-graphql";
-import { ApolloServer } from "apollo-server";
-import path from "path";
-import { PrismaClient } from "@prisma/client";
+} from 'type-graphql';
+import { ApolloServer } from 'apollo-server';
+import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
 import {
   User,
@@ -18,26 +18,26 @@ import {
   PostRelationsResolver,
   UserCrudResolver,
   PostCrudResolver,
-} from "./prisma/generated/type-graphql";
+} from './prisma/generated/type-graphql';
 
 interface Context {
   prisma: PrismaClient;
 }
 
 // custom resolver for custom business logic using Prisma Client
-@Resolver(of => User)
+@Resolver((of) => User)
 class CustomUserResolver {
-  @Query(returns => User, { nullable: true })
+  @Query((returns) => User, { nullable: true })
   async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
     return await prisma.user.findOne({
-      where: { email: "bob@prisma.io" },
+      where: { email: 'bob@prisma.io' },
     });
   }
 
-  @FieldResolver(type => Post, { nullable: true })
+  @FieldResolver((type) => Post, { nullable: true })
   async favoritePost(
     @Root() user: User,
-    @Ctx() { prisma }: Context,
+    @Ctx() { prisma }: Context
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
       .findOne({ where: { id: user.id } })
@@ -47,7 +47,7 @@ class CustomUserResolver {
   }
 }
 
-async function main() {
+const main = async () => {
   const schema = await buildSchema({
     resolvers: [
       CustomUserResolver,
@@ -56,7 +56,7 @@ async function main() {
       PostRelationsResolver,
       PostCrudResolver,
     ],
-    emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
+    emitSchemaFile: path.resolve(__dirname, './generated-schema.graphql'),
     validate: false,
   });
 
@@ -69,6 +69,6 @@ async function main() {
   });
   const { port } = await server.listen(4000);
   console.log(`GraphQL is listening on ${port}!`);
-}
+};
 
 main().catch(console.error);

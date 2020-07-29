@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class UpdatePostResolver {
-  @Mutation(_returns => Post, {
+  @Mutation(() => Post, {
     nullable: true,
     description: undefined
   })

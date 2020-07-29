@@ -4,6 +4,6 @@ import { CategoryCreateInput } from "../../../inputs/CategoryCreateInput";
 
 @ArgsType()
 export class CreateCategoryArgs {
-  @Field(_type => CategoryCreateInput, { nullable: false })
+  @Field(() => CategoryCreateInput, { nullable: false })
   data!: CategoryCreateInput;
 }

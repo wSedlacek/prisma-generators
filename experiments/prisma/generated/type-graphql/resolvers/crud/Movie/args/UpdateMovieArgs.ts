@@ -5,9 +5,9 @@ import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
 @ArgsType()
 export class UpdateMovieArgs {
-  @Field(_type => MovieUpdateInput, { nullable: false })
+  @Field(() => MovieUpdateInput, { nullable: false })
   data!: MovieUpdateInput;
 
-  @Field(_type => MovieWhereUniqueInput, { nullable: false })
+  @Field(() => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 }

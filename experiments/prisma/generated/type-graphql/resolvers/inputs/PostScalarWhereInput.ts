@@ -15,73 +15,73 @@ import { UUIDFilter } from "../inputs/UUIDFilter";
   description: undefined,
 })
 export class PostScalarWhereInput {
-  @Field(_type => UUIDFilter, {
+  @Field(() => UUIDFilter, {
     nullable: true,
     description: undefined
   })
   uuid?: UUIDFilter | undefined;
 
-  @Field(_type => DateTimeFilter, {
+  @Field(() => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
   createdAt?: DateTimeFilter | undefined;
 
-  @Field(_type => DateTimeFilter, {
+  @Field(() => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
   updatedAt?: DateTimeFilter | undefined;
 
-  @Field(_type => BooleanFilter, {
+  @Field(() => BooleanFilter, {
     nullable: true,
     description: undefined
   })
   published?: BooleanFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   title?: StringFilter | undefined;
 
-  @Field(_type => NullableStringFilter, {
+  @Field(() => NullableStringFilter, {
     nullable: true,
     description: undefined
   })
   content?: NullableStringFilter | undefined;
 
-  @Field(_type => IntFilter, {
+  @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
   authorId?: IntFilter | undefined;
 
-  @Field(_type => NullablePostKindFilter, {
+  @Field(() => NullablePostKindFilter, {
     nullable: true,
     description: undefined
   })
   kind?: NullablePostKindFilter | undefined;
 
-  @Field(_type => JsonFilter, {
+  @Field(() => JsonFilter, {
     nullable: true,
     description: undefined
   })
   metadata?: JsonFilter | undefined;
 
-  @Field(_type => [PostScalarWhereInput], {
+  @Field(() => [PostScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: PostScalarWhereInput[] | undefined;
 
-  @Field(_type => [PostScalarWhereInput], {
+  @Field(() => [PostScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: PostScalarWhereInput[] | undefined;
 
-  @Field(_type => [PostScalarWhereInput], {
+  @Field(() => [PostScalarWhereInput], {
     nullable: true,
     description: undefined
   })

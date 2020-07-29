@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`models should properly generate object type class for prisma model with descriptions: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
 
 /** User model doc */
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: \\"User model doc\\",
 })
 export class User {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   id!: number;
 
   /** field doc */
-  @TypeGraphQL.Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: \\"field doc\\",
   })
   stringField!: string;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -38,58 +38,58 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with different scalar fields types: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   stringField!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined,
   })
   optionalStringField?: string | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   intField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined,
   })
   floatField!: number;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: false,
     description: undefined,
   })
   booleanField!: boolean;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(() => Date, {
     nullable: false,
     description: undefined,
   })
   dateField!: Date;
 
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: false,
     description: undefined,
   })
@@ -99,29 +99,29 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with enum and alias fields types: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Sample } from \\"../enums/Sample\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   intIdField!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined,
   })
   aliasField!: number;
 
-  @TypeGraphQL.Field(_type => Sample, {
+  @Field(() => Sample, {
     nullable: false,
     description: undefined,
   })
@@ -131,23 +131,23 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with renamed fields: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   id!: number;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(() => Date, {
     nullable: false,
     description: undefined,
   })
@@ -161,7 +161,7 @@ export class User {
   posts?: Post[] | undefined;
 
   /** renamed field docs */
-  @TypeGraphQL.Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: \\"renamed field docs\\",
   })
@@ -169,7 +169,7 @@ export class User {
     return this.name;
   }
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(() => Float, {
     nullable: true,
     description: undefined,
   })
@@ -181,17 +181,17 @@ export class User {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Article 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Client } from \\"../models/Client\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class Article {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -199,7 +199,7 @@ export class Article {
 
   author?: Client;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -209,17 +209,17 @@ export class Article {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Client 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Article } from \\"../models/Article\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class Client {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -231,17 +231,17 @@ export class Client {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: Post 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { User } from \\"../models/User\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class Post {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -249,7 +249,7 @@ export class Post {
 
   author?: User;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -259,17 +259,17 @@ export class Post {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
@@ -281,22 +281,22 @@ export class User {
 `;
 
 exports[`models should properly generate object type classes for prisma models with self relations: Service 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class Service {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   id!: number;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
@@ -304,7 +304,7 @@ export class Service {
 
   sourceService?: Service | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(() => Int, {
     nullable: true,
     description: undefined,
   })

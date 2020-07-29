@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindManyCategoryArgs } from "./args/FindManyCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class FindManyCategoryResolver {
-  @Query(_returns => [Category], {
+  @Query(() => [Category], {
     nullable: false,
     description: undefined
   })

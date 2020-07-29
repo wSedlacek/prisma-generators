@@ -11,31 +11,31 @@ import { ClientSumAggregateOutputType } from "../outputs/ClientSumAggregateOutpu
   description: undefined,
 })
 export class AggregateClient {
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
   count!: number;
 
-  @Field(_type => ClientAvgAggregateOutputType, {
+  @Field(() => ClientAvgAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   avg?: ClientAvgAggregateOutputType | undefined;
 
-  @Field(_type => ClientSumAggregateOutputType, {
+  @Field(() => ClientSumAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   sum?: ClientSumAggregateOutputType | undefined;
 
-  @Field(_type => ClientMinAggregateOutputType, {
+  @Field(() => ClientMinAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   min?: ClientMinAggregateOutputType | undefined;
 
-  @Field(_type => ClientMaxAggregateOutputType, {
+  @Field(() => ClientMaxAggregateOutputType, {
     nullable: true,
     description: undefined
   })

@@ -4,6 +4,6 @@ import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
 
 @ArgsType()
 export class DeleteManyMovieArgs {
-  @Field(_type => MovieWhereInput, { nullable: true })
+  @Field(() => MovieWhereInput, { nullable: true })
   where?: MovieWhereInput | undefined;
 }

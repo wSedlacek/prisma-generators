@@ -7,13 +7,13 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class DirectorCreateWithoutMoviesInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   firstName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })

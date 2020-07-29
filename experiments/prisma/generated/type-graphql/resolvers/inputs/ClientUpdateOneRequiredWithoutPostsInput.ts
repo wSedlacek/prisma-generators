@@ -12,31 +12,31 @@ import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
   description: undefined,
 })
 export class ClientUpdateOneRequiredWithoutPostsInput {
-  @Field(_type => ClientCreateWithoutPostsInput, {
+  @Field(() => ClientCreateWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
   create?: ClientCreateWithoutPostsInput | undefined;
 
-  @Field(_type => ClientWhereUniqueInput, {
+  @Field(() => ClientWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
   connect?: ClientWhereUniqueInput | undefined;
 
-  @Field(_type => ClientUpdateWithoutPostsDataInput, {
+  @Field(() => ClientUpdateWithoutPostsDataInput, {
     nullable: true,
     description: undefined
   })
   update?: ClientUpdateWithoutPostsDataInput | undefined;
 
-  @Field(_type => ClientUpsertWithoutPostsInput, {
+  @Field(() => ClientUpsertWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
   upsert?: ClientUpsertWithoutPostsInput | undefined;
 
-  @Field(_type => ClientCreateOrConnectWithoutpostInput, {
+  @Field(() => ClientCreateOrConnectWithoutpostInput, {
     nullable: true,
     description: undefined
   })

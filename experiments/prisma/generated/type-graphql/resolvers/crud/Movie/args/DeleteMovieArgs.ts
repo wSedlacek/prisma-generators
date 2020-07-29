@@ -4,6 +4,6 @@ import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
 @ArgsType()
 export class DeleteMovieArgs {
-  @Field(_type => MovieWhereUniqueInput, { nullable: false })
+  @Field(() => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 }

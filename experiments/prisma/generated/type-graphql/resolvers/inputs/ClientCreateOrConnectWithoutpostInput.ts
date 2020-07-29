@@ -9,13 +9,13 @@ import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
   description: undefined,
 })
 export class ClientCreateOrConnectWithoutpostInput {
-  @Field(_type => ClientWhereUniqueInput, {
+  @Field(() => ClientWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: ClientWhereUniqueInput;
 
-  @Field(_type => ClientCreateWithoutPostsInput, {
+  @Field(() => ClientCreateWithoutPostsInput, {
     nullable: false,
     description: undefined
   })

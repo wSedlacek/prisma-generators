@@ -5,14 +5,14 @@ import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { Movie } from "../../../models/Movie";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class AggregateMovieResolver {
-  @Query(_returns => AggregateMovie, {
+  @Query(() => AggregateMovie, {
     nullable: false,
     description: undefined
   })
   async aggregateMovie(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateMovieArgs): Promise<AggregateMovie> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

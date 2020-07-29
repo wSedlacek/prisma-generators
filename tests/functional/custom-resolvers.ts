@@ -1,16 +1,16 @@
-import "reflect-metadata";
-import { promises as fs } from "fs";
-import { buildSchema, Query, Resolver, Args, Ctx } from "type-graphql";
-import { graphql } from "graphql";
+import 'reflect-metadata';
+import { promises as fs } from 'fs';
+import { buildSchema, Query, Resolver, Args, Ctx } from 'type-graphql';
+import { graphql } from 'graphql';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 
-describe("custom resolvers execution", () => {
+describe('custom resolvers execution', () => {
   let outputDirPath: string;
 
   beforeAll(async () => {
-    outputDirPath = generateArtifactsDirPath("functional-custom-resolvers");
+    outputDirPath = generateArtifactsDirPath('functional-custom-resolvers');
     await fs.mkdir(outputDirPath, { recursive: true });
     const prismaSchema = /* prisma */ `
       enum Color {
@@ -28,14 +28,14 @@ describe("custom resolvers execution", () => {
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
   });
 
-  it("should be possible to use generated inputs, args and types to build own resolvers", async () => {
+  it('should be possible to use generated inputs, args and types to build own resolvers', async () => {
     const { Post, FindManyPostArgs } = require(outputDirPath);
     @Resolver()
     class CustomResolver {
-      @Query(_returns => [Post])
+      @Query((_returns) => [Post])
       async customFindManyPost(
-        @Args(_type => FindManyPostArgs) args: any,
-        @Ctx() { prisma }: any,
+        @Args((_type) => FindManyPostArgs) args: any,
+        @Ctx() { prisma }: any
       ) {
         return await prisma.post.findMany(args);
       }
@@ -61,12 +61,12 @@ describe("custom resolvers execution", () => {
       post: {
         findMany: jest.fn().mockResolvedValue([
           {
-            uuid: "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
-            color: "RED",
+            uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
+            color: 'RED',
           },
           {
-            uuid: "72c8a188-3d46-45b3-b23f-7d420aa282f1",
-            color: "BLUE",
+            uuid: '72c8a188-3d46-45b3-b23f-7d420aa282f1',
+            color: 'BLUE',
           },
         ]),
       },
@@ -75,11 +75,11 @@ describe("custom resolvers execution", () => {
     const graphQLSchema = await buildSchema({
       resolvers: [CustomResolver],
       validate: false,
-      emitSchemaFile: outputDirPath + "/schema.graphql",
+      emitSchemaFile: outputDirPath + '/schema.graphql',
     });
     const graphQLSchemaSDL = await fs.readFile(
-      outputDirPath + "/schema.graphql",
-      { encoding: "utf8" },
+      outputDirPath + '/schema.graphql',
+      { encoding: 'utf8' }
     );
 
     const { data, errors } = await graphql(graphQLSchema, document, null, {
@@ -87,10 +87,10 @@ describe("custom resolvers execution", () => {
     });
 
     expect(errors).toBeUndefined();
-    expect(data).toMatchSnapshot("custom posts resolver mocked response");
+    expect(data).toMatchSnapshot('custom posts resolver mocked response');
     expect(prismaMock.post.findMany.mock.calls).toMatchSnapshot(
-      "findManyPost call args",
+      'findManyPost call args'
     );
-    expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
+    expect(graphQLSchemaSDL).toMatchSnapshot('graphQLSchemaSDL');
   });
 });

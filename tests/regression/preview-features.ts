@@ -1,23 +1,23 @@
-import { promises as fs } from "fs";
+import { promises as fs } from 'fs';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 import createReadGeneratedFile, {
   ReadGeneratedFile,
-} from "../helpers/read-file";
+} from '../helpers/read-file';
 
-describe("preview features", () => {
+describe('preview features', () => {
   let outputDirPath: string;
   let readGeneratedFile: ReadGeneratedFile;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("preview-features");
+    outputDirPath = generateArtifactsDirPath('preview-features');
     await fs.mkdir(outputDirPath, { recursive: true });
     readGeneratedFile = createReadGeneratedFile(outputDirPath);
   });
 
-  describe("when `distinct` is enabled", () => {
-    it("should properly generate args classes and enums for model actions resolvers", async () => {
+  describe('when `distinct` is enabled', () => {
+    it('should properly generate args classes and enums for model actions resolvers', async () => {
       const schema = /* prisma */ `
         model User {
           intIdField          Int      @id @default(autoincrement())
@@ -29,30 +29,30 @@ describe("preview features", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["distinct"],
+        enabledPreviewFeatures: ['distinct'],
       });
       const aggregateUserArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/args/AggregateUserArgs.ts",
+        '/resolvers/crud/User/args/AggregateUserArgs.ts'
       );
       const findManyUserArgsTSFile = await readGeneratedFile(
-        "/resolvers/crud/User/args/FindManyUserArgs.ts",
+        '/resolvers/crud/User/args/FindManyUserArgs.ts'
       );
       const userDistinctFieldEnumTSFile = await readGeneratedFile(
-        "/enums/UserDistinctFieldEnum.ts",
+        '/enums/UserDistinctFieldEnum.ts'
       );
-      const enumsIndexTSFile = await readGeneratedFile("/enums/index.ts");
+      const enumsIndexTSFile = await readGeneratedFile('/enums/index.ts');
 
-      expect(aggregateUserArgsTSFile).toMatchSnapshot("AggregateUserArgs");
-      expect(findManyUserArgsTSFile).toMatchSnapshot("FindManyUserArgs");
+      expect(aggregateUserArgsTSFile).toMatchSnapshot('AggregateUserArgs');
+      expect(findManyUserArgsTSFile).toMatchSnapshot('FindManyUserArgs');
       expect(userDistinctFieldEnumTSFile).toMatchSnapshot(
-        "UserDistinctFieldEnum",
+        'UserDistinctFieldEnum'
       );
-      expect(enumsIndexTSFile).toMatchSnapshot("enums index");
+      expect(enumsIndexTSFile).toMatchSnapshot('enums index');
     });
   });
 
-  describe("when `connectOrCreate` is enabled", () => {
-    it("should properly generate input type classes for connectOrCreate", async () => {
+  describe('when `connectOrCreate` is enabled', () => {
+    it('should properly generate input type classes for connectOrCreate', async () => {
       const schema = /* prisma */ `
         model User {
           id          Int     @id @default(autoincrement())
@@ -69,31 +69,31 @@ describe("preview features", () => {
 
       await generateCodeFromSchema(schema, {
         outputDirPath,
-        enabledPreviewFeatures: ["connectOrCreate"],
+        enabledPreviewFeatures: ['connectOrCreate'],
       });
       const userUpdateOneRequiredWithoutPostsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts",
+        '/resolvers/inputs/UserUpdateOneRequiredWithoutPostsFieldInput.ts'
       );
       const userCreateOrConnectWithoutpostInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/UserCreateOrConnectWithoutPostInput.ts",
+        '/resolvers/inputs/UserCreateOrConnectWithoutPostInput.ts'
       );
       const userCreateOneWithoutPostsFieldInputTSFile = await readGeneratedFile(
-        "/resolvers/inputs/UserCreateOneWithoutPostsFieldInput.ts",
+        '/resolvers/inputs/UserCreateOneWithoutPostsFieldInput.ts'
       );
       const inputsIndexTSFile = await readGeneratedFile(
-        "/resolvers/inputs/index.ts",
+        '/resolvers/inputs/index.ts'
       );
 
       expect(userUpdateOneRequiredWithoutPostsFieldInputTSFile).toMatchSnapshot(
-        "UserUpdateOneRequiredWithoutPostsFieldInput",
+        'UserUpdateOneRequiredWithoutPostsFieldInput'
       );
       expect(userCreateOrConnectWithoutpostInputTSFile).toMatchSnapshot(
-        "UserCreateOrConnectWithoutPostInput",
+        'UserCreateOrConnectWithoutPostInput'
       );
       expect(userCreateOneWithoutPostsFieldInputTSFile).toMatchSnapshot(
-        "UserCreateOneWithoutPostsFieldInput",
+        'UserCreateOneWithoutPostsFieldInput'
       );
-      expect(inputsIndexTSFile).toMatchSnapshot("inputs index");
+      expect(inputsIndexTSFile).toMatchSnapshot('inputs index');
     });
   });
 });

@@ -4,6 +4,6 @@ import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 
 @ArgsType()
 export class DeleteClientArgs {
-  @Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }

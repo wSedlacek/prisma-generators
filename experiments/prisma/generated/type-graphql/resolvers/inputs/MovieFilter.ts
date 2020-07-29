@@ -8,19 +8,19 @@ import { MovieWhereInput } from "../inputs/MovieWhereInput";
   description: undefined,
 })
 export class MovieFilter {
-  @Field(_type => MovieWhereInput, {
+  @Field(() => MovieWhereInput, {
     nullable: true,
     description: undefined
   })
   every?: MovieWhereInput | undefined;
 
-  @Field(_type => MovieWhereInput, {
+  @Field(() => MovieWhereInput, {
     nullable: true,
     description: undefined
   })
   some?: MovieWhereInput | undefined;
 
-  @Field(_type => MovieWhereInput, {
+  @Field(() => MovieWhereInput, {
     nullable: true,
     description: undefined
   })

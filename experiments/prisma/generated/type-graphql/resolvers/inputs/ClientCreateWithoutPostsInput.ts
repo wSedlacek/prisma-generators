@@ -8,7 +8,7 @@ import { Role } from "../../enums/Role";
   description: undefined,
 })
 export class ClientCreateWithoutPostsInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
@@ -16,7 +16,7 @@ export class ClientCreateWithoutPostsInput {
 
   name?: string | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -24,19 +24,19 @@ export class ClientCreateWithoutPostsInput {
 
   balance!: number;
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
   amount!: number;
 
-  @Field(_type => Role, {
+  @Field(() => Role, {
     nullable: false,
     description: undefined
   })
   role!: keyof typeof Role;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class ClientCreateWithoutPostsInput {
     this.name = name;
   }
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })

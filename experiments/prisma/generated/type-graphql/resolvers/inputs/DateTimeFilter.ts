@@ -7,49 +7,49 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class DateTimeFilter {
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   equals?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   not?: Date | undefined;
 
-  @Field(_type => [Date], {
+  @Field(() => [Date], {
     nullable: true,
     description: undefined
   })
   in?: Date[] | undefined;
 
-  @Field(_type => [Date], {
+  @Field(() => [Date], {
     nullable: true,
     description: undefined
   })
   notIn?: Date[] | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   lt?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   lte?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   gt?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })

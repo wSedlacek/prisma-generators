@@ -5,14 +5,14 @@ import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { Director } from "../../../models/Director";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class AggregateDirectorResolver {
-  @Query(_returns => AggregateDirector, {
+  @Query(() => AggregateDirector, {
     nullable: false,
     description: undefined
   })
   async aggregateDirector(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

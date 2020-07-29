@@ -7,21 +7,21 @@ import { PatientDistinctFieldEnum } from "../../../../enums/PatientDistinctField
 
 @ArgsType()
 export class FindManyPatientArgs {
-  @Field(_type => PatientWhereInput, { nullable: true })
+  @Field(() => PatientWhereInput, { nullable: true })
   where?: PatientWhereInput | undefined;
 
-  @Field(_type => PatientOrderByInput, { nullable: true })
+  @Field(() => PatientOrderByInput, { nullable: true })
   orderBy?: PatientOrderByInput | undefined;
 
-  @Field(_type => PatientWhereUniqueInput, { nullable: true })
+  @Field(() => PatientWhereUniqueInput, { nullable: true })
   cursor?: PatientWhereUniqueInput | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @Field(_type => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(_type => [PatientDistinctFieldEnum], { nullable: true })
+  @Field(() => [PatientDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof PatientDistinctFieldEnum> | undefined;
 }

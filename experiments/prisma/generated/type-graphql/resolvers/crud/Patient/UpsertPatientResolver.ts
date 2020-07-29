@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
 import { Patient } from "../../../models/Patient";
 
-@Resolver(_of => Patient)
+@Resolver(() => Patient)
 export class UpsertPatientResolver {
-  @Mutation(_returns => Patient, {
+  @Mutation(() => Patient, {
     nullable: false,
     description: undefined
   })

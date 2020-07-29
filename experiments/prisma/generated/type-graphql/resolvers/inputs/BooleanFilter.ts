@@ -7,13 +7,13 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class BooleanFilter {
-  @Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: true,
     description: undefined
   })
   equals?: boolean | undefined;
 
-  @Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: true,
     description: undefined
   })

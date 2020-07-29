@@ -3,9 +3,9 @@ import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { Category } from "../../../models/Category";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class UpdateManyCategoryResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

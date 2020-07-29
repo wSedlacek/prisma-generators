@@ -10,19 +10,19 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
   description: undefined,
 })
 export class MovieCreateManyWithoutDirectorInput {
-  @Field(_type => [MovieCreateWithoutDirectorInput], {
+  @Field(() => [MovieCreateWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
-  @Field(_type => [MovieWhereUniqueInput], {
+  @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: MovieWhereUniqueInput[] | undefined;
 
-  @Field(_type => [MovieCreateOrConnectWithoutDirectorInput], {
+  @Field(() => [MovieCreateOrConnectWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })

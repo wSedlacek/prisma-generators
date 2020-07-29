@@ -4,6 +4,6 @@ import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @ArgsType()
 export class DeletePostArgs {
-  @Field(_type => PostWhereUniqueInput, { nullable: false })
+  @Field(() => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 }

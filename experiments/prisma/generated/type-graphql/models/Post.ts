@@ -9,37 +9,37 @@ import { PostKind } from "../enums/PostKind";
   description: undefined,
 })
 export class Post {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   uuid!: string;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: false,
     description: undefined,
   })
   createdAt!: Date;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: false,
     description: undefined,
   })
   updatedAt!: Date;
 
-  @Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: false,
     description: undefined,
   })
   published!: boolean;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   title!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined,
   })
@@ -47,19 +47,19 @@ export class Post {
 
   author?: Client;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined,
   })
   authorId!: number;
 
-  @Field(_type => PostKind, {
+  @Field(() => PostKind, {
     nullable: true,
     description: undefined,
   })
   kind?: keyof typeof PostKind | undefined;
 
-  @Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: false,
     description: undefined,
   })

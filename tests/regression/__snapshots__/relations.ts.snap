@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`relations resolvers generation should properly generate relation resolver class for model with multi id keys with relation: MovieRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
 
-@TypeGraphQL.Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class MovieRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Director, {
+  @ResolveField(() => Director, {
     nullable: false,
     description: undefined,
   })
-  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+  async director(@Root() movie: Movie, @Context() ctx: any): Promise<Director> {
     return ctx.prisma.movie.findOne({
       where: {
         directorFirstName_directorLastName_title: {
@@ -27,18 +27,18 @@ export class MovieRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate relation resolver class for model with unique fields: DirectorRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
 import { DirectorMoviesArgs } from \\"./args/DirectorMoviesArgs\\";
 
-@TypeGraphQL.Resolver(_of => Director)
+@Resolver(() => Director)
 export class DirectorRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Movie], {
+  @ResolveField(() => [Movie], {
     nullable: true,
     description: undefined,
   })
-  async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | undefined> {
+  async movies(@Root() director: Director, @Context() ctx: any, @Args() args: DirectorMoviesArgs): Promise<Movie[] | undefined> {
     return ctx.prisma.director.findOne({
       where: {
         firstName_lastName: {
@@ -53,17 +53,17 @@ export class DirectorRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: Post 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => Post)
+@Resolver(() => Post)
 export class PostRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @ResolveField(() => User, {
     nullable: true,
     description: \\"author field doc\\",
   })
-  async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | undefined> {
+  async postAuthor(@Root() post: Post, @Context() ctx: any): Promise<User | undefined> {
     return ctx.prisma.post.findOne({
       where: {
         uuid: post.uuid,
@@ -75,18 +75,18 @@ export class PostRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Post], {
+  @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
   })
-  async userPosts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
+  async userPosts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,
@@ -98,45 +98,45 @@ export class UserRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserPostsArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { PostOrderByInput } from \\"../../../inputs/PostOrderByInput\\";
 import { PostWhereInput } from \\"../../../inputs/PostWhereInput\\";
 import { PostWhereUniqueInput } from \\"../../../inputs/PostWhereUniqueInput\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UserPostsArgs {
-  @TypeGraphQL.Field(_type => PostWhereInput, { nullable: true })
+  @Field(() => PostWhereInput, { nullable: true })
   where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostOrderByInput, { nullable: true })
+  @Field(() => PostOrderByInput, { nullable: true })
   orderBy?: PostOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
+  @Field(() => PostWhereUniqueInput, { nullable: true })
   cursor?: PostWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Post], {
+  @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
   })
-  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
+  async posts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,
@@ -148,17 +148,17 @@ export class UserRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate resolver class for single relation resolvers: UserRelationsResolver 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Address } from \\"../../../models/Address\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Address, {
+  @ResolveField(() => Address, {
     nullable: true,
     description: undefined,
   })
-  async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | undefined> {
+  async address(@Root() user: User, @Context() ctx: any): Promise<Address | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,
@@ -170,17 +170,17 @@ export class UserRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: Post 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 
-@TypeGraphQL.Resolver(_of => Post)
+@Resolver(() => Post)
 export class PostRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => User, {
+  @ResolveField(() => User, {
     nullable: true,
     description: \\"author field doc\\",
   })
-  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | undefined> {
+  async author(@Root() post: Post, @Context() ctx: any): Promise<User | undefined> {
     return ctx.prisma.post.findOne({
       where: {
         uuid: post.uuid,
@@ -192,18 +192,18 @@ export class PostRelationsResolver {
 `;
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: User 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
-@TypeGraphQL.Resolver(_of => User)
+@Resolver(() => User)
 export class UserRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Post], {
+  @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
   })
-  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
+  async posts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,

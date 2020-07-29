@@ -7,7 +7,7 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class PostAvgAggregateOutputType {
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })

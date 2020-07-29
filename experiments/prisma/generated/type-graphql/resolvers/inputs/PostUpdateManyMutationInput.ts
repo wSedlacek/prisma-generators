@@ -8,49 +8,49 @@ import { PostKind } from "../../enums/PostKind";
   description: undefined,
 })
 export class PostUpdateManyMutationInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   uuid?: string | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   createdAt?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   updatedAt?: Date | undefined;
 
-  @Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: true,
     description: undefined
   })
   published?: boolean | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   title?: string | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   content?: string | undefined;
 
-  @Field(_type => PostKind, {
+  @Field(() => PostKind, {
     nullable: true,
     description: undefined
   })
   kind?: keyof typeof PostKind | undefined;
 
-  @Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: true,
     description: undefined
   })

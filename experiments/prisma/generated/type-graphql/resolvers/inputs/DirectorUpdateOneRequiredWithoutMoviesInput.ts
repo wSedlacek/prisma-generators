@@ -12,31 +12,31 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
   description: undefined,
 })
 export class DirectorUpdateOneRequiredWithoutMoviesInput {
-  @Field(_type => DirectorCreateWithoutMoviesInput, {
+  @Field(() => DirectorCreateWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
   create?: DirectorCreateWithoutMoviesInput | undefined;
 
-  @Field(_type => DirectorWhereUniqueInput, {
+  @Field(() => DirectorWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
   connect?: DirectorWhereUniqueInput | undefined;
 
-  @Field(_type => DirectorUpdateWithoutMoviesDataInput, {
+  @Field(() => DirectorUpdateWithoutMoviesDataInput, {
     nullable: true,
     description: undefined
   })
   update?: DirectorUpdateWithoutMoviesDataInput | undefined;
 
-  @Field(_type => DirectorUpsertWithoutMoviesInput, {
+  @Field(() => DirectorUpsertWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
   upsert?: DirectorUpsertWithoutMoviesInput | undefined;
 
-  @Field(_type => DirectorCreateOrConnectWithoutMovieInput, {
+  @Field(() => DirectorCreateOrConnectWithoutMovieInput, {
     nullable: true,
     description: undefined
   })

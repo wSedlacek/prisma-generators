@@ -5,9 +5,9 @@ import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 
 @ArgsType()
 export class UpdateManyCategoryArgs {
-  @Field(_type => CategoryUpdateManyMutationInput, { nullable: false })
+  @Field(() => CategoryUpdateManyMutationInput, { nullable: false })
   data!: CategoryUpdateManyMutationInput;
 
-  @Field(_type => CategoryWhereInput, { nullable: true })
+  @Field(() => CategoryWhereInput, { nullable: true })
   where?: CategoryWhereInput | undefined;
 }

@@ -9,13 +9,13 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
   description: undefined,
 })
 export class MovieUpdateWithWhereUniqueWithoutDirectorInput {
-  @Field(_type => MovieWhereUniqueInput, {
+  @Field(() => MovieWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: MovieWhereUniqueInput;
 
-  @Field(_type => MovieUpdateWithoutDirectorDataInput, {
+  @Field(() => MovieUpdateWithoutDirectorDataInput, {
     nullable: false,
     description: undefined
   })

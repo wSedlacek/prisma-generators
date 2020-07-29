@@ -14,9 +14,9 @@ import { Patient } from "../../../models/Patient";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Patient)
+@Resolver(() => Patient)
 export class PatientCrudResolver {
-  @Query(_returns => Patient, {
+  @Query(() => Patient, {
     nullable: true,
     description: undefined
   })
@@ -24,7 +24,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.findOne(args);
   }
 
-  @Query(_returns => [Patient], {
+  @Query(() => [Patient], {
     nullable: false,
     description: undefined
   })
@@ -32,7 +32,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.findMany(args);
   }
 
-  @Mutation(_returns => Patient, {
+  @Mutation(() => Patient, {
     nullable: false,
     description: undefined
   })
@@ -40,7 +40,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.create(args);
   }
 
-  @Mutation(_returns => Patient, {
+  @Mutation(() => Patient, {
     nullable: true,
     description: undefined
   })
@@ -48,7 +48,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.delete(args);
   }
 
-  @Mutation(_returns => Patient, {
+  @Mutation(() => Patient, {
     nullable: true,
     description: undefined
   })
@@ -56,7 +56,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.update(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -64,7 +64,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.deleteMany(args);
   }
 
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })
@@ -72,7 +72,7 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.updateMany(args);
   }
 
-  @Mutation(_returns => Patient, {
+  @Mutation(() => Patient, {
     nullable: false,
     description: undefined
   })
@@ -80,12 +80,12 @@ export class PatientCrudResolver {
     return ctx.prisma.patient.upsert(args);
   }
 
-  @Query(_returns => AggregatePatient, {
+  @Query(() => AggregatePatient, {
     nullable: false,
     description: undefined
   })
   async aggregatePatient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregatePatientArgs): Promise<AggregatePatient> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

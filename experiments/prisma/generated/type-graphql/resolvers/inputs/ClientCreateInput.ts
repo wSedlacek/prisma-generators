@@ -9,7 +9,7 @@ import { Role } from "../../enums/Role";
   description: undefined,
 })
 export class ClientCreateInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
@@ -17,7 +17,7 @@ export class ClientCreateInput {
 
   name?: string | undefined;
 
-  @Field(_type => Int, {
+  @Field(() => Int, {
     nullable: false,
     description: undefined
   })
@@ -25,13 +25,13 @@ export class ClientCreateInput {
 
   balance!: number;
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
   amount!: number;
 
-  @Field(_type => Role, {
+  @Field(() => Role, {
     nullable: false,
     description: undefined
   })
@@ -39,7 +39,7 @@ export class ClientCreateInput {
 
   posts?: PostCreateManyWithoutAuthorInput | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
@@ -51,7 +51,7 @@ export class ClientCreateInput {
     this.name = name;
   }
 
-  @Field(_type => Float, {
+  @Field(() => Float, {
     nullable: false,
     description: undefined
   })
@@ -63,7 +63,7 @@ export class ClientCreateInput {
     this.balance = balance;
   }
 
-  @Field(_type => PostCreateManyWithoutAuthorInput, {
+  @Field(() => PostCreateManyWithoutAuthorInput, {
     nullable: true,
     description: undefined
   })

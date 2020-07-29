@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindManyPostArgs } from "./args/FindManyPostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class FindManyPostResolver {
-  @Query(_returns => [Post], {
+  @Query(() => [Post], {
     nullable: false,
     description: undefined
   })

@@ -8,13 +8,13 @@ import { Movie } from "../models/Movie";
   description: undefined,
 })
 export class Director {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })
   firstName!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined,
   })

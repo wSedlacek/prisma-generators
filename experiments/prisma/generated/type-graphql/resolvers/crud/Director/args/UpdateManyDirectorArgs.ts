@@ -5,9 +5,9 @@ import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 
 @ArgsType()
 export class UpdateManyDirectorArgs {
-  @Field(_type => DirectorUpdateManyMutationInput, { nullable: false })
+  @Field(() => DirectorUpdateManyMutationInput, { nullable: false })
   data!: DirectorUpdateManyMutationInput;
 
-  @Field(_type => DirectorWhereInput, { nullable: true })
+  @Field(() => DirectorWhereInput, { nullable: true })
   where?: DirectorWhereInput | undefined;
 }

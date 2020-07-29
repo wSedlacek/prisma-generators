@@ -8,13 +8,13 @@ import { OrderByArg } from "../../enums/OrderByArg";
   description: undefined,
 })
 export class ClientOrderByInput {
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   id?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
@@ -22,7 +22,7 @@ export class ClientOrderByInput {
 
   name?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
@@ -30,19 +30,19 @@ export class ClientOrderByInput {
 
   balance?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   amount?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
   role?: keyof typeof OrderByArg | undefined;
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })
@@ -54,7 +54,7 @@ export class ClientOrderByInput {
     this.name = name;
   }
 
-  @Field(_type => OrderByArg, {
+  @Field(() => OrderByArg, {
     nullable: true,
     description: undefined
   })

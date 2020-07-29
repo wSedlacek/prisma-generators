@@ -3,9 +3,9 @@ import { DeleteManyCategoryArgs } from "./args/DeleteManyCategoryArgs";
 import { Category } from "../../../models/Category";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@Resolver(_of => Category)
+@Resolver(() => Category)
 export class DeleteManyCategoryResolver {
-  @Mutation(_returns => BatchPayload, {
+  @Mutation(() => BatchPayload, {
     nullable: false,
     description: undefined
   })

@@ -7,13 +7,13 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class JsonFilter {
-  @Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: true,
     description: undefined
   })
   equals?: InputJsonValue | undefined;
 
-  @Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: true,
     description: undefined
   })

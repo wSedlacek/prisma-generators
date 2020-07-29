@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpsertMovieArgs } from "./args/UpsertMovieArgs";
 import { Movie } from "../../../models/Movie";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class UpsertMovieResolver {
-  @Mutation(_returns => Movie, {
+  @Mutation(() => Movie, {
     nullable: false,
     description: undefined
   })

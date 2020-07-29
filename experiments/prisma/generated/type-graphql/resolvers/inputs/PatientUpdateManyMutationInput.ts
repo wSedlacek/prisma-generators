@@ -7,19 +7,19 @@ import { JsonValue, InputJsonValue } from "../../../client";
   description: undefined,
 })
 export class PatientUpdateManyMutationInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   firstName?: string | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   lastName?: string | undefined;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })

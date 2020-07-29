@@ -6,12 +6,12 @@ import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInp
 
 @ArgsType()
 export class UpsertCategoryArgs {
-  @Field(_type => CategoryWhereUniqueInput, { nullable: false })
+  @Field(() => CategoryWhereUniqueInput, { nullable: false })
   where!: CategoryWhereUniqueInput;
 
-  @Field(_type => CategoryCreateInput, { nullable: false })
+  @Field(() => CategoryCreateInput, { nullable: false })
   create!: CategoryCreateInput;
 
-  @Field(_type => CategoryUpdateInput, { nullable: false })
+  @Field(() => CategoryUpdateInput, { nullable: false })
   update!: CategoryUpdateInput;
 }

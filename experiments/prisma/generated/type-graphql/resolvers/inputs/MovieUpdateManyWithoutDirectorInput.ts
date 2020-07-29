@@ -14,61 +14,61 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
   description: undefined,
 })
 export class MovieUpdateManyWithoutDirectorInput {
-  @Field(_type => [MovieCreateWithoutDirectorInput], {
+  @Field(() => [MovieCreateWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
-  @Field(_type => [MovieWhereUniqueInput], {
+  @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: MovieWhereUniqueInput[] | undefined;
 
-  @Field(_type => [MovieWhereUniqueInput], {
+  @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   set?: MovieWhereUniqueInput[] | undefined;
 
-  @Field(_type => [MovieWhereUniqueInput], {
+  @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   disconnect?: MovieWhereUniqueInput[] | undefined;
 
-  @Field(_type => [MovieWhereUniqueInput], {
+  @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   delete?: MovieWhereUniqueInput[] | undefined;
 
-  @Field(_type => [MovieUpdateWithWhereUniqueWithoutDirectorInput], {
+  @Field(() => [MovieUpdateWithWhereUniqueWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   update?: MovieUpdateWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @Field(_type => [MovieUpdateManyWithWhereNestedInput], {
+  @Field(() => [MovieUpdateManyWithWhereNestedInput], {
     nullable: true,
     description: undefined
   })
   updateMany?: MovieUpdateManyWithWhereNestedInput[] | undefined;
 
-  @Field(_type => [MovieScalarWhereInput], {
+  @Field(() => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   deleteMany?: MovieScalarWhereInput[] | undefined;
 
-  @Field(_type => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
+  @Field(() => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @Field(_type => [MovieCreateOrConnectWithoutDirectorInput], {
+  @Field(() => [MovieCreateOrConnectWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })

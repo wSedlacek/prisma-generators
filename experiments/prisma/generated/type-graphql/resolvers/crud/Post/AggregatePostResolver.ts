@@ -5,14 +5,14 @@ import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { Post } from "../../../models/Post";
 import { AggregatePost } from "../../outputs/AggregatePost";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class AggregatePostResolver {
-  @Query(_returns => AggregatePost, {
+  @Query(() => AggregatePost, {
     nullable: false,
     description: undefined
   })
   async aggregatePost(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregatePostArgs): Promise<AggregatePost> {
-    function transformFields(fields: Record<string, any>): Record<string, any> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
       return Object.fromEntries(
         Object.entries(fields)
           .filter(([key, value]) => !key.startsWith("_"))

@@ -4,6 +4,6 @@ import { MovieCreateInput } from "../../../inputs/MovieCreateInput";
 
 @ArgsType()
 export class CreateMovieArgs {
-  @Field(_type => MovieCreateInput, { nullable: false })
+  @Field(() => MovieCreateInput, { nullable: false })
   data!: MovieCreateInput;
 }

@@ -1,15 +1,15 @@
-import "reflect-metadata";
-import { promises as fs } from "fs";
-import { buildSchema } from "type-graphql";
+import 'reflect-metadata';
+import { promises as fs } from 'fs';
+import { buildSchema } from 'type-graphql';
 
-import generateArtifactsDirPath from "../helpers/artifacts-dir";
-import { generateCodeFromSchema } from "../helpers/generate-code";
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateCodeFromSchema } from '../helpers/generate-code';
 
-describe("picking prisma actions", () => {
+describe('picking prisma actions', () => {
   let outputDirPath: string;
 
   beforeEach(async () => {
-    outputDirPath = generateArtifactsDirPath("functional-picking-actions");
+    outputDirPath = generateArtifactsDirPath('functional-picking-actions');
     await fs.mkdir(outputDirPath, { recursive: true });
     const prismaSchema = /* prisma */ `
       model User {
@@ -22,19 +22,19 @@ describe("picking prisma actions", () => {
     await generateCodeFromSchema(prismaSchema, { outputDirPath });
   });
 
-  it("should expose in GraphQL schema only actions chosen by single resolvers", async () => {
+  it('should expose in GraphQL schema only actions chosen by single resolvers', async () => {
     const { CreateUserResolver, FindManyUserResolver } = require(outputDirPath +
-      "/index");
+      '/index');
     await buildSchema({
       resolvers: [CreateUserResolver, FindManyUserResolver],
       validate: false,
-      emitSchemaFile: outputDirPath + "/schema.graphql",
+      emitSchemaFile: outputDirPath + '/schema.graphql',
     });
     const graphQLSchemaSDL = await fs.readFile(
-      outputDirPath + "/schema.graphql",
-      { encoding: "utf8" },
+      outputDirPath + '/schema.graphql',
+      { encoding: 'utf8' }
     );
 
-    expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
+    expect(graphQLSchemaSDL).toMatchSnapshot('graphQLSchemaSDL');
   });
 });

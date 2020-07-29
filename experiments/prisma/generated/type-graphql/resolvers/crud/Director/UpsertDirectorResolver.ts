@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { UpsertDirectorArgs } from "./args/UpsertDirectorArgs";
 import { Director } from "../../../models/Director";
 
-@Resolver(_of => Director)
+@Resolver(() => Director)
 export class UpsertDirectorResolver {
-  @Mutation(_returns => Director, {
+  @Mutation(() => Director, {
     nullable: false,
     description: undefined
   })

@@ -6,12 +6,12 @@ import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
 
 @ArgsType()
 export class UpsertPostArgs {
-  @Field(_type => PostWhereUniqueInput, { nullable: false })
+  @Field(() => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 
-  @Field(_type => PostCreateInput, { nullable: false })
+  @Field(() => PostCreateInput, { nullable: false })
   create!: PostCreateInput;
 
-  @Field(_type => PostUpdateInput, { nullable: false })
+  @Field(() => PostUpdateInput, { nullable: false })
   update!: PostUpdateInput;
 }

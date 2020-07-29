@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindOnePostArgs } from "./args/FindOnePostArgs";
 import { Post } from "../../../models/Post";
 
-@Resolver(_of => Post)
+@Resolver(() => Post)
 export class FindOnePostResolver {
-  @Query(_returns => Post, {
+  @Query(() => Post, {
     nullable: true,
     description: undefined
   })

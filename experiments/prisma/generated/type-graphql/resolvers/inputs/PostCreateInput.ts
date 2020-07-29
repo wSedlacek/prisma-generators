@@ -9,55 +9,55 @@ import { PostKind } from "../../enums/PostKind";
   description: undefined,
 })
 export class PostCreateInput {
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   uuid?: string | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   createdAt?: Date | undefined;
 
-  @Field(_type => Date, {
+  @Field(() => Date, {
     nullable: true,
     description: undefined
   })
   updatedAt?: Date | undefined;
 
-  @Field(_type => Boolean, {
+  @Field(() => Boolean, {
     nullable: false,
     description: undefined
   })
   published!: boolean;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: false,
     description: undefined
   })
   title!: string;
 
-  @Field(_type => String, {
+  @Field(() => String, {
     nullable: true,
     description: undefined
   })
   content?: string | undefined;
 
-  @Field(_type => PostKind, {
+  @Field(() => PostKind, {
     nullable: true,
     description: undefined
   })
   kind?: keyof typeof PostKind | undefined;
 
-  @Field(_type => GraphQLJSON, {
+  @Field(() => GraphQLJSON, {
     nullable: false,
     description: undefined
   })
   metadata!: InputJsonValue;
 
-  @Field(_type => ClientCreateOneWithoutPostsInput, {
+  @Field(() => ClientCreateOneWithoutPostsInput, {
     nullable: false,
     description: undefined
   })

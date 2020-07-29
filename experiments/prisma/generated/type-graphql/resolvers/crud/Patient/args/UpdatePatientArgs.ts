@@ -5,9 +5,9 @@ import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput
 
 @ArgsType()
 export class UpdatePatientArgs {
-  @Field(_type => PatientUpdateInput, { nullable: false })
+  @Field(() => PatientUpdateInput, { nullable: false })
   data!: PatientUpdateInput;
 
-  @Field(_type => PatientWhereUniqueInput, { nullable: false })
+  @Field(() => PatientWhereUniqueInput, { nullable: false })
   where!: PatientWhereUniqueInput;
 }

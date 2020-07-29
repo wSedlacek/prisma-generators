@@ -8,37 +8,37 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class PatientWhereInput {
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   firstName?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   lastName?: StringFilter | undefined;
 
-  @Field(_type => StringFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   email?: StringFilter | undefined;
 
-  @Field(_type => [PatientWhereInput], {
+  @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: PatientWhereInput[] | undefined;
 
-  @Field(_type => [PatientWhereInput], {
+  @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: PatientWhereInput[] | undefined;
 
-  @Field(_type => [PatientWhereInput], {
+  @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined
   })

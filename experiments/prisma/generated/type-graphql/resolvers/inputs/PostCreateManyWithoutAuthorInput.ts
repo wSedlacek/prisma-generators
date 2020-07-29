@@ -10,19 +10,19 @@ import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
   description: undefined,
 })
 export class PostCreateManyWithoutAuthorInput {
-  @Field(_type => [PostCreateWithoutAuthorInput], {
+  @Field(() => [PostCreateWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   create?: PostCreateWithoutAuthorInput[] | undefined;
 
-  @Field(_type => [PostWhereUniqueInput], {
+  @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
-  @Field(_type => [PostCreateOrConnectWithoutUserInput], {
+  @Field(() => [PostCreateOrConnectWithoutUserInput], {
     nullable: true,
     description: undefined
   })

@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindOneMovieArgs } from "./args/FindOneMovieArgs";
 import { Movie } from "../../../models/Movie";
 
-@Resolver(_of => Movie)
+@Resolver(() => Movie)
 export class FindOneMovieResolver {
-  @Query(_returns => Movie, {
+  @Query(() => Movie, {
     nullable: true,
     description: undefined
   })

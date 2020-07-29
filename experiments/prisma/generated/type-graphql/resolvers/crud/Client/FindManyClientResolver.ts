@@ -2,9 +2,9 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import { FindManyClientArgs } from "./args/FindManyClientArgs";
 import { Client } from "../../../models/Client";
 
-@Resolver(_of => Client)
+@Resolver(() => Client)
 export class FindManyClientResolver {
-  @Query(_returns => [Client], {
+  @Query(() => [Client], {
     nullable: false,
     description: undefined
   })
