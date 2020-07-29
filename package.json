@@ -1,5 +1,5 @@
 {
-  "name": "typegraphql-prisma-nestjs",
+  "name": "nestjs-prisma",
   "version": "0.4.1",
   "scripts": {
     "build": "tsc",
