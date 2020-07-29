@@ -1,26 +1,27 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class PatientUpdateInput {
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  firstName?: string | null;
+  firstName?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lastName?: string | null;
+  lastName?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  email?: string | null;
+  email?: string | undefined;
 }

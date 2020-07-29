@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { CreateDirectorArgs } from "./args/CreateDirectorArgs";
 import { Director } from "../../../models/Director";
 
-@TypeGraphQL.Resolver(_of => Director)
+@Resolver(_of => Director)
 export class CreateDirectorResolver {
-  @TypeGraphQL.Mutation(_returns => Director, {
+  @Mutation(_returns => Director, {
     nullable: false,
     description: undefined
   })
-  async createDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateDirectorArgs): Promise<Director> {
+  async createDirector(@Context() ctx: any, @Args() args: CreateDirectorArgs): Promise<Director> {
     return ctx.prisma.director.create(args);
   }
 }

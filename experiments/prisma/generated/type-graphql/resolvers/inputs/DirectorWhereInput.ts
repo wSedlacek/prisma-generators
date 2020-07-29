@@ -1,46 +1,47 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { MovieFilter } from "../inputs/MovieFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class DirectorWhereInput {
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  firstName?: StringFilter | null;
+  firstName?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  lastName?: StringFilter | null;
+  lastName?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => MovieFilter, {
+  @Field(_type => MovieFilter, {
     nullable: true,
     description: undefined
   })
-  movies?: MovieFilter | null;
+  movies?: MovieFilter | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorWhereInput], {
+  @Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: DirectorWhereInput[] | null;
+  AND?: DirectorWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorWhereInput], {
+  @Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: DirectorWhereInput[] | null;
+  OR?: DirectorWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [DirectorWhereInput], {
+  @Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: DirectorWhereInput[] | null;
+  NOT?: DirectorWhereInput[] | undefined;
 }

@@ -1,29 +1,27 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { DirectorOrderByInput } from "../../../inputs/DirectorOrderByInput";
 import { DirectorWhereInput } from "../../../inputs/DirectorWhereInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
+import { DirectorDistinctFieldEnum } from "../../../../enums/DirectorDistinctFieldEnum";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindManyDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorWhereInput, { nullable: true })
-  where?: DirectorWhereInput | null;
+  @Field(_type => DirectorWhereInput, { nullable: true })
+  where?: DirectorWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorOrderByInput, { nullable: true })
-  orderBy?: DirectorOrderByInput | null;
+  @Field(_type => DirectorOrderByInput, { nullable: true })
+  orderBy?: DirectorOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  skip?: number | null;
+  @Field(_type => DirectorWhereUniqueInput, { nullable: true })
+  cursor?: DirectorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: true })
-  after?: DirectorWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: true })
-  before?: DirectorWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  first?: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  last?: number | null;
+  @Field(_type => [DirectorDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof DirectorDistinctFieldEnum> | undefined;
 }

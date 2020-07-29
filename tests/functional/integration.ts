@@ -6,7 +6,7 @@ import util from "util";
 import childProcess from "child_process";
 import { buildSchema } from "type-graphql";
 import { graphql } from "graphql";
-const pgtools = require("pgtools");
+import pg from "pg";
 
 import generateArtifactsDirPath from "../helpers/artifacts-dir";
 import { stringifyDirectoryTrees } from "../helpers/structure";
@@ -33,7 +33,7 @@ describe("generator integration", () => {
       }
 
       generator typegraphql {
-        provider = "../../../src/cli/dev.ts"
+        provider = "node ../../../src/cli/dev.ts"
         output   = "./generated/type-graphql"
       }
 
@@ -65,9 +65,10 @@ describe("generator integration", () => {
   });
 
   it("should generates TypeGraphQL classes files to output folder by running `prisma generate`", async () => {
-    const { stderr } = await exec("npx prisma generate", {
+    const prismaGenerateResult = await exec("npx prisma generate", {
       cwd: cwdDirPath,
     });
+    // console.log(prismaGenerateResult);
 
     const directoryStructure = directoryTree(
       cwdDirPath + "/generated/type-graphql",
@@ -76,14 +77,17 @@ describe("generator integration", () => {
       "\n[type-graphql]\n" +
       stringifyDirectoryTrees(directoryStructure.children, 2);
 
-    expect(stderr).toHaveLength(0);
+    expect(prismaGenerateResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
     expect(directoryStructureString).toMatchSnapshot("files structure");
   }, 60000);
 
   it("should be able to use generate TypeGraphQL classes files to generate GraphQL schema", async () => {
-    const { stderr } = await exec("npx prisma generate", {
+    const prismaGenerateResult = await exec("npx prisma generate", {
       cwd: cwdDirPath,
     });
+    // console.log(prismaGenerateResult);
     const {
       UserCrudResolver,
       PostCrudResolver,
@@ -104,15 +108,18 @@ describe("generator integration", () => {
       encoding: "utf8",
     });
 
-    expect(stderr).toHaveLength(0);
+    expect(prismaGenerateResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
     expect(graphQLSchemaSDL).toMatchSnapshot("graphQLSchemaSDL");
   }, 60000);
 
   it("should be able to generate TypeGraphQL classes files without any type errors", async () => {
     const tsconfigContent = {
       compilerOptions: {
-        target: "es2018",
+        target: "es2019",
         module: "commonjs",
+        lib: ["es2019"],
         strict: true,
         skipLibCheck: true,
         esModuleInterop: true,
@@ -130,6 +137,7 @@ describe("generator integration", () => {
     const prismaGenerateResult = await exec("npx prisma generate", {
       cwd: cwdDirPath,
     });
+    // console.log(prismaGenerateResult);
     await fs.writeFile(
       path.join(typegraphqlfolderPath, "tsconfig.json"),
       JSON.stringify(tsconfigContent),
@@ -138,7 +146,9 @@ describe("generator integration", () => {
       cwd: typegraphqlfolderPath,
     });
 
-    expect(prismaGenerateResult.stderr).toHaveLength(0);
+    expect(prismaGenerateResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
     expect(tscResult.stdout).toHaveLength(0);
     expect(tscResult.stderr).toHaveLength(0);
   }, 60000);
@@ -148,7 +158,9 @@ describe("generator integration", () => {
       cwd: cwdDirPath,
     });
     // console.log(prismaGenerateResult);
-    expect(prismaGenerateResult.stderr).toHaveLength(0);
+    expect(prismaGenerateResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
 
     // drop database before migrate
     const originalDatabaseUrl = process.env.TEST_DATABASE_URL!;
@@ -156,20 +168,29 @@ describe("generator integration", () => {
       .split("/")
       .reverse();
     const databaseUrl = databaseUrlParts.reverse().join("/") + "/postgres";
-    await pgtools.dropdb(databaseUrl, dbName);
+    const pgClient = new pg.Client({
+      connectionString: databaseUrl,
+    });
+    await pgClient.connect();
+    await pgClient.query(`DROP DATABASE IF EXISTS "${dbName}"`);
+    await pgClient.end();
 
     const migrateSaveResult = await exec(
       "npx prisma migrate save --experimental --name='init' --create-db",
       { cwd: cwdDirPath },
     );
     // console.log(migrateSaveResult);
-    expect(migrateSaveResult.stderr).toHaveLength(0);
+    expect(migrateSaveResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
 
     const migrateUpResult = await exec("npx prisma migrate up --experimental", {
       cwd: cwdDirPath,
     });
     // console.log(migrateUpResult);
-    expect(migrateUpResult.stderr).toHaveLength(0);
+    expect(migrateUpResult.stderr).toEqual(
+      "\x1B[2mEnvironment variables loaded from current directory\x1B[22m\n",
+    );
 
     const { PrismaClient } = require(cwdDirPath + "/generated/client");
     const prisma = new PrismaClient();

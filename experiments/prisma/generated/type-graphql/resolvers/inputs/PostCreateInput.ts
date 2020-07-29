@@ -1,62 +1,63 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { ClientCreateOneWithoutPostsInput } from "../inputs/ClientCreateOneWithoutPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class PostCreateInput {
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  uuid?: string | null;
+  uuid?: string | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  createdAt?: Date | null;
+  createdAt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  updatedAt?: Date | null;
+  updatedAt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Boolean, {
+  @Field(_type => Boolean, {
     nullable: false,
     description: undefined
   })
   published!: boolean;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: false,
     description: undefined
   })
   title!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  content?: string | null;
+  content?: string | undefined;
 
-  @TypeGraphQL.Field(_type => PostKind, {
+  @Field(_type => PostKind, {
     nullable: true,
     description: undefined
   })
-  kind?: keyof typeof PostKind | null;
+  kind?: keyof typeof PostKind | undefined;
 
-  @TypeGraphQL.Field(_type => GraphQLJSON, {
+  @Field(_type => GraphQLJSON, {
     nullable: false,
     description: undefined
   })
-  metadata!: object;
+  metadata!: InputJsonValue;
 
-  @TypeGraphQL.Field(_type => ClientCreateOneWithoutPostsInput, {
+  @Field(_type => ClientCreateOneWithoutPostsInput, {
     nullable: false,
     description: undefined
   })

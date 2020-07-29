@@ -1,22 +1,30 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { MovieCreateOrConnectWithoutDirectorInput } from "../inputs/MovieCreateOrConnectWithoutDirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class MovieCreateManyWithoutDirectorInput {
-  @TypeGraphQL.Field(_type => [MovieCreateWithoutDirectorInput], {
+  @Field(_type => [MovieCreateWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
-  create?: MovieCreateWithoutDirectorInput[] | null;
+  create?: MovieCreateWithoutDirectorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [MovieWhereUniqueInput], {
+  @Field(_type => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
-  connect?: MovieWhereUniqueInput[] | null;
+  connect?: MovieWhereUniqueInput[] | undefined;
+
+  @Field(_type => [MovieCreateOrConnectWithoutDirectorInput], {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: MovieCreateOrConnectWithoutDirectorInput[] | undefined;
 }

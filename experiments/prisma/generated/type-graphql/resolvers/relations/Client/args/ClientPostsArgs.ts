@@ -1,29 +1,27 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { PostOrderByInput } from "../../../inputs/PostOrderByInput";
 import { PostWhereInput } from "../../../inputs/PostWhereInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
+import { PostDistinctFieldEnum } from "../../../../enums/PostDistinctFieldEnum";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class ClientPostsArgs {
-  @TypeGraphQL.Field(_type => PostWhereInput, { nullable: true })
-  where?: PostWhereInput | null;
+  @Field(_type => PostWhereInput, { nullable: true })
+  where?: PostWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostOrderByInput, { nullable: true })
-  orderBy?: PostOrderByInput | null;
+  @Field(_type => PostOrderByInput, { nullable: true })
+  orderBy?: PostOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  skip?: number | null;
+  @Field(_type => PostWhereUniqueInput, { nullable: true })
+  cursor?: PostWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
-  after?: PostWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
-  before?: PostWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  first?: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  last?: number | null;
+  @Field(_type => [PostDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof PostDistinctFieldEnum> | undefined;
 }

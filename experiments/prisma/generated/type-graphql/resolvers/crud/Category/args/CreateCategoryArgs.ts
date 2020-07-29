@@ -1,9 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { CategoryCreateInput } from "../../../inputs/CategoryCreateInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class CreateCategoryArgs {
-  @TypeGraphQL.Field(_type => CategoryCreateInput, { nullable: false })
+  @Field(_type => CategoryCreateInput, { nullable: false })
   data!: CategoryCreateInput;
 }

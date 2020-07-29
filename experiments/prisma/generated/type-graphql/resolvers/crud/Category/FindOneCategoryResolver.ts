@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { FindOneCategoryArgs } from "./args/FindOneCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@TypeGraphQL.Resolver(_of => Category)
+@Resolver(_of => Category)
 export class FindOneCategoryResolver {
-  @TypeGraphQL.Query(_returns => Category, {
+  @Query(_returns => Category, {
     nullable: true,
     description: undefined
   })
-  async category(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneCategoryArgs): Promise<Category | null> {
+  async category(@Context() ctx: any, @Args() args: FindOneCategoryArgs): Promise<Category | undefined> {
     return ctx.prisma.category.findOne(args);
   }
 }

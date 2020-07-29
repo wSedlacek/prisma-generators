@@ -1,74 +1,75 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class UUIDFilter {
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  equals?: string | null;
+  equals?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  not?: string | null;
+  not?: string | undefined;
 
-  @TypeGraphQL.Field(_type => [String], {
+  @Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  in?: string[] | null;
+  in?: string[] | undefined;
 
-  @TypeGraphQL.Field(_type => [String], {
+  @Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  notIn?: string[] | null;
+  notIn?: string[] | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lt?: string | null;
+  lt?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lte?: string | null;
+  lte?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gt?: string | null;
+  gt?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gte?: string | null;
+  gte?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  contains?: string | null;
+  contains?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  startsWith?: string | null;
+  startsWith?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  endsWith?: string | null;
+  endsWith?: string | undefined;
 }

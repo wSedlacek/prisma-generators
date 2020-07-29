@@ -1,4 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import graphqlFields from "graphql-fields";
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { CreateDirectorArgs } from "./args/CreateDirectorArgs";
 import { DeleteDirectorArgs } from "./args/DeleteDirectorArgs";
 import { DeleteManyDirectorArgs } from "./args/DeleteManyDirectorArgs";
@@ -11,77 +14,93 @@ import { Director } from "../../../models/Director";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@TypeGraphQL.Resolver(_of => Director)
+@Resolver(_of => Director)
 export class DirectorCrudResolver {
-  @TypeGraphQL.Query(_returns => Director, {
+  @Query(_returns => Director, {
     nullable: true,
     description: undefined
   })
-  async director(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneDirectorArgs): Promise<Director | null> {
+  async director(@Context() ctx: any, @Args() args: FindOneDirectorArgs): Promise<Director | undefined> {
     return ctx.prisma.director.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [Director], {
+  @Query(_returns => [Director], {
     nullable: false,
     description: undefined
   })
-  async directors(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyDirectorArgs): Promise<Director[]> {
+  async directors(@Context() ctx: any, @Args() args: FindManyDirectorArgs): Promise<Director[]> {
     return ctx.prisma.director.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Director, {
+  @Mutation(_returns => Director, {
     nullable: false,
     description: undefined
   })
-  async createDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateDirectorArgs): Promise<Director> {
+  async createDirector(@Context() ctx: any, @Args() args: CreateDirectorArgs): Promise<Director> {
     return ctx.prisma.director.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Director, {
+  @Mutation(_returns => Director, {
     nullable: true,
     description: undefined
   })
-  async deleteDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteDirectorArgs): Promise<Director | null> {
+  async deleteDirector(@Context() ctx: any, @Args() args: DeleteDirectorArgs): Promise<Director | undefined> {
     return ctx.prisma.director.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Director, {
+  @Mutation(_returns => Director, {
     nullable: true,
     description: undefined
   })
-  async updateDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateDirectorArgs): Promise<Director | null> {
+  async updateDirector(@Context() ctx: any, @Args() args: UpdateDirectorArgs): Promise<Director | undefined> {
     return ctx.prisma.director.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
+  async deleteManyDirector(@Context() ctx: any, @Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
+  async updateManyDirector(@Context() ctx: any, @Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Director, {
+  @Mutation(_returns => Director, {
     nullable: false,
     description: undefined
   })
-  async upsertDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertDirectorArgs): Promise<Director> {
+  async upsertDirector(@Context() ctx: any, @Args() args: UpsertDirectorArgs): Promise<Director> {
     return ctx.prisma.director.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateDirector, {
+  @Query(_returns => AggregateDirector, {
     nullable: false,
     description: undefined
   })
-  async aggregateDirector(): Promise<AggregateDirector> {
-    return new AggregateDirector();
+  async aggregateDirector(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateDirectorArgs): Promise<AggregateDirector> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith("_"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.director.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
   }
 }

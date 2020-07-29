@@ -3,11 +3,13 @@
 exports[`models should properly generate object type class for prisma model with descriptions: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
 
+/** User model doc */
 @TypeGraphQL.ObjectType({
   isAbstract: true,
-  description: undefined,
+  description: \\"User model doc\\",
 })
 export class User {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
@@ -16,9 +18,10 @@ export class User {
   })
   id!: number;
 
+  /** field doc */
   @TypeGraphQL.Field(_type => String, {
     nullable: false,
-    description: undefined,
+    description: \\"field doc\\",
   })
   stringField!: string;
 
@@ -28,7 +31,8 @@ export class User {
   })
   intField!: number;
 
-  posts?: Post[] | null;
+  /** relation doc */
+  posts?: Post[] | undefined;
 }
 "
 `;
@@ -36,6 +40,7 @@ export class User {
 exports[`models should properly generate object type class for prisma model with different scalar fields types: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -58,7 +63,7 @@ export class User {
     nullable: true,
     description: undefined,
   })
-  optionalStringField?: string | null;
+  optionalStringField?: string | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false,
@@ -88,7 +93,7 @@ export class User {
     nullable: false,
     description: undefined,
   })
-  jsonField!: object;
+  jsonField!: JsonValue;
 }
 "
 `;
@@ -96,6 +101,7 @@ export class User {
 exports[`models should properly generate object type class for prisma model with enum and alias fields types: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Sample } from \\"../enums/Sample\\";
 
 @TypeGraphQL.ObjectType({
@@ -124,9 +130,60 @@ export class User {
 "
 `;
 
+exports[`models should properly generate object type class for prisma model with renamed fields: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
+import { Post } from \\"../models/Post\\";
+
+@TypeGraphQL.ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class User {
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false,
+    description: undefined,
+  })
+  id!: number;
+
+  @TypeGraphQL.Field(_type => Date, {
+    nullable: false,
+    description: undefined,
+  })
+  dateOfBirth!: Date;
+
+  /** renamed field docs */
+  name!: string;
+
+  balance?: number | undefined;
+
+  posts?: Post[] | undefined;
+
+  /** renamed field docs */
+  @TypeGraphQL.Field(_type => String, {
+    nullable: false,
+    description: \\"renamed field docs\\",
+  })
+  get firstName(): string {
+    return this.name;
+  }
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+    nullable: true,
+    description: undefined,
+  })
+  get accountBalance(): number | undefined {
+    return this.balance;
+  }
+}
+"
+`;
+
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Article 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Client } from \\"../models/Client\\";
 
 @TypeGraphQL.ObjectType({
@@ -154,6 +211,7 @@ export class Article {
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Client 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Article } from \\"../models/Article\\";
 
 @TypeGraphQL.ObjectType({
@@ -167,7 +225,7 @@ export class Client {
   })
   id!: number;
 
-  posts?: Article[] | null;
+  posts?: Article[] | undefined;
 }
 "
 `;
@@ -175,6 +233,7 @@ export class Client {
 exports[`models should properly generate object type classes for prisma models with cyclic relations: Post 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { User } from \\"../models/User\\";
 
 @TypeGraphQL.ObjectType({
@@ -202,6 +261,7 @@ export class Post {
 exports[`models should properly generate object type classes for prisma models with cyclic relations: User 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
 
 @TypeGraphQL.ObjectType({
@@ -215,7 +275,7 @@ export class User {
   })
   id!: number;
 
-  posts?: Post[] | null;
+  posts?: Post[] | undefined;
 }
 "
 `;
@@ -223,6 +283,7 @@ export class User {
 exports[`models should properly generate object type classes for prisma models with self relations: Service 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.ObjectType({
   isAbstract: true,
@@ -241,15 +302,15 @@ export class Service {
   })
   name!: string;
 
-  sourceService?: Service | null;
+  sourceService?: Service | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined,
   })
-  sourceId?: number | null;
+  sourceId?: number | undefined;
 
-  services?: Service[] | null;
+  services?: Service[] | undefined;
 }
 "
 `;

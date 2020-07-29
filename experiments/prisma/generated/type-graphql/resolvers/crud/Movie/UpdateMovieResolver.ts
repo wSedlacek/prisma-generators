@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpdateMovieArgs } from "./args/UpdateMovieArgs";
 import { Movie } from "../../../models/Movie";
 
-@TypeGraphQL.Resolver(_of => Movie)
+@Resolver(_of => Movie)
 export class UpdateMovieResolver {
-  @TypeGraphQL.Mutation(_returns => Movie, {
+  @Mutation(_returns => Movie, {
     nullable: true,
     description: undefined
   })
-  async updateMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateMovieArgs): Promise<Movie | null> {
+  async updateMovie(@Context() ctx: any, @Args() args: UpdateMovieArgs): Promise<Movie | undefined> {
     return ctx.prisma.movie.update(args);
   }
 }

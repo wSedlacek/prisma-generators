@@ -1,15 +1,15 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { Director } from "../../../models/Director";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@TypeGraphQL.Resolver(_of => Director)
+@Resolver(_of => Director)
 export class UpdateManyDirectorResolver {
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyDirector(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
+  async updateManyDirector(@Context() ctx: any, @Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
     return ctx.prisma.director.updateMany(args);
   }
 }

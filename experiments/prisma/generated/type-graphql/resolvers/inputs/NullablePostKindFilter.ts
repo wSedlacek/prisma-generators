@@ -1,33 +1,34 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { PostKind } from "../../enums/PostKind";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class NullablePostKindFilter {
-  @TypeGraphQL.Field(_type => PostKind, {
+  @Field(_type => PostKind, {
     nullable: true,
     description: undefined
   })
-  equals?: keyof typeof PostKind | null;
+  equals?: keyof typeof PostKind | undefined;
 
-  @TypeGraphQL.Field(_type => PostKind, {
+  @Field(_type => PostKind, {
     nullable: true,
     description: undefined
   })
-  not?: keyof typeof PostKind | null;
+  not?: keyof typeof PostKind | undefined;
 
-  @TypeGraphQL.Field(_type => [PostKind], {
+  @Field(_type => [PostKind], {
     nullable: true,
     description: undefined
   })
-  in?: Array<keyof typeof PostKind> | null;
+  in?: Array<keyof typeof PostKind> | undefined;
 
-  @TypeGraphQL.Field(_type => [PostKind], {
+  @Field(_type => [PostKind], {
     nullable: true,
     description: undefined
   })
-  notIn?: Array<keyof typeof PostKind> | null;
+  notIn?: Array<keyof typeof PostKind> | undefined;
 }

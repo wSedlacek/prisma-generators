@@ -1,15 +1,15 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { Client } from "../../../models/Client";
 import { Post } from "../../../models/Post";
 import { ClientPostsArgs } from "./args/ClientPostsArgs";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(_of => Client)
 export class ClientRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => [Post], {
+  @ResolveField(_type => [Post], {
     nullable: true,
     description: undefined,
   })
-  async posts(@TypeGraphQL.Root() client: Client, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: ClientPostsArgs): Promise<Post[] | null> {
+  async clientPosts(@Root() client: Client, @Context() ctx: any, @Args() args: ClientPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: client.id,

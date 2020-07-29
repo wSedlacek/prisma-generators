@@ -3,6 +3,7 @@
 exports[`inputs should properly generate input type class for filtering by enums values: ColorFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { Color } from \\"../../enums/Color\\";
 
 @TypeGraphQL.InputType({
@@ -14,25 +15,25 @@ export class ColorFilter {
     nullable: true,
     description: undefined
   })
-  equals?: keyof typeof Color | null;
+  equals?: keyof typeof Color | undefined;
 
   @TypeGraphQL.Field(_type => Color, {
     nullable: true,
     description: undefined
   })
-  not?: keyof typeof Color | null;
+  not?: keyof typeof Color | undefined;
 
   @TypeGraphQL.Field(_type => [Color], {
     nullable: true,
     description: undefined
   })
-  in?: Array<keyof typeof Color> | null;
+  in?: Array<keyof typeof Color> | undefined;
 
   @TypeGraphQL.Field(_type => [Color], {
     nullable: true,
     description: undefined
   })
-  notIn?: Array<keyof typeof Color> | null;
+  notIn?: Array<keyof typeof Color> | undefined;
 }
 "
 `;
@@ -40,10 +41,12 @@ export class ColorFilter {
 exports[`inputs should properly generate input type classes for filtering models by fields: SampleModelWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { BooleanFilter } from \\"../inputs/BooleanFilter\\";
 import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
+import { JsonFilter } from \\"../inputs/JsonFilter\\";
 import { NullableStringFilter } from \\"../inputs/NullableStringFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
@@ -56,61 +59,67 @@ export class SampleModelWhereInput {
     nullable: true,
     description: undefined
   })
-  intIdField?: IntFilter | null;
+  intIdField?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  stringField?: StringFilter | null;
+  stringField?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => NullableStringFilter, {
     nullable: true,
     description: undefined
   })
-  optionalStringField?: NullableStringFilter | null;
+  optionalStringField?: NullableStringFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  intField?: IntFilter | null;
+  intField?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  floatField?: FloatFilter | null;
+  floatField?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => BooleanFilter, {
     nullable: true,
     description: undefined
   })
-  booleanField?: BooleanFilter | null;
+  booleanField?: BooleanFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
-  dateField?: DateTimeFilter | null;
+  dateField?: DateTimeFilter | undefined;
+
+  @TypeGraphQL.Field(_type => JsonFilter, {
+    nullable: true,
+    description: undefined
+  })
+  jsonField?: JsonFilter | undefined;
 
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: SampleModelWhereInput[] | null;
+  AND?: SampleModelWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: SampleModelWhereInput[] | null;
+  OR?: SampleModelWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [SampleModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: SampleModelWhereInput[] | null;
+  NOT?: SampleModelWhereInput[] | undefined;
 }
 "
 `;
@@ -118,6 +127,7 @@ export class SampleModelWhereInput {
 exports[`inputs should properly generate input type classes for filtering models by fields: SampleModelWhereUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -128,13 +138,13 @@ export class SampleModelWhereUniqueInput {
     nullable: true,
     description: undefined
   })
-  intIdField?: number | null;
+  intIdField?: number | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  stringField?: string | null;
+  stringField?: string | undefined;
 }
 "
 `;
@@ -142,6 +152,7 @@ export class SampleModelWhereUniqueInput {
 exports[`inputs should properly generate input type classes for filtering models by relation fields: FirstModelOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { OrderByArg } from \\"../../enums/OrderByArg\\";
 
 @TypeGraphQL.InputType({
@@ -153,19 +164,19 @@ export class FirstModelOrderByInput {
     nullable: true,
     description: undefined
   })
-  idField?: keyof typeof OrderByArg | null;
+  idField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  uniqueStringField?: keyof typeof OrderByArg | null;
+  uniqueStringField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  floatField?: keyof typeof OrderByArg | null;
+  floatField?: keyof typeof OrderByArg | undefined;
 }
 "
 `;
@@ -173,6 +184,7 @@ export class FirstModelOrderByInput {
 exports[`inputs should properly generate input type classes for filtering models by relation fields: FirstModelScalarWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { SecondModelFilter } from \\"../inputs/SecondModelFilter\\";
@@ -187,43 +199,43 @@ export class FirstModelScalarWhereInput {
     nullable: true,
     description: undefined
   })
-  idField?: IntFilter | null;
+  idField?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  uniqueStringField?: StringFilter | null;
+  uniqueStringField?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  floatField?: FloatFilter | null;
+  floatField?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => SecondModelFilter, {
     nullable: true,
     description: undefined
   })
-  secondModelsField?: SecondModelFilter | null;
+  secondModelsField?: SecondModelFilter | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: FirstModelScalarWhereInput[] | null;
+  AND?: FirstModelScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: FirstModelScalarWhereInput[] | null;
+  OR?: FirstModelScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: FirstModelScalarWhereInput[] | null;
+  NOT?: FirstModelScalarWhereInput[] | undefined;
 }
 "
 `;
@@ -231,6 +243,7 @@ export class FirstModelScalarWhereInput {
 exports[`inputs should properly generate input type classes for filtering models by relation fields: FirstModelWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { SecondModelFilter } from \\"../inputs/SecondModelFilter\\";
@@ -245,43 +258,43 @@ export class FirstModelWhereInput {
     nullable: true,
     description: undefined
   })
-  idField?: IntFilter | null;
+  idField?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  uniqueStringField?: StringFilter | null;
+  uniqueStringField?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  floatField?: FloatFilter | null;
+  floatField?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => SecondModelFilter, {
     nullable: true,
     description: undefined
   })
-  secondModelsField?: SecondModelFilter | null;
+  secondModelsField?: SecondModelFilter | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: FirstModelWhereInput[] | null;
+  AND?: FirstModelWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: FirstModelWhereInput[] | null;
+  OR?: FirstModelWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [FirstModelWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: FirstModelWhereInput[] | null;
+  NOT?: FirstModelWhereInput[] | undefined;
 }
 "
 `;
@@ -289,6 +302,7 @@ export class FirstModelWhereInput {
 exports[`inputs should properly generate input type classes for filtering models by relation fields: FirstModelWhereUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -299,13 +313,13 @@ export class FirstModelWhereUniqueInput {
     nullable: true,
     description: undefined
   })
-  idField?: number | null;
+  idField?: number | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  uniqueStringField?: string | null;
+  uniqueStringField?: string | undefined;
 }
 "
 `;
@@ -313,6 +327,7 @@ export class FirstModelWhereUniqueInput {
 exports[`inputs should properly generate input type classes for filtering scalar fields: BooleanFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -323,13 +338,13 @@ export class BooleanFilter {
     nullable: true,
     description: undefined
   })
-  equals?: boolean | null;
+  equals?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true,
     description: undefined
   })
-  not?: boolean | null;
+  not?: boolean | undefined;
 }
 "
 `;
@@ -337,6 +352,7 @@ export class BooleanFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: DateTimeFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -347,49 +363,49 @@ export class DateTimeFilter {
     nullable: true,
     description: undefined
   })
-  equals?: Date | null;
+  equals?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  not?: Date | null;
+  not?: Date | undefined;
 
   @TypeGraphQL.Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  in?: Date[] | null;
+  in?: Date[] | undefined;
 
   @TypeGraphQL.Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  notIn?: Date[] | null;
+  notIn?: Date[] | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lt?: Date | null;
+  lt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lte?: Date | null;
+  lte?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gt?: Date | null;
+  gt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gte?: Date | null;
+  gte?: Date | undefined;
 }
 "
 `;
@@ -397,6 +413,7 @@ export class DateTimeFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: FloatFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -407,49 +424,49 @@ export class FloatFilter {
     nullable: true,
     description: undefined
   })
-  equals?: number | null;
+  equals?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  not?: number | null;
+  not?: number | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
     nullable: true,
     description: undefined
   })
-  in?: number[] | null;
+  in?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
     nullable: true,
     description: undefined
   })
-  notIn?: number[] | null;
+  notIn?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  lt?: number | null;
+  lt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  lte?: number | null;
+  lte?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  gt?: number | null;
+  gt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  gte?: number | null;
+  gte?: number | undefined;
 }
 "
 `;
@@ -457,6 +474,7 @@ export class FloatFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: IntFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -467,49 +485,74 @@ export class IntFilter {
     nullable: true,
     description: undefined
   })
-  equals?: number | null;
+  equals?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  not?: number | null;
+  not?: number | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true,
     description: undefined
   })
-  in?: number[] | null;
+  in?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true,
     description: undefined
   })
-  notIn?: number[] | null;
+  notIn?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  lt?: number | null;
+  lt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  lte?: number | null;
+  lte?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  gt?: number | null;
+  gt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  gte?: number | null;
+  gte?: number | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: JsonFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class JsonFilter {
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  not?: InputJsonValue | undefined;
 }
 "
 `;
@@ -517,6 +560,7 @@ export class IntFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: NullableBooleanFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -527,13 +571,13 @@ export class NullableBooleanFilter {
     nullable: true,
     description: undefined
   })
-  equals?: boolean | null;
+  equals?: boolean | undefined;
 
   @TypeGraphQL.Field(_type => Boolean, {
     nullable: true,
     description: undefined
   })
-  not?: boolean | null;
+  not?: boolean | undefined;
 }
 "
 `;
@@ -541,6 +585,7 @@ export class NullableBooleanFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: NullableDateTimeFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -551,49 +596,49 @@ export class NullableDateTimeFilter {
     nullable: true,
     description: undefined
   })
-  equals?: Date | null;
+  equals?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  not?: Date | null;
+  not?: Date | undefined;
 
   @TypeGraphQL.Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  in?: Date[] | null;
+  in?: Date[] | undefined;
 
   @TypeGraphQL.Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  notIn?: Date[] | null;
+  notIn?: Date[] | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lt?: Date | null;
+  lt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lte?: Date | null;
+  lte?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gt?: Date | null;
+  gt?: Date | undefined;
 
   @TypeGraphQL.Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gte?: Date | null;
+  gte?: Date | undefined;
 }
 "
 `;
@@ -601,6 +646,7 @@ export class NullableDateTimeFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: NullableFloatFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -611,49 +657,49 @@ export class NullableFloatFilter {
     nullable: true,
     description: undefined
   })
-  equals?: number | null;
+  equals?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  not?: number | null;
+  not?: number | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
     nullable: true,
     description: undefined
   })
-  in?: number[] | null;
+  in?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
     nullable: true,
     description: undefined
   })
-  notIn?: number[] | null;
+  notIn?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  lt?: number | null;
+  lt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  lte?: number | null;
+  lte?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  gt?: number | null;
+  gt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
     nullable: true,
     description: undefined
   })
-  gte?: number | null;
+  gte?: number | undefined;
 }
 "
 `;
@@ -661,6 +707,7 @@ export class NullableFloatFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: NullableIntFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -671,49 +718,74 @@ export class NullableIntFilter {
     nullable: true,
     description: undefined
   })
-  equals?: number | null;
+  equals?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  not?: number | null;
+  not?: number | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true,
     description: undefined
   })
-  in?: number[] | null;
+  in?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => [TypeGraphQL.Int], {
     nullable: true,
     description: undefined
   })
-  notIn?: number[] | null;
+  notIn?: number[] | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  lt?: number | null;
+  lt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  lte?: number | null;
+  lte?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  gt?: number | null;
+  gt?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: true,
     description: undefined
   })
-  gte?: number | null;
+  gte?: number | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NullableJsonFilter 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NullableJsonFilter {
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: InputJsonValue | undefined;
+
+  @TypeGraphQL.Field(_type => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  not?: InputJsonValue | undefined;
 }
 "
 `;
@@ -721,6 +793,7 @@ export class NullableIntFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: NullableStringFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -731,67 +804,67 @@ export class NullableStringFilter {
     nullable: true,
     description: undefined
   })
-  equals?: string | null;
+  equals?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  not?: string | null;
+  not?: string | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  in?: string[] | null;
+  in?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  notIn?: string[] | null;
+  notIn?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lt?: string | null;
+  lt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lte?: string | null;
+  lte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gt?: string | null;
+  gt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gte?: string | null;
+  gte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  contains?: string | null;
+  contains?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  startsWith?: string | null;
+  startsWith?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  endsWith?: string | null;
+  endsWith?: string | undefined;
 }
 "
 `;
@@ -799,6 +872,7 @@ export class NullableStringFilter {
 exports[`inputs should properly generate input type classes for filtering scalar fields: StringFilter 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -809,67 +883,67 @@ export class StringFilter {
     nullable: true,
     description: undefined
   })
-  equals?: string | null;
+  equals?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  not?: string | null;
+  not?: string | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  in?: string[] | null;
+  in?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => [String], {
     nullable: true,
     description: undefined
   })
-  notIn?: string[] | null;
+  notIn?: string[] | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lt?: string | null;
+  lt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  lte?: string | null;
+  lte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gt?: string | null;
+  gt?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  gte?: string | null;
+  gte?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  contains?: string | null;
+  contains?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  startsWith?: string | null;
+  startsWith?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  endsWith?: string | null;
+  endsWith?: string | undefined;
 }
 "
 `;
@@ -877,6 +951,7 @@ export class StringFilter {
 exports[`inputs should properly generate input type classes for model with composite unique index: DirectorOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { OrderByArg } from \\"../../enums/OrderByArg\\";
 
 @TypeGraphQL.InputType({
@@ -888,19 +963,19 @@ export class DirectorOrderByInput {
     nullable: true,
     description: undefined
   })
-  firstName?: keyof typeof OrderByArg | null;
+  firstName?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  lastName?: keyof typeof OrderByArg | null;
+  lastName?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  age?: keyof typeof OrderByArg | null;
+  age?: keyof typeof OrderByArg | undefined;
 }
 "
 `;
@@ -908,6 +983,7 @@ export class DirectorOrderByInput {
 exports[`inputs should properly generate input type classes for model with composite unique index: DirectorWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { IntFilter } from \\"../inputs/IntFilter\\";
 import { MovieFilter } from \\"../inputs/MovieFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
@@ -921,43 +997,43 @@ export class DirectorWhereInput {
     nullable: true,
     description: undefined
   })
-  firstName?: StringFilter | null;
+  firstName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  lastName?: StringFilter | null;
+  lastName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  age?: IntFilter | null;
+  age?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => MovieFilter, {
     nullable: true,
     description: undefined
   })
-  movies?: MovieFilter | null;
+  movies?: MovieFilter | undefined;
 
   @TypeGraphQL.Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: DirectorWhereInput[] | null;
+  AND?: DirectorWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: DirectorWhereInput[] | null;
+  OR?: DirectorWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [DirectorWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: DirectorWhereInput[] | null;
+  NOT?: DirectorWhereInput[] | undefined;
 }
 "
 `;
@@ -965,6 +1041,7 @@ export class DirectorWhereInput {
 exports[`inputs should properly generate input type classes for model with composite unique index: DirectorWhereUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { FirstNameLastNameCompoundUniqueInput } from \\"../inputs/FirstNameLastNameCompoundUniqueInput\\";
 
 @TypeGraphQL.InputType({
@@ -976,7 +1053,7 @@ export class DirectorWhereUniqueInput {
     nullable: true,
     description: undefined
   })
-  firstName_lastName?: FirstNameLastNameCompoundUniqueInput | null;
+  firstName_lastName?: FirstNameLastNameCompoundUniqueInput | undefined;
 }
 "
 `;
@@ -984,6 +1061,7 @@ export class DirectorWhereUniqueInput {
 exports[`inputs should properly generate input type classes for model with composite unique index: FirstNameLastNameCompoundUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -1008,6 +1086,7 @@ export class FirstNameLastNameCompoundUniqueInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -1038,6 +1117,7 @@ export class DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: MovieOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { OrderByArg } from \\"../../enums/OrderByArg\\";
 
 @TypeGraphQL.InputType({
@@ -1049,25 +1129,25 @@ export class MovieOrderByInput {
     nullable: true,
     description: undefined
   })
-  directorFirstName?: keyof typeof OrderByArg | null;
+  directorFirstName?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  directorLastName?: keyof typeof OrderByArg | null;
+  directorLastName?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  title?: keyof typeof OrderByArg | null;
+  title?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  rating?: keyof typeof OrderByArg | null;
+  rating?: keyof typeof OrderByArg | undefined;
 }
 "
 `;
@@ -1075,6 +1155,7 @@ export class MovieOrderByInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: MovieScalarWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
 
@@ -1087,43 +1168,43 @@ export class MovieScalarWhereInput {
     nullable: true,
     description: undefined
   })
-  directorFirstName?: StringFilter | null;
+  directorFirstName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  directorLastName?: StringFilter | null;
+  directorLastName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  title?: StringFilter | null;
+  title?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  rating?: FloatFilter | null;
+  rating?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: MovieScalarWhereInput[] | null;
+  AND?: MovieScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: MovieScalarWhereInput[] | null;
+  OR?: MovieScalarWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: MovieScalarWhereInput[] | null;
+  NOT?: MovieScalarWhereInput[] | undefined;
 }
 "
 `;
@@ -1131,6 +1212,7 @@ export class MovieScalarWhereInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: MovieWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { DirectorWhereInput } from \\"../inputs/DirectorWhereInput\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
 import { StringFilter } from \\"../inputs/StringFilter\\";
@@ -1144,49 +1226,49 @@ export class MovieWhereInput {
     nullable: true,
     description: undefined
   })
-  directorFirstName?: StringFilter | null;
+  directorFirstName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  directorLastName?: StringFilter | null;
+  directorLastName?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  title?: StringFilter | null;
+  title?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  rating?: FloatFilter | null;
+  rating?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: MovieWhereInput[] | null;
+  AND?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: MovieWhereInput[] | null;
+  OR?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [MovieWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: MovieWhereInput[] | null;
+  NOT?: MovieWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => DirectorWhereInput, {
     nullable: true,
     description: undefined
   })
-  director?: DirectorWhereInput | null;
+  director?: DirectorWhereInput | undefined;
 }
 "
 `;
@@ -1194,6 +1276,7 @@ export class MovieWhereInput {
 exports[`inputs should properly generate input type classes for model with id keys with relation: MovieWhereUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"../inputs/DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
 
 @TypeGraphQL.InputType({
@@ -1205,7 +1288,94 @@ export class MovieWhereUniqueInput {
     nullable: true,
     description: undefined
   })
-  directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | null;
+  directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes when model field is renamed: SampleOrderByInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { OrderByArg } from \\"../../enums/OrderByArg\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleOrderByInput {
+  @TypeGraphQL.Field(_type => OrderByArg, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof OrderByArg | undefined;
+
+  modelFieldName?: keyof typeof OrderByArg | undefined;
+
+  @TypeGraphQL.Field(_type => OrderByArg, {
+    nullable: true,
+    description: undefined
+  })
+  get mappedFieldName() {
+    return this.modelFieldName;
+  }
+
+  set mappedFieldName(modelFieldName: keyof typeof OrderByArg | undefined) {
+    this.modelFieldName = modelFieldName;
+  }
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes when model field is renamed: SampleWhereInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleWhereInput {
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | undefined;
+
+  modelFieldName?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SampleWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SampleWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SampleWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  get mappedFieldName() {
+    return this.modelFieldName;
+  }
+
+  set mappedFieldName(modelFieldName: StringFilter | undefined) {
+    this.modelFieldName = modelFieldName;
+  }
 }
 "
 `;
@@ -1213,6 +1383,7 @@ export class MovieWhereUniqueInput {
 exports[`inputs should properly generate input type classes when model is renamed: ExampleOrderByInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { OrderByArg } from \\"../../enums/OrderByArg\\";
 
 @TypeGraphQL.InputType({
@@ -1224,37 +1395,37 @@ export class ExampleOrderByInput {
     nullable: true,
     description: undefined
   })
-  intIdField?: keyof typeof OrderByArg | null;
+  intIdField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  stringField?: keyof typeof OrderByArg | null;
+  stringField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  floatField?: keyof typeof OrderByArg | null;
+  floatField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  booleanField?: keyof typeof OrderByArg | null;
+  booleanField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  dateField?: keyof typeof OrderByArg | null;
+  dateField?: keyof typeof OrderByArg | undefined;
 
   @TypeGraphQL.Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  otherId?: keyof typeof OrderByArg | null;
+  otherId?: keyof typeof OrderByArg | undefined;
 }
 "
 `;
@@ -1262,6 +1433,7 @@ export class ExampleOrderByInput {
 exports[`inputs should properly generate input type classes when model is renamed: ExampleWhereInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 import { BooleanFilter } from \\"../inputs/BooleanFilter\\";
 import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
 import { FloatFilter } from \\"../inputs/FloatFilter\\";
@@ -1278,61 +1450,61 @@ export class ExampleWhereInput {
     nullable: true,
     description: undefined
   })
-  intIdField?: IntFilter | null;
+  intIdField?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  stringField?: StringFilter | null;
+  stringField?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  floatField?: FloatFilter | null;
+  floatField?: FloatFilter | undefined;
 
   @TypeGraphQL.Field(_type => BooleanFilter, {
     nullable: true,
     description: undefined
   })
-  booleanField?: BooleanFilter | null;
+  booleanField?: BooleanFilter | undefined;
 
   @TypeGraphQL.Field(_type => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
-  dateField?: DateTimeFilter | null;
+  dateField?: DateTimeFilter | undefined;
 
   @TypeGraphQL.Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  otherId?: IntFilter | null;
+  otherId?: IntFilter | undefined;
 
   @TypeGraphQL.Field(_type => [ExampleWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: ExampleWhereInput[] | null;
+  AND?: ExampleWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ExampleWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: ExampleWhereInput[] | null;
+  OR?: ExampleWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => [ExampleWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: ExampleWhereInput[] | null;
+  NOT?: ExampleWhereInput[] | undefined;
 
   @TypeGraphQL.Field(_type => OtherModelWhereInput, {
     nullable: true,
     description: undefined
   })
-  other?: OtherModelWhereInput | null;
+  other?: OtherModelWhereInput | undefined;
 }
 "
 `;
@@ -1340,6 +1512,7 @@ export class ExampleWhereInput {
 exports[`inputs should properly generate input type classes when model is renamed: ExampleWhereUniqueInput 1`] = `
 "import * as TypeGraphQL from \\"type-graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
 
 @TypeGraphQL.InputType({
   isAbstract: true,
@@ -1350,13 +1523,58 @@ export class ExampleWhereUniqueInput {
     nullable: true,
     description: undefined
   })
-  intIdField?: number | null;
+  intIdField?: number | undefined;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  stringField?: string | null;
+  stringField?: string | undefined;
+}
+"
+`;
+
+exports[`inputs when prisma client is generated into node_modules should properly generate prisma client imports in input type class files: SampleWhereInput 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"@prisma/client\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@TypeGraphQL.InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleWhereInput {
+  @TypeGraphQL.Field(_type => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  modelFieldName?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SampleWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SampleWhereInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SampleWhereInput[] | undefined;
 }
 "
 `;

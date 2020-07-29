@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@TypeGraphQL.Resolver(_of => Category)
+@Resolver(_of => Category)
 export class UpdateCategoryResolver {
-  @TypeGraphQL.Mutation(_returns => Category, {
+  @Mutation(_returns => Category, {
     nullable: true,
     description: undefined
   })
-  async updateCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateCategoryArgs): Promise<Category | null> {
+  async updateCategory(@Context() ctx: any, @Args() args: UpdateCategoryArgs): Promise<Category | undefined> {
     return ctx.prisma.category.update(args);
   }
 }

@@ -1,29 +1,27 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { CategoryOrderByInput } from "../../../inputs/CategoryOrderByInput";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInput";
+import { CategoryDistinctFieldEnum } from "../../../../enums/CategoryDistinctFieldEnum";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindManyCategoryArgs {
-  @TypeGraphQL.Field(_type => CategoryWhereInput, { nullable: true })
-  where?: CategoryWhereInput | null;
+  @Field(_type => CategoryWhereInput, { nullable: true })
+  where?: CategoryWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => CategoryOrderByInput, { nullable: true })
-  orderBy?: CategoryOrderByInput | null;
+  @Field(_type => CategoryOrderByInput, { nullable: true })
+  orderBy?: CategoryOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  skip?: number | null;
+  @Field(_type => CategoryWhereUniqueInput, { nullable: true })
+  cursor?: CategoryWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => CategoryWhereUniqueInput, { nullable: true })
-  after?: CategoryWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => CategoryWhereUniqueInput, { nullable: true })
-  before?: CategoryWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  first?: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  last?: number | null;
+  @Field(_type => [CategoryDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof CategoryDistinctFieldEnum> | undefined;
 }

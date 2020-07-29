@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { DeleteCategoryArgs } from "./args/DeleteCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@TypeGraphQL.Resolver(_of => Category)
+@Resolver(_of => Category)
 export class DeleteCategoryResolver {
-  @TypeGraphQL.Mutation(_returns => Category, {
+  @Mutation(_returns => Category, {
     nullable: true,
     description: undefined
   })
-  async deleteCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteCategoryArgs): Promise<Category | null> {
+  async deleteCategory(@Context() ctx: any, @Args() args: DeleteCategoryArgs): Promise<Category | undefined> {
     return ctx.prisma.category.delete(args);
   }
 }

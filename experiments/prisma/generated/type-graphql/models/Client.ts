@@ -1,54 +1,67 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../client";
 import { Post } from "../models/Post";
 import { Role } from "../enums/Role";
 
-@TypeGraphQL.ObjectType({
+/** User model doc */
+@ObjectType({
   isAbstract: true,
-  description: undefined,
+  description: "User model doc",
 })
 export class Client {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  /** User model field doc */
+  @Field(_type => Int, {
     nullable: false,
-    description: undefined,
+    description: "User model field doc",
   })
   id!: number;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: false,
     description: undefined,
   })
   email!: string;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined,
-  })
-  name?: string | null;
+  /** renamed field doc */
+  name?: string | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(_type => Int, {
     nullable: false,
     description: undefined,
   })
   age!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-    nullable: false,
-    description: undefined,
-  })
   balance!: number;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: false,
     description: undefined,
   })
   amount!: number;
 
-  posts?: Post[] | null;
+  posts?: Post[] | undefined;
 
-  @TypeGraphQL.Field(_type => Role, {
+  @Field(_type => Role, {
     nullable: false,
     description: undefined,
   })
   role!: keyof typeof Role;
+
+  /** renamed field doc */
+  @Field(_type => String, {
+    nullable: true,
+    description: "renamed field doc",
+  })
+  get firstName(): string | undefined {
+    return this.name;
+  }
+
+  @Field(_type => Float, {
+    nullable: false,
+    description: undefined,
+  })
+  get accountBalance(): number {
+    return this.balance;
+  }
 }

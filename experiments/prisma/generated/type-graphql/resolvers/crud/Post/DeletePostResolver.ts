@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { DeletePostArgs } from "./args/DeletePostArgs";
 import { Post } from "../../../models/Post";
 
-@TypeGraphQL.Resolver(_of => Post)
+@Resolver(_of => Post)
 export class DeletePostResolver {
-  @TypeGraphQL.Mutation(_returns => Post, {
+  @Mutation(_returns => Post, {
     nullable: true,
     description: undefined
   })
-  async deletePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeletePostArgs): Promise<Post | null> {
+  async deletePost(@Context() ctx: any, @Args() args: DeletePostArgs): Promise<Post | undefined> {
     return ctx.prisma.post.delete(args);
   }
 }

@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { FindManyPatientArgs } from "./args/FindManyPatientArgs";
 import { Patient } from "../../../models/Patient";
 
-@TypeGraphQL.Resolver(_of => Patient)
+@Resolver(_of => Patient)
 export class FindManyPatientResolver {
-  @TypeGraphQL.Query(_returns => [Patient], {
+  @Query(_returns => [Patient], {
     nullable: false,
     description: undefined
   })
-  async patients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyPatientArgs): Promise<Patient[]> {
+  async patients(@Context() ctx: any, @Args() args: FindManyPatientArgs): Promise<Patient[]> {
     return ctx.prisma.patient.findMany(args);
   }
 }

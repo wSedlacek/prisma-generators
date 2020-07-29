@@ -1,56 +1,57 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class DateTimeFilter {
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  equals?: Date | null;
+  equals?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  not?: Date | null;
+  not?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => [Date], {
+  @Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  in?: Date[] | null;
+  in?: Date[] | undefined;
 
-  @TypeGraphQL.Field(_type => [Date], {
+  @Field(_type => [Date], {
     nullable: true,
     description: undefined
   })
-  notIn?: Date[] | null;
+  notIn?: Date[] | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lt?: Date | null;
+  lt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  lte?: Date | null;
+  lte?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gt?: Date | null;
+  gt?: Date | undefined;
 
-  @TypeGraphQL.Field(_type => Date, {
+  @Field(_type => Date, {
     nullable: true,
     description: undefined
   })
-  gte?: Date | null;
+  gte?: Date | undefined;
 }

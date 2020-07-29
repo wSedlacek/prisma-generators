@@ -1,29 +1,27 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { PatientOrderByInput } from "../../../inputs/PatientOrderByInput";
 import { PatientWhereInput } from "../../../inputs/PatientWhereInput";
 import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput";
+import { PatientDistinctFieldEnum } from "../../../../enums/PatientDistinctFieldEnum";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindManyPatientArgs {
-  @TypeGraphQL.Field(_type => PatientWhereInput, { nullable: true })
-  where?: PatientWhereInput | null;
+  @Field(_type => PatientWhereInput, { nullable: true })
+  where?: PatientWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => PatientOrderByInput, { nullable: true })
-  orderBy?: PatientOrderByInput | null;
+  @Field(_type => PatientOrderByInput, { nullable: true })
+  orderBy?: PatientOrderByInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  skip?: number | null;
+  @Field(_type => PatientWhereUniqueInput, { nullable: true })
+  cursor?: PatientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => PatientWhereUniqueInput, { nullable: true })
-  after?: PatientWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => PatientWhereUniqueInput, { nullable: true })
-  before?: PatientWhereUniqueInput | null;
+  @Field(_type => Int, { nullable: true })
+  skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  first?: number | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  last?: number | null;
+  @Field(_type => [PatientDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof PatientDistinctFieldEnum> | undefined;
 }

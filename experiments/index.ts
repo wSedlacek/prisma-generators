@@ -1,14 +1,9 @@
 import "reflect-metadata";
-import {
-  // ObjectType,
-  Resolver,
-  Query,
-  buildSchema,
-  FieldResolver,
-  Ctx,
-} from "type-graphql";
-import { ApolloServer } from "apollo-server";
-import path from "path";
+import { Resolver, Query, FieldResolver, Ctx, Args } from "type-graphql";
+
+import { NestFactory } from "@nestjs/core";
+import { Module, Logger, ValidationPipe } from "@nestjs/common";
+import { GraphQLModule } from "@nestjs/graphql";
 
 import {
   Client,
@@ -30,6 +25,7 @@ import {
   DirectorCrudResolver,
   DirectorRelationsResolver,
   MovieRelationsResolver,
+  FindManyClientArgs,
 } from "./prisma/generated/type-graphql";
 import { PrismaClient } from "./prisma/generated/client";
 
@@ -47,7 +43,15 @@ interface Context {
 class ClientResolver {
   @Query(returns => [Client])
   async allClients(@Ctx() { prisma }: Context): Promise<Client[]> {
-    return prisma.user.findMany();
+    return (await prisma.user.findMany()) as Client[];
+  }
+
+  @Query(returns => [Client])
+  async customFindClientsWithArgs(
+    @Args() args: FindManyClientArgs,
+    @Ctx() { prisma }: Context,
+  ) {
+    return prisma.user.findMany(args);
   }
 
   @FieldResolver()
@@ -60,45 +64,54 @@ class ClientResolver {
 class PostResolver {
   @Query(returns => [Post])
   async allPosts(@Ctx() { prisma }: Context): Promise<Post[]> {
-    return prisma.post.findMany();
+    return (await prisma.post.findMany()) as Post[];
   }
 }
 
+const prisma = new PrismaClient({
+  // see dataloader for relations in action
+  log: ["query"],
+});
+
+@Module({
+  imports: [
+    GraphQLModule.forRoot({
+      context: (): Context => ({ prisma }),
+      autoSchemaFile: true,
+      playground: true,
+    }),
+  ],
+  providers: [
+    ClientResolver,
+    ClientRelationsResolver,
+    ClientCrudResolver,
+    PostResolver,
+    PostRelationsResolver,
+    FindOnePostResolver,
+    CreatePostResolver,
+    UpdateManyPostResolver,
+    CategoryCrudResolver,
+    PatientCrudResolver,
+    FindManyPostResolver,
+    MovieCrudResolver,
+    MovieRelationsResolver,
+    DirectorCrudResolver,
+    DirectorRelationsResolver,
+  ],
+})
+class AppModule {}
+
 async function main() {
-  const schema = await buildSchema({
-    resolvers: [
-      ClientResolver,
-      ClientRelationsResolver,
-      ClientCrudResolver,
-      PostResolver,
-      PostRelationsResolver,
-      FindOnePostResolver,
-      CreatePostResolver,
-      UpdateManyPostResolver,
-      CategoryCrudResolver,
-      PatientCrudResolver,
-      FindManyPostResolver,
-      MovieCrudResolver,
-      MovieRelationsResolver,
-      DirectorCrudResolver,
-      DirectorRelationsResolver,
-    ],
-    validate: false,
-    emitSchemaFile: path.resolve(__dirname, "./generated-schema.graphql"),
-  });
-
-  const prisma = new PrismaClient({
-    // see dataloader for relations in action
-    log: ["query"],
-  });
-
-  const server = new ApolloServer({
-    schema,
-    playground: true,
-    context: (): Context => ({ prisma }),
-  });
-  const { port } = await server.listen(4000);
-  console.log(`GraphQL is listening on ${port}!`);
+  const app = await NestFactory.create(AppModule, {});
+  const port = 4000;
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
+  await app.listen(port);
+  Logger.log(`GraphQL is listening on ${port}!`);
 }
 
 main().catch(console.error);

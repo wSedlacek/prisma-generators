@@ -1,21 +1,22 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { DirectorUpdateOneRequiredWithoutMoviesInput } from "../inputs/DirectorUpdateOneRequiredWithoutMoviesInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class MovieUpdateInput {
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  title?: string | null;
+  title?: string | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateOneRequiredWithoutMoviesInput, {
+  @Field(_type => DirectorUpdateOneRequiredWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
-  director?: DirectorUpdateOneRequiredWithoutMoviesInput | null;
+  director?: DirectorUpdateOneRequiredWithoutMoviesInput | undefined;
 }

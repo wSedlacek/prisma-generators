@@ -1,22 +1,30 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { DirectorCreateOrConnectWithoutMovieInput } from "../inputs/DirectorCreateOrConnectWithoutMovieInput";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class DirectorCreateOneWithoutMoviesInput {
-  @TypeGraphQL.Field(_type => DirectorCreateWithoutMoviesInput, {
+  @Field(_type => DirectorCreateWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
-  create?: DirectorCreateWithoutMoviesInput | null;
+  create?: DirectorCreateWithoutMoviesInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+  @Field(_type => DirectorWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
-  connect?: DirectorWhereUniqueInput | null;
+  connect?: DirectorWhereUniqueInput | undefined;
+
+  @Field(_type => DirectorCreateOrConnectWithoutMovieInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: DirectorCreateOrConnectWithoutMovieInput | undefined;
 }

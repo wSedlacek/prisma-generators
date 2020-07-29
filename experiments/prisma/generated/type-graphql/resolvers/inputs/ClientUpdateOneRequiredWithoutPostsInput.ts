@@ -1,36 +1,44 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { ClientCreateOrConnectWithoutpostInput } from "../inputs/ClientCreateOrConnectWithoutpostInput";
 import { ClientCreateWithoutPostsInput } from "../inputs/ClientCreateWithoutPostsInput";
 import { ClientUpdateWithoutPostsDataInput } from "../inputs/ClientUpdateWithoutPostsDataInput";
 import { ClientUpsertWithoutPostsInput } from "../inputs/ClientUpsertWithoutPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class ClientUpdateOneRequiredWithoutPostsInput {
-  @TypeGraphQL.Field(_type => ClientCreateWithoutPostsInput, {
+  @Field(_type => ClientCreateWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
-  create?: ClientCreateWithoutPostsInput | null;
+  create?: ClientCreateWithoutPostsInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, {
+  @Field(_type => ClientWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
-  connect?: ClientWhereUniqueInput | null;
+  connect?: ClientWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientUpdateWithoutPostsDataInput, {
+  @Field(_type => ClientUpdateWithoutPostsDataInput, {
     nullable: true,
     description: undefined
   })
-  update?: ClientUpdateWithoutPostsDataInput | null;
+  update?: ClientUpdateWithoutPostsDataInput | undefined;
 
-  @TypeGraphQL.Field(_type => ClientUpsertWithoutPostsInput, {
+  @Field(_type => ClientUpsertWithoutPostsInput, {
     nullable: true,
     description: undefined
   })
-  upsert?: ClientUpsertWithoutPostsInput | null;
+  upsert?: ClientUpsertWithoutPostsInput | undefined;
+
+  @Field(_type => ClientCreateOrConnectWithoutpostInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: ClientCreateOrConnectWithoutpostInput | undefined;
 }

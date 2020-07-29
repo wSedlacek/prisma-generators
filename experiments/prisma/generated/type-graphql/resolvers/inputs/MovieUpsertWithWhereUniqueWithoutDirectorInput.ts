@@ -1,27 +1,28 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieUpdateWithoutDirectorDataInput } from "../inputs/MovieUpdateWithoutDirectorDataInput";
 import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class MovieUpsertWithWhereUniqueWithoutDirectorInput {
-  @TypeGraphQL.Field(_type => MovieWhereUniqueInput, {
+  @Field(_type => MovieWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: MovieWhereUniqueInput;
 
-  @TypeGraphQL.Field(_type => MovieUpdateWithoutDirectorDataInput, {
+  @Field(_type => MovieUpdateWithoutDirectorDataInput, {
     nullable: false,
     description: undefined
   })
   update!: MovieUpdateWithoutDirectorDataInput;
 
-  @TypeGraphQL.Field(_type => MovieCreateWithoutDirectorInput, {
+  @Field(_type => MovieCreateWithoutDirectorInput, {
     nullable: false,
     description: undefined
   })

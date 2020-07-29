@@ -90,6 +90,9 @@ describe("crud", () => {
     `;
 
     await generateCodeFromSchema(schema, { outputDirPath });
+    const aggregateUserArgsTSFile = await readGeneratedFile(
+      "/resolvers/crud/User/args/AggregateUserArgs.ts",
+    );
     const createUserArgsTSFile = await readGeneratedFile(
       "/resolvers/crud/User/args/CreateUserArgs.ts",
     );
@@ -118,6 +121,7 @@ describe("crud", () => {
       "/resolvers/crud/User/args/index.ts",
     );
 
+    expect(aggregateUserArgsTSFile).toMatchSnapshot("AggregateUserArgs");
     expect(createUserArgsTSFile).toMatchSnapshot("CreateUserArgs");
     expect(deleteManyUserArgsTSFile).toMatchSnapshot("DeleteManyUserArgs");
     expect(deleteUserArgsTSFile).toMatchSnapshot("DeleteUserArgs");
@@ -184,7 +188,7 @@ describe("crud", () => {
   describe("when model is renamed", () => {
     it("should properly generate resolver class for single prisma model", async () => {
       const schema = /* prisma */ `
-        // @@TypeGraphQL.type("Client")
+        /// @@TypeGraphQL.type("Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique
@@ -206,7 +210,7 @@ describe("crud", () => {
 
     it("should properly generate args classes for every method of crud resolver", async () => {
       const schema = /* prisma */ `
-        // @@TypeGraphQL.type("Client")
+        /// @@TypeGraphQL.type("Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique
@@ -216,6 +220,9 @@ describe("crud", () => {
       `;
 
       await generateCodeFromSchema(schema, { outputDirPath });
+      const aggregateClientArgsTSFile = await readGeneratedFile(
+        "/resolvers/crud/Client/args/AggregateClientArgs.ts",
+      );
       const createClientArgsTSFile = await readGeneratedFile(
         "/resolvers/crud/Client/args/CreateClientArgs.ts",
       );
@@ -244,6 +251,7 @@ describe("crud", () => {
         "/resolvers/crud/Client/args/index.ts",
       );
 
+      expect(aggregateClientArgsTSFile).toMatchSnapshot("AggregateClientArgs");
       expect(createClientArgsTSFile).toMatchSnapshot("CreateClientArgs");
       expect(deleteManyClientArgsTSFile).toMatchSnapshot(
         "DeleteManyClientArgs",
@@ -261,7 +269,7 @@ describe("crud", () => {
 
     it("should properly generate actions resolver classes for prisma model", async () => {
       const schema = /* prisma */ `
-        // @@TypeGraphQL.type("Client")
+        /// @@TypeGraphQL.type("Client")
         model User {
           intIdField          Int     @id @default(autoincrement())
           uniqueStringField   String  @unique

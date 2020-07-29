@@ -4,23 +4,31 @@
 # -----------------------------------------------
 
 type AggregateCategory {
-  count(after: CategoryWhereUniqueInput, before: CategoryWhereUniqueInput, first: Int, last: Int, orderBy: CategoryOrderByInput, skip: Int, where: CategoryWhereInput): Int!
+  avg: CategoryAvgAggregateOutputType
+  count: Int!
+  max: CategoryMaxAggregateOutputType
+  min: CategoryMinAggregateOutputType
+  sum: CategorySumAggregateOutputType
 }
 
 type AggregateClient {
-  count(after: ClientWhereUniqueInput, before: ClientWhereUniqueInput, first: Int, last: Int, orderBy: ClientOrderByInput, skip: Int, where: ClientWhereInput): Int!
+  avg: ClientAvgAggregateOutputType
+  count: Int!
+  max: ClientMaxAggregateOutputType
+  min: ClientMinAggregateOutputType
+  sum: ClientSumAggregateOutputType
 }
 
 type AggregateDirector {
-  count(after: DirectorWhereUniqueInput, before: DirectorWhereUniqueInput, first: Int, last: Int, orderBy: DirectorOrderByInput, skip: Int, where: DirectorWhereInput): Int!
+  count: Int!
 }
 
 type AggregateMovie {
-  count(after: MovieWhereUniqueInput, before: MovieWhereUniqueInput, first: Int, last: Int, orderBy: MovieOrderByInput, skip: Int, where: MovieWhereInput): Int!
+  count: Int!
 }
 
 type AggregatePatient {
-  count(after: PatientWhereUniqueInput, before: PatientWhereUniqueInput, first: Int, last: Int, orderBy: PatientOrderByInput, skip: Int, where: PatientWhereInput): Int!
+  count: Int!
 }
 
 type BatchPayload {
@@ -38,16 +46,38 @@ type Category {
   slug: String!
 }
 
+type CategoryAvgAggregateOutputType {
+  number: Float!
+}
+
 input CategoryCreateInput {
   name: String!
   number: Int!
   slug: String!
 }
 
+enum CategoryDistinctFieldEnum {
+  name
+  number
+  slug
+}
+
+type CategoryMaxAggregateOutputType {
+  number: Int!
+}
+
+type CategoryMinAggregateOutputType {
+  number: Int!
+}
+
 input CategoryOrderByInput {
   name: OrderByArg
   number: OrderByArg
   slug: OrderByArg
+}
+
+type CategorySumAggregateOutputType {
+  number: Int!
 }
 
 input CategoryUpdateInput {
@@ -75,84 +105,121 @@ input CategoryWhereUniqueInput {
   slug_number: SlugNumberCompoundUniqueInput
 }
 
+"""User model doc"""
 type Client {
+  accountBalance: Float!
   age: Int!
   amount: Float!
-  balance: Float!
+  clientPosts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: PostOrderByInput, skip: Int, take: Int, where: PostWhereInput): [Post!]
   email: String!
+
+  """renamed field doc"""
+  firstName: String
   hello: String!
+
+  """User model field doc"""
   id: Int!
-  name: String
-  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: PostOrderByInput, skip: Int, where: PostWhereInput): [Post!]
   role: Role!
 }
 
-input ClientCreateInput {
-  age: Int!
+type ClientAvgAggregateOutputType {
+  age: Float!
   amount: Float!
   balance: Float!
+  id: Float!
+}
+
+input ClientCreateInput {
+  accountBalance: Float!
+  age: Int!
+  amount: Float!
+  clientPosts: PostCreateManyWithoutAuthorInput
   email: String!
-  name: String
-  posts: PostCreateManyWithoutAuthorInput
+  firstName: String
   role: Role!
 }
 
 input ClientCreateOneWithoutPostsInput {
   connect: ClientWhereUniqueInput
+  connectOrCreate: ClientCreateOrConnectWithoutpostInput
   create: ClientCreateWithoutPostsInput
 }
 
+input ClientCreateOrConnectWithoutpostInput {
+  create: ClientCreateWithoutPostsInput!
+  where: ClientWhereUniqueInput!
+}
+
 input ClientCreateWithoutPostsInput {
+  accountBalance: Float!
   age: Int!
   amount: Float!
-  balance: Float!
   email: String!
-  name: String
+  firstName: String
   role: Role!
 }
 
+type ClientMaxAggregateOutputType {
+  age: Int!
+  amount: Float!
+  balance: Float!
+  id: Int!
+}
+
+type ClientMinAggregateOutputType {
+  age: Int!
+  amount: Float!
+  balance: Float!
+  id: Int!
+}
+
 input ClientOrderByInput {
+  accountBalance: OrderByArg
   age: OrderByArg
   amount: OrderByArg
-  balance: OrderByArg
   email: OrderByArg
+  firstName: OrderByArg
   id: OrderByArg
-  name: OrderByArg
   role: OrderByArg
 }
 
+type ClientSumAggregateOutputType {
+  age: Int!
+  amount: Float!
+  balance: Float!
+  id: Int!
+}
+
 input ClientUpdateInput {
+  accountBalance: Float
   age: Int
   amount: Float
-  balance: Float
+  clientPosts: PostUpdateManyWithoutAuthorInput
   email: String
-  id: Int
-  name: String
-  posts: PostUpdateManyWithoutAuthorInput
+  firstName: String
   role: Role
 }
 
 input ClientUpdateManyMutationInput {
+  accountBalance: Float
   age: Int
   amount: Float
-  balance: Float
   email: String
-  id: Int
-  name: String
+  firstName: String
   role: Role
 }
 
 input ClientWhereInput {
+  accountBalance: FloatFilter
   age: IntFilter
   amount: FloatFilter
   AND: [ClientWhereInput!]
-  balance: FloatFilter
+  clientPosts: PostFilter
   email: StringFilter
+  firstName: NullableStringFilter
   id: IntFilter
-  name: NullableStringFilter
   NOT: [ClientWhereInput!]
   OR: [ClientWhereInput!]
-  posts: PostFilter
   role: RoleFilter
 }
 
@@ -180,7 +247,7 @@ input DateTimeFilter {
 type Director {
   firstName: String!
   lastName: String!
-  movies(after: MovieWhereUniqueInput, before: MovieWhereUniqueInput, first: Int, last: Int, orderBy: MovieOrderByInput, skip: Int, where: MovieWhereInput): [Movie!]
+  movies(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: MovieOrderByInput, skip: Int, take: Int, where: MovieWhereInput): [Movie!]
 }
 
 input DirectorCreateInput {
@@ -191,12 +258,23 @@ input DirectorCreateInput {
 
 input DirectorCreateOneWithoutMoviesInput {
   connect: DirectorWhereUniqueInput
+  connectOrCreate: DirectorCreateOrConnectWithoutMovieInput
   create: DirectorCreateWithoutMoviesInput
+}
+
+input DirectorCreateOrConnectWithoutMovieInput {
+  create: DirectorCreateWithoutMoviesInput!
+  where: DirectorWhereUniqueInput!
 }
 
 input DirectorCreateWithoutMoviesInput {
   firstName: String!
   lastName: String!
+}
+
+enum DirectorDistinctFieldEnum {
+  firstName
+  lastName
 }
 
 input DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
@@ -223,6 +301,7 @@ input DirectorUpdateManyMutationInput {
 
 input DirectorUpdateOneRequiredWithoutMoviesInput {
   connect: DirectorWhereUniqueInput
+  connectOrCreate: DirectorCreateOrConnectWithoutMovieInput
   create: DirectorCreateWithoutMoviesInput
   update: DirectorUpdateWithoutMoviesDataInput
   upsert: DirectorUpsertWithoutMoviesInput
@@ -281,7 +360,12 @@ input IntFilter {
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar JSON
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+input JsonFilter {
+  equals: JSON
+  not: JSON
+}
 
 type Movie {
   director: Director!
@@ -297,11 +381,23 @@ input MovieCreateInput {
 
 input MovieCreateManyWithoutDirectorInput {
   connect: [MovieWhereUniqueInput!]
+  connectOrCreate: [MovieCreateOrConnectWithoutDirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
+}
+
+input MovieCreateOrConnectWithoutDirectorInput {
+  create: MovieCreateWithoutDirectorInput!
+  where: MovieWhereUniqueInput!
 }
 
 input MovieCreateWithoutDirectorInput {
   title: String!
+}
+
+enum MovieDistinctFieldEnum {
+  directorFirstName
+  directorLastName
+  title
 }
 
 input MovieFilter {
@@ -340,6 +436,7 @@ input MovieUpdateManyMutationInput {
 
 input MovieUpdateManyWithoutDirectorInput {
   connect: [MovieWhereUniqueInput!]
+  connectOrCreate: [MovieCreateOrConnectWithoutDirectorInput!]
   create: [MovieCreateWithoutDirectorInput!]
   delete: [MovieWhereUniqueInput!]
   deleteMany: [MovieScalarWhereInput!]
@@ -457,6 +554,12 @@ input PatientCreateInput {
   lastName: String!
 }
 
+enum PatientDistinctFieldEnum {
+  email
+  firstName
+  lastName
+}
+
 input PatientOrderByInput {
   email: OrderByArg
   firstName: OrderByArg
@@ -515,7 +618,13 @@ input PostCreateInput {
 
 input PostCreateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutUserInput!]
   create: [PostCreateWithoutAuthorInput!]
+}
+
+input PostCreateOrConnectWithoutUserInput {
+  create: PostCreateWithoutAuthorInput!
+  where: PostWhereUniqueInput!
 }
 
 input PostCreateWithoutAuthorInput {
@@ -527,6 +636,18 @@ input PostCreateWithoutAuthorInput {
   title: String!
   updatedAt: DateTime
   uuid: String
+}
+
+enum PostDistinctFieldEnum {
+  authorId
+  content
+  createdAt
+  kind
+  metadata
+  published
+  title
+  updatedAt
+  uuid
 }
 
 input PostFilter {
@@ -558,6 +679,7 @@ input PostScalarWhereInput {
   content: NullableStringFilter
   createdAt: DateTimeFilter
   kind: NullablePostKindFilter
+  metadata: JsonFilter
   NOT: [PostScalarWhereInput!]
   OR: [PostScalarWhereInput!]
   published: BooleanFilter
@@ -590,6 +712,7 @@ input PostUpdateManyMutationInput {
 
 input PostUpdateManyWithoutAuthorInput {
   connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutUserInput!]
   create: [PostCreateWithoutAuthorInput!]
   delete: [PostWhereUniqueInput!]
   deleteMany: [PostScalarWhereInput!]
@@ -634,6 +757,7 @@ input PostWhereInput {
   content: NullableStringFilter
   createdAt: DateTimeFilter
   kind: NullablePostKindFilter
+  metadata: JsonFilter
   NOT: [PostWhereInput!]
   OR: [PostWhereInput!]
   published: BooleanFilter
@@ -647,27 +771,29 @@ input PostWhereUniqueInput {
 }
 
 type Query {
-  aggregateCategory: AggregateCategory!
-  aggregateClient: AggregateClient!
-  aggregateDirector: AggregateDirector!
-  aggregateMovie: AggregateMovie!
-  aggregatePatient: AggregatePatient!
+  aggregateCategory(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: CategoryOrderByInput, skip: Int, take: Int, where: CategoryWhereInput): AggregateCategory!
+  aggregateClient(cursor: ClientWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: ClientOrderByInput, skip: Int, take: Int, where: ClientWhereInput): AggregateClient!
+  aggregateDirector(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: DirectorOrderByInput, skip: Int, take: Int, where: DirectorWhereInput): AggregateDirector!
+  aggregateMovie(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: MovieOrderByInput, skip: Int, take: Int, where: MovieWhereInput): AggregateMovie!
+  aggregatePatient(cursor: PatientWhereUniqueInput, distinct: [PatientDistinctFieldEnum!], orderBy: PatientOrderByInput, skip: Int, take: Int, where: PatientWhereInput): AggregatePatient!
   allClients: [Client!]!
   allPosts: [Post!]!
-  categories(after: CategoryWhereUniqueInput, before: CategoryWhereUniqueInput, first: Int, last: Int, orderBy: CategoryOrderByInput, skip: Int, where: CategoryWhereInput): [Category!]!
+  categories(cursor: CategoryWhereUniqueInput, distinct: [CategoryDistinctFieldEnum!], orderBy: CategoryOrderByInput, skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
   category(where: CategoryWhereUniqueInput!): Category
   client(where: ClientWhereUniqueInput!): Client
-  clients(after: ClientWhereUniqueInput, before: ClientWhereUniqueInput, first: Int, last: Int, orderBy: ClientOrderByInput, skip: Int, where: ClientWhereInput): [Client!]!
+  clients(cursor: ClientWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: ClientOrderByInput, skip: Int, take: Int, where: ClientWhereInput): [Client!]!
+  customFindClientsWithArgs(cursor: ClientWhereUniqueInput, distinct: [UserDistinctFieldEnum!], orderBy: ClientOrderByInput, skip: Int, take: Int, where: ClientWhereInput): [Client!]!
   director(where: DirectorWhereUniqueInput!): Director
-  directors(after: DirectorWhereUniqueInput, before: DirectorWhereUniqueInput, first: Int, last: Int, orderBy: DirectorOrderByInput, skip: Int, where: DirectorWhereInput): [Director!]!
+  directors(cursor: DirectorWhereUniqueInput, distinct: [DirectorDistinctFieldEnum!], orderBy: DirectorOrderByInput, skip: Int, take: Int, where: DirectorWhereInput): [Director!]!
   movie(where: MovieWhereUniqueInput!): Movie
-  movies(after: MovieWhereUniqueInput, before: MovieWhereUniqueInput, first: Int, last: Int, orderBy: MovieOrderByInput, skip: Int, where: MovieWhereInput): [Movie!]!
+  movies(cursor: MovieWhereUniqueInput, distinct: [MovieDistinctFieldEnum!], orderBy: MovieOrderByInput, skip: Int, take: Int, where: MovieWhereInput): [Movie!]!
   patient(where: PatientWhereUniqueInput!): Patient
-  patients(after: PatientWhereUniqueInput, before: PatientWhereUniqueInput, first: Int, last: Int, orderBy: PatientOrderByInput, skip: Int, where: PatientWhereInput): [Patient!]!
+  patients(cursor: PatientWhereUniqueInput, distinct: [PatientDistinctFieldEnum!], orderBy: PatientOrderByInput, skip: Int, take: Int, where: PatientWhereInput): [Patient!]!
   post(where: PostWhereUniqueInput!): Post
-  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: PostOrderByInput, skip: Int, where: PostWhereInput): [Post!]!
+  posts(cursor: PostWhereUniqueInput, distinct: [PostDistinctFieldEnum!], orderBy: PostOrderByInput, skip: Int, take: Int, where: PostWhereInput): [Post!]!
 }
 
+"""Role enum doc"""
 enum Role {
   ADMIN
   USER
@@ -697,6 +823,16 @@ input StringFilter {
   not: String
   notIn: [String!]
   startsWith: String
+}
+
+enum UserDistinctFieldEnum {
+  age
+  amount
+  balance
+  email
+  id
+  name
+  role
 }
 
 input UUIDFilter {

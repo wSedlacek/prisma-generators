@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { Post } from "../../../models/Post";
 
-@TypeGraphQL.Resolver(_of => Post)
+@Resolver(_of => Post)
 export class UpdatePostResolver {
-  @TypeGraphQL.Mutation(_returns => Post, {
+  @Mutation(_returns => Post, {
     nullable: true,
     description: undefined
   })
-  async updatePost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdatePostArgs): Promise<Post | null> {
+  async updatePost(@Context() ctx: any, @Args() args: UpdatePostArgs): Promise<Post | undefined> {
     return ctx.prisma.post.update(args);
   }
 }

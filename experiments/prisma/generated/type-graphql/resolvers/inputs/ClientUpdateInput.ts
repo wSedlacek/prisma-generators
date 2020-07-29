@@ -1,58 +1,77 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { PostUpdateManyWithoutAuthorInput } from "../inputs/PostUpdateManyWithoutAuthorInput";
 import { Role } from "../../enums/Role";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class ClientUpdateInput {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  id?: number | null;
+  email?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true,
-    description: undefined
-  })
-  email?: string | null;
+  name?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => Int, {
     nullable: true,
     description: undefined
   })
-  name?: string | null;
+  age?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-    nullable: true,
-    description: undefined
-  })
-  age?: number | null;
+  balance?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  balance?: number | null;
+  amount?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Role, {
     nullable: true,
     description: undefined
   })
-  amount?: number | null;
+  role?: keyof typeof Role | undefined;
 
-  @TypeGraphQL.Field(_type => Role, {
-    nullable: true,
-    description: undefined
-  })
-  role?: keyof typeof Role | null;
+  posts?: PostUpdateManyWithoutAuthorInput | undefined;
 
-  @TypeGraphQL.Field(_type => PostUpdateManyWithoutAuthorInput, {
+  @Field(_type => String, {
     nullable: true,
     description: undefined
   })
-  posts?: PostUpdateManyWithoutAuthorInput | null;
+  get firstName() {
+    return this.name;
+  }
+
+  set firstName(name: string | undefined) {
+    this.name = name;
+  }
+
+  @Field(_type => Float, {
+    nullable: true,
+    description: undefined
+  })
+  get accountBalance() {
+    return this.balance;
+  }
+
+  set accountBalance(balance: number | undefined) {
+    this.balance = balance;
+  }
+
+  @Field(_type => PostUpdateManyWithoutAuthorInput, {
+    nullable: true,
+    description: undefined
+  })
+  get clientPosts() {
+    return this.posts;
+  }
+
+  set clientPosts(posts: PostUpdateManyWithoutAuthorInput | undefined) {
+    this.posts = posts;
+  }
 }

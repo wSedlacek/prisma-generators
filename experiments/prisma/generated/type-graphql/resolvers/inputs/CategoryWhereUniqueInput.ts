@@ -1,15 +1,16 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { SlugNumberCompoundUniqueInput } from "../inputs/SlugNumberCompoundUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class CategoryWhereUniqueInput {
-  @TypeGraphQL.Field(_type => SlugNumberCompoundUniqueInput, {
+  @Field(_type => SlugNumberCompoundUniqueInput, {
     nullable: true,
     description: undefined
   })
-  slug_number?: SlugNumberCompoundUniqueInput | null;
+  slug_number?: SlugNumberCompoundUniqueInput | undefined;
 }

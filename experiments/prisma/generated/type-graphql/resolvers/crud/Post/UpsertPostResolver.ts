@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
 
-@TypeGraphQL.Resolver(_of => Post)
+@Resolver(_of => Post)
 export class UpsertPostResolver {
-  @TypeGraphQL.Mutation(_returns => Post, {
+  @Mutation(_returns => Post, {
     nullable: false,
     description: undefined
   })
-  async upsertPost(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPostArgs): Promise<Post> {
+  async upsertPost(@Context() ctx: any, @Args() args: UpsertPostArgs): Promise<Post> {
     return ctx.prisma.post.upsert(args);
   }
 }

@@ -1,23 +1,24 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../client";
 import { Movie } from "../models/Movie";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class Director {
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: false,
     description: undefined,
   })
   firstName!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @Field(_type => String, {
     nullable: false,
     description: undefined,
   })
   lastName!: string;
 
-  movies?: Movie[] | null;
+  movies?: Movie[] | undefined;
 }

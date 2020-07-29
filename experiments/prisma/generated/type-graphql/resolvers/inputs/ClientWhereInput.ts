@@ -1,5 +1,6 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { FloatFilter } from "../inputs/FloatFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { NullableStringFilter } from "../inputs/NullableStringFilter";
@@ -7,74 +8,98 @@ import { PostFilter } from "../inputs/PostFilter";
 import { RoleFilter } from "../inputs/RoleFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class ClientWhereInput {
-  @TypeGraphQL.Field(_type => IntFilter, {
+  @Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  id?: IntFilter | null;
+  id?: IntFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  email?: StringFilter | null;
+  email?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => NullableStringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  name?: NullableStringFilter | null;
+  name?: NullableStringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => IntFilter, {
+  @Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  age?: IntFilter | null;
+  age?: IntFilter | undefined;
 
-  @TypeGraphQL.Field(_type => FloatFilter, {
-    nullable: true,
-    description: undefined
-  })
-  balance?: FloatFilter | null;
+  balance?: FloatFilter | undefined;
 
-  @TypeGraphQL.Field(_type => FloatFilter, {
+  @Field(_type => FloatFilter, {
     nullable: true,
     description: undefined
   })
-  amount?: FloatFilter | null;
+  amount?: FloatFilter | undefined;
 
-  @TypeGraphQL.Field(_type => PostFilter, {
-    nullable: true,
-    description: undefined
-  })
-  posts?: PostFilter | null;
+  posts?: PostFilter | undefined;
 
-  @TypeGraphQL.Field(_type => RoleFilter, {
+  @Field(_type => RoleFilter, {
     nullable: true,
     description: undefined
   })
-  role?: RoleFilter | null;
+  role?: RoleFilter | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientWhereInput], {
+  @Field(_type => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: ClientWhereInput[] | null;
+  AND?: ClientWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientWhereInput], {
+  @Field(_type => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: ClientWhereInput[] | null;
+  OR?: ClientWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [ClientWhereInput], {
+  @Field(_type => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: ClientWhereInput[] | null;
+  NOT?: ClientWhereInput[] | undefined;
+
+  @Field(_type => NullableStringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  get firstName() {
+    return this.name;
+  }
+
+  set firstName(name: NullableStringFilter | undefined) {
+    this.name = name;
+  }
+
+  @Field(_type => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  get accountBalance() {
+    return this.balance;
+  }
+
+  set accountBalance(balance: FloatFilter | undefined) {
+    this.balance = balance;
+  }
+
+  @Field(_type => PostFilter, {
+    nullable: true,
+    description: undefined
+  })
+  get clientPosts() {
+    return this.posts;
+  }
+
+  set clientPosts(posts: PostFilter | undefined) {
+    this.posts = posts;
+  }
 }

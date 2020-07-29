@@ -1,45 +1,34 @@
-import { DMMF } from "@prisma/client/runtime/dmmf-types";
-
-import {
-  getFieldTSType,
-  getMappedActionName,
-  getTypeGraphQLType,
-} from "../helpers";
-import { DMMFTypeInfo } from "../types";
-import { GenerateCodeOptions } from "../options";
-import { ModelKeys } from "../config";
+import { getFieldTSType, getTypeGraphQLType } from "../helpers";
 import { DmmfDocument } from "../dmmf/dmmf-document";
+import { DMMF } from "../dmmf/types";
 
 export function generateCrudResolverClassMethodDeclaration(
-  operationKind: string,
-  actionName: ModelKeys,
+  action: DMMF.Action,
   typeName: string,
   method: DMMF.SchemaField,
   argsTypeName: string | undefined,
   collectionName: string,
   dmmfDocument: DmmfDocument,
   mapping: DMMF.Mapping,
-  options: GenerateCodeOptions,
 ) {
   const returnTSType = getFieldTSType(
-    method.outputType as DMMFTypeInfo,
+    method.outputType,
     dmmfDocument,
+    false,
     mapping.model,
     typeName,
   );
 
   return {
-    name: options.useOriginalMapping
-      ? `${actionName}${typeName}`
-      : getMappedActionName(actionName, typeName),
+    name: action.name,
     isAsync: true,
     returnType: `Promise<${returnTSType}>`,
     decorators: [
       {
-        name: `${operationKind}`,
+        name: `${action.operation}`,
         arguments: [
           `_returns => ${getTypeGraphQLType(
-            method.outputType as DMMFTypeInfo,
+            method.outputType,
             dmmfDocument,
             mapping.model,
             typeName,
@@ -58,6 +47,15 @@ export function generateCrudResolverClassMethodDeclaration(
         type: "any",
         decorators: [{ name: "Context", arguments: [] }],
       },
+      ...(action.kind === "aggregate"
+        ? [
+            {
+              name: "info",
+              type: "GraphQLResolveInfo",
+              decorators: [{ name: "Info", arguments: [] }],
+            },
+          ]
+        : []),
       ...(!argsTypeName
         ? []
         : [
@@ -69,13 +67,27 @@ export function generateCrudResolverClassMethodDeclaration(
           ]),
     ],
     statements:
-      actionName === "aggregate"
+      action.kind === "aggregate"
         ? [
-            // it will expose field resolvers automatically
-            `return new ${returnTSType}();`,
+            `function transformFields(fields: Record<string, any>): Record<string, any> {
+              return Object.fromEntries(
+                Object.entries(fields)
+                  .filter(([key, value]) => !key.startsWith("_"))
+                  .map<[string, any]>(([key, value]) => {
+                    if (Object.keys(value).length === 0) {
+                      return [key, true];
+                    }
+                    return [key, transformFields(value)];
+                  }),
+              );
+            }`,
+            `return ctx.prisma.${collectionName}.${action.kind}({
+              ...args,
+              ...transformFields(graphqlFields(info as any)),
+            });`,
           ]
         : [
-            `return ctx.prisma.${collectionName}.${actionName}(${
+            `return ctx.prisma.${collectionName}.${action.kind}(${
               argsTypeName ? "args" : ""
             });`,
           ],

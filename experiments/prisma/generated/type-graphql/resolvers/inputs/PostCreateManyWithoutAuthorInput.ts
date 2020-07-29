@@ -1,22 +1,30 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { PostCreateOrConnectWithoutUserInput } from "../inputs/PostCreateOrConnectWithoutUserInput";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class PostCreateManyWithoutAuthorInput {
-  @TypeGraphQL.Field(_type => [PostCreateWithoutAuthorInput], {
+  @Field(_type => [PostCreateWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
-  create?: PostCreateWithoutAuthorInput[] | null;
+  create?: PostCreateWithoutAuthorInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [PostWhereUniqueInput], {
+  @Field(_type => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
-  connect?: PostWhereUniqueInput[] | null;
+  connect?: PostWhereUniqueInput[] | undefined;
+
+  @Field(_type => [PostCreateOrConnectWithoutUserInput], {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: PostCreateOrConnectWithoutUserInput[] | undefined;
 }

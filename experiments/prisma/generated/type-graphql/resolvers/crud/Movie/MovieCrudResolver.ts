@@ -1,4 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import graphqlFields from "graphql-fields";
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { CreateMovieArgs } from "./args/CreateMovieArgs";
 import { DeleteManyMovieArgs } from "./args/DeleteManyMovieArgs";
 import { DeleteMovieArgs } from "./args/DeleteMovieArgs";
@@ -11,77 +14,93 @@ import { Movie } from "../../../models/Movie";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@TypeGraphQL.Resolver(_of => Movie)
+@Resolver(_of => Movie)
 export class MovieCrudResolver {
-  @TypeGraphQL.Query(_returns => Movie, {
+  @Query(_returns => Movie, {
     nullable: true,
     description: undefined
   })
-  async movie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneMovieArgs): Promise<Movie | null> {
+  async movie(@Context() ctx: any, @Args() args: FindOneMovieArgs): Promise<Movie | undefined> {
     return ctx.prisma.movie.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [Movie], {
+  @Query(_returns => [Movie], {
     nullable: false,
     description: undefined
   })
-  async movies(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyMovieArgs): Promise<Movie[]> {
+  async movies(@Context() ctx: any, @Args() args: FindManyMovieArgs): Promise<Movie[]> {
     return ctx.prisma.movie.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Movie, {
+  @Mutation(_returns => Movie, {
     nullable: false,
     description: undefined
   })
-  async createMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateMovieArgs): Promise<Movie> {
+  async createMovie(@Context() ctx: any, @Args() args: CreateMovieArgs): Promise<Movie> {
     return ctx.prisma.movie.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Movie, {
+  @Mutation(_returns => Movie, {
     nullable: true,
     description: undefined
   })
-  async deleteMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteMovieArgs): Promise<Movie | null> {
+  async deleteMovie(@Context() ctx: any, @Args() args: DeleteMovieArgs): Promise<Movie | undefined> {
     return ctx.prisma.movie.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Movie, {
+  @Mutation(_returns => Movie, {
     nullable: true,
     description: undefined
   })
-  async updateMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateMovieArgs): Promise<Movie | null> {
+  async updateMovie(@Context() ctx: any, @Args() args: UpdateMovieArgs): Promise<Movie | undefined> {
     return ctx.prisma.movie.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyMovieArgs): Promise<BatchPayload> {
+  async deleteManyMovie(@Context() ctx: any, @Args() args: DeleteManyMovieArgs): Promise<BatchPayload> {
     return ctx.prisma.movie.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyMovieArgs): Promise<BatchPayload> {
+  async updateManyMovie(@Context() ctx: any, @Args() args: UpdateManyMovieArgs): Promise<BatchPayload> {
     return ctx.prisma.movie.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Movie, {
+  @Mutation(_returns => Movie, {
     nullable: false,
     description: undefined
   })
-  async upsertMovie(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertMovieArgs): Promise<Movie> {
+  async upsertMovie(@Context() ctx: any, @Args() args: UpsertMovieArgs): Promise<Movie> {
     return ctx.prisma.movie.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateMovie, {
+  @Query(_returns => AggregateMovie, {
     nullable: false,
     description: undefined
   })
-  async aggregateMovie(): Promise<AggregateMovie> {
-    return new AggregateMovie();
+  async aggregateMovie(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateMovieArgs): Promise<AggregateMovie> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith("_"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.movie.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
   }
 }

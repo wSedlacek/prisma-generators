@@ -1,3 +1,11 @@
+import { CategoryCrudResolver } from "./Category/CategoryCrudResolver";
+import { ClientCrudResolver } from "./Client/ClientCrudResolver";
+import { DirectorCrudResolver } from "./Director/DirectorCrudResolver";
+import { MovieCrudResolver } from "./Movie/MovieCrudResolver";
+import { PatientCrudResolver } from "./Patient/PatientCrudResolver";
+import { PostCrudResolver } from "./Post/PostCrudResolver";
+import { Module } from "@nestjs/common";
+
 export { CategoryCrudResolver } from "./Category/CategoryCrudResolver";
 export { FindOneCategoryResolver } from "./Category/FindOneCategoryResolver";
 export { FindManyCategoryResolver } from "./Category/FindManyCategoryResolver";
@@ -64,3 +72,24 @@ export { UpdateManyPostResolver } from "./Post/UpdateManyPostResolver";
 export { UpsertPostResolver } from "./Post/UpsertPostResolver";
 export { AggregatePostResolver } from "./Post/AggregatePostResolver";
 export * from "./Post/args";
+
+@Module({
+  providers: [
+    CategoryCrudResolver,
+    ClientCrudResolver,
+    DirectorCrudResolver,
+    MovieCrudResolver,
+    PatientCrudResolver,
+    PostCrudResolver
+  ],
+  exports: [
+    CategoryCrudResolver,
+    ClientCrudResolver,
+    DirectorCrudResolver,
+    MovieCrudResolver,
+    PatientCrudResolver,
+    PostCrudResolver
+  ]
+})
+export class CrudResolversModule {
+}

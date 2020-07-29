@@ -1,10 +1,10 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 
 export enum PostKind {
   BLOG = "BLOG",
   ADVERT = "ADVERT"
 }
-TypeGraphQL.registerEnumType(PostKind, {
+registerEnumType(PostKind, {
   name: "PostKind",
   description: undefined,
 });

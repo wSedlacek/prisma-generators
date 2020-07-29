@@ -1,23 +1,31 @@
-import { PropertyDeclarationStructure, OptionalKind, Project } from "ts-morph";
+import {
+  PropertyDeclarationStructure,
+  OptionalKind,
+  Project,
+  GetAccessorDeclarationStructure,
+} from "ts-morph";
 import path from "path";
 
-import { getFieldTSType, getTypeGraphQLType } from "./helpers";
+import { cleanDocsString } from "./helpers";
 import {
   generateTypeGraphQLImport,
   generateModelsImports,
   generateEnumsImports,
   generateGraphQLScalarImport,
+  generatePrismaJsonTypeImport,
 } from "./imports";
 import { modelsFolderName } from "./config";
 import saveSourceFile from "../utils/saveSourceFile";
 import { DMMF } from "./dmmf/types";
 import { DmmfDocument } from "./dmmf/dmmf-document";
+import { GenerateCodeOptions } from "./options";
 
 export default async function generateObjectTypeClassFromModel(
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
   dmmfDocument: DmmfDocument,
+  options: GenerateCodeOptions,
 ) {
   const dirPath = path.resolve(baseDirPath, modelsFolderName);
   const filePath = path.resolve(dirPath, `${model.typeName}.ts`);
@@ -27,6 +35,7 @@ export default async function generateObjectTypeClassFromModel(
 
   generateTypeGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
+  generatePrismaJsonTypeImport(sourceFile, options, 1);
   generateModelsImports(
     sourceFile,
     model.fields
@@ -45,10 +54,7 @@ export default async function generateObjectTypeClassFromModel(
       .map(field => field.type),
   );
 
-  // FIXME: restore when issue fixed: https://github.com/prisma/prisma2/issues/1987
-  const modelDocs = undefined as string | undefined;
-  // const modelDocs =
-  //   model.documentation && model.documentation.replace("\r", "");
+  const modelDocs = cleanDocsString(model.documentation);
 
   sourceFile.addClass({
     name: model.typeName,
@@ -67,25 +73,22 @@ export default async function generateObjectTypeClassFromModel(
     properties: model.fields.map<OptionalKind<PropertyDeclarationStructure>>(
       field => {
         const isOptional = !!field.relationName || !field.isRequired;
-        // FIXME: restore when issue fixed: https://github.com/prisma/prisma2/issues/1987
-        const fieldDocs = undefined as string | undefined;
-        // const fieldDocs =
-        //   field.documentation && field.documentation.replace("\r", "");
+        const fieldDocs = cleanDocsString(field.documentation);
 
         return {
           name: field.name,
-          type: getFieldTSType(field, dmmfDocument),
+          type: field.fieldTSType,
           hasExclamationToken: !isOptional,
           hasQuestionToken: isOptional,
           trailingTrivia: "\r\n",
           decorators: [
-            ...(field.relationName
+            ...(field.relationName || field.typeFieldAlias
               ? []
               : [
                   {
                     name: "Field",
                     arguments: [
-                      `_type => ${getTypeGraphQLType(field, dmmfDocument)}`,
+                      `_type => ${field.typeGraphQLType}`,
                       `{
                         nullable: ${isOptional},
                         description: ${
@@ -102,6 +105,33 @@ export default async function generateObjectTypeClassFromModel(
         };
       },
     ),
+    getAccessors: model.fields
+      .filter(field => field.typeFieldAlias && !field.relationName)
+      .map<OptionalKind<GetAccessorDeclarationStructure>>(field => {
+        const fieldDocs = cleanDocsString(field.documentation);
+
+        return {
+          name: field.typeFieldAlias!,
+          returnType: field.fieldTSType,
+          trailingTrivia: "\r\n",
+          decorators: [
+            {
+              name: "Field",
+              arguments: [
+                `_type => ${field.typeGraphQLType}`,
+                `{
+                  nullable: ${!field.isRequired},
+                  description: ${fieldDocs ? `"${fieldDocs}"` : "undefined"},
+                }`,
+              ],
+            },
+          ],
+          statements: [`return this.${field.name};`],
+          ...(fieldDocs && {
+            docs: [{ description: fieldDocs }],
+          }),
+        };
+      }),
     ...(modelDocs && {
       docs: [{ description: modelDocs }],
     }),

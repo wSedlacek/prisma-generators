@@ -1,9 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteMovieArgs {
-  @TypeGraphQL.Field(_type => MovieWhereUniqueInput, { nullable: false })
+  @Field(_type => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 }

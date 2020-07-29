@@ -1,36 +1,44 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { DirectorCreateOrConnectWithoutMovieInput } from "../inputs/DirectorCreateOrConnectWithoutMovieInput";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
 import { DirectorUpdateWithoutMoviesDataInput } from "../inputs/DirectorUpdateWithoutMoviesDataInput";
 import { DirectorUpsertWithoutMoviesInput } from "../inputs/DirectorUpsertWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class DirectorUpdateOneRequiredWithoutMoviesInput {
-  @TypeGraphQL.Field(_type => DirectorCreateWithoutMoviesInput, {
+  @Field(_type => DirectorCreateWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
-  create?: DirectorCreateWithoutMoviesInput | null;
+  create?: DirectorCreateWithoutMoviesInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, {
+  @Field(_type => DirectorWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
-  connect?: DirectorWhereUniqueInput | null;
+  connect?: DirectorWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpdateWithoutMoviesDataInput, {
+  @Field(_type => DirectorUpdateWithoutMoviesDataInput, {
     nullable: true,
     description: undefined
   })
-  update?: DirectorUpdateWithoutMoviesDataInput | null;
+  update?: DirectorUpdateWithoutMoviesDataInput | undefined;
 
-  @TypeGraphQL.Field(_type => DirectorUpsertWithoutMoviesInput, {
+  @Field(_type => DirectorUpsertWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
-  upsert?: DirectorUpsertWithoutMoviesInput | null;
+  upsert?: DirectorUpsertWithoutMoviesInput | undefined;
+
+  @Field(_type => DirectorCreateOrConnectWithoutMovieInput, {
+    nullable: true,
+    description: undefined
+  })
+  connectOrCreate?: DirectorCreateOrConnectWithoutMovieInput | undefined;
 }

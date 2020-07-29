@@ -1,15 +1,6 @@
 import { PropertyDeclarationStructure, OptionalKind, Project } from "ts-morph";
-import { DMMF } from "@prisma/client/runtime/dmmf-types";
 import path from "path";
 
-import {
-  getFieldTSType,
-  getTypeGraphQLType,
-  pascalCase,
-  selectInputTypeFromTypes,
-  getInputTypeName,
-} from "./helpers";
-import { DMMFTypeInfo } from "./types";
 import { argsFolderName } from "./config";
 import {
   generateTypeGraphQLImport,
@@ -19,18 +10,18 @@ import {
 } from "./imports";
 import saveSourceFile from "../utils/saveSourceFile";
 import { DmmfDocument } from "./dmmf/dmmf-document";
+import { DMMF } from "./dmmf/types";
 
 export default async function generateArgsTypeClassFromArgs(
   project: Project,
   generateDirPath: string,
-  args: DMMF.SchemaArg[],
-  methodName: string,
+  fields: DMMF.SchemaArg[],
+  argsTypeName: string,
   dmmfDocument: DmmfDocument,
   inputImportsLevel = 3,
 ) {
-  const name = `${pascalCase(methodName)}Args`;
   const dirPath = path.resolve(generateDirPath, argsFolderName);
-  const filePath = path.resolve(dirPath, `${name}.ts`);
+  const filePath = path.resolve(dirPath, `${argsTypeName}.ts`);
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
@@ -39,23 +30,23 @@ export default async function generateArgsTypeClassFromArgs(
   generateGraphQLScalarImport(sourceFile);
   generateInputsImports(
     sourceFile,
-    args
-      .map(arg => selectInputTypeFromTypes(arg.inputType))
-      .filter(argType => argType.kind === "object")
-      .map(argType => getInputTypeName(argType.type as string, dmmfDocument)),
+    fields
+      .map(arg => arg.selectedInputType)
+      .filter(argInputType => argInputType.kind === "object")
+      .map(argInputType => argInputType.type),
     inputImportsLevel,
   );
   generateEnumsImports(
     sourceFile,
-    args
-      .map(field => selectInputTypeFromTypes(field.inputType))
+    fields
+      .map(field => field.selectedInputType)
       .filter(argType => argType.kind === "enum")
       .map(argType => argType.type as string),
-    3,
+    4,
   );
 
   sourceFile.addClass({
-    name,
+    name: argsTypeName,
     isExported: true,
     decorators: [
       {
@@ -63,13 +54,12 @@ export default async function generateArgsTypeClassFromArgs(
         arguments: [],
       },
     ],
-    properties: args.map<OptionalKind<PropertyDeclarationStructure>>(arg => {
-      const inputType = selectInputTypeFromTypes(arg.inputType);
-      const isOptional = !inputType.isRequired;
+    properties: fields.map<OptionalKind<PropertyDeclarationStructure>>(arg => {
+      const isOptional = !arg.selectedInputType.isRequired;
 
       return {
-        name: arg.name,
-        type: getFieldTSType(inputType as DMMFTypeInfo, dmmfDocument),
+        name: arg.typeName,
+        type: arg.fieldTSType,
         hasExclamationToken: !isOptional,
         hasQuestionToken: isOptional,
         trailingTrivia: "\r\n",
@@ -77,10 +67,7 @@ export default async function generateArgsTypeClassFromArgs(
           {
             name: "Field",
             arguments: [
-              `_type => ${getTypeGraphQLType(
-                inputType as DMMFTypeInfo,
-                dmmfDocument,
-              )}`,
+              `_type => ${arg.typeGraphQLType}`,
               `{ nullable: ${isOptional} }`,
             ],
           },
@@ -90,5 +77,5 @@ export default async function generateArgsTypeClassFromArgs(
   });
 
   await saveSourceFile(sourceFile);
-  return name;
+  return argsTypeName;
 }

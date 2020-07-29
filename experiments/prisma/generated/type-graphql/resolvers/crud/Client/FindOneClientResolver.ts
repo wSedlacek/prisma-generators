@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { FindOneClientArgs } from "./args/FindOneClientArgs";
 import { Client } from "../../../models/Client";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(_of => Client)
 export class FindOneClientResolver {
-  @TypeGraphQL.Query(_returns => Client, {
+  @Query(_returns => Client, {
     nullable: true,
     description: undefined
   })
-  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | null> {
+  async client(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 }

@@ -1,4 +1,7 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import graphqlFields from "graphql-fields";
+import { GraphQLResolveInfo } from "graphql";
+import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { CreateClientArgs } from "./args/CreateClientArgs";
 import { DeleteClientArgs } from "./args/DeleteClientArgs";
 import { DeleteManyClientArgs } from "./args/DeleteManyClientArgs";
@@ -11,77 +14,94 @@ import { Client } from "../../../models/Client";
 import { AggregateClient } from "../../outputs/AggregateClient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
-@TypeGraphQL.Resolver(_of => Client)
+@Resolver(_of => Client)
 export class ClientCrudResolver {
-  @TypeGraphQL.Query(_returns => Client, {
+  @Query(_returns => Client, {
     nullable: true,
     description: undefined
   })
-  async client(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindOneClientArgs): Promise<Client | null> {
+  async client(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.findOne(args);
   }
 
-  @TypeGraphQL.Query(_returns => [Client], {
+  @Query(_returns => [Client], {
     nullable: false,
     description: undefined
   })
-  async clients(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindManyClientArgs): Promise<Client[]> {
+  async clients(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<Client[]> {
     return ctx.prisma.user.findMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(_returns => Client, {
     nullable: false,
     description: undefined
   })
-  async createClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: CreateClientArgs): Promise<Client> {
+  async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<Client> {
+    console.log(args.data)
     return ctx.prisma.user.create(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(_returns => Client, {
     nullable: true,
     description: undefined
   })
-  async deleteClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteClientArgs): Promise<Client | null> {
+  async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.delete(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(_returns => Client, {
     nullable: true,
     description: undefined
   })
-  async updateClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateClientArgs): Promise<Client | null> {
+  async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<Client | undefined> {
     return ctx.prisma.user.update(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async deleteManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
+  async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.deleteMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => BatchPayload, {
+  @Mutation(_returns => BatchPayload, {
     nullable: false,
     description: undefined
   })
-  async updateManyClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
+  async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
     return ctx.prisma.user.updateMany(args);
   }
 
-  @TypeGraphQL.Mutation(_returns => Client, {
+  @Mutation(_returns => Client, {
     nullable: false,
     description: undefined
   })
-  async upsertClient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertClientArgs): Promise<Client> {
+  async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<Client> {
     return ctx.prisma.user.upsert(args);
   }
 
-  @TypeGraphQL.Query(_returns => AggregateClient, {
+  @Query(_returns => AggregateClient, {
     nullable: false,
     description: undefined
   })
-  async aggregateClient(): Promise<AggregateClient> {
-    return new AggregateClient();
+  async aggregateClient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateClientArgs): Promise<AggregateClient> {
+    function transformFields(fields: Record<string, any>): Record<string, any> {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith("_"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
   }
 }

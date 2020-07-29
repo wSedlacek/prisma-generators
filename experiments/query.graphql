@@ -1,18 +1,18 @@
 query GetClientsAndPosts {
   clients {
     ...ClientData
-    advertPosts: posts(where: { kind: { equals: ADVERT } }) {
+    advertPosts: clientPosts(where: { kind: { equals: ADVERT } }) {
       ...PostData
     }
-    blogPosts: posts(where: { kind: { equals: BLOG } }) {
+    blogPosts: clientPosts(where: { kind: { equals: BLOG } }) {
       ...PostData
       author {
-        posts(where: { kind: { equals: ADVERT } }) {
+        clientPosts(where: { kind: { equals: ADVERT } }) {
           ...PostData
         }
       }
     }
-    posts {
+    clientPosts {
       ...PostData
     }
   }
@@ -29,9 +29,9 @@ mutation AddClient {
     data: {
       age: 50
       amount: 123
-      balance: 0
+      accountBalance: 0
       email: "test3@test3.test3"
-      name: "Test"
+      firstName: "Test"
       role: USER
     }
   ) {
@@ -39,12 +39,22 @@ mutation AddClient {
   }
 }
 
+query MyFindClients {
+  customFindClientsWithArgs(where: { accountBalance: { gte: 10 } }) {
+    id
+    email
+    accountBalance
+  }
+}
+
 query FindClients {
   clients(
     orderBy: { id: desc }
+    take: 2
     where: {
       OR: [{ email: { contains: "test3" } }, { role: { equals: ADMIN } }]
     }
+    distinct: [name]
   ) {
     ...ClientData
   }
@@ -53,8 +63,9 @@ query FindClients {
 fragment ClientData on Client {
   id
   email
+  firstName
   age
-  balance
+  accountBalance
   amount
   role
   hello
@@ -117,7 +128,70 @@ query GetMovie {
 }
 
 query CountBravoPatients {
-  countBravoPatients: aggregatePatient {
-    count(where: { lastName: { contains: "Bravo" } })
+  countBravoPatients: aggregatePatient(
+    where: { lastName: { contains: "Bravo" } }
+  ) {
+    count
+  }
+}
+
+query FilterPostsByJson {
+  onWikiLeaks: posts(
+    where: { metadata: { equals: { publishedOnWikiLeaks: true } } }
+  ) {
+    uuid
+    title
+  }
+  notPublishedAndOthers: posts(
+    where: { metadata: { not: { publishedOnWikiLeaks: false } } }
+  ) {
+    uuid
+    title
+  }
+}
+
+query AggregateClient {
+  aggregateClient {
+    count
+    avg {
+      age
+    }
+    sum {
+      balance
+      amount
+    }
+    min {
+      age
+    }
+    max {
+      age
+    }
+  }
+}
+
+mutation ConnectOrCreateExample {
+  createPost(
+    data: {
+      title: "Test"
+      metadata: {}
+      published: true
+      author: {
+        connectOrCreate: {
+          where: { id: 1 }
+          create: {
+            email: "test1@test.test"
+            accountBalance: 0
+            role: ADMIN
+            amount: 0
+            age: 11
+          }
+        }
+      }
+    }
+  ) {
+    ...PostData
+    author {
+      ...ClientData
+    }
   }
 }

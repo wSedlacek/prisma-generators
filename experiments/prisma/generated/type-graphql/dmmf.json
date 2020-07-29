@@ -14,7 +14,7 @@
           }
         ],
         "dbName": null,
-        "documentation": "Role enum comment"
+        "documentation": "Role enum doc"
       },
       {
         "name": "PostKind",
@@ -46,13 +46,14 @@
             "isId": true,
             "isReadOnly": false,
             "type": "Int",
+            "hasDefaultValue": true,
             "default": {
               "name": "autoincrement",
               "args": []
             },
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "User model field comment"
+            "documentation": "User model field doc"
           },
           {
             "name": "email",
@@ -63,6 +64,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -75,8 +77,10 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
-            "isUpdatedAt": false
+            "isUpdatedAt": false,
+            "documentation": "renamed field doc\n@TypeGraphQL.field(\"firstName\")"
           },
           {
             "name": "age",
@@ -87,6 +91,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Int",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -99,8 +104,10 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Float",
+            "hasDefaultValue": false,
             "isGenerated": false,
-            "isUpdatedAt": false
+            "isUpdatedAt": false,
+            "documentation": "@TypeGraphQL.field(\"accountBalance\")"
           },
           {
             "name": "amount",
@@ -111,6 +118,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Float",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -122,13 +130,15 @@
             "isUnique": false,
             "isId": false,
             "isReadOnly": false,
-            "type": "Post",
-            "relationName": "PostToUser",
+            "type": "post",
+            "hasDefaultValue": false,
+            "relationName": "UserTopost",
             "relationFromFields": [],
             "relationToFields": [],
             "relationOnDelete": "NONE",
             "isGenerated": false,
-            "isUpdatedAt": false
+            "isUpdatedAt": false,
+            "documentation": "@TypeGraphQL.field(\"clientPosts\")"
           },
           {
             "name": "role",
@@ -139,17 +149,19 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Role",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
         "isGenerated": false,
-        "documentation": "User model comment\n@@TypeGraphQL.type(\"Client\")",
+        "documentation": "User model doc\n@@TypeGraphQL.type(\"Client\")",
         "idFields": [],
-        "uniqueFields": []
+        "uniqueFields": [],
+        "uniqueIndexes": []
       },
       {
-        "name": "Post",
+        "name": "post",
         "isEmbedded": false,
         "dbName": null,
         "fields": [
@@ -162,6 +174,7 @@
             "isId": true,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": true,
             "default": {
               "name": "uuid",
               "args": []
@@ -178,6 +191,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "DateTime",
+            "hasDefaultValue": true,
             "default": {
               "name": "now",
               "args": []
@@ -194,6 +208,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "DateTime",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": true
           },
@@ -206,6 +221,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Boolean",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -218,6 +234,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -230,6 +247,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -242,7 +260,8 @@
             "isId": false,
             "isReadOnly": false,
             "type": "User",
-            "relationName": "PostToUser",
+            "hasDefaultValue": false,
+            "relationName": "UserTopost",
             "relationFromFields": [
               "authorId"
             ],
@@ -262,6 +281,7 @@
             "isId": false,
             "isReadOnly": true,
             "type": "Int",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -274,6 +294,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "PostKind",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -286,13 +307,15 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Json",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           }
         ],
         "isGenerated": false,
         "idFields": [],
-        "uniqueFields": []
+        "uniqueFields": [],
+        "uniqueIndexes": []
       },
       {
         "name": "Category",
@@ -308,6 +331,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -320,6 +344,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -332,6 +357,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Int",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           }
@@ -343,6 +369,15 @@
             "slug",
             "number"
           ]
+        ],
+        "uniqueIndexes": [
+          {
+            "name": null,
+            "fields": [
+              "slug",
+              "number"
+            ]
+          }
         ]
       },
       {
@@ -359,6 +394,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -371,6 +407,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -383,6 +420,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           }
@@ -392,7 +430,8 @@
           "firstName",
           "lastName"
         ],
-        "uniqueFields": []
+        "uniqueFields": [],
+        "uniqueIndexes": []
       },
       {
         "name": "Movie",
@@ -408,6 +447,7 @@
             "isId": false,
             "isReadOnly": true,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -420,6 +460,7 @@
             "isId": false,
             "isReadOnly": true,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -432,6 +473,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Director",
+            "hasDefaultValue": false,
             "relationName": "DirectorToMovie",
             "relationFromFields": [
               "directorFirstName",
@@ -454,6 +496,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           }
@@ -464,7 +507,8 @@
           "directorLastName",
           "title"
         ],
-        "uniqueFields": []
+        "uniqueFields": [],
+        "uniqueIndexes": []
       },
       {
         "name": "Director",
@@ -480,6 +524,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -492,6 +537,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "String",
+            "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false
           },
@@ -504,6 +550,7 @@
             "isId": false,
             "isReadOnly": false,
             "type": "Movie",
+            "hasDefaultValue": false,
             "relationName": "DirectorToMovie",
             "relationFromFields": [],
             "relationToFields": [],
@@ -517,7 +564,8 @@
           "firstName",
           "lastName"
         ],
-        "uniqueFields": []
+        "uniqueFields": [],
+        "uniqueIndexes": []
       }
     ]
   },
@@ -526,12 +574,13 @@
     "rootMutationType": "Mutation",
     "inputTypes": [
       {
-        "name": "PostWhereInput",
+        "name": "postWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -541,7 +590,7 @@
           {
             "name": "OR",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -551,7 +600,7 @@
           {
             "name": "NOT",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -1279,6 +1328,26 @@
             }
           },
           {
+            "name": "metadata",
+            "inputType": {
+              "type": "Json",
+              "kind": "scalar",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "metadata_not",
+            "inputType": {
+              "type": "Json",
+              "kind": "scalar",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
             "name": "author",
             "inputType": {
               "type": "UserWhereInput",
@@ -1292,6 +1361,7 @@
       },
       {
         "name": "UserWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -1966,7 +2036,7 @@
           {
             "name": "posts_every",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -1976,7 +2046,7 @@
           {
             "name": "posts_some",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -1986,7 +2056,7 @@
           {
             "name": "posts_none",
             "inputType": {
-              "type": "PostWhereInput",
+              "type": "postWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -1997,6 +2067,7 @@
       },
       {
         "name": "UserWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "id",
@@ -2021,7 +2092,8 @@
         ]
       },
       {
-        "name": "PostWhereUniqueInput",
+        "name": "postWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "uuid",
@@ -2037,6 +2109,7 @@
       },
       {
         "name": "CategoryWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -2432,6 +2505,7 @@
       },
       {
         "name": "SlugNumberCompoundUniqueInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "slug",
@@ -2457,6 +2531,7 @@
       },
       {
         "name": "CategoryWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "slug_number",
@@ -2472,6 +2547,7 @@
       },
       {
         "name": "PatientWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -2927,6 +3003,7 @@
       },
       {
         "name": "FirstNameLastNameCompoundUniqueInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -2952,6 +3029,7 @@
       },
       {
         "name": "PatientWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "firstName_lastName",
@@ -2967,6 +3045,7 @@
       },
       {
         "name": "DirectorWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -3312,6 +3391,7 @@
       },
       {
         "name": "MovieWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -3777,6 +3857,7 @@
       },
       {
         "name": "DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "directorFirstName",
@@ -3812,6 +3893,7 @@
       },
       {
         "name": "MovieWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "directorFirstName_directorLastName_title",
@@ -3827,6 +3909,7 @@
       },
       {
         "name": "DirectorWhereUniqueInput",
+        "isOneOf": true,
         "fields": [
           {
             "name": "firstName_lastName",
@@ -3841,7 +3924,8 @@
         ]
       },
       {
-        "name": "PostCreateWithoutAuthorInput",
+        "name": "postCreateWithoutAuthorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -3926,12 +4010,39 @@
         ]
       },
       {
-        "name": "PostCreateManyWithoutAuthorInput",
+        "name": "postCreateOrConnectWithoutUserInput",
+        "isOneOf": false,
+        "fields": [
+          {
+            "name": "where",
+            "inputType": {
+              "type": "postWhereUniqueInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "create",
+            "inputType": {
+              "type": "postCreateWithoutAuthorInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "postCreateManyWithoutAuthorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
             "inputType": {
-              "type": "PostCreateWithoutAuthorInput",
+              "type": "postCreateWithoutAuthorInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -3941,7 +4052,17 @@
           {
             "name": "connect",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": true,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "postCreateOrConnectWithoutUserInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -3952,6 +4073,7 @@
       },
       {
         "name": "UserCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "email",
@@ -4016,17 +4138,18 @@
           {
             "name": "posts",
             "inputType": {
-              "type": "PostCreateManyWithoutAuthorInput",
+              "type": "postCreateManyWithoutAuthorInput",
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
-        "name": "PostUpdateWithoutAuthorDataInput",
+        "name": "postUpdateWithoutAuthorDataInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -4111,12 +4234,13 @@
         ]
       },
       {
-        "name": "PostUpdateWithWhereUniqueWithoutAuthorInput",
+        "name": "postUpdateWithWhereUniqueWithoutAuthorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -4126,7 +4250,7 @@
           {
             "name": "data",
             "inputType": {
-              "type": "PostUpdateWithoutAuthorDataInput",
+              "type": "postUpdateWithoutAuthorDataInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -4136,12 +4260,13 @@
         ]
       },
       {
-        "name": "PostScalarWhereInput",
+        "name": "postScalarWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
             "inputType": {
-              "type": "PostScalarWhereInput",
+              "type": "postScalarWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -4151,7 +4276,7 @@
           {
             "name": "OR",
             "inputType": {
-              "type": "PostScalarWhereInput",
+              "type": "postScalarWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -4161,7 +4286,7 @@
           {
             "name": "NOT",
             "inputType": {
-              "type": "PostScalarWhereInput",
+              "type": "postScalarWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -4887,11 +5012,32 @@
               "isList": true,
               "isNullable": true
             }
+          },
+          {
+            "name": "metadata",
+            "inputType": {
+              "type": "Json",
+              "kind": "scalar",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "metadata_not",
+            "inputType": {
+              "type": "Json",
+              "kind": "scalar",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       },
       {
-        "name": "PostUpdateManyDataInput",
+        "name": "postUpdateManyDataInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -4976,12 +5122,13 @@
         ]
       },
       {
-        "name": "PostUpdateManyWithWhereNestedInput",
+        "name": "postUpdateManyWithWhereNestedInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
             "inputType": {
-              "type": "PostScalarWhereInput",
+              "type": "postScalarWhereInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -4991,7 +5138,7 @@
           {
             "name": "data",
             "inputType": {
-              "type": "PostUpdateManyDataInput",
+              "type": "postUpdateManyDataInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -5001,12 +5148,13 @@
         ]
       },
       {
-        "name": "PostUpsertWithWhereUniqueWithoutAuthorInput",
+        "name": "postUpsertWithWhereUniqueWithoutAuthorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -5016,7 +5164,7 @@
           {
             "name": "update",
             "inputType": {
-              "type": "PostUpdateWithoutAuthorDataInput",
+              "type": "postUpdateWithoutAuthorDataInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -5026,7 +5174,7 @@
           {
             "name": "create",
             "inputType": {
-              "type": "PostCreateWithoutAuthorInput",
+              "type": "postCreateWithoutAuthorInput",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -5036,12 +5184,13 @@
         ]
       },
       {
-        "name": "PostUpdateManyWithoutAuthorInput",
+        "name": "postUpdateManyWithoutAuthorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
             "inputType": {
-              "type": "PostCreateWithoutAuthorInput",
+              "type": "postCreateWithoutAuthorInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5051,7 +5200,7 @@
           {
             "name": "connect",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5061,7 +5210,7 @@
           {
             "name": "set",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5071,7 +5220,7 @@
           {
             "name": "disconnect",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5081,7 +5230,7 @@
           {
             "name": "delete",
             "inputType": {
-              "type": "PostWhereUniqueInput",
+              "type": "postWhereUniqueInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5091,7 +5240,7 @@
           {
             "name": "update",
             "inputType": {
-              "type": "PostUpdateWithWhereUniqueWithoutAuthorInput",
+              "type": "postUpdateWithWhereUniqueWithoutAuthorInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5101,17 +5250,17 @@
           {
             "name": "updateMany",
             "inputType": {
-              "type": "PostUpdateManyWithWhereNestedInput",
+              "type": "postUpdateManyWithWhereNestedInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
-              "isNullable": false
+              "isNullable": true
             }
           },
           {
             "name": "deleteMany",
             "inputType": {
-              "type": "PostScalarWhereInput",
+              "type": "postScalarWhereInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5121,7 +5270,17 @@
           {
             "name": "upsert",
             "inputType": {
-              "type": "PostUpsertWithWhereUniqueWithoutAuthorInput",
+              "type": "postUpsertWithWhereUniqueWithoutAuthorInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": true,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "postCreateOrConnectWithoutUserInput",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -5132,17 +5291,8 @@
       },
       {
         "name": "UserUpdateInput",
+        "isOneOf": false,
         "fields": [
-          {
-            "name": "id",
-            "inputType": {
-              "type": "Int",
-              "kind": "scalar",
-              "isRequired": false,
-              "isList": false,
-              "isNullable": false
-            }
-          },
           {
             "name": "email",
             "inputType": {
@@ -5206,28 +5356,19 @@
           {
             "name": "posts",
             "inputType": {
-              "type": "PostUpdateManyWithoutAuthorInput",
+              "type": "postUpdateManyWithoutAuthorInput",
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
         "name": "UserUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
-          {
-            "name": "id",
-            "inputType": {
-              "type": "Int",
-              "kind": "scalar",
-              "isRequired": false,
-              "isList": false,
-              "isNullable": false
-            }
-          },
           {
             "name": "email",
             "inputType": {
@@ -5292,6 +5433,7 @@
       },
       {
         "name": "UserCreateWithoutPostsInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "email",
@@ -5356,7 +5498,34 @@
         ]
       },
       {
+        "name": "UserCreateOrConnectWithoutpostInput",
+        "isOneOf": false,
+        "fields": [
+          {
+            "name": "where",
+            "inputType": {
+              "type": "UserWhereUniqueInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "create",
+            "inputType": {
+              "type": "UserCreateWithoutPostsInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
         "name": "UserCreateOneWithoutPostsInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -5377,11 +5546,22 @@
               "isList": false,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "UserCreateOrConnectWithoutpostInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       },
       {
-        "name": "PostCreateInput",
+        "name": "postCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -5477,17 +5657,8 @@
       },
       {
         "name": "UserUpdateWithoutPostsDataInput",
+        "isOneOf": false,
         "fields": [
-          {
-            "name": "id",
-            "inputType": {
-              "type": "Int",
-              "kind": "scalar",
-              "isRequired": false,
-              "isList": false,
-              "isNullable": false
-            }
-          },
           {
             "name": "email",
             "inputType": {
@@ -5552,6 +5723,7 @@
       },
       {
         "name": "UserUpsertWithoutPostsInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "update",
@@ -5577,6 +5749,7 @@
       },
       {
         "name": "UserUpdateOneRequiredWithoutPostsInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -5617,11 +5790,22 @@
               "isList": false,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "UserCreateOrConnectWithoutpostInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       },
       {
-        "name": "PostUpdateInput",
+        "name": "postUpdateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -5710,13 +5894,14 @@
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
-        "name": "PostUpdateManyMutationInput",
+        "name": "postUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "uuid",
@@ -5802,6 +5987,7 @@
       },
       {
         "name": "CategoryCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "name",
@@ -5837,6 +6023,7 @@
       },
       {
         "name": "CategoryUpdateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "name",
@@ -5872,6 +6059,7 @@
       },
       {
         "name": "CategoryUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "name",
@@ -5907,6 +6095,7 @@
       },
       {
         "name": "PatientCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -5942,6 +6131,7 @@
       },
       {
         "name": "PatientUpdateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -5977,6 +6167,7 @@
       },
       {
         "name": "PatientUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -6012,6 +6203,7 @@
       },
       {
         "name": "DirectorCreateWithoutMoviesInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -6036,7 +6228,34 @@
         ]
       },
       {
+        "name": "DirectorCreateOrConnectWithoutMovieInput",
+        "isOneOf": false,
+        "fields": [
+          {
+            "name": "where",
+            "inputType": {
+              "type": "DirectorWhereUniqueInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "create",
+            "inputType": {
+              "type": "DirectorCreateWithoutMoviesInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
         "name": "DirectorCreateOneWithoutMoviesInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -6057,11 +6276,22 @@
               "isList": false,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "DirectorCreateOrConnectWithoutMovieInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       },
       {
         "name": "MovieCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6087,6 +6317,7 @@
       },
       {
         "name": "DirectorUpdateWithoutMoviesDataInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -6112,6 +6343,7 @@
       },
       {
         "name": "DirectorUpsertWithoutMoviesInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "update",
@@ -6137,6 +6369,7 @@
       },
       {
         "name": "DirectorUpdateOneRequiredWithoutMoviesInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -6177,11 +6410,22 @@
               "isList": false,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "DirectorCreateOrConnectWithoutMovieInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       },
       {
         "name": "MovieUpdateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6200,13 +6444,14 @@
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
         "name": "MovieUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6222,6 +6467,7 @@
       },
       {
         "name": "MovieCreateWithoutDirectorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6236,7 +6482,34 @@
         ]
       },
       {
+        "name": "MovieCreateOrConnectWithoutDirectorInput",
+        "isOneOf": false,
+        "fields": [
+          {
+            "name": "where",
+            "inputType": {
+              "type": "MovieWhereUniqueInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "create",
+            "inputType": {
+              "type": "MovieCreateWithoutDirectorInput",
+              "kind": "object",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
         "name": "MovieCreateManyWithoutDirectorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -6257,11 +6530,22 @@
               "isList": true,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "MovieCreateOrConnectWithoutDirectorInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": true,
+              "isNullable": false
+            }
           }
         ]
       },
       {
         "name": "DirectorCreateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -6290,13 +6574,14 @@
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
         "name": "MovieUpdateWithoutDirectorDataInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6312,6 +6597,7 @@
       },
       {
         "name": "MovieUpdateWithWhereUniqueWithoutDirectorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
@@ -6337,6 +6623,7 @@
       },
       {
         "name": "MovieScalarWhereInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "AND",
@@ -6792,6 +7079,7 @@
       },
       {
         "name": "MovieUpdateManyDataInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "title",
@@ -6807,6 +7095,7 @@
       },
       {
         "name": "MovieUpdateManyWithWhereNestedInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
@@ -6832,6 +7121,7 @@
       },
       {
         "name": "MovieUpsertWithWhereUniqueWithoutDirectorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "where",
@@ -6867,6 +7157,7 @@
       },
       {
         "name": "MovieUpdateManyWithoutDirectorInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "create",
@@ -6935,7 +7226,7 @@
               "kind": "object",
               "isRequired": false,
               "isList": true,
-              "isNullable": false
+              "isNullable": true
             }
           },
           {
@@ -6957,11 +7248,22 @@
               "isList": true,
               "isNullable": false
             }
+          },
+          {
+            "name": "connectOrCreate",
+            "inputType": {
+              "type": "MovieCreateOrConnectWithoutDirectorInput",
+              "kind": "object",
+              "isRequired": false,
+              "isList": true,
+              "isNullable": false
+            }
           }
         ]
       },
       {
         "name": "DirectorUpdateInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -6990,13 +7292,14 @@
               "kind": "object",
               "isRequired": false,
               "isList": false,
-              "isNullable": false
+              "isNullable": true
             }
           }
         ]
       },
       {
         "name": "DirectorUpdateManyMutationInput",
+        "isOneOf": false,
         "fields": [
           {
             "name": "firstName",
@@ -7023,7 +7326,7 @@
     ],
     "outputTypes": [
       {
-        "name": "Post",
+        "name": "post",
         "fields": [
           {
             "name": "uuid",
@@ -7212,7 +7515,7 @@
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereInput",
+                  "type": "postWhereInput",
                   "kind": "object",
                   "isRequired": false,
                   "isList": false,
@@ -7222,8 +7525,28 @@
               {
                 "name": "orderBy",
                 "inputType": {
-                  "type": "PostOrderByInput",
+                  "type": "postOrderByInput",
                   "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "postWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
                   "isRequired": false,
                   "isList": false,
                   "isNullable": false
@@ -7240,48 +7563,18 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
+                  "type": "PostDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": false,
               "isList": true,
@@ -7302,82 +7595,315 @@
         ]
       },
       {
+        "name": "UserAvgAggregateOutputType",
+        "fields": [
+          {
+            "name": "id",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "age",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "balance",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "amount",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "UserSumAggregateOutputType",
+        "fields": [
+          {
+            "name": "id",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "age",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "balance",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "amount",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "UserMinAggregateOutputType",
+        "fields": [
+          {
+            "name": "id",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "age",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "balance",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "amount",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "UserMaxAggregateOutputType",
+        "fields": [
+          {
+            "name": "id",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "age",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "balance",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "amount",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
         "name": "AggregateUser",
         "fields": [
           {
             "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "UserWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "UserOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "UserWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "UserWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "avg",
+            "args": [],
+            "outputType": {
+              "type": "UserAvgAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "sum",
+            "args": [],
+            "outputType": {
+              "type": "UserSumAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "min",
+            "args": [],
+            "outputType": {
+              "type": "UserMinAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "max",
+            "args": [],
+            "outputType": {
+              "type": "UserMaxAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "PostAvgAggregateOutputType",
+        "fields": [
+          {
+            "name": "authorId",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "PostSumAggregateOutputType",
+        "fields": [
+          {
+            "name": "authorId",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "PostMinAggregateOutputType",
+        "fields": [
+          {
+            "name": "authorId",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "PostMaxAggregateOutputType",
+        "fields": [
+          {
+            "name": "authorId",
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
@@ -7393,82 +7919,55 @@
         "fields": [
           {
             "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "PostWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "PostOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
               "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "avg",
+            "args": [],
+            "outputType": {
+              "type": "PostAvgAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "sum",
+            "args": [],
+            "outputType": {
+              "type": "PostSumAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "min",
+            "args": [],
+            "outputType": {
+              "type": "PostMinAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "max",
+            "args": [],
+            "outputType": {
+              "type": "PostMaxAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
               "isList": false,
               "isNullable": false
             }
@@ -7514,86 +8013,123 @@
         ]
       },
       {
-        "name": "AggregateCategory",
+        "name": "CategoryAvgAggregateOutputType",
         "fields": [
           {
-            "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "CategoryWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "CategoryOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "CategoryWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "CategoryWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "name": "number",
+            "args": [],
+            "outputType": {
+              "type": "Float",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "CategorySumAggregateOutputType",
+        "fields": [
+          {
+            "name": "number",
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
               "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "CategoryMinAggregateOutputType",
+        "fields": [
+          {
+            "name": "number",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "CategoryMaxAggregateOutputType",
+        "fields": [
+          {
+            "name": "number",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          }
+        ]
+      },
+      {
+        "name": "AggregateCategory",
+        "fields": [
+          {
+            "name": "count",
+            "args": [],
+            "outputType": {
+              "type": "Int",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "avg",
+            "args": [],
+            "outputType": {
+              "type": "CategoryAvgAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "sum",
+            "args": [],
+            "outputType": {
+              "type": "CategorySumAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "min",
+            "args": [],
+            "outputType": {
+              "type": "CategoryMinAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
+              "isList": false,
+              "isNullable": false
+            }
+          },
+          {
+            "name": "max",
+            "args": [],
+            "outputType": {
+              "type": "CategoryMaxAggregateOutputType",
+              "kind": "object",
+              "isRequired": false,
               "isList": false,
               "isNullable": false
             }
@@ -7643,78 +8179,7 @@
         "fields": [
           {
             "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "PatientWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "PatientOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "PatientWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "PatientWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
@@ -7774,6 +8239,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "MovieWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -7784,42 +8269,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
+                  "type": "MovieDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -7888,78 +8343,7 @@
         "fields": [
           {
             "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "MovieWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "MovieOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
@@ -7975,78 +8359,7 @@
         "fields": [
           {
             "name": "count",
-            "args": [
-              {
-                "name": "where",
-                "inputType": {
-                  "type": "DirectorWhereInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "orderBy",
-                "inputType": {
-                  "type": "DirectorOrderByInput",
-                  "kind": "enum",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "skip",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "after",
-                "inputType": {
-                  "type": "DirectorWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "DirectorWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              }
-            ],
+            "args": [],
             "outputType": {
               "type": "Int",
               "kind": "scalar",
@@ -8084,6 +8397,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "UserWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -8094,42 +8427,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "UserWhereUniqueInput",
-                  "kind": "object",
+                  "type": "UserDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "UserWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -8144,7 +8447,68 @@
           },
           {
             "name": "aggregateUser",
-            "args": [],
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "UserWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "UserOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "UserWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "UserDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregateUser",
               "kind": "object",
@@ -8176,12 +8540,12 @@
             }
           },
           {
-            "name": "findManyPost",
+            "name": "findManypost",
             "args": [
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereInput",
+                  "type": "postWhereInput",
                   "kind": "object",
                   "isRequired": false,
                   "isList": false,
@@ -8191,8 +8555,28 @@
               {
                 "name": "orderBy",
                 "inputType": {
-                  "type": "PostOrderByInput",
+                  "type": "postOrderByInput",
                   "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "postWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
                   "isRequired": false,
                   "isList": false,
                   "isNullable": false
@@ -8209,48 +8593,18 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
+                  "type": "PostDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "PostWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": true,
               "isList": true,
@@ -8258,8 +8612,69 @@
             }
           },
           {
-            "name": "aggregatePost",
-            "args": [],
+            "name": "aggregatepost",
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "postWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "postOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "postWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "PostDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregatePost",
               "kind": "object",
@@ -8269,12 +8684,12 @@
             }
           },
           {
-            "name": "findOnePost",
+            "name": "findOnepost",
             "args": [
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
+                  "type": "postWhereUniqueInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -8283,7 +8698,7 @@
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -8314,6 +8729,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "CategoryWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -8324,42 +8759,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "CategoryWhereUniqueInput",
-                  "kind": "object",
+                  "type": "CategoryDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "CategoryWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -8374,7 +8779,68 @@
           },
           {
             "name": "aggregateCategory",
-            "args": [],
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "CategoryWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "CategoryOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "CategoryWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "CategoryDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregateCategory",
               "kind": "object",
@@ -8429,6 +8895,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "PatientWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -8439,42 +8925,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "PatientWhereUniqueInput",
-                  "kind": "object",
+                  "type": "PatientDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "PatientWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -8489,7 +8945,68 @@
           },
           {
             "name": "aggregatePatient",
-            "args": [],
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "PatientWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "PatientOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "PatientWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "PatientDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregatePatient",
               "kind": "object",
@@ -8544,6 +9061,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "MovieWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -8554,42 +9091,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
+                  "type": "MovieDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "MovieWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -8604,7 +9111,68 @@
           },
           {
             "name": "aggregateMovie",
-            "args": [],
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "MovieWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "MovieOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "MovieWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "MovieDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregateMovie",
               "kind": "object",
@@ -8659,6 +9227,26 @@
                 }
               },
               {
+                "name": "cursor",
+                "inputType": {
+                  "type": "DirectorWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
                 "name": "skip",
                 "inputType": {
                   "type": "Int",
@@ -8669,42 +9257,12 @@
                 }
               },
               {
-                "name": "after",
+                "name": "distinct",
                 "inputType": {
-                  "type": "DirectorWhereUniqueInput",
-                  "kind": "object",
+                  "type": "DirectorDistinctFieldEnum",
+                  "kind": "enum",
                   "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "before",
-                "inputType": {
-                  "type": "DirectorWhereUniqueInput",
-                  "kind": "object",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "first",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
-                  "isNullable": false
-                }
-              },
-              {
-                "name": "last",
-                "inputType": {
-                  "type": "Int",
-                  "kind": "scalar",
-                  "isRequired": false,
-                  "isList": false,
+                  "isList": true,
                   "isNullable": false
                 }
               }
@@ -8719,7 +9277,68 @@
           },
           {
             "name": "aggregateDirector",
-            "args": [],
+            "args": [
+              {
+                "name": "where",
+                "inputType": {
+                  "type": "DirectorWhereInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "orderBy",
+                "inputType": {
+                  "type": "DirectorOrderByInput",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "cursor",
+                "inputType": {
+                  "type": "DirectorWhereUniqueInput",
+                  "kind": "object",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "take",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "skip",
+                "inputType": {
+                  "type": "Int",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "distinct",
+                "inputType": {
+                  "type": "DirectorDistinctFieldEnum",
+                  "kind": "enum",
+                  "isRequired": false,
+                  "isList": true,
+                  "isNullable": false
+                }
+              }
+            ],
             "outputType": {
               "type": "AggregateDirector",
               "kind": "object",
@@ -8944,12 +9563,12 @@
             }
           },
           {
-            "name": "createOnePost",
+            "name": "createOnepost",
             "args": [
               {
                 "name": "data",
                 "inputType": {
-                  "type": "PostCreateInput",
+                  "type": "postCreateInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -8958,7 +9577,7 @@
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -8966,12 +9585,12 @@
             }
           },
           {
-            "name": "deleteOnePost",
+            "name": "deleteOnepost",
             "args": [
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
+                  "type": "postWhereUniqueInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -8980,7 +9599,7 @@
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -8988,12 +9607,12 @@
             }
           },
           {
-            "name": "updateOnePost",
+            "name": "updateOnepost",
             "args": [
               {
                 "name": "data",
                 "inputType": {
-                  "type": "PostUpdateInput",
+                  "type": "postUpdateInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9003,7 +9622,7 @@
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
+                  "type": "postWhereUniqueInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9012,7 +9631,7 @@
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": false,
               "isList": false,
@@ -9020,12 +9639,12 @@
             }
           },
           {
-            "name": "upsertOnePost",
+            "name": "upsertOnepost",
             "args": [
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereUniqueInput",
+                  "type": "postWhereUniqueInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9035,7 +9654,7 @@
               {
                 "name": "create",
                 "inputType": {
-                  "type": "PostCreateInput",
+                  "type": "postCreateInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9045,7 +9664,7 @@
               {
                 "name": "update",
                 "inputType": {
-                  "type": "PostUpdateInput",
+                  "type": "postUpdateInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9054,7 +9673,7 @@
               }
             ],
             "outputType": {
-              "type": "Post",
+              "type": "post",
               "kind": "object",
               "isRequired": true,
               "isList": false,
@@ -9062,12 +9681,12 @@
             }
           },
           {
-            "name": "updateManyPost",
+            "name": "updateManypost",
             "args": [
               {
                 "name": "data",
                 "inputType": {
-                  "type": "PostUpdateManyMutationInput",
+                  "type": "postUpdateManyMutationInput",
                   "kind": "object",
                   "isRequired": true,
                   "isList": false,
@@ -9077,7 +9696,7 @@
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereInput",
+                  "type": "postWhereInput",
                   "kind": "object",
                   "isRequired": false,
                   "isList": false,
@@ -9094,12 +9713,12 @@
             }
           },
           {
-            "name": "deleteManyPost",
+            "name": "deleteManypost",
             "args": [
               {
                 "name": "where",
                 "inputType": {
-                  "type": "PostWhereInput",
+                  "type": "postWhereInput",
                   "kind": "object",
                   "isRequired": false,
                   "isList": false,
@@ -9834,6 +10453,38 @@
               "isList": false,
               "isNullable": false
             }
+          },
+          {
+            "name": "queryRaw",
+            "args": [
+              {
+                "name": "query",
+                "inputType": {
+                  "type": "String",
+                  "kind": "scalar",
+                  "isRequired": true,
+                  "isList": false,
+                  "isNullable": false
+                }
+              },
+              {
+                "name": "parameters",
+                "inputType": {
+                  "type": "Json",
+                  "kind": "scalar",
+                  "isRequired": false,
+                  "isList": false,
+                  "isNullable": false
+                }
+              }
+            ],
+            "outputType": {
+              "type": "Json",
+              "kind": "scalar",
+              "isRequired": true,
+              "isList": false,
+              "isNullable": false
+            }
           }
         ]
       }
@@ -9873,7 +10524,19 @@
         ]
       },
       {
-        "name": "PostOrderByInput",
+        "name": "UserDistinctFieldEnum",
+        "values": [
+          "id",
+          "email",
+          "name",
+          "age",
+          "balance",
+          "amount",
+          "role"
+        ]
+      },
+      {
+        "name": "postOrderByInput",
         "values": [
           "uuid_ASC",
           "uuid_DESC",
@@ -9896,6 +10559,20 @@
         ]
       },
       {
+        "name": "PostDistinctFieldEnum",
+        "values": [
+          "uuid",
+          "createdAt",
+          "updatedAt",
+          "published",
+          "title",
+          "content",
+          "authorId",
+          "kind",
+          "metadata"
+        ]
+      },
+      {
         "name": "CategoryOrderByInput",
         "values": [
           "name_ASC",
@@ -9904,6 +10581,14 @@
           "slug_DESC",
           "number_ASC",
           "number_DESC"
+        ]
+      },
+      {
+        "name": "CategoryDistinctFieldEnum",
+        "values": [
+          "name",
+          "slug",
+          "number"
         ]
       },
       {
@@ -9918,6 +10603,14 @@
         ]
       },
       {
+        "name": "PatientDistinctFieldEnum",
+        "values": [
+          "firstName",
+          "lastName",
+          "email"
+        ]
+      },
+      {
         "name": "MovieOrderByInput",
         "values": [
           "directorFirstName_ASC",
@@ -9929,12 +10622,27 @@
         ]
       },
       {
+        "name": "MovieDistinctFieldEnum",
+        "values": [
+          "directorFirstName",
+          "directorLastName",
+          "title"
+        ]
+      },
+      {
         "name": "DirectorOrderByInput",
         "values": [
           "firstName_ASC",
           "firstName_DESC",
           "lastName_ASC",
           "lastName_DESC"
+        ]
+      },
+      {
+        "name": "DirectorDistinctFieldEnum",
+        "values": [
+          "firstName",
+          "lastName"
         ]
       }
     ]
@@ -9953,16 +10661,16 @@
       "upsertOne": "upsertOneUser"
     },
     {
-      "model": "Post",
-      "aggregate": "aggregatePost",
-      "createOne": "createOnePost",
-      "deleteMany": "deleteManyPost",
-      "deleteOne": "deleteOnePost",
-      "findMany": "findManyPost",
-      "findOne": "findOnePost",
-      "updateMany": "updateManyPost",
-      "updateOne": "updateOnePost",
-      "upsertOne": "upsertOnePost"
+      "model": "post",
+      "aggregate": "aggregatepost",
+      "createOne": "createOnepost",
+      "deleteMany": "deleteManypost",
+      "deleteOne": "deleteOnepost",
+      "findMany": "findManypost",
+      "findOne": "findOnepost",
+      "updateMany": "updateManypost",
+      "updateOne": "updateOnepost",
+      "upsertOne": "upsertOnepost"
     },
     {
       "model": "Category",

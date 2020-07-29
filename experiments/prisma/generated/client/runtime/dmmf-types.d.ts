@@ -14,14 +14,20 @@ export declare namespace DMMF {
         models: Model[];
         enums: Enum[];
     }
+    interface uniqueIndex {
+        name: string;
+        fields: string[];
+    }
     interface Model {
         name: string;
         isEmbedded: boolean;
         dbName: string | null;
         fields: Field[];
+        uniqueFields: string[][];
+        uniqueIndexes: uniqueIndex[];
         documentation?: string;
-        [key: string]: any;
         idFields: string[];
+        [key: string]: any;
     }
     type FieldKind = 'scalar' | 'object' | 'enum';
     interface Field {
@@ -34,16 +40,16 @@ export declare namespace DMMF {
         type: string;
         dbNames: string[] | null;
         isGenerated: boolean;
+        hasDefaultValue: boolean;
+        default?: FieldDefault | string | boolean | number;
         relationToFields?: any[];
         relationOnDelete?: string;
         relationName?: string;
         documentation?: string;
-        default?: FieldDefault | string | boolean;
         [key: string]: any;
     }
     interface FieldDefault {
         name: string;
-        returnType: string;
         args: any[];
     }
     interface Schema {
@@ -66,6 +72,7 @@ export declare namespace DMMF {
     type ArgType = string | InputType | Enum;
     interface SchemaArgInputType {
         isRequired: boolean;
+        isNullable: boolean;
         isList: boolean;
         type: ArgType;
         kind: FieldKind;
@@ -80,6 +87,7 @@ export declare namespace DMMF {
     interface OutputType {
         name: string;
         fields: SchemaField[];
+        fieldMap?: Record<string, SchemaField>;
         isEmbedded?: boolean;
     }
     interface SchemaField {
@@ -99,6 +107,7 @@ export declare namespace DMMF {
         atLeastOne?: boolean;
         atMostOne?: boolean;
         fields: SchemaArg[];
+        fieldMap?: Record<string, SchemaArg>;
     }
     interface Mapping {
         model: string;

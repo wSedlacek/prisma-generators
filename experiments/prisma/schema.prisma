@@ -6,34 +6,42 @@ datasource db {
 type Numeric = Float
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["windows"]
-  output        = "../prisma/generated/client"
+  provider        = "prisma-client-js"
+  binaryTargets   = ["windows", "debian-openssl-1.1.x", "native"]
+  output          = "../prisma/generated/client"
+  previewFeatures = ["aggregateApi", "distinct", "connectOrCreate"]
 }
 
 generator typegraphql {
-  provider = "../src/cli/dev.ts"
+  provider = "node ../src/cli/dev.ts"
   output   = "../prisma/generated/type-graphql"
   emitDMMF = true
 }
 
 // Role enum comment
+/// Role enum doc
 enum Role {
   USER
   ADMIN
 }
 
 // User model comment
-// @@TypeGraphQL.type("Client")
+/// User model doc
+/// @@TypeGraphQL.type("Client")
 model User {
   // User model field comment
+  /// User model field doc
   id      Int     @default(autoincrement()) @id
   email   String  @unique
+  /// renamed field doc
+  /// @TypeGraphQL.field("firstName")
   name    String?
   age     Int
+  /// @TypeGraphQL.field("accountBalance")
   balance Numeric
   amount  Float
-  posts   Post[]
+  /// @TypeGraphQL.field("clientPosts")
+  posts   post[]
   role    Role
 }
 
@@ -42,7 +50,7 @@ enum PostKind {
   ADVERT
 }
 
-model Post {
+model post {
   uuid      String    @default(uuid()) @id
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

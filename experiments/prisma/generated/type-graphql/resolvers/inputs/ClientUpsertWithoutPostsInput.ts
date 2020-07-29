@@ -1,20 +1,21 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { ClientCreateWithoutPostsInput } from "../inputs/ClientCreateWithoutPostsInput";
 import { ClientUpdateWithoutPostsDataInput } from "../inputs/ClientUpdateWithoutPostsDataInput";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class ClientUpsertWithoutPostsInput {
-  @TypeGraphQL.Field(_type => ClientUpdateWithoutPostsDataInput, {
+  @Field(_type => ClientUpdateWithoutPostsDataInput, {
     nullable: false,
     description: undefined
   })
   update!: ClientUpdateWithoutPostsDataInput;
 
-  @TypeGraphQL.Field(_type => ClientCreateWithoutPostsInput, {
+  @Field(_type => ClientCreateWithoutPostsInput, {
     nullable: false,
     description: undefined
   })

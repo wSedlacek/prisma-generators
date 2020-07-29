@@ -12,6 +12,7 @@ import {
   relationsResolversFolderName,
 } from "./config";
 import { GeneratedResolverData } from "./types";
+import { GenerateCodeOptions } from "./options";
 
 export function generateTypeGraphQLImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
@@ -32,7 +33,19 @@ export function generateTypeGraphQLImport(sourceFile: SourceFile) {
       "ID",
       "InputType",
       "ArgsType",
+      "Info",
     ].sort(),
+  });
+}
+
+export function generateGraphQLFieldsImport(sourceFile: SourceFile) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "graphql-fields",
+    defaultImport: "graphqlFields",
+  });
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: "graphql",
+    namedImports: ["GraphQLResolveInfo"],
   });
 }
 
@@ -40,6 +53,23 @@ export function generateGraphQLScalarImport(sourceFile: SourceFile) {
   sourceFile.addImportDeclaration({
     moduleSpecifier: "graphql-type-json",
     defaultImport: "GraphQLJSON",
+  });
+}
+
+export function generatePrismaJsonTypeImport(
+  sourceFile: SourceFile,
+  options: GenerateCodeOptions,
+  level = 0,
+) {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier:
+      options.absolutePrismaOutputPath ??
+      (level === 0 ? "./" : "") +
+        path.posix.join(
+          ...Array(level).fill(".."),
+          options.relativePrismaOutputPath,
+        ),
+    namedImports: ["JsonValue", "InputJsonValue"],
   });
 }
 

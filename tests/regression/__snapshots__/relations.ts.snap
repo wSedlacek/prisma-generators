@@ -38,7 +38,7 @@ export class DirectorRelationsResolver {
     nullable: true,
     description: undefined,
   })
-  async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | null> {
+  async movies(@TypeGraphQL.Root() director: Director, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: DirectorMoviesArgs): Promise<Movie[] | undefined> {
     return ctx.prisma.director.findOne({
       where: {
         firstName_lastName: {
@@ -47,6 +47,51 @@ export class DirectorRelationsResolver {
         },
       },
     }).movies(args);
+  }
+}
+"
+`;
+
+exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: Post 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Post } from \\"../../../models/Post\\";
+import { User } from \\"../../../models/User\\";
+
+@TypeGraphQL.Resolver(_of => Post)
+export class PostRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => User, {
+    nullable: true,
+    description: \\"author field doc\\",
+  })
+  async postAuthor(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | undefined> {
+    return ctx.prisma.post.findOne({
+      where: {
+        uuid: post.uuid,
+      },
+    }).author({});
+  }
+}
+"
+`;
+
+exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: User 1`] = `
+"import * as TypeGraphQL from \\"type-graphql\\";
+import { Post } from \\"../../../models/Post\\";
+import { User } from \\"../../../models/User\\";
+import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
+
+@TypeGraphQL.Resolver(_of => User)
+export class UserRelationsResolver {
+  @TypeGraphQL.FieldResolver(_type => [Post], {
+    nullable: true,
+    description: undefined,
+  })
+  async userPosts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
+    return ctx.prisma.user.findOne({
+      where: {
+        id: user.id,
+      },
+    }).posts(args);
   }
 }
 "
@@ -62,25 +107,19 @@ import { PostWhereUniqueInput } from \\"../../../inputs/PostWhereUniqueInput\\";
 @TypeGraphQL.ArgsType()
 export class UserPostsArgs {
   @TypeGraphQL.Field(_type => PostWhereInput, { nullable: true })
-  where?: PostWhereInput | null;
+  where?: PostWhereInput | undefined;
 
   @TypeGraphQL.Field(_type => PostOrderByInput, { nullable: true })
-  orderBy?: PostOrderByInput | null;
-
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  skip?: number | null;
+  orderBy?: PostOrderByInput | undefined;
 
   @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
-  after?: PostWhereUniqueInput | null;
-
-  @TypeGraphQL.Field(_type => PostWhereUniqueInput, { nullable: true })
-  before?: PostWhereUniqueInput | null;
+  cursor?: PostWhereUniqueInput | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  first?: number | null;
+  take?: number | undefined;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
-  last?: number | null;
+  skip?: number | undefined;
 }
 "
 `;
@@ -97,7 +136,7 @@ export class UserRelationsResolver {
     nullable: true,
     description: undefined,
   })
-  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
+  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,
@@ -119,7 +158,7 @@ export class UserRelationsResolver {
     nullable: true,
     description: undefined,
   })
-  async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | null> {
+  async address(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any): Promise<Address | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,
@@ -139,9 +178,9 @@ import { User } from \\"../../../models/User\\";
 export class PostRelationsResolver {
   @TypeGraphQL.FieldResolver(_type => User, {
     nullable: true,
-    description: undefined,
+    description: \\"author field doc\\",
   })
-  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | null> {
+  async author(@TypeGraphQL.Root() post: Post, @TypeGraphQL.Ctx() ctx: any): Promise<User | undefined> {
     return ctx.prisma.post.findOne({
       where: {
         uuid: post.uuid,
@@ -164,7 +203,7 @@ export class UserRelationsResolver {
     nullable: true,
     description: undefined,
   })
-  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | null> {
+  async posts(@TypeGraphQL.Root() user: User, @TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UserPostsArgs): Promise<Post[] | undefined> {
     return ctx.prisma.user.findOne({
       where: {
         id: user.id,

@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
 
-@TypeGraphQL.Resolver(_of => Category)
+@Resolver(_of => Category)
 export class UpsertCategoryResolver {
-  @TypeGraphQL.Mutation(_returns => Category, {
+  @Mutation(_returns => Category, {
     nullable: false,
     description: undefined
   })
-  async upsertCategory(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertCategoryArgs): Promise<Category> {
+  async upsertCategory(@Context() ctx: any, @Args() args: UpsertCategoryArgs): Promise<Category> {
     return ctx.prisma.category.upsert(args);
   }
 }

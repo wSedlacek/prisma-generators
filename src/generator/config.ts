@@ -1,4 +1,4 @@
-import { DMMF } from "@prisma/client/runtime/dmmf-types";
+import { DMMF } from "./dmmf/types";
 
 export type BaseKeys = keyof Pick<DMMF.Mapping, "model" | "plural">;
 export const baseKeys: BaseKeys[] = ["model", "plural"];
@@ -6,7 +6,7 @@ export const baseKeys: BaseKeys[] = ["model", "plural"];
 export type ModelKeys = keyof Exclude<DMMF.Mapping, BaseKeys>;
 
 export type SupportedQueries = keyof Pick<
-  DMMF.Mapping,
+  typeof DMMF.ModelAction,
   "findOne" | "findMany" | "aggregate"
 >;
 export const supportedQueryActions: SupportedQueries[] = [
@@ -16,7 +16,7 @@ export const supportedQueryActions: SupportedQueries[] = [
 ];
 
 export type SupportedMutations = keyof Pick<
-  DMMF.Mapping,
+  typeof DMMF.ModelAction,
   "create" | "delete" | "update" | "deleteMany" | "updateMany" | "upsert"
 >;
 export const supportedMutationActions: SupportedMutations[] = [

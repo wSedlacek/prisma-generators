@@ -1,13 +1,13 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { DirectorUpdateInput } from "../../../inputs/DirectorUpdateInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class UpdateDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorUpdateInput, { nullable: false })
+  @Field(_type => DirectorUpdateInput, { nullable: false })
   data!: DirectorUpdateInput;
 
-  @TypeGraphQL.Field(_type => DirectorWhereUniqueInput, { nullable: false })
+  @Field(_type => DirectorWhereUniqueInput, { nullable: false })
   where!: DirectorWhereUniqueInput;
 }

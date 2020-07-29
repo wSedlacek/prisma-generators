@@ -1,5 +1,6 @@
 # Example use NestJS + Prisma2 + Typegraphql
-https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example
+
+<https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example>
 
 ![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
 
@@ -15,28 +16,45 @@ Fist of all, you have to install the generator, as a dev dependency:
 npm i -D typegraphql-prisma-nestjs
 ```
 
-`typegraphql-prisma` is designed to work only with selected version of `prisma`, so please install this version if you don't have it already installed:
+Futhermore, `typegraphql-prisma` to work properly requires `prisma` to be, so please install prisma dependencies if you don't have it already installed:
 
 ```sh
-npm i -D @prisma/cli@2.0.0-beta.5
-npm i @prisma/client@2.0.0-beta.5
+npm i -D @prisma/cli
+npm i @prisma/client
 ```
 
-To support Prisma `Json` scalar, you also need to install the GraphQL JSON scalar:
+> `typegraphql-prisma` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `~2.3.0`!
+
+You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
 
 ```sh
 npm i graphql-type-json
 ```
 
-Also, be aware that due to usage of some newer Node.js features, you also have to use **Node.js v10.12 or newer**.
+as well as the `graphql-fields` that is used to properly support the aggregations queries:
+
+```sh
+npm i graphql-fields @types/graphql-fields
+```
+
+Also, be aware that due to usage of some ES2019 and newer Node.js features, you also have to use **Node.js v12.4.0 or newer**.
 
 ## Configuration
 
-After installation, you need to update your `schema.prisma` file and add a new generator section below the `client` one:
+After installation, you need to update your `schema.prisma` file and enable the experimental feature called `aggregateApi`:
 
 ```prisma
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["aggregateApi"]
+}
+```
+
+and then add a new generator section below the `client` one:
+
+```prisma
+generator client {
+  // ...
 }
 
 generator typegraphql {
@@ -160,7 +178,9 @@ In order to use generated types and resolvers classes in NestJS, you need to use
 
 Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
 
-### Customization
+### Advanced usage
+
+#### Custom operations
 
 You can also add custom queries and mutations to the schema as always, using the generated `PrismaClient` client:
 
@@ -175,6 +195,8 @@ export class CustomUserResolver {
   }
 }
 ```
+
+#### Adding fields to model type
 
 If you want to add a field to the generated type like `User`, you have to add a proper `@FieldResolver` for that:
 
@@ -194,6 +216,8 @@ export class CustomUserResolver {
   }
 }
 ```
+
+#### Exposing selected Prisma actions
 
 If you want to expose only certain Prisma actions, like `findManyUser` or `createOneUser`, you can import resolver classes only for them, instead of the whole model `CrudResolver`.
 Then you just have to put them into the `buildSchema`:
@@ -217,10 +241,13 @@ const schema = await buildSchema({
 });
 ```
 
-You can also change the name of the model types exposed in GraphQL Schema. To achieve this, just put the `@@TypeGraphQL.type` comment above the model definition in `schema.prisma` file, e.g:
+#### Changing exposed model type name
+
+You can also change the name of the model types exposed in GraphQL Schema.
+To achieve this, just put the `@@TypeGraphQL.type` doc line above the model definition in `schema.prisma` file, e.g:
 
 ```prisma
-// @@TypeGraphQL.type("Client")
+/// @@TypeGraphQL.type("Client")
 model User {
   id     Int     @default(autoincrement()) @id
   email  String  @unique
@@ -236,15 +263,52 @@ type Mutation {
 }
 ```
 
+#### Changing exposed model type field name
+
+You can also change the name of the model type fields exposed in GraphQL Schema.
+To achieve this, just put the `@TypeGraphQL.field` doc line above the model field definition in `schema.prisma` file, e.g:
+
+```prisma
+model User {
+  id     Int     @default(autoincrement()) @id
+  /// @TypeGraphQL.field("emailAddress")
+  email  String  @unique
+  posts  Post[]
+}
+```
+
+This will result in the following GraphQL schema representation:
+
+```graphql
+type User {
+  id: Int!
+  emailAddress: String!
+  posts: [Post!]!
+}
+```
+
+All generated CRUD and relations resolvers fully support this feature and they map under the hood the original prisma property to the renamed field exposed in schema.
+
+The same goes to the resolvers input types - they will also be emitted with changed field name, e.g.:
+
+```graphql
+input UserCreateInput {
+  emailAddress: String!
+  posts: PostCreateManyWithoutAuthorInput
+}
+```
+
+The emitted input type classes automatically map the provided renamed field values from GraphQL query into proper Prisma input properties out of the box.
+
 ## Examples
 
 You can check out some integration examples on this repo:
 
-https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example
+<https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example>
 
 ## Feedback
 
-Currently released version `0.1.x` is just a preview of the upcoming integration. For now it lacks customization option - picking/omitting fields of object types to expose in the schema, as well as picking CRUD methods and exposed args.
+Currently released version `0.x` is just a preview of the upcoming integration. For now it lacks customization option - picking/omitting fields of object types to expose in the schema, as well as picking exposed args fields.
 
 However, the base functionality is working well, so I strongly encourage you to give it a try and play with it. Any feedback about the developers experience, bug reports or ideas about new features or enhancements are very welcome - please feel free to put your two cents into [discussion in the issue](https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues/476).
 

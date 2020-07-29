@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
 
-@TypeGraphQL.Resolver(_of => Movie)
+@Resolver(_of => Movie)
 export class MovieRelationsResolver {
-  @TypeGraphQL.FieldResolver(_type => Director, {
+  @ResolveField(_type => Director, {
     nullable: false,
     description: undefined,
   })
-  async director(@TypeGraphQL.Root() movie: Movie, @TypeGraphQL.Ctx() ctx: any): Promise<Director> {
+  async director(@Root() movie: Movie, @Context() ctx: any): Promise<Director> {
     return ctx.prisma.movie.findOne({
       where: {
         directorFirstName_directorLastName_title: {

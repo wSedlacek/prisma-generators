@@ -1,9 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class FindOneClientArgs {
-  @TypeGraphQL.Field(_type => ClientWhereUniqueInput, { nullable: false })
+  @Field(_type => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }

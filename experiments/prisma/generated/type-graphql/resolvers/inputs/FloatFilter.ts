@@ -1,56 +1,57 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class FloatFilter {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  equals?: number | null;
+  equals?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  not?: number | null;
+  not?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
+  @Field(_type => [Float], {
     nullable: true,
     description: undefined
   })
-  in?: number[] | null;
+  in?: number[] | undefined;
 
-  @TypeGraphQL.Field(_type => [TypeGraphQL.Float], {
+  @Field(_type => [Float], {
     nullable: true,
     description: undefined
   })
-  notIn?: number[] | null;
+  notIn?: number[] | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  lt?: number | null;
+  lt?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  lte?: number | null;
+  lte?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  gt?: number | null;
+  gt?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+  @Field(_type => Float, {
     nullable: true,
     description: undefined
   })
-  gte?: number | null;
+  gte?: number | undefined;
 }

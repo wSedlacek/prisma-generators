@@ -1,9 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class DeleteManyCategoryArgs {
-  @TypeGraphQL.Field(_type => CategoryWhereInput, { nullable: true })
-  where?: CategoryWhereInput | null;
+  @Field(_type => CategoryWhereInput, { nullable: true })
+  where?: CategoryWhereInput | undefined;
 }

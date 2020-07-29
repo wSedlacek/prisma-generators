@@ -1,27 +1,28 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { OrderByArg } from "../../enums/OrderByArg";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class CategoryOrderByInput {
-  @TypeGraphQL.Field(_type => OrderByArg, {
+  @Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  name?: keyof typeof OrderByArg | null;
+  name?: keyof typeof OrderByArg | undefined;
 
-  @TypeGraphQL.Field(_type => OrderByArg, {
+  @Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  slug?: keyof typeof OrderByArg | null;
+  slug?: keyof typeof OrderByArg | undefined;
 
-  @TypeGraphQL.Field(_type => OrderByArg, {
+  @Field(_type => OrderByArg, {
     nullable: true,
     description: undefined
   })
-  number?: keyof typeof OrderByArg | null;
+  number?: keyof typeof OrderByArg | undefined;
 }

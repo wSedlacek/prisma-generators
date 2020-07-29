@@ -1,8 +1,8 @@
-import { DMMF } from "@prisma/client/runtime/dmmf-types";
+import { DMMF as PrismaDMMF } from "@prisma/client/runtime/dmmf-types";
 import { Project } from "ts-morph";
 import path from "path";
 
-import { noop, getInputTypeName } from "./helpers";
+import { noop } from "./helpers";
 import generateEnumFromDef from "./enum";
 import generateObjectTypeClassFromModel from "./model-type-class";
 import generateRelationsResolverClassesFromModel from "./resolvers/relations";
@@ -35,7 +35,7 @@ import { GenerateCodeOptions } from "./options";
 import { DmmfDocument } from "./dmmf/dmmf-document";
 
 export default async function generateCode(
-  dmmf: DMMF.Document,
+  dmmf: PrismaDMMF.Document,
   options: GenerateCodeOptions,
   log: (msg: string) => void = noop,
 ) {
@@ -45,7 +45,7 @@ export default async function generateCode(
   const modelNames = dmmf.datamodel.models.map(model => model.name);
 
   log("Transforming dmmfDocument...");
-  const dmmfDocument = new DmmfDocument(dmmf);
+  const dmmfDocument = new DmmfDocument(dmmf, options);
 
   log("Generating enums...");
   const datamodelEnumNames = dmmfDocument.datamodel.enums.map(
@@ -84,6 +84,7 @@ export default async function generateCode(
         baseDirPath,
         model,
         dmmfDocument,
+        options,
       ),
     ),
   );
@@ -106,32 +107,37 @@ export default async function generateCode(
     // skip generating models and root resolvers
     type => !modelNames.includes(type.name) && !rootTypes.includes(type),
   );
-  const outputTypesInfo = await Promise.all(
+  await Promise.all(
     outputTypesToGenerate.map(type =>
       generateOutputTypeClassFromType(
         project,
         resolversDirPath,
         type,
         dmmfDocument,
+        options,
       ),
     ),
   );
-  const argsTypesNames = outputTypesInfo
-    .map(it => it.fieldArgsTypeNames)
-    .reduce((a, b) => a.concat(b), []);
-  const outputsArgsBarrelExportSourceFile = project.createSourceFile(
-    path.resolve(
-      baseDirPath,
-      resolversFolderName,
-      outputsFolderName,
-      argsFolderName,
-      "index.ts",
-    ),
-    undefined,
-    { overwrite: true },
-  );
-  generateArgsBarrelFile(outputsArgsBarrelExportSourceFile, argsTypesNames);
-  await saveSourceFile(outputsArgsBarrelExportSourceFile);
+  const argsTypesNames = outputTypesToGenerate
+    .map(it => it.fields)
+    .reduce((a, b) => a.concat(b), [])
+    .map(it => it.argsTypeName)
+    .filter(Boolean) as string[];
+  if (argsTypesNames.length > 0) {
+    const outputsArgsBarrelExportSourceFile = project.createSourceFile(
+      path.resolve(
+        baseDirPath,
+        resolversFolderName,
+        outputsFolderName,
+        argsFolderName,
+        "index.ts",
+      ),
+      undefined,
+      { overwrite: true },
+    );
+    generateArgsBarrelFile(outputsArgsBarrelExportSourceFile, argsTypesNames);
+    await saveSourceFile(outputsArgsBarrelExportSourceFile);
+  }
 
   const outputsBarrelExportSourceFile = project.createSourceFile(
     path.resolve(
@@ -145,22 +151,20 @@ export default async function generateCode(
   );
   generateOutputsBarrelFile(
     outputsBarrelExportSourceFile,
-    outputTypesInfo.map(it => it.typeName),
+    outputTypesToGenerate.map(it => it.typeName),
     argsTypesNames.length > 0,
   );
   await saveSourceFile(outputsBarrelExportSourceFile);
 
   log("Generating input types...");
-  const inputTypesToEmit = dmmfDocument.schema.inputTypes.filter(
-    type => type.name !== "JsonFilter",
-  );
   await Promise.all(
-    inputTypesToEmit.map(type =>
+    dmmfDocument.schema.inputTypes.map(type =>
       generateInputTypeClassFromType(
         project,
         resolversDirPath,
         type,
         dmmfDocument,
+        options,
       ),
     ),
   );
@@ -176,7 +180,7 @@ export default async function generateCode(
   );
   generateInputsBarrelFile(
     inputsBarrelExportSourceFile,
-    inputTypesToEmit.map(it => getInputTypeName(it.name, dmmfDocument)),
+    dmmfDocument.schema.inputTypes.map(it => it.typeName),
   );
   await saveSourceFile(inputsBarrelExportSourceFile);
 

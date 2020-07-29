@@ -1,46 +1,47 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { JsonValue, InputJsonValue } from "../../../client";
 import { IntFilter } from "../inputs/IntFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
-@TypeGraphQL.InputType({
+@InputType({
   isAbstract: true,
   description: undefined,
 })
 export class CategoryWhereInput {
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  name?: StringFilter | null;
+  name?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => StringFilter, {
+  @Field(_type => StringFilter, {
     nullable: true,
     description: undefined
   })
-  slug?: StringFilter | null;
+  slug?: StringFilter | undefined;
 
-  @TypeGraphQL.Field(_type => IntFilter, {
+  @Field(_type => IntFilter, {
     nullable: true,
     description: undefined
   })
-  number?: IntFilter | null;
+  number?: IntFilter | undefined;
 
-  @TypeGraphQL.Field(_type => [CategoryWhereInput], {
+  @Field(_type => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })
-  AND?: CategoryWhereInput[] | null;
+  AND?: CategoryWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [CategoryWhereInput], {
+  @Field(_type => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })
-  OR?: CategoryWhereInput[] | null;
+  OR?: CategoryWhereInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => [CategoryWhereInput], {
+  @Field(_type => [CategoryWhereInput], {
     nullable: true,
     description: undefined
   })
-  NOT?: CategoryWhereInput[] | null;
+  NOT?: CategoryWhereInput[] | undefined;
 }

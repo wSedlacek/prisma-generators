@@ -1,12 +1,7 @@
 import { OptionalKind, MethodDeclarationStructure, Project } from "ts-morph";
 import path from "path";
 
-import {
-  getFieldTSType,
-  getTypeGraphQLType,
-  camelCase,
-  pascalCase,
-} from "../helpers";
+import { camelCase, pascalCase, cleanDocsString } from "../helpers";
 import generateArgsTypeClassFromArgs from "../args-class";
 import {
   resolversFolderName,
@@ -18,7 +13,6 @@ import {
   generateArgsImports,
   generateModelsImports,
   generateArgsBarrelFile,
-  generateGraphQLScalarImport,
 } from "../imports";
 import { GeneratedResolverData } from "../types";
 import saveSourceFile from "../../utils/saveSourceFile";
@@ -65,11 +59,7 @@ export default async function generateRelationsResolverClassesFromModel(
       const outputTypeField = outputType.fields.find(
         it => it.name === field.name,
       )!;
-      // FIXME: remove when issue fixed: https://github.com/prisma/prisma2/issues/1987
-      const fieldDocs = undefined as string | undefined;
-      // const fieldDocs =
-      //   field.documentation && field.documentation.replace("\r", "");
-      const fieldType = getFieldTSType(field, dmmfDocument);
+      const fieldDocs = cleanDocsString(field.documentation);
 
       let argsTypeName: string | undefined;
       if (outputTypeField.args.length > 0) {
@@ -77,11 +67,11 @@ export default async function generateRelationsResolverClassesFromModel(
           project,
           resolverDirPath,
           outputTypeField.args,
-          model.typeName + pascalCase(field.name),
+          `${model.typeName}${pascalCase(field.name)}Args`,
           dmmfDocument,
         );
       }
-      return { field, fieldDocs, fieldType, argsTypeName };
+      return { field, fieldDocs, argsTypeName };
     }),
   );
   const argTypeNames = methodsInfo
@@ -120,7 +110,7 @@ export default async function generateRelationsResolverClassesFromModel(
       },
     ],
     methods: methodsInfo.map<OptionalKind<MethodDeclarationStructure>>(
-      ({ field, fieldType, fieldDocs, argsTypeName }) => {
+      ({ field, fieldDocs, argsTypeName }) => {
         let whereConditionString: string = "";
         // TODO: refactor to AST
         if (singleFilterField) {
@@ -143,14 +133,14 @@ export default async function generateRelationsResolverClassesFromModel(
           );
         }
         return {
-          name: field.name,
+          name: field.typeFieldAlias ?? field.name,
           isAsync: true,
-          returnType: `Promise<${fieldType}>`,
+          returnType: `Promise<${field.fieldTSType}>`,
           decorators: [
             {
               name: "ResolveField",
               arguments: [
-                `_type => ${getTypeGraphQLType(field, dmmfDocument)}`,
+                `_type => ${field.typeGraphQLType}`,
                 `{
                   nullable: ${!field.isRequired},
                   description: ${fieldDocs ? `"${fieldDocs}"` : "undefined"},

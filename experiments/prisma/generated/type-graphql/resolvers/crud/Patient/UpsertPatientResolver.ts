@@ -1,14 +1,14 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
 import { Patient } from "../../../models/Patient";
 
-@TypeGraphQL.Resolver(_of => Patient)
+@Resolver(_of => Patient)
 export class UpsertPatientResolver {
-  @TypeGraphQL.Mutation(_returns => Patient, {
+  @Mutation(_returns => Patient, {
     nullable: false,
     description: undefined
   })
-  async upsertPatient(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: UpsertPatientArgs): Promise<Patient> {
+  async upsertPatient(@Context() ctx: any, @Args() args: UpsertPatientArgs): Promise<Patient> {
     return ctx.prisma.patient.upsert(args);
   }
 }

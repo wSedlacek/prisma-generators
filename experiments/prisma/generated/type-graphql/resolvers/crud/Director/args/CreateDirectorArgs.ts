@@ -1,9 +1,9 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { DirectorCreateInput } from "../../../inputs/DirectorCreateInput";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class CreateDirectorArgs {
-  @TypeGraphQL.Field(_type => DirectorCreateInput, { nullable: false })
+  @Field(_type => DirectorCreateInput, { nullable: false })
   data!: DirectorCreateInput;
 }

@@ -1,17 +1,43 @@
-import * as TypeGraphQL from "type-graphql";
+import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
-import { AggregateClientCountArgs } from "./args/AggregateClientCountArgs";
+import { JsonValue, InputJsonValue } from "../../../client";
+import { ClientAvgAggregateOutputType } from "../outputs/ClientAvgAggregateOutputType";
+import { ClientMaxAggregateOutputType } from "../outputs/ClientMaxAggregateOutputType";
+import { ClientMinAggregateOutputType } from "../outputs/ClientMinAggregateOutputType";
+import { ClientSumAggregateOutputType } from "../outputs/ClientSumAggregateOutputType";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class AggregateClient {
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+  @Field(_type => Int, {
     nullable: false,
     description: undefined
   })
-  count(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: AggregateClientCountArgs) {
-    return ctx.prisma.user.count(args);
-  }
+  count!: number;
+
+  @Field(_type => ClientAvgAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  avg?: ClientAvgAggregateOutputType | undefined;
+
+  @Field(_type => ClientSumAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  sum?: ClientSumAggregateOutputType | undefined;
+
+  @Field(_type => ClientMinAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  min?: ClientMinAggregateOutputType | undefined;
+
+  @Field(_type => ClientMaxAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  max?: ClientMaxAggregateOutputType | undefined;
 }
