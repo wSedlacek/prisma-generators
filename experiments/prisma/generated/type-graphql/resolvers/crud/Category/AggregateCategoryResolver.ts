@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { Category } from "../../../models/Category";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 
 @Resolver(() => Category)

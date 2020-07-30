@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { FindOnePostArgs } from "./args/FindOnePostArgs";
 import { Post } from "../../../models/Post";
+import { plainToClass, Type } from "class-transformer";
 
 @Resolver(() => Post)
 export class FindOnePostResolver {
@@ -9,6 +10,6 @@ export class FindOnePostResolver {
     description: undefined
   })
   async post(@Context() ctx: any, @Args() args: FindOnePostArgs): Promise<Post | undefined> {
-    return ctx.prisma.post.findOne(args);
+    return plainToClass(Post, await ctx.prisma.post.findOne(args) as Post);
   }
 }

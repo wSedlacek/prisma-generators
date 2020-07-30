@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpsertClientArgs } from "./args/UpsertClientArgs";
 import { Client } from "../../../models/Client";
+import { plainToClass, Type } from "class-transformer";
 
 @Resolver(() => Client)
 export class UpsertClientResolver {
@@ -9,6 +10,6 @@ export class UpsertClientResolver {
     description: undefined
   })
   async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<Client> {
-    return ctx.prisma.user.upsert(args);
+    return plainToClass(Client, await ctx.prisma.user.upsert(args) as Client);
   }
 }

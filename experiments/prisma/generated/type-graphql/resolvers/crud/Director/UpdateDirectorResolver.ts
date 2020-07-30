@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { Director } from "../../../models/Director";
+import { plainToClass, Type } from "class-transformer";
 
 @Resolver(() => Director)
 export class UpdateDirectorResolver {
@@ -9,6 +10,6 @@ export class UpdateDirectorResolver {
     description: undefined
   })
   async updateDirector(@Context() ctx: any, @Args() args: UpdateDirectorArgs): Promise<Director | undefined> {
-    return ctx.prisma.director.update(args);
+    return plainToClass(Director, await ctx.prisma.director.update(args) as Director);
   }
 }

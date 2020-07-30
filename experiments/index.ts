@@ -1,14 +1,7 @@
 import 'reflect-metadata';
-import {
-  Resolver,
-  Query,
-  Field,
-  Context,
-  Args,
-  ResolveField,
-} from '@nestjs/graphql';
+import { Resolver, Query, Context, Args, ResolveField } from '@nestjs/graphql';
 
-import { NestFactory, APP_INTERCEPTOR } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { Module, Logger, ValidationPipe } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
@@ -35,6 +28,7 @@ import {
   FindManyClientArgs,
 } from './prisma/generated/type-graphql';
 import { PrismaClient } from './prisma/generated/client';
+import { plainToClass } from 'class-transformer';
 
 // @ObjectType()
 // class User extends BaseUser {}
@@ -58,7 +52,7 @@ class ClientResolver {
     @Args() args: FindManyClientArgs,
     @Context() { prisma }: ContextType
   ) {
-    return prisma.user.findMany(args);
+    return plainToClass(Client, await prisma.user.findMany(args));
   }
 
   @ResolveField()

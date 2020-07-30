@@ -11,6 +11,7 @@ import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { UpdateMovieArgs } from "./args/UpdateMovieArgs";
 import { UpsertMovieArgs } from "./args/UpsertMovieArgs";
 import { Movie } from "../../../models/Movie";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async movie(@Context() ctx: any, @Args() args: FindOneMovieArgs): Promise<Movie | undefined> {
-    return ctx.prisma.movie.findOne(args);
+    return plainToClass(Movie, await ctx.prisma.movie.findOne(args) as Movie);
   }
 
   @Query(() => [Movie], {
@@ -29,7 +30,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async movies(@Context() ctx: any, @Args() args: FindManyMovieArgs): Promise<Movie[]> {
-    return ctx.prisma.movie.findMany(args);
+    return plainToClass(Movie, await ctx.prisma.movie.findMany(args) as Movie[]);
   }
 
   @Mutation(() => Movie, {
@@ -37,7 +38,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async createMovie(@Context() ctx: any, @Args() args: CreateMovieArgs): Promise<Movie> {
-    return ctx.prisma.movie.create(args);
+    return plainToClass(Movie, await ctx.prisma.movie.create(args) as Movie);
   }
 
   @Mutation(() => Movie, {
@@ -45,7 +46,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async deleteMovie(@Context() ctx: any, @Args() args: DeleteMovieArgs): Promise<Movie | undefined> {
-    return ctx.prisma.movie.delete(args);
+    return plainToClass(Movie, await ctx.prisma.movie.delete(args) as Movie);
   }
 
   @Mutation(() => Movie, {
@@ -53,7 +54,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async updateMovie(@Context() ctx: any, @Args() args: UpdateMovieArgs): Promise<Movie | undefined> {
-    return ctx.prisma.movie.update(args);
+    return plainToClass(Movie, await ctx.prisma.movie.update(args) as Movie);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async deleteManyMovie(@Context() ctx: any, @Args() args: DeleteManyMovieArgs): Promise<BatchPayload> {
-    return ctx.prisma.movie.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.movie.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async updateManyMovie(@Context() ctx: any, @Args() args: UpdateManyMovieArgs): Promise<BatchPayload> {
-    return ctx.prisma.movie.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.movie.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Movie, {
@@ -77,7 +78,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async upsertMovie(@Context() ctx: any, @Args() args: UpsertMovieArgs): Promise<Movie> {
-    return ctx.prisma.movie.upsert(args);
+    return plainToClass(Movie, await ctx.prisma.movie.upsert(args) as Movie);
   }
 
   @Query(() => AggregateMovie, {

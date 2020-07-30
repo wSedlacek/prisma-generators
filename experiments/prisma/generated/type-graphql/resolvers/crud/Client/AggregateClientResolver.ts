@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { Client } from "../../../models/Client";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateClient } from "../../outputs/AggregateClient";
 
 @Resolver(() => Client)

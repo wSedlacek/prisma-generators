@@ -11,6 +11,7 @@ import { UpdateManyPatientArgs } from "./args/UpdateManyPatientArgs";
 import { UpdatePatientArgs } from "./args/UpdatePatientArgs";
 import { UpsertPatientArgs } from "./args/UpsertPatientArgs";
 import { Patient } from "../../../models/Patient";
+import { plainToClass, Type } from "class-transformer";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async patient(@Context() ctx: any, @Args() args: FindOnePatientArgs): Promise<Patient | undefined> {
-    return ctx.prisma.patient.findOne(args);
+    return plainToClass(Patient, await ctx.prisma.patient.findOne(args) as Patient);
   }
 
   @Query(() => [Patient], {
@@ -29,7 +30,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async patients(@Context() ctx: any, @Args() args: FindManyPatientArgs): Promise<Patient[]> {
-    return ctx.prisma.patient.findMany(args);
+    return plainToClass(Patient, await ctx.prisma.patient.findMany(args) as Patient[]);
   }
 
   @Mutation(() => Patient, {
@@ -37,7 +38,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async createPatient(@Context() ctx: any, @Args() args: CreatePatientArgs): Promise<Patient> {
-    return ctx.prisma.patient.create(args);
+    return plainToClass(Patient, await ctx.prisma.patient.create(args) as Patient);
   }
 
   @Mutation(() => Patient, {
@@ -45,7 +46,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async deletePatient(@Context() ctx: any, @Args() args: DeletePatientArgs): Promise<Patient | undefined> {
-    return ctx.prisma.patient.delete(args);
+    return plainToClass(Patient, await ctx.prisma.patient.delete(args) as Patient);
   }
 
   @Mutation(() => Patient, {
@@ -53,7 +54,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async updatePatient(@Context() ctx: any, @Args() args: UpdatePatientArgs): Promise<Patient | undefined> {
-    return ctx.prisma.patient.update(args);
+    return plainToClass(Patient, await ctx.prisma.patient.update(args) as Patient);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async deleteManyPatient(@Context() ctx: any, @Args() args: DeleteManyPatientArgs): Promise<BatchPayload> {
-    return ctx.prisma.patient.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.patient.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async updateManyPatient(@Context() ctx: any, @Args() args: UpdateManyPatientArgs): Promise<BatchPayload> {
-    return ctx.prisma.patient.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.patient.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Patient, {
@@ -77,7 +78,7 @@ export class PatientCrudResolver {
     description: undefined
   })
   async upsertPatient(@Context() ctx: any, @Args() args: UpsertPatientArgs): Promise<Patient> {
-    return ctx.prisma.patient.upsert(args);
+    return plainToClass(Patient, await ctx.prisma.patient.upsert(args) as Patient);
   }
 
   @Query(() => AggregatePatient, {

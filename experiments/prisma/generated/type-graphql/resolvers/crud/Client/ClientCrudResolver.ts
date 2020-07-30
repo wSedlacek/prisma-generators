@@ -11,6 +11,7 @@ import { UpdateClientArgs } from "./args/UpdateClientArgs";
 import { UpdateManyClientArgs } from "./args/UpdateManyClientArgs";
 import { UpsertClientArgs } from "./args/UpsertClientArgs";
 import { Client } from "../../../models/Client";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateClient } from "../../outputs/AggregateClient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async client(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<Client | undefined> {
-    return ctx.prisma.user.findOne(args);
+    return plainToClass(Client, await ctx.prisma.user.findOne(args) as Client);
   }
 
   @Query(() => [Client], {
@@ -29,7 +30,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async clients(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<Client[]> {
-    return ctx.prisma.user.findMany(args);
+    return plainToClass(Client, await ctx.prisma.user.findMany(args) as Client[]);
   }
 
   @Mutation(() => Client, {
@@ -37,7 +38,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<Client> {
-    return ctx.prisma.user.create(args);
+    return plainToClass(Client, await ctx.prisma.user.create(args) as Client);
   }
 
   @Mutation(() => Client, {
@@ -45,7 +46,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<Client | undefined> {
-    return ctx.prisma.user.delete(args);
+    return plainToClass(Client, await ctx.prisma.user.delete(args) as Client);
   }
 
   @Mutation(() => Client, {
@@ -53,7 +54,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<Client | undefined> {
-    return ctx.prisma.user.update(args);
+    return plainToClass(Client, await ctx.prisma.user.update(args) as Client);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
-    return ctx.prisma.user.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
-    return ctx.prisma.user.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Client, {
@@ -77,7 +78,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<Client> {
-    return ctx.prisma.user.upsert(args);
+    return plainToClass(Client, await ctx.prisma.user.upsert(args) as Client);
   }
 
   @Query(() => AggregateClient, {

@@ -87,9 +87,14 @@ export const generateCrudResolverClassMethodDeclaration = (
             });`,
           ]
         : [
-            `return ctx.prisma.${collectionName}.${action.kind}(${
+            `return plainToClass(${returnTSType
+              .replace(/\[|\]/g, '')
+              .replace(
+                '| undefined',
+                ''
+              )}, await ctx.prisma.${collectionName}.${action.kind}(${
               argsTypeName ? 'args' : ''
-            });`,
+            }) as ${returnTSType.replace('| undefined', '')});`,
           ],
   };
 };

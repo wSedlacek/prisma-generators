@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
 import { Patient } from "../../../models/Patient";
+import { plainToClass, Type } from "class-transformer";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
 
 @Resolver(() => Patient)

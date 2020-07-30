@@ -11,6 +11,7 @@ import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
+import { plainToClass, Type } from "class-transformer";
 import { AggregatePost } from "../../outputs/AggregatePost";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async post(@Context() ctx: any, @Args() args: FindOnePostArgs): Promise<Post | undefined> {
-    return ctx.prisma.post.findOne(args);
+    return plainToClass(Post, await ctx.prisma.post.findOne(args) as Post);
   }
 
   @Query(() => [Post], {
@@ -29,7 +30,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async posts(@Context() ctx: any, @Args() args: FindManyPostArgs): Promise<Post[]> {
-    return ctx.prisma.post.findMany(args);
+    return plainToClass(Post, await ctx.prisma.post.findMany(args) as Post[]);
   }
 
   @Mutation(() => Post, {
@@ -37,7 +38,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async createPost(@Context() ctx: any, @Args() args: CreatePostArgs): Promise<Post> {
-    return ctx.prisma.post.create(args);
+    return plainToClass(Post, await ctx.prisma.post.create(args) as Post);
   }
 
   @Mutation(() => Post, {
@@ -45,7 +46,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async deletePost(@Context() ctx: any, @Args() args: DeletePostArgs): Promise<Post | undefined> {
-    return ctx.prisma.post.delete(args);
+    return plainToClass(Post, await ctx.prisma.post.delete(args) as Post);
   }
 
   @Mutation(() => Post, {
@@ -53,7 +54,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async updatePost(@Context() ctx: any, @Args() args: UpdatePostArgs): Promise<Post | undefined> {
-    return ctx.prisma.post.update(args);
+    return plainToClass(Post, await ctx.prisma.post.update(args) as Post);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async deleteManyPost(@Context() ctx: any, @Args() args: DeleteManyPostArgs): Promise<BatchPayload> {
-    return ctx.prisma.post.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.post.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async updateManyPost(@Context() ctx: any, @Args() args: UpdateManyPostArgs): Promise<BatchPayload> {
-    return ctx.prisma.post.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.post.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Post, {
@@ -77,7 +78,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async upsertPost(@Context() ctx: any, @Args() args: UpsertPostArgs): Promise<Post> {
-    return ctx.prisma.post.upsert(args);
+    return plainToClass(Post, await ctx.prisma.post.upsert(args) as Post);
   }
 
   @Query(() => AggregatePost, {

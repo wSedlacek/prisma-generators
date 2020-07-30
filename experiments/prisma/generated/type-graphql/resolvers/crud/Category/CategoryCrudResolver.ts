@@ -11,6 +11,7 @@ import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async category(@Context() ctx: any, @Args() args: FindOneCategoryArgs): Promise<Category | undefined> {
-    return ctx.prisma.category.findOne(args);
+    return plainToClass(Category, await ctx.prisma.category.findOne(args) as Category);
   }
 
   @Query(() => [Category], {
@@ -29,7 +30,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async categories(@Context() ctx: any, @Args() args: FindManyCategoryArgs): Promise<Category[]> {
-    return ctx.prisma.category.findMany(args);
+    return plainToClass(Category, await ctx.prisma.category.findMany(args) as Category[]);
   }
 
   @Mutation(() => Category, {
@@ -37,7 +38,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async createCategory(@Context() ctx: any, @Args() args: CreateCategoryArgs): Promise<Category> {
-    return ctx.prisma.category.create(args);
+    return plainToClass(Category, await ctx.prisma.category.create(args) as Category);
   }
 
   @Mutation(() => Category, {
@@ -45,7 +46,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async deleteCategory(@Context() ctx: any, @Args() args: DeleteCategoryArgs): Promise<Category | undefined> {
-    return ctx.prisma.category.delete(args);
+    return plainToClass(Category, await ctx.prisma.category.delete(args) as Category);
   }
 
   @Mutation(() => Category, {
@@ -53,7 +54,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async updateCategory(@Context() ctx: any, @Args() args: UpdateCategoryArgs): Promise<Category | undefined> {
-    return ctx.prisma.category.update(args);
+    return plainToClass(Category, await ctx.prisma.category.update(args) as Category);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async deleteManyCategory(@Context() ctx: any, @Args() args: DeleteManyCategoryArgs): Promise<BatchPayload> {
-    return ctx.prisma.category.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.category.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async updateManyCategory(@Context() ctx: any, @Args() args: UpdateManyCategoryArgs): Promise<BatchPayload> {
-    return ctx.prisma.category.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.category.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Category, {
@@ -77,7 +78,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async upsertCategory(@Context() ctx: any, @Args() args: UpsertCategoryArgs): Promise<Category> {
-    return ctx.prisma.category.upsert(args);
+    return plainToClass(Category, await ctx.prisma.category.upsert(args) as Category);
   }
 
   @Query(() => AggregateCategory, {

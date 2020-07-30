@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { Movie } from "../../../models/Movie";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 
 @Resolver(() => Movie)

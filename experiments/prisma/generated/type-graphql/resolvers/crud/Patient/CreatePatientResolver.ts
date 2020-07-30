@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { CreatePatientArgs } from "./args/CreatePatientArgs";
 import { Patient } from "../../../models/Patient";
+import { plainToClass, Type } from "class-transformer";
 
 @Resolver(() => Patient)
 export class CreatePatientResolver {
@@ -9,6 +10,6 @@ export class CreatePatientResolver {
     description: undefined
   })
   async createPatient(@Context() ctx: any, @Args() args: CreatePatientArgs): Promise<Patient> {
-    return ctx.prisma.patient.create(args);
+    return plainToClass(Patient, await ctx.prisma.patient.create(args) as Patient);
   }
 }

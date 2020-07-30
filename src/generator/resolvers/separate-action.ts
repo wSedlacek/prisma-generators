@@ -9,6 +9,7 @@ import {
   generateModelsImports,
   generateOutputsImports,
   generateGraphQLFieldsImport,
+  generateClassTransformerImport,
 } from '../imports';
 import saveSourceFile from '../../utils/saveSourceFile';
 import { generateCrudResolverClassMethodDeclaration } from './helpers';
@@ -60,6 +61,7 @@ const generateActionResolverClass = async (
       ),
     3
   );
+  generateClassTransformerImport(sourceFile);
   generateOutputsImports(
     sourceFile,
     [outputTypeName].filter((name) => !modelNames.includes(name)),

@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateDirectorArgs } from "./args/AggregateDirectorArgs";
 import { Director } from "../../../models/Director";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 
 @Resolver(() => Director)

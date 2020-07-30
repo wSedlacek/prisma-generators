@@ -11,6 +11,7 @@ import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { UpdateManyDirectorArgs } from "./args/UpdateManyDirectorArgs";
 import { UpsertDirectorArgs } from "./args/UpsertDirectorArgs";
 import { Director } from "../../../models/Director";
+import { plainToClass, Type } from "class-transformer";
 import { AggregateDirector } from "../../outputs/AggregateDirector";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -21,7 +22,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async director(@Context() ctx: any, @Args() args: FindOneDirectorArgs): Promise<Director | undefined> {
-    return ctx.prisma.director.findOne(args);
+    return plainToClass(Director, await ctx.prisma.director.findOne(args) as Director);
   }
 
   @Query(() => [Director], {
@@ -29,7 +30,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async directors(@Context() ctx: any, @Args() args: FindManyDirectorArgs): Promise<Director[]> {
-    return ctx.prisma.director.findMany(args);
+    return plainToClass(Director, await ctx.prisma.director.findMany(args) as Director[]);
   }
 
   @Mutation(() => Director, {
@@ -37,7 +38,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async createDirector(@Context() ctx: any, @Args() args: CreateDirectorArgs): Promise<Director> {
-    return ctx.prisma.director.create(args);
+    return plainToClass(Director, await ctx.prisma.director.create(args) as Director);
   }
 
   @Mutation(() => Director, {
@@ -45,7 +46,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async deleteDirector(@Context() ctx: any, @Args() args: DeleteDirectorArgs): Promise<Director | undefined> {
-    return ctx.prisma.director.delete(args);
+    return plainToClass(Director, await ctx.prisma.director.delete(args) as Director);
   }
 
   @Mutation(() => Director, {
@@ -53,7 +54,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async updateDirector(@Context() ctx: any, @Args() args: UpdateDirectorArgs): Promise<Director | undefined> {
-    return ctx.prisma.director.update(args);
+    return plainToClass(Director, await ctx.prisma.director.update(args) as Director);
   }
 
   @Mutation(() => BatchPayload, {
@@ -61,7 +62,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async deleteManyDirector(@Context() ctx: any, @Args() args: DeleteManyDirectorArgs): Promise<BatchPayload> {
-    return ctx.prisma.director.deleteMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.director.deleteMany(args) as BatchPayload);
   }
 
   @Mutation(() => BatchPayload, {
@@ -69,7 +70,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async updateManyDirector(@Context() ctx: any, @Args() args: UpdateManyDirectorArgs): Promise<BatchPayload> {
-    return ctx.prisma.director.updateMany(args);
+    return plainToClass(BatchPayload, await ctx.prisma.director.updateMany(args) as BatchPayload);
   }
 
   @Mutation(() => Director, {
@@ -77,7 +78,7 @@ export class DirectorCrudResolver {
     description: undefined
   })
   async upsertDirector(@Context() ctx: any, @Args() args: UpsertDirectorArgs): Promise<Director> {
-    return ctx.prisma.director.upsert(args);
+    return plainToClass(Director, await ctx.prisma.director.upsert(args) as Director);
   }
 
   @Query(() => AggregateDirector, {

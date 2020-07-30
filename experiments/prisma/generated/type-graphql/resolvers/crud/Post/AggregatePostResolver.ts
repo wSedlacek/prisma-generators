@@ -3,6 +3,7 @@ import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { Post } from "../../../models/Post";
+import { plainToClass, Type } from "class-transformer";
 import { AggregatePost } from "../../outputs/AggregatePost";
 
 @Resolver(() => Post)

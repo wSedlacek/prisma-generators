@@ -20,6 +20,7 @@ import {
   generateOutputsImports,
   generateArgsBarrelFile,
   generateGraphQLFieldsImport,
+  generateClassTransformerImport,
 } from '../imports';
 import saveSourceFile from '../../utils/saveSourceFile';
 import generateActionResolverClass from './separate-action';
@@ -131,6 +132,7 @@ const generateCrudResolverClassFromMapping = async (
       ),
     3
   );
+  generateClassTransformerImport(sourceFile);
   generateOutputsImports(
     sourceFile,
     distinctOutputTypesNames.filter(
