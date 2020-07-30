@@ -14,7 +14,7 @@ import {
 } from '../config';
 import generateArgsTypeClassFromArgs from '../args-class';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
@@ -52,7 +52,7 @@ const generateCrudResolverClassFromMapping = async (
     overwrite: true,
   });
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateGraphQLFieldsImport(sourceFile);
 
   const methodsInfo = await Promise.all(

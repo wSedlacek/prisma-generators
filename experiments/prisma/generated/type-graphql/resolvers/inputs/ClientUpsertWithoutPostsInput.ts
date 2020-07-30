@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
+import { plainToClass, Type } from "class-transformer";
 import { ClientCreateWithoutPostsInput } from "../inputs/ClientCreateWithoutPostsInput";
 import { ClientUpdateWithoutPostsDataInput } from "../inputs/ClientUpdateWithoutPostsDataInput";
 
@@ -9,12 +10,14 @@ import { ClientUpdateWithoutPostsDataInput } from "../inputs/ClientUpdateWithout
   description: undefined,
 })
 export class ClientUpsertWithoutPostsInput {
+  @Type(() => ClientUpdateWithoutPostsDataInput)
   @Field(() => ClientUpdateWithoutPostsDataInput, {
     nullable: false,
     description: undefined
   })
   update!: ClientUpdateWithoutPostsDataInput;
 
+  @Type(() => ClientCreateWithoutPostsInput)
   @Field(() => ClientCreateWithoutPostsInput, {
     nullable: false,
     description: undefined

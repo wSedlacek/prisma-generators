@@ -2,12 +2,15 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import GraphQLJSON from "graphql-type-json";
 import { DirectorUpdateInput } from "../../../inputs/DirectorUpdateInput";
 import { DirectorWhereUniqueInput } from "../../../inputs/DirectorWhereUniqueInput";
+import { plainToClass, Type } from "class-transformer";
 
 @ArgsType()
 export class UpdateDirectorArgs {
+  @Type(() => DirectorUpdateInput)
   @Field(() => DirectorUpdateInput, { nullable: false })
   data!: DirectorUpdateInput;
 
+  @Type(() => DirectorWhereUniqueInput)
   @Field(() => DirectorWhereUniqueInput, { nullable: false })
   where!: DirectorWhereUniqueInput;
 }

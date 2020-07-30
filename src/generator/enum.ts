@@ -1,7 +1,7 @@
 import { EnumMemberStructure, OptionalKind, Project } from 'ts-morph';
 import path from 'path';
 
-import { generateTypeGraphQLImport } from './imports';
+import { generateNestJSGraphQLImport } from './imports';
 import { enumsFolderName } from './config';
 import saveSourceFile from '../utils/saveSourceFile';
 import { DMMF } from './dmmf/types';
@@ -17,7 +17,7 @@ const generateEnumFromDef = async (
   const sourceFile = project.createSourceFile(filePath, undefined, {
     overwrite: true,
   });
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
 
   const documentation = cleanDocsString(enumDef.documentation);
   sourceFile.addEnum({

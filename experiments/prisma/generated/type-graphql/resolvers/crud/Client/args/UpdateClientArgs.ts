@@ -2,12 +2,15 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import GraphQLJSON from "graphql-type-json";
 import { ClientUpdateInput } from "../../../inputs/ClientUpdateInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
+import { plainToClass, Type } from "class-transformer";
 
 @ArgsType()
 export class UpdateClientArgs {
+  @Type(() => ClientUpdateInput)
   @Field(() => ClientUpdateInput, { nullable: false })
   data!: ClientUpdateInput;
 
+  @Type(() => ClientWhereUniqueInput)
   @Field(() => ClientWhereUniqueInput, { nullable: false })
   where!: ClientWhereUniqueInput;
 }

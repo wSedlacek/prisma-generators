@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../client";
 import { Post } from "../models/Post";
+import { plainToClass, Type } from "class-transformer";
 import { Role } from "../enums/Role";
 
 /** User model doc */

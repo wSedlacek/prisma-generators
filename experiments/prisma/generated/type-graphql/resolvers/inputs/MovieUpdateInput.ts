@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
+import { plainToClass, Type } from "class-transformer";
 import { DirectorUpdateOneRequiredWithoutMoviesInput } from "../inputs/DirectorUpdateOneRequiredWithoutMoviesInput";
 
 @InputType({
@@ -14,6 +15,7 @@ export class MovieUpdateInput {
   })
   title?: string | undefined;
 
+  @Type(() => DirectorUpdateOneRequiredWithoutMoviesInput)
   @Field(() => DirectorUpdateOneRequiredWithoutMoviesInput, {
     nullable: true,
     description: undefined

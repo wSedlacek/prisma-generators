@@ -5,7 +5,7 @@ import {
   getInputTypeName,
   camelCase,
   getModelNameFromInputType,
-  getTypeGraphQLType,
+  getGraphQLType,
   getFieldTSType,
   pascalCase,
 } from '../helpers';
@@ -77,7 +77,7 @@ const transformField = (dmmfDocument: DmmfDocument) => {
     );
     const typeFieldAlias = attributeArgs?.slice(1, -1);
     const fieldTSType = getFieldTSType(field, dmmfDocument, false);
-    const typeGraphQLType = getTypeGraphQLType(field, dmmfDocument);
+    const typeGraphQLType = getGraphQLType(field, dmmfDocument);
     return {
       ...field,
       typeFieldAlias,
@@ -104,10 +104,7 @@ const transformInputType = (dmmfDocument: DmmfDocument) => {
         const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
           field.inputType
         );
-        const typeGraphQLType = getTypeGraphQLType(
-          selectedInputType,
-          dmmfDocument
-        );
+        const typeGraphQLType = getGraphQLType(selectedInputType, dmmfDocument);
         const fieldTSType = getFieldTSType(
           selectedInputType,
           dmmfDocument,
@@ -144,12 +141,12 @@ const transformOutputType = (dmmfDocument: DmmfDocument) => {
           ),
         };
         const fieldTSType = getFieldTSType(outputType, dmmfDocument, false);
-        const typeGraphQLType = getTypeGraphQLType(outputType, dmmfDocument);
+        const typeGraphQLType = getGraphQLType(outputType, dmmfDocument);
         const args = field.args.map<DMMF.SchemaArg>((arg) => {
           const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
             arg.inputType
           );
-          const typeGraphQLType = getTypeGraphQLType(
+          const typeGraphQLType = getGraphQLType(
             selectedInputType,
             dmmfDocument
           );

@@ -11,13 +11,14 @@ import path from 'path';
 import { camelCase } from './helpers';
 import { outputsFolderName, inputsFolderName } from './config';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
   generateArgsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
   generateOutputsImports,
+  generateClassTransformerImport,
 } from './imports';
 import saveSourceFile from '../utils/saveSourceFile';
 import generateArgsTypeClassFromArgs from './args-class';
@@ -41,9 +42,10 @@ export const generateOutputTypeClassFromType = async (
     .filter((it) => it.argsTypeName)
     .map((it) => it.argsTypeName!);
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 2);
+  generateClassTransformerImport(sourceFile);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   // generateInputsImports(
   //   sourceFile,
@@ -105,6 +107,14 @@ export const generateOutputTypeClassFromType = async (
           hasQuestionToken: !isRequired,
           trailingTrivia: '\r\n',
           decorators: [
+            ...(field.outputType.kind === 'object'
+              ? [
+                  {
+                    name: 'Type',
+                    arguments: [`() => ${field.outputType.type}`],
+                  },
+                ]
+              : []),
             {
               name: 'Field',
               arguments: [
@@ -185,9 +195,10 @@ export const generateInputTypeClassFromType = async (
     overwrite: true,
   });
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 2);
+  generateClassTransformerImport(sourceFile);
   generateInputsImports(
     sourceFile,
     inputType.fields
@@ -238,6 +249,14 @@ export const generateInputTypeClassFromType = async (
           decorators: field.hasMappedName
             ? []
             : [
+                ...(field.selectedInputType.kind === 'object'
+                  ? [
+                      {
+                        name: 'Type',
+                        arguments: [`() => ${field.selectedInputType.type}`],
+                      },
+                    ]
+                  : []),
                 {
                   name: 'Field',
                   arguments: [

@@ -9,7 +9,6 @@ export class CreatePostResolver {
     description: undefined
   })
   async createPost(@Context() ctx: any, @Args() args: CreatePostArgs): Promise<Post> {
-    console.log(args.data)
     return ctx.prisma.post.create(args);
   }
 }

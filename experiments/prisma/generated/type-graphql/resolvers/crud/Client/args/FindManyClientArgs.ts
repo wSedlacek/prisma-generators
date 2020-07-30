@@ -3,16 +3,20 @@ import GraphQLJSON from "graphql-type-json";
 import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
+import { plainToClass, Type } from "class-transformer";
 import { UserDistinctFieldEnum } from "../../../../enums/UserDistinctFieldEnum";
 
 @ArgsType()
 export class FindManyClientArgs {
+  @Type(() => ClientWhereInput)
   @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
+  @Type(() => ClientOrderByInput)
   @Field(() => ClientOrderByInput, { nullable: true })
   orderBy?: ClientOrderByInput | undefined;
 
+  @Type(() => ClientWhereUniqueInput)
   @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
 

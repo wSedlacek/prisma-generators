@@ -1,4 +1,4 @@
-import { getFieldTSType, getTypeGraphQLType } from '../helpers';
+import { getFieldTSType, getGraphQLType } from '../helpers';
 import { DmmfDocument } from '../dmmf/dmmf-document';
 import { DMMF } from '../dmmf/types';
 
@@ -27,7 +27,7 @@ export const generateCrudResolverClassMethodDeclaration = (
       {
         name: `${action.operation}`,
         arguments: [
-          `() => ${getTypeGraphQLType(
+          `() => ${getGraphQLType(
             method.outputType,
             dmmfDocument,
             mapping.model,

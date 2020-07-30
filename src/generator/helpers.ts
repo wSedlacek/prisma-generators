@@ -69,7 +69,7 @@ export const mapScalarToTSType = (scalar: string, isInputType: boolean) => {
   }
 };
 
-export const getTypeGraphQLType = (
+export const getGraphQLType = (
   typeInfo: DMMFTypeInfo,
   dmmfDocument: DmmfDocument,
   modelName?: string,

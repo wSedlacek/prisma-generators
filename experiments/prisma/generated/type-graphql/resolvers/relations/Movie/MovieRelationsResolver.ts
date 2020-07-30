@@ -1,6 +1,7 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import { Director } from "../../../models/Director";
 import { Movie } from "../../../models/Movie";
+import { plainToClass, Type } from "class-transformer";
 
 @Resolver(() => Movie)
 export class MovieRelationsResolver {
@@ -9,7 +10,7 @@ export class MovieRelationsResolver {
     description: undefined,
   })
   async director(@Root() movie: Movie, @Context() ctx: any): Promise<Director> {
-    return ctx.prisma.movie.findOne({
+    return plainToClass(Director, await ctx.prisma.movie.findOne({
       where: {
         directorFirstName_directorLastName_title: {
           directorFirstName: movie.directorFirstName,
@@ -17,6 +18,6 @@ export class MovieRelationsResolver {
           title: movie.title,
         },
       },
-    }).director({});
+    }).director({}) as Director);
   }
 }

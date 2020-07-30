@@ -9,10 +9,11 @@ import {
   argsFolderName,
 } from '../config';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateArgsImports,
   generateModelsImports,
   generateArgsBarrelFile,
+  generateClassTransformerImport,
 } from '../imports';
 import { GeneratedResolverData } from '../types';
 import saveSourceFile from '../../utils/saveSourceFile';
@@ -88,7 +89,7 @@ const generateRelationsResolverClassesFromModel = async (
     await saveSourceFile(barrelExportSourceFile);
   }
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateModelsImports(
     sourceFile,
     [...relationFields.map((field) => field.type), model.name].map((typeName) =>
@@ -98,6 +99,7 @@ const generateRelationsResolverClassesFromModel = async (
     ),
     3
   );
+  generateClassTransformerImport(sourceFile);
   generateArgsImports(sourceFile, argTypeNames, 0);
 
   sourceFile.addClass({
@@ -173,9 +175,14 @@ const generateRelationsResolverClassesFromModel = async (
           ],
           // TODO: refactor to AST
           statements: [
-            `return ctx.prisma.${camelCase(model.name)}.findOne({
+            `return plainToClass(${field.typeGraphQLType.replace(
+              /\[|\]/g,
+              ''
+            )}, await ctx.prisma.${camelCase(model.name)}.findOne({
               where: {${whereConditionString}},
-            }).${field.name}(${argsTypeName ? 'args' : '{}'});`,
+            }).${field.name}(${argsTypeName ? 'args' : '{}'}) as ${
+              field.typeGraphQLType
+            });`,
           ],
         };
       }

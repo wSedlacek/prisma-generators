@@ -4,7 +4,7 @@ import path from 'path';
 import { pascalCase } from '../helpers';
 import { resolversFolderName, crudResolversFolderName } from '../config';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
@@ -42,7 +42,7 @@ const generateActionResolverClass = async (
     overwrite: true,
   });
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   if (action.kind === DMMF.ModelAction.aggregate) {
     generateGraphQLFieldsImport(sourceFile);
   }

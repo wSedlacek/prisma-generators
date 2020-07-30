@@ -14,7 +14,7 @@ import {
 import { GeneratedResolverData } from './types';
 import { GenerateCodeOptions } from './options';
 
-export const generateTypeGraphQLImport = (sourceFile: SourceFile) => {
+export const generateNestJSGraphQLImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: '@nestjs/graphql',
     namedImports: [
@@ -70,6 +70,13 @@ export const generatePrismaJsonTypeImport = (
           options.relativePrismaOutputPath
         ),
     namedImports: ['JsonValue', 'InputJsonValue'],
+  });
+};
+
+export const generateClassTransformerImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: 'class-transformer',
+    namedImports: ['plainToClass', 'Type'],
   });
 };
 

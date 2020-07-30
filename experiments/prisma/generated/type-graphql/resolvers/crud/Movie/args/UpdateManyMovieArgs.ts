@@ -2,12 +2,15 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import GraphQLJSON from "graphql-type-json";
 import { MovieUpdateManyMutationInput } from "../../../inputs/MovieUpdateManyMutationInput";
 import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
+import { plainToClass, Type } from "class-transformer";
 
 @ArgsType()
 export class UpdateManyMovieArgs {
+  @Type(() => MovieUpdateManyMutationInput)
   @Field(() => MovieUpdateManyMutationInput, { nullable: false })
   data!: MovieUpdateManyMutationInput;
 
+  @Type(() => MovieWhereInput)
   @Field(() => MovieWhereInput, { nullable: true })
   where?: MovieWhereInput | undefined;
 }

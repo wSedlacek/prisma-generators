@@ -3,10 +3,11 @@ import path from 'path';
 
 import { argsFolderName } from './config';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateInputsImports,
   generateEnumsImports,
   generateGraphQLScalarImport,
+  generateClassTransformerImport,
 } from './imports';
 import saveSourceFile from '../utils/saveSourceFile';
 import { DmmfDocument } from './dmmf/dmmf-document';
@@ -26,7 +27,7 @@ const generateArgsTypeClassFromArgs = async (
     overwrite: true,
   });
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generateInputsImports(
     sourceFile,
@@ -36,6 +37,7 @@ const generateArgsTypeClassFromArgs = async (
       .map((argInputType) => argInputType.type),
     inputImportsLevel
   );
+  generateClassTransformerImport(sourceFile);
   generateEnumsImports(
     sourceFile,
     fields
@@ -65,6 +67,14 @@ const generateArgsTypeClassFromArgs = async (
           hasQuestionToken: isOptional,
           trailingTrivia: '\r\n',
           decorators: [
+            ...(arg.selectedInputType.kind === 'object'
+              ? [
+                  {
+                    name: 'Type',
+                    arguments: [`() => ${arg.selectedInputType.type}`],
+                  },
+                ]
+              : []),
             {
               name: 'Field',
               arguments: [

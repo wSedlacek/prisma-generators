@@ -8,7 +8,7 @@ import {
   ResolveField,
 } from '@nestjs/graphql';
 
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, APP_INTERCEPTOR } from '@nestjs/core';
 import { Module, Logger, ValidationPipe } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
@@ -111,9 +111,6 @@ const main = async () => {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      transformOptions: {
-        enableImplicitConversion: true,
-      },
     })
   );
   await app.listen(port);

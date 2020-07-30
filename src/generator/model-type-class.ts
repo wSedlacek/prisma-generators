@@ -8,11 +8,12 @@ import path from 'path';
 
 import { cleanDocsString } from './helpers';
 import {
-  generateTypeGraphQLImport,
+  generateNestJSGraphQLImport,
   generateModelsImports,
   generateEnumsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
+  generateClassTransformerImport,
 } from './imports';
 import { modelsFolderName } from './config';
 import saveSourceFile from '../utils/saveSourceFile';
@@ -33,7 +34,7 @@ const generateObjectTypeClassFromModel = async (
     overwrite: true,
   });
 
-  generateTypeGraphQLImport(sourceFile);
+  generateNestJSGraphQLImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 1);
   generateModelsImports(
@@ -47,6 +48,7 @@ const generateObjectTypeClassFromModel = async (
           : field.type
       )
   );
+  generateClassTransformerImport(sourceFile);
   generateEnumsImports(
     sourceFile,
     model.fields
@@ -85,6 +87,14 @@ const generateObjectTypeClassFromModel = async (
             ...(field.relationName || field.typeFieldAlias
               ? []
               : [
+                  ...(field.kind === 'object'
+                    ? [
+                        {
+                          name: 'Type',
+                          arguments: [`() => ${field.type}`],
+                        },
+                      ]
+                    : []),
                   {
                     name: 'Field',
                     arguments: [
@@ -115,6 +125,14 @@ const generateObjectTypeClassFromModel = async (
           returnType: field.fieldTSType,
           trailingTrivia: '\r\n',
           decorators: [
+            ...(field.kind === 'object'
+              ? [
+                  {
+                    name: 'Type',
+                    arguments: [`() => ${field.type}`],
+                  },
+                ]
+              : []),
             {
               name: 'Field',
               arguments: [
