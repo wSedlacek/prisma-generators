@@ -20,7 +20,6 @@ import {
   generateClassTransformerDTOImport,
 } from './imports';
 import saveSourceFile from '../utils/saveSourceFile';
-import generateArgsTypeClassFromArgs from './args-class';
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { DMMF } from './dmmf/types';
 import { GenerateCodeOptions } from './options';
@@ -52,23 +51,6 @@ export const generateOutputTypeClassFromType = async (
       .filter((field) => field.outputType.kind === 'object')
       .map((field) => field.outputType.type),
     1
-  );
-
-  // TODO: move to the root level
-  await Promise.all(
-    type.fields.map(async (field) => {
-      if (field.argsTypeName) {
-        await generateArgsTypeClassFromArgs(
-          project,
-          fileDirPath,
-          field.args,
-          field.argsTypeName,
-          dmmfDocument,
-          options,
-          2
-        );
-      }
-    })
   );
 
   sourceFile.addClass({
@@ -159,13 +141,7 @@ export const generateInputTypeClassFromType = async (
     2
   );
 
-  const fields = inputType.fields.map((field) => {
-    const hasMappedName = field.name !== field.typeName;
-    return {
-      ...field,
-      hasMappedName,
-    };
-  });
+  const mappedFields = inputType.fields.filter((field) => field.hasMappedName);
 
   sourceFile.addClass({
     name: inputType.typeName,
@@ -181,77 +157,77 @@ export const generateInputTypeClassFromType = async (
         ],
       },
     ],
-    properties: fields.map<OptionalKind<PropertyDeclarationStructure>>(
-      (field) => {
-        const isOptional = !field.selectedInputType.isRequired;
-        return {
-          name: field.name,
-          type: field.fieldTSType,
-          hasExclamationToken: !isOptional,
-          hasQuestionToken: isOptional,
-          trailingTrivia: '\r\n',
-          decorators: field.hasMappedName
-            ? []
-            : [
-                ...(field.selectedInputType.kind === 'object'
-                  ? [
-                      {
-                        name: 'ClassTransformer__Type',
-                        arguments: [`() => ${field.selectedInputType.type}`],
-                      },
-                    ]
-                  : []),
-                {
-                  name: 'Field',
-                  arguments: [
-                    `() => ${field.typeGraphQLType}`,
-                    `{
+    properties: inputType.fields.map<
+      OptionalKind<PropertyDeclarationStructure>
+    >((field) => {
+      const isOptional = !field.selectedInputType.isRequired;
+      return {
+        name: field.name,
+        type: field.fieldTSType,
+        hasExclamationToken: !isOptional,
+        hasQuestionToken: isOptional,
+        trailingTrivia: '\r\n',
+        decorators: field.hasMappedName
+          ? []
+          : [
+              {
+                name: 'Field',
+                arguments: [
+                  `() => ${field.typeGraphQLType}`,
+                  `{
                       nullable: ${isOptional},
                       description: undefined
                     }`,
-                  ],
+                ],
+              },
+            ],
+      };
+    }),
+    getAccessors: mappedFields.map<
+      OptionalKind<GetAccessorDeclarationStructure>
+    >((field) => {
+      return {
+        name: field.typeName,
+        type: field.fieldTSType,
+        hasExclamationToken: field.selectedInputType.isRequired,
+        hasQuestionToken: !field.selectedInputType.isRequired,
+        trailingTrivia: '\r\n',
+        statements: [`return this.${field.name};`],
+        decorators: [
+          ...(field.selectedInputType.kind === 'object'
+            ? [
+                {
+                  name: 'ClassTransformer__Type',
+                  arguments: [`() => ${field.selectedInputType.type}`],
                 },
-              ],
-        };
-      }
-    ),
-    getAccessors: fields
-      .filter((field) => field.hasMappedName)
-      .map<OptionalKind<GetAccessorDeclarationStructure>>((field) => {
-        return {
-          name: field.typeName,
-          type: field.fieldTSType,
-          hasExclamationToken: field.selectedInputType.isRequired,
-          hasQuestionToken: !field.selectedInputType.isRequired,
-          trailingTrivia: '\r\n',
-          statements: [`return this.${field.name};`],
-          decorators: [
-            {
-              name: 'Field',
-              arguments: [
-                `() => ${field.typeGraphQLType}`,
-                `{
+              ]
+            : []),
+          {
+            name: 'Field',
+            arguments: [
+              `() => ${field.typeGraphQLType}`,
+              `{
                   nullable: ${!field.selectedInputType.isRequired},
                   description: undefined
                 }`,
-              ],
-            },
-          ],
-        };
-      }),
-    setAccessors: fields
-      .filter((field) => field.hasMappedName)
-      .map<OptionalKind<SetAccessorDeclarationStructure>>((field) => {
-        return {
-          name: field.typeName,
-          type: field.fieldTSType,
-          hasExclamationToken: field.selectedInputType.isRequired,
-          hasQuestionToken: !field.selectedInputType.isRequired,
-          trailingTrivia: '\r\n',
-          parameters: [{ name: field.name, type: field.fieldTSType }],
-          statements: [`this.${field.name} = ${field.name};`],
-        };
-      }),
+            ],
+          },
+        ],
+      };
+    }),
+    setAccessors: mappedFields.map<
+      OptionalKind<SetAccessorDeclarationStructure>
+    >((field) => {
+      return {
+        name: field.typeName,
+        type: field.fieldTSType,
+        hasExclamationToken: field.selectedInputType.isRequired,
+        hasQuestionToken: !field.selectedInputType.isRequired,
+        trailingTrivia: '\r\n',
+        parameters: [{ name: field.name, type: field.fieldTSType }],
+        statements: [`this.${field.name} = ${field.name};`],
+      };
+    }),
   });
 
   await saveSourceFile(sourceFile);

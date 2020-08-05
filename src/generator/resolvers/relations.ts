@@ -62,7 +62,6 @@ const generateRelationsResolverClassesFromModel = async (
       const outputTypeField = outputType.fields.find(
         (it) => it.name === field.name
       )!;
-      const fieldDocs = cleanDocsString(field.documentation);
 
       let argsTypeName: string | undefined;
       if (outputTypeField.args.length > 0) {
@@ -75,7 +74,7 @@ const generateRelationsResolverClassesFromModel = async (
           options
         );
       }
-      return { field, fieldDocs, argsTypeName };
+      return { field, fieldDocs: field.docs, argsTypeName };
     })
   );
   const argTypeNames = methodsInfo
