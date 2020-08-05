@@ -12,8 +12,8 @@ export class AggregateMovieArgs {
   where?: MovieWhereInput | undefined;
 
   @ClassTransformer__Type(() => MovieOrderByInput)
-  @Field(() => MovieOrderByInput, { nullable: true })
-  orderBy?: MovieOrderByInput | undefined;
+  @Field(() => [MovieOrderByInput], { nullable: true })
+  orderBy?: MovieOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => MovieWhereUniqueInput, { nullable: true })

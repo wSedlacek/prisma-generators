@@ -71,9 +71,9 @@ type CategoryMinAggregateOutputType {
 }
 
 input CategoryOrderByInput {
-  name: OrderByArg
-  number: OrderByArg
-  slug: OrderByArg
+  name: SortOrder
+  number: SortOrder
+  slug: SortOrder
 }
 
 type CategorySumAggregateOutputType {
@@ -187,13 +187,13 @@ type ClientMinAggregateOutputType {
 }
 
 input ClientOrderByInput {
-  accountBalance: OrderByArg
-  age: OrderByArg
-  amount: OrderByArg
-  email: OrderByArg
-  firstName: OrderByArg
-  id: OrderByArg
-  role: OrderByArg
+  accountBalance: SortOrder
+  age: SortOrder
+  amount: SortOrder
+  email: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  role: SortOrder
 }
 
 type ClientSumAggregateOutputType {
@@ -304,8 +304,8 @@ input DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
 }
 
 input DirectorOrderByInput {
-  firstName: OrderByArg
-  lastName: OrderByArg
+  firstName: SortOrder
+  lastName: SortOrder
 }
 
 input DirectorUpdateInput {
@@ -430,9 +430,9 @@ input MovieFilter {
 }
 
 input MovieOrderByInput {
-  directorFirstName: OrderByArg
-  directorLastName: OrderByArg
-  title: OrderByArg
+  directorFirstName: SortOrder
+  directorLastName: SortOrder
+  title: SortOrder
 }
 
 input MovieScalarWhereInput {
@@ -607,11 +607,6 @@ input NullableStringFilter {
   startsWith: String
 }
 
-enum OrderByArg {
-  asc
-  desc
-}
-
 type Patient {
   email: String!
   firstName: String!
@@ -631,9 +626,9 @@ enum PatientDistinctFieldEnum {
 }
 
 input PatientOrderByInput {
-  email: OrderByArg
-  firstName: OrderByArg
-  lastName: OrderByArg
+  email: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
 }
 
 input PatientUpdateInput {
@@ -732,15 +727,15 @@ enum PostKind {
 }
 
 input PostOrderByInput {
-  authorId: OrderByArg
-  content: OrderByArg
-  createdAt: OrderByArg
-  kind: OrderByArg
-  metadata: OrderByArg
-  published: OrderByArg
-  title: OrderByArg
-  updatedAt: OrderByArg
-  uuid: OrderByArg
+  authorId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  kind: SortOrder
+  metadata: SortOrder
+  published: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+  uuid: SortOrder
 }
 
 input PostScalarWhereInput {
@@ -965,6 +960,11 @@ input RoleFilter {
 input SlugNumberCompoundUniqueInput {
   number: Int!
   slug: String!
+}
+
+enum SortOrder {
+  asc
+  desc
 }
 
 input StringFilter {

@@ -12,8 +12,8 @@ export class AggregateClientArgs {
   where?: ClientWhereInput | undefined;
 
   @ClassTransformer__Type(() => ClientOrderByInput)
-  @Field(() => ClientOrderByInput, { nullable: true })
-  orderBy?: ClientOrderByInput | undefined;
+  @Field(() => [ClientOrderByInput], { nullable: true })
+  orderBy?: ClientOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => ClientWhereUniqueInput)
   @Field(() => ClientWhereUniqueInput, { nullable: true })

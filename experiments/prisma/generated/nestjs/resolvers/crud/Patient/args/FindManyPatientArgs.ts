@@ -12,8 +12,8 @@ export class FindManyPatientArgs {
   where?: PatientWhereInput | undefined;
 
   @ClassTransformer__Type(() => PatientOrderByInput)
-  @Field(() => PatientOrderByInput, { nullable: true })
-  orderBy?: PatientOrderByInput | undefined;
+  @Field(() => [PatientOrderByInput], { nullable: true })
+  orderBy?: PatientOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => PatientWhereUniqueInput)
   @Field(() => PatientWhereUniqueInput, { nullable: true })

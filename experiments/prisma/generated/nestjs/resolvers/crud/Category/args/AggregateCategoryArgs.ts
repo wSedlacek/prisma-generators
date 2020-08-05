@@ -12,8 +12,8 @@ export class AggregateCategoryArgs {
   where?: CategoryWhereInput | undefined;
 
   @ClassTransformer__Type(() => CategoryOrderByInput)
-  @Field(() => CategoryOrderByInput, { nullable: true })
-  orderBy?: CategoryOrderByInput | undefined;
+  @Field(() => [CategoryOrderByInput], { nullable: true })
+  orderBy?: CategoryOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => CategoryWhereUniqueInput)
   @Field(() => CategoryWhereUniqueInput, { nullable: true })

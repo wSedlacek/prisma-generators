@@ -12,8 +12,8 @@ export class FindManyPostArgs {
   where?: PostWhereInput | undefined;
 
   @ClassTransformer__Type(() => PostOrderByInput)
-  @Field(() => PostOrderByInput, { nullable: true })
-  orderBy?: PostOrderByInput | undefined;
+  @Field(() => [PostOrderByInput], { nullable: true })
+  orderBy?: PostOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => PostWhereUniqueInput, { nullable: true })

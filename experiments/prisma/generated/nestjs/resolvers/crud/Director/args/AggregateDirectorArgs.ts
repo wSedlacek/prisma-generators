@@ -12,8 +12,8 @@ export class AggregateDirectorArgs {
   where?: DirectorWhereInput | undefined;
 
   @ClassTransformer__Type(() => DirectorOrderByInput)
-  @Field(() => DirectorOrderByInput, { nullable: true })
-  orderBy?: DirectorOrderByInput | undefined;
+  @Field(() => [DirectorOrderByInput], { nullable: true })
+  orderBy?: DirectorOrderByInput[] | undefined;
 
   @ClassTransformer__Type(() => DirectorWhereUniqueInput)
   @Field(() => DirectorWhereUniqueInput, { nullable: true })

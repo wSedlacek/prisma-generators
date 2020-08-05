@@ -1,10 +1,10 @@
 import { registerEnumType } from "@nestjs/graphql";
 
-export enum OrderByArg {
+export enum SortOrder {
   asc = "asc",
   desc = "desc"
 }
-registerEnumType(OrderByArg, {
-  name: "OrderByArg",
+registerEnumType(SortOrder, {
+  name: "SortOrder",
   description: undefined,
 });
