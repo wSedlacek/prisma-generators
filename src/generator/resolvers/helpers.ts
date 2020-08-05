@@ -5,14 +5,11 @@ import { DMMF } from '../dmmf/types';
 export const generateCrudResolverClassMethodDeclaration = (
   action: DMMF.Action,
   typeName: string,
-  method: DMMF.SchemaField,
-  argsTypeName: string | undefined,
-  collectionName: string,
   dmmfDocument: DmmfDocument,
   mapping: DMMF.Mapping
 ) => {
   const returnTSType = getFieldTSType(
-    method.outputType,
+    action.method.outputType,
     dmmfDocument,
     false,
     mapping.model,
@@ -28,16 +25,16 @@ export const generateCrudResolverClassMethodDeclaration = (
         name: `${action.operation}`,
         arguments: [
           `() => ${getGraphQLType(
-            method.outputType,
+            action.method.outputType,
             dmmfDocument,
             mapping.model,
             typeName
           )}`,
           `{
-            ${[
-              `nullable: ${!method.outputType.isRequired}`,
-              `description: undefined`,
-            ].join(',\n')}
+${[
+  `nullable: ${!action.method.outputType.isRequired}`,
+  `description: undefined`,
+].join(',\n')}
           }`,
         ],
       },
@@ -58,12 +55,12 @@ export const generateCrudResolverClassMethodDeclaration = (
             },
           ]
         : []),
-      ...(!argsTypeName
+      ...(!action.argsTypeName
         ? []
         : [
             {
               name: 'args',
-              type: argsTypeName,
+              type: action.argsTypeName,
               decorators: [{ name: 'Args', arguments: [] }],
             },
           ]),
@@ -83,21 +80,23 @@ export const generateCrudResolverClassMethodDeclaration = (
                   }),
               );
             }`,
-            `return ctx.prisma.${collectionName}.${action.kind}({
+            `return ctx.prisma.${mapping.collectionName}.${action.kind}({
               ...args,
               ...transformFields(graphqlFields(info as any)),
             });`,
           ]
         : [
-            `return plainToClass(${returnTSType
-              .replace(/\[|\]/g, '')
-              .replace(
-                '| undefined',
-                ''
-              )}, await ctx.prisma.${collectionName}.${action.kind}(${
-              argsTypeName ? 'args' : ''
+            `return plainToClass(${getGraphQLType(
+              action.method.outputType,
+              dmmfDocument,
+              mapping.model,
+              typeName
+            ).replace(/\[|\]/g, '')}, await ctx.prisma.${
+              mapping.collectionName
+            }.${action.kind}(${
+              action.argsTypeName ? 'args' : ''
             }) as ${getGraphQLType(
-              method.outputType,
+              action.method.outputType,
               dmmfDocument,
               mapping.model,
               typeName

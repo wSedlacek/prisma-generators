@@ -155,9 +155,9 @@ const transformOutputType = (dmmfDocument: DmmfDocument) => {
             selectedInputType,
             fieldTSType,
             typeGraphQLType,
+            hasMappedName: arg.name !== typeName,
             // TODO: add proper mapping in the future if needed
             typeName: arg.name,
-            hasMappedName: arg.name !== typeName,
           };
         });
         const argsTypeName =
@@ -196,7 +196,6 @@ const getMappedOutputTypeName = (
   ].find((type) => outputTypeName.includes(type));
   if (dedicatedTypeSuffix) {
     const modelName = outputTypeName.replace(dedicatedTypeSuffix, '');
-    // console.log(outputTypeName, modelName, dedicatedTypeSuffix);
     return `${dmmfDocument.getModelTypeName(modelName)}${dedicatedTypeSuffix}`;
   }
 
@@ -213,15 +212,42 @@ const transformMapping = (
       ([modelAction, fieldName]) => {
         const kind = modelAction as DMMF.ModelAction;
         const modelName = dmmfDocument.getModelTypeName(model) ?? model;
+        const actionOutputType = dmmfDocument.schema.outputTypes.find((type) =>
+          type.fields.some((field) => field.name === fieldName)
+        );
+        if (!actionOutputType) {
+          throw new Error(
+            `Cannot find type with field ${fieldName} in root types definitions!`
+          );
+        }
+        const method = actionOutputType.fields.find(
+          (field) => field.name === fieldName
+        )!;
+        const argsTypeName =
+          method.args.length > 0
+            ? `${pascalCase(
+                `${kind}${dmmfDocument.getModelTypeName(mapping.model)}`
+              )}Args`
+            : undefined;
+        const outputTypeName = method.outputType.type as string;
+
         return {
           name: getMappedActionName(kind, modelName, options),
           fieldName,
           kind: kind,
-          operation: getOperationKindName(kind) as any,
+          operation: getOperationKindName(kind)!,
+          method,
+          argsTypeName,
+          outputTypeName,
         };
       }
     );
-    return { model, plural, actions };
+    return {
+      model,
+      plural,
+      actions,
+      collectionName: camelCase(mapping.model),
+    };
   };
 };
 
@@ -273,7 +299,9 @@ const getMappedActionName = (
   }
 };
 
-const getOperationKindName = (actionName: string): string | undefined => {
+const getOperationKindName = (
+  actionName: string
+): 'Query' | 'Mutation' | undefined => {
   if (supportedQueryActions.includes(actionName as any)) return 'Query';
   if (supportedMutationActions.includes(actionName as any)) return 'Mutation';
 };

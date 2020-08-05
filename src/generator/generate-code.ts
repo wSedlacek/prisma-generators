@@ -253,7 +253,6 @@ const generateCode = async (
         baseDirPath,
         mapping,
         model,
-        rootTypes,
         modelNames,
         options,
         dmmfDocument
