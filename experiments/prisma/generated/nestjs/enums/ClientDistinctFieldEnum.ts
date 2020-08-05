@@ -1,15 +1,15 @@
 import { registerEnumType } from "@nestjs/graphql";
 
-export enum UserDistinctFieldEnum {
+export enum ClientDistinctFieldEnum {
   id = "id",
   email = "email",
-  name = "name",
+  firstName = "name",
   age = "age",
-  balance = "balance",
+  accountBalance = "balance",
   amount = "amount",
   role = "role"
 }
-registerEnumType(UserDistinctFieldEnum, {
-  name: "UserDistinctFieldEnum",
+registerEnumType(ClientDistinctFieldEnum, {
+  name: "ClientDistinctFieldEnum",
   description: undefined,
 });
