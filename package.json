@@ -1,6 +1,6 @@
 {
   "name": "nestjs-prisma-generator",
-  "version": "0.4.1-alpha9",
+  "version": "0.4.1-alpha10",
   "scripts": {
     "build": "tsc",
     "check:type": "tsc --noEmit",
@@ -8,7 +8,8 @@
     "test": "ts-node ./tests/helpers/setup-tests.ts && jest --watch --verbose",
     "test:integration": "ts-node ./tests/helpers/setup-tests.ts && env-cmd jest --watch --verbose --config ./jest.config.integration.js",
     "test:ci": "ts-node ./tests/helpers/setup-tests.ts && jest --coverage --verbose --runInBand && jest --coverage --verbose --runInBand --config ./jest.config.integration.js",
-    "format": "prettier --write ./**/*.{js,json,ts,tsx}"
+    "format": "prettier --write ./**/*.{js,json,ts,tsx}",
+    "prepublish": "yarn build"
   },
   "peerDependencies": {
     "@nestjs/graphql": ">=7",
