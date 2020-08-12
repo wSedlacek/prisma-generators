@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
 import { FindOneClientArgs } from "./args/FindOneClientArgs";
 import { Client } from "../../../models/Client";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 
 @Resolver(() => Client)
 export class FindOneClientResolver {

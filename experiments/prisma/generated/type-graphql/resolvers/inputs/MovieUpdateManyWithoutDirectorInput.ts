@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { MovieCreateOrConnectWithoutDirectorInput } from "../inputs/MovieCreateOrConnectWithoutDirectorInput";
 import { MovieCreateWithoutDirectorInput } from "../inputs/MovieCreateWithoutDirectorInput";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
@@ -15,70 +15,70 @@ import { MovieWhereUniqueInput } from "../inputs/MovieWhereUniqueInput";
   description: undefined,
 })
 export class MovieUpdateManyWithoutDirectorInput {
-  @Type(() => MovieCreateWithoutDirectorInput)
+  @ClassTransformer__Type(() => MovieCreateWithoutDirectorInput)
   @Field(() => [MovieCreateWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   create?: MovieCreateWithoutDirectorInput[] | undefined;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: MovieWhereUniqueInput[] | undefined;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   set?: MovieWhereUniqueInput[] | undefined;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   disconnect?: MovieWhereUniqueInput[] | undefined;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => [MovieWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   delete?: MovieWhereUniqueInput[] | undefined;
 
-  @Type(() => MovieUpdateWithWhereUniqueWithoutDirectorInput)
+  @ClassTransformer__Type(() => MovieUpdateWithWhereUniqueWithoutDirectorInput)
   @Field(() => [MovieUpdateWithWhereUniqueWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   update?: MovieUpdateWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @Type(() => MovieUpdateManyWithWhereNestedInput)
+  @ClassTransformer__Type(() => MovieUpdateManyWithWhereNestedInput)
   @Field(() => [MovieUpdateManyWithWhereNestedInput], {
     nullable: true,
     description: undefined
   })
   updateMany?: MovieUpdateManyWithWhereNestedInput[] | undefined;
 
-  @Type(() => MovieScalarWhereInput)
+  @ClassTransformer__Type(() => MovieScalarWhereInput)
   @Field(() => [MovieScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   deleteMany?: MovieScalarWhereInput[] | undefined;
 
-  @Type(() => MovieUpsertWithWhereUniqueWithoutDirectorInput)
+  @ClassTransformer__Type(() => MovieUpsertWithWhereUniqueWithoutDirectorInput)
   @Field(() => [MovieUpsertWithWhereUniqueWithoutDirectorInput], {
     nullable: true,
     description: undefined
   })
   upsert?: MovieUpsertWithWhereUniqueWithoutDirectorInput[] | undefined;
 
-  @Type(() => MovieCreateOrConnectWithoutDirectorInput)
+  @ClassTransformer__Type(() => MovieCreateOrConnectWithoutDirectorInput)
   @Field(() => [MovieCreateOrConnectWithoutDirectorInput], {
     nullable: true,
     description: undefined

@@ -1,5 +1,5 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import graphqlFields from "graphql-fields";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
+import * as graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateCategoryArgs } from "./args/AggregateCategoryArgs";
 import { CreateCategoryArgs } from "./args/CreateCategoryArgs";
@@ -11,7 +11,7 @@ import { UpdateCategoryArgs } from "./args/UpdateCategoryArgs";
 import { UpdateManyCategoryArgs } from "./args/UpdateManyCategoryArgs";
 import { UpsertCategoryArgs } from "./args/UpsertCategoryArgs";
 import { Category } from "../../../models/Category";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 import { AggregateCategory } from "../../outputs/AggregateCategory";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -30,7 +30,7 @@ export class CategoryCrudResolver {
     description: undefined
   })
   async categories(@Context() ctx: any, @Args() args: FindManyCategoryArgs): Promise<Category[]> {
-    return plainToClass(Category, await ctx.prisma.category.findMany(args) as Category[]);
+    return plainToClass(Category, await ctx.prisma.category.findMany(args) as [Category]);
   }
 
   @Mutation(() => Category, {

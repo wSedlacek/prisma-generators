@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { DirectorCreateOrConnectWithoutMovieInput } from "../inputs/DirectorCreateOrConnectWithoutMovieInput";
 import { DirectorCreateWithoutMoviesInput } from "../inputs/DirectorCreateWithoutMoviesInput";
 import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
@@ -11,21 +11,21 @@ import { DirectorWhereUniqueInput } from "../inputs/DirectorWhereUniqueInput";
   description: undefined,
 })
 export class DirectorCreateOneWithoutMoviesInput {
-  @Type(() => DirectorCreateWithoutMoviesInput)
+  @ClassTransformer__Type(() => DirectorCreateWithoutMoviesInput)
   @Field(() => DirectorCreateWithoutMoviesInput, {
     nullable: true,
     description: undefined
   })
   create?: DirectorCreateWithoutMoviesInput | undefined;
 
-  @Type(() => DirectorWhereUniqueInput)
+  @ClassTransformer__Type(() => DirectorWhereUniqueInput)
   @Field(() => DirectorWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
   connect?: DirectorWhereUniqueInput | undefined;
 
-  @Type(() => DirectorCreateOrConnectWithoutMovieInput)
+  @ClassTransformer__Type(() => DirectorCreateOrConnectWithoutMovieInput)
   @Field(() => DirectorCreateOrConnectWithoutMovieInput, {
     nullable: true,
     description: undefined

@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { FirstNameLastNameCompoundUniqueInput } from "../inputs/FirstNameLastNameCompoundUniqueInput";
 
 @InputType({
@@ -9,7 +9,7 @@ import { FirstNameLastNameCompoundUniqueInput } from "../inputs/FirstNameLastNam
   description: undefined,
 })
 export class DirectorWhereUniqueInput {
-  @Type(() => FirstNameLastNameCompoundUniqueInput)
+  @ClassTransformer__Type(() => FirstNameLastNameCompoundUniqueInput)
   @Field(() => FirstNameLastNameCompoundUniqueInput, {
     nullable: true,
     description: undefined

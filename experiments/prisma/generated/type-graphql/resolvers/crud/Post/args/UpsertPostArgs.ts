@@ -1,21 +1,20 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { PostCreateInput } from "../../../inputs/PostCreateInput";
 import { PostUpdateInput } from "../../../inputs/PostUpdateInput";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class UpsertPostArgs {
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 
-  @Type(() => PostCreateInput)
+  @ClassTransformer__Type(() => PostCreateInput)
   @Field(() => PostCreateInput, { nullable: false })
   create!: PostCreateInput;
 
-  @Type(() => PostUpdateInput)
+  @ClassTransformer__Type(() => PostUpdateInput)
   @Field(() => PostUpdateInput, { nullable: false })
   update!: PostUpdateInput;
 }

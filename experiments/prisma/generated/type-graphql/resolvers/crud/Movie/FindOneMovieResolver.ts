@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
 import { FindOneMovieArgs } from "./args/FindOneMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 
 @Resolver(() => Movie)
 export class FindOneMovieResolver {

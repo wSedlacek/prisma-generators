@@ -1,5 +1,5 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import graphqlFields from "graphql-fields";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
+import * as graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateClientArgs } from "./args/AggregateClientArgs";
 import { CreateClientArgs } from "./args/CreateClientArgs";
@@ -11,7 +11,7 @@ import { UpdateClientArgs } from "./args/UpdateClientArgs";
 import { UpdateManyClientArgs } from "./args/UpdateManyClientArgs";
 import { UpsertClientArgs } from "./args/UpsertClientArgs";
 import { Client } from "../../../models/Client";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 import { AggregateClient } from "../../outputs/AggregateClient";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -30,7 +30,7 @@ export class ClientCrudResolver {
     description: undefined
   })
   async clients(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<Client[]> {
-    return plainToClass(Client, await ctx.prisma.user.findMany(args) as Client[]);
+    return plainToClass(Client, await ctx.prisma.user.findMany(args) as [Client]);
   }
 
   @Mutation(() => Client, {

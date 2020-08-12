@@ -1,5 +1,5 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import graphqlFields from "graphql-fields";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
+import * as graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { CreateMovieArgs } from "./args/CreateMovieArgs";
@@ -11,7 +11,7 @@ import { UpdateManyMovieArgs } from "./args/UpdateManyMovieArgs";
 import { UpdateMovieArgs } from "./args/UpdateMovieArgs";
 import { UpsertMovieArgs } from "./args/UpsertMovieArgs";
 import { Movie } from "../../../models/Movie";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 import { AggregateMovie } from "../../outputs/AggregateMovie";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -30,7 +30,7 @@ export class MovieCrudResolver {
     description: undefined
   })
   async movies(@Context() ctx: any, @Args() args: FindManyMovieArgs): Promise<Movie[]> {
-    return plainToClass(Movie, await ctx.prisma.movie.findMany(args) as Movie[]);
+    return plainToClass(Movie, await ctx.prisma.movie.findMany(args) as [Movie]);
   }
 
   @Mutation(() => Movie, {

@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { StringFilter } from "../inputs/StringFilter";
 
 @InputType({
@@ -9,42 +9,42 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class PatientWhereInput {
-  @Type(() => StringFilter)
+  @ClassTransformer__Type(() => StringFilter)
   @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   firstName?: StringFilter | undefined;
 
-  @Type(() => StringFilter)
+  @ClassTransformer__Type(() => StringFilter)
   @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   lastName?: StringFilter | undefined;
 
-  @Type(() => StringFilter)
+  @ClassTransformer__Type(() => StringFilter)
   @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   email?: StringFilter | undefined;
 
-  @Type(() => PatientWhereInput)
+  @ClassTransformer__Type(() => PatientWhereInput)
   @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: PatientWhereInput[] | undefined;
 
-  @Type(() => PatientWhereInput)
+  @ClassTransformer__Type(() => PatientWhereInput)
   @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: PatientWhereInput[] | undefined;
 
-  @Type(() => PatientWhereInput)
+  @ClassTransformer__Type(() => PatientWhereInput)
   @Field(() => [PatientWhereInput], {
     nullable: true,
     description: undefined

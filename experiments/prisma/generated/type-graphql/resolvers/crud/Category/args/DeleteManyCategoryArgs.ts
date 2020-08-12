@@ -1,11 +1,10 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class DeleteManyCategoryArgs {
-  @Type(() => CategoryWhereInput)
+  @ClassTransformer__Type(() => CategoryWhereInput)
   @Field(() => CategoryWhereInput, { nullable: true })
   where?: CategoryWhereInput | undefined;
 }

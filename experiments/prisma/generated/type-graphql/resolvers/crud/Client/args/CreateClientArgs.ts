@@ -1,11 +1,10 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { ClientCreateInput } from "../../../inputs/ClientCreateInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class CreateClientArgs {
-  @Type(() => ClientCreateInput)
+  @ClassTransformer__Type(() => ClientCreateInput)
   @Field(() => ClientCreateInput, { nullable: false })
   data!: ClientCreateInput;
 }

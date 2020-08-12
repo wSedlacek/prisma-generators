@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { PostCreateOrConnectWithoutUserInput } from "../inputs/PostCreateOrConnectWithoutUserInput";
 import { PostCreateWithoutAuthorInput } from "../inputs/PostCreateWithoutAuthorInput";
 import { PostScalarWhereInput } from "../inputs/PostScalarWhereInput";
@@ -15,70 +15,70 @@ import { PostWhereUniqueInput } from "../inputs/PostWhereUniqueInput";
   description: undefined,
 })
 export class PostUpdateManyWithoutAuthorInput {
-  @Type(() => PostCreateWithoutAuthorInput)
+  @ClassTransformer__Type(() => PostCreateWithoutAuthorInput)
   @Field(() => [PostCreateWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   create?: PostCreateWithoutAuthorInput[] | undefined;
 
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   connect?: PostWhereUniqueInput[] | undefined;
 
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   set?: PostWhereUniqueInput[] | undefined;
 
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   disconnect?: PostWhereUniqueInput[] | undefined;
 
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => [PostWhereUniqueInput], {
     nullable: true,
     description: undefined
   })
   delete?: PostWhereUniqueInput[] | undefined;
 
-  @Type(() => PostUpdateWithWhereUniqueWithoutAuthorInput)
+  @ClassTransformer__Type(() => PostUpdateWithWhereUniqueWithoutAuthorInput)
   @Field(() => [PostUpdateWithWhereUniqueWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | undefined;
 
-  @Type(() => PostUpdateManyWithWhereNestedInput)
+  @ClassTransformer__Type(() => PostUpdateManyWithWhereNestedInput)
   @Field(() => [PostUpdateManyWithWhereNestedInput], {
     nullable: true,
     description: undefined
   })
   updateMany?: PostUpdateManyWithWhereNestedInput[] | undefined;
 
-  @Type(() => PostScalarWhereInput)
+  @ClassTransformer__Type(() => PostScalarWhereInput)
   @Field(() => [PostScalarWhereInput], {
     nullable: true,
     description: undefined
   })
   deleteMany?: PostScalarWhereInput[] | undefined;
 
-  @Type(() => PostUpsertWithWhereUniqueWithoutAuthorInput)
+  @ClassTransformer__Type(() => PostUpsertWithWhereUniqueWithoutAuthorInput)
   @Field(() => [PostUpsertWithWhereUniqueWithoutAuthorInput], {
     nullable: true,
     description: undefined
   })
   upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | undefined;
 
-  @Type(() => PostCreateOrConnectWithoutUserInput)
+  @ClassTransformer__Type(() => PostCreateOrConnectWithoutUserInput)
   @Field(() => [PostCreateOrConnectWithoutUserInput], {
     nullable: true,
     description: undefined

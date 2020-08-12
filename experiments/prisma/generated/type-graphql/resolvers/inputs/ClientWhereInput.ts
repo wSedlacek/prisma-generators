@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { FloatFilter } from "../inputs/FloatFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { NullableStringFilter } from "../inputs/NullableStringFilter";
@@ -14,14 +14,14 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class ClientWhereInput {
-  @Type(() => IntFilter)
+  @ClassTransformer__Type(() => IntFilter)
   @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
   id?: IntFilter | undefined;
 
-  @Type(() => StringFilter)
+  @ClassTransformer__Type(() => StringFilter)
   @Field(() => StringFilter, {
     nullable: true,
     description: undefined
@@ -30,7 +30,7 @@ export class ClientWhereInput {
 
   name?: NullableStringFilter | undefined;
 
-  @Type(() => IntFilter)
+  @ClassTransformer__Type(() => IntFilter)
   @Field(() => IntFilter, {
     nullable: true,
     description: undefined
@@ -39,7 +39,7 @@ export class ClientWhereInput {
 
   balance?: FloatFilter | undefined;
 
-  @Type(() => FloatFilter)
+  @ClassTransformer__Type(() => FloatFilter)
   @Field(() => FloatFilter, {
     nullable: true,
     description: undefined
@@ -48,28 +48,28 @@ export class ClientWhereInput {
 
   posts?: PostFilter | undefined;
 
-  @Type(() => RoleFilter)
+  @ClassTransformer__Type(() => RoleFilter)
   @Field(() => RoleFilter, {
     nullable: true,
     description: undefined
   })
   role?: RoleFilter | undefined;
 
-  @Type(() => ClientWhereInput)
+  @ClassTransformer__Type(() => ClientWhereInput)
   @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: ClientWhereInput[] | undefined;
 
-  @Type(() => ClientWhereInput)
+  @ClassTransformer__Type(() => ClientWhereInput)
   @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: ClientWhereInput[] | undefined;
 
-  @Type(() => ClientWhereInput)
+  @ClassTransformer__Type(() => ClientWhereInput)
   @Field(() => [ClientWhereInput], {
     nullable: true,
     description: undefined

@@ -1,26 +1,25 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { UserDistinctFieldEnum } from "../../../../enums/UserDistinctFieldEnum";
 
 @ArgsType()
 export class FindManyClientArgs {
-  @Type(() => ClientWhereInput)
+  @ClassTransformer__Type(() => ClientWhereInput)
   @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @Type(() => ClientOrderByInput)
+  @ClassTransformer__Type(() => ClientOrderByInput)
   @Field(() => ClientOrderByInput, { nullable: true })
   orderBy?: ClientOrderByInput | undefined;
 
-  @Type(() => ClientWhereUniqueInput)
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
   @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })

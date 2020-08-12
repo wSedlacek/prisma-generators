@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, Int, ObjectType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { PostAvgAggregateOutputType } from "../outputs/PostAvgAggregateOutputType";
 import { PostMaxAggregateOutputType } from "../outputs/PostMaxAggregateOutputType";
 import { PostMinAggregateOutputType } from "../outputs/PostMinAggregateOutputType";
@@ -18,28 +18,28 @@ export class AggregatePost {
   })
   count!: number;
 
-  @Type(() => PostAvgAggregateOutputType)
+  @ClassTransformer__Type(() => PostAvgAggregateOutputType)
   @Field(() => PostAvgAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   avg?: PostAvgAggregateOutputType | undefined;
 
-  @Type(() => PostSumAggregateOutputType)
+  @ClassTransformer__Type(() => PostSumAggregateOutputType)
   @Field(() => PostSumAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   sum?: PostSumAggregateOutputType | undefined;
 
-  @Type(() => PostMinAggregateOutputType)
+  @ClassTransformer__Type(() => PostMinAggregateOutputType)
   @Field(() => PostMinAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   min?: PostMinAggregateOutputType | undefined;
 
-  @Type(() => PostMaxAggregateOutputType)
+  @ClassTransformer__Type(() => PostMaxAggregateOutputType)
   @Field(() => PostMaxAggregateOutputType, {
     nullable: true,
     description: undefined

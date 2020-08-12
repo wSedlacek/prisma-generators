@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
 import { DeletePostArgs } from "./args/DeletePostArgs";
 import { Post } from "../../../models/Post";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 
 @Resolver(() => Post)
 export class DeletePostResolver {

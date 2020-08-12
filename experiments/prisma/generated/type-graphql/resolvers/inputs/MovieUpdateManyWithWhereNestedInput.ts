@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { MovieScalarWhereInput } from "../inputs/MovieScalarWhereInput";
 import { MovieUpdateManyDataInput } from "../inputs/MovieUpdateManyDataInput";
 
@@ -10,14 +10,14 @@ import { MovieUpdateManyDataInput } from "../inputs/MovieUpdateManyDataInput";
   description: undefined,
 })
 export class MovieUpdateManyWithWhereNestedInput {
-  @Type(() => MovieScalarWhereInput)
+  @ClassTransformer__Type(() => MovieScalarWhereInput)
   @Field(() => MovieScalarWhereInput, {
     nullable: false,
     description: undefined
   })
   where!: MovieScalarWhereInput;
 
-  @Type(() => MovieUpdateManyDataInput)
+  @ClassTransformer__Type(() => MovieUpdateManyDataInput)
   @Field(() => MovieUpdateManyDataInput, {
     nullable: false,
     description: undefined

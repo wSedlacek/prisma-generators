@@ -68,7 +68,7 @@
             "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "renamed field doc\\n@TypeGraphQL.field(\"firstName\")"
+            "documentation": "renamed field doc\\n@NestJS.field(\"firstName\")"
           },
           {
             "name": "age",
@@ -95,7 +95,7 @@
             "hasDefaultValue": false,
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "@TypeGraphQL.field(\"accountBalance\")"
+            "documentation": "@NestJS.field(\"accountBalance\")"
           },
           {
             "name": "amount",
@@ -126,7 +126,7 @@
             "relationOnDelete": "NONE",
             "isGenerated": false,
             "isUpdatedAt": false,
-            "documentation": "@TypeGraphQL.field(\"clientPosts\")"
+            "documentation": "@NestJS.field(\"clientPosts\")"
           },
           {
             "name": "role",
@@ -143,7 +143,7 @@
           }
         ],
         "isGenerated": false,
-        "documentation": "User model doc\\n@@TypeGraphQL.type(\"Client\")",
+        "documentation": "User model doc\\n@@NestJS.type(\"Client\")",
         "idFields": [],
         "uniqueFields": [],
         "uniqueIndexes": []

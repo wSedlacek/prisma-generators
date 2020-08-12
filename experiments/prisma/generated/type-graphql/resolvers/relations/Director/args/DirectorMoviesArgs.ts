@@ -1,26 +1,25 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { MovieOrderByInput } from "../../../inputs/MovieOrderByInput";
 import { MovieWhereInput } from "../../../inputs/MovieWhereInput";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { MovieDistinctFieldEnum } from "../../../../enums/MovieDistinctFieldEnum";
 
 @ArgsType()
 export class DirectorMoviesArgs {
-  @Type(() => MovieWhereInput)
+  @ClassTransformer__Type(() => MovieWhereInput)
   @Field(() => MovieWhereInput, { nullable: true })
   where?: MovieWhereInput | undefined;
 
-  @Type(() => MovieOrderByInput)
+  @ClassTransformer__Type(() => MovieOrderByInput)
   @Field(() => MovieOrderByInput, { nullable: true })
   orderBy?: MovieOrderByInput | undefined;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => MovieWhereUniqueInput, { nullable: true })
   cursor?: MovieWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })

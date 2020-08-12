@@ -1,11 +1,10 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { PostWhereUniqueInput } from "../../../inputs/PostWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class FindOnePostArgs {
-  @Type(() => PostWhereUniqueInput)
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => PostWhereUniqueInput, { nullable: false })
   where!: PostWhereUniqueInput;
 }

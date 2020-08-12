@@ -1,9 +1,9 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import graphqlFields from "graphql-fields";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
+import * as graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePatientArgs } from "./args/AggregatePatientArgs";
 import { Patient } from "../../../models/Patient";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 import { AggregatePatient } from "../../outputs/AggregatePatient";
 
 @Resolver(() => Patient)

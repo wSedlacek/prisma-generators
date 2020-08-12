@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
 import { UpdateDirectorArgs } from "./args/UpdateDirectorArgs";
 import { Director } from "../../../models/Director";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 
 @Resolver(() => Director)
 export class UpdateDirectorResolver {

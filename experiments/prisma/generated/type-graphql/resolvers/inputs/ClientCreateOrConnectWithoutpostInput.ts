@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { ClientCreateWithoutPostsInput } from "../inputs/ClientCreateWithoutPostsInput";
 import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
 
@@ -10,14 +10,14 @@ import { ClientWhereUniqueInput } from "../inputs/ClientWhereUniqueInput";
   description: undefined,
 })
 export class ClientCreateOrConnectWithoutpostInput {
-  @Type(() => ClientWhereUniqueInput)
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
   @Field(() => ClientWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: ClientWhereUniqueInput;
 
-  @Type(() => ClientCreateWithoutPostsInput)
+  @ClassTransformer__Type(() => ClientCreateWithoutPostsInput)
   @Field(() => ClientCreateWithoutPostsInput, {
     nullable: false,
     description: undefined

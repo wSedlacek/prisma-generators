@@ -1,16 +1,15 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { PatientUpdateInput } from "../../../inputs/PatientUpdateInput";
 import { PatientWhereUniqueInput } from "../../../inputs/PatientWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class UpdatePatientArgs {
-  @Type(() => PatientUpdateInput)
+  @ClassTransformer__Type(() => PatientUpdateInput)
   @Field(() => PatientUpdateInput, { nullable: false })
   data!: PatientUpdateInput;
 
-  @Type(() => PatientWhereUniqueInput)
+  @ClassTransformer__Type(() => PatientWhereUniqueInput)
   @Field(() => PatientWhereUniqueInput, { nullable: false })
   where!: PatientWhereUniqueInput;
 }

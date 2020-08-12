@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { PostWhereInput } from "../inputs/PostWhereInput";
 
 @InputType({
@@ -9,21 +9,21 @@ import { PostWhereInput } from "../inputs/PostWhereInput";
   description: undefined,
 })
 export class PostFilter {
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined
   })
   every?: PostWhereInput | undefined;
 
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined
   })
   some?: PostWhereInput | undefined;
 
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => PostWhereInput, {
     nullable: true,
     description: undefined

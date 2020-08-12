@@ -1,16 +1,15 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { MovieUpdateInput } from "../../../inputs/MovieUpdateInput";
 import { MovieWhereUniqueInput } from "../../../inputs/MovieWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 
 @ArgsType()
 export class UpdateMovieArgs {
-  @Type(() => MovieUpdateInput)
+  @ClassTransformer__Type(() => MovieUpdateInput)
   @Field(() => MovieUpdateInput, { nullable: false })
   data!: MovieUpdateInput;
 
-  @Type(() => MovieWhereUniqueInput)
+  @ClassTransformer__Type(() => MovieWhereUniqueInput)
   @Field(() => MovieWhereUniqueInput, { nullable: false })
   where!: MovieWhereUniqueInput;
 }

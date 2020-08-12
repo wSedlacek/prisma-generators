@@ -1,5 +1,5 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import graphqlFields from "graphql-fields";
+import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
+import * as graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregatePostArgs } from "./args/AggregatePostArgs";
 import { CreatePostArgs } from "./args/CreatePostArgs";
@@ -11,7 +11,7 @@ import { UpdateManyPostArgs } from "./args/UpdateManyPostArgs";
 import { UpdatePostArgs } from "./args/UpdatePostArgs";
 import { UpsertPostArgs } from "./args/UpsertPostArgs";
 import { Post } from "../../../models/Post";
-import { plainToClass, Type } from "class-transformer";
+import { plainToClass } from "class-transformer";
 import { AggregatePost } from "../../outputs/AggregatePost";
 import { BatchPayload } from "../../outputs/BatchPayload";
 
@@ -30,7 +30,7 @@ export class PostCrudResolver {
     description: undefined
   })
   async posts(@Context() ctx: any, @Args() args: FindManyPostArgs): Promise<Post[]> {
-    return plainToClass(Post, await ctx.prisma.post.findMany(args) as Post[]);
+    return plainToClass(Post, await ctx.prisma.post.findMany(args) as [Post]);
   }
 
   @Mutation(() => Post, {

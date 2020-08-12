@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { BooleanFilter } from "../inputs/BooleanFilter";
 import { ClientWhereInput } from "../inputs/ClientWhereInput";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
@@ -17,91 +17,91 @@ import { UUIDFilter } from "../inputs/UUIDFilter";
   description: undefined,
 })
 export class PostWhereInput {
-  @Type(() => UUIDFilter)
+  @ClassTransformer__Type(() => UUIDFilter)
   @Field(() => UUIDFilter, {
     nullable: true,
     description: undefined
   })
   uuid?: UUIDFilter | undefined;
 
-  @Type(() => DateTimeFilter)
+  @ClassTransformer__Type(() => DateTimeFilter)
   @Field(() => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
   createdAt?: DateTimeFilter | undefined;
 
-  @Type(() => DateTimeFilter)
+  @ClassTransformer__Type(() => DateTimeFilter)
   @Field(() => DateTimeFilter, {
     nullable: true,
     description: undefined
   })
   updatedAt?: DateTimeFilter | undefined;
 
-  @Type(() => BooleanFilter)
+  @ClassTransformer__Type(() => BooleanFilter)
   @Field(() => BooleanFilter, {
     nullable: true,
     description: undefined
   })
   published?: BooleanFilter | undefined;
 
-  @Type(() => StringFilter)
+  @ClassTransformer__Type(() => StringFilter)
   @Field(() => StringFilter, {
     nullable: true,
     description: undefined
   })
   title?: StringFilter | undefined;
 
-  @Type(() => NullableStringFilter)
+  @ClassTransformer__Type(() => NullableStringFilter)
   @Field(() => NullableStringFilter, {
     nullable: true,
     description: undefined
   })
   content?: NullableStringFilter | undefined;
 
-  @Type(() => IntFilter)
+  @ClassTransformer__Type(() => IntFilter)
   @Field(() => IntFilter, {
     nullable: true,
     description: undefined
   })
   authorId?: IntFilter | undefined;
 
-  @Type(() => NullablePostKindFilter)
+  @ClassTransformer__Type(() => NullablePostKindFilter)
   @Field(() => NullablePostKindFilter, {
     nullable: true,
     description: undefined
   })
   kind?: NullablePostKindFilter | undefined;
 
-  @Type(() => JsonFilter)
+  @ClassTransformer__Type(() => JsonFilter)
   @Field(() => JsonFilter, {
     nullable: true,
     description: undefined
   })
   metadata?: JsonFilter | undefined;
 
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => [PostWhereInput], {
     nullable: true,
     description: undefined
   })
   AND?: PostWhereInput[] | undefined;
 
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => [PostWhereInput], {
     nullable: true,
     description: undefined
   })
   OR?: PostWhereInput[] | undefined;
 
-  @Type(() => PostWhereInput)
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => [PostWhereInput], {
     nullable: true,
     description: undefined
   })
   NOT?: PostWhereInput[] | undefined;
 
-  @Type(() => ClientWhereInput)
+  @ClassTransformer__Type(() => ClientWhereInput)
   @Field(() => ClientWhereInput, {
     nullable: true,
     description: undefined

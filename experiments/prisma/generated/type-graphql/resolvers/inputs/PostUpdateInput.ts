@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { ClientUpdateOneRequiredWithoutPostsInput } from "../inputs/ClientUpdateOneRequiredWithoutPostsInput";
 import { PostKind } from "../../enums/PostKind";
 
@@ -58,7 +58,7 @@ export class PostUpdateInput {
   })
   metadata?: InputJsonValue | undefined;
 
-  @Type(() => ClientUpdateOneRequiredWithoutPostsInput)
+  @ClassTransformer__Type(() => ClientUpdateOneRequiredWithoutPostsInput)
   @Field(() => ClientUpdateOneRequiredWithoutPostsInput, {
     nullable: true,
     description: undefined

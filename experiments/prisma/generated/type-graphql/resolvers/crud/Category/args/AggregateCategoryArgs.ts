@@ -1,26 +1,25 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
-import GraphQLJSON from "graphql-type-json";
+import { ArgsType, Field, Int } from "@nestjs/graphql";
 import { CategoryOrderByInput } from "../../../inputs/CategoryOrderByInput";
 import { CategoryWhereInput } from "../../../inputs/CategoryWhereInput";
 import { CategoryWhereUniqueInput } from "../../../inputs/CategoryWhereUniqueInput";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { CategoryDistinctFieldEnum } from "../../../../enums/CategoryDistinctFieldEnum";
 
 @ArgsType()
 export class AggregateCategoryArgs {
-  @Type(() => CategoryWhereInput)
+  @ClassTransformer__Type(() => CategoryWhereInput)
   @Field(() => CategoryWhereInput, { nullable: true })
   where?: CategoryWhereInput | undefined;
 
-  @Type(() => CategoryOrderByInput)
+  @ClassTransformer__Type(() => CategoryOrderByInput)
   @Field(() => CategoryOrderByInput, { nullable: true })
   orderBy?: CategoryOrderByInput | undefined;
 
-  @Type(() => CategoryWhereUniqueInput)
+  @ClassTransformer__Type(() => CategoryWhereUniqueInput)
   @Field(() => CategoryWhereUniqueInput, { nullable: true })
   cursor?: CategoryWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })

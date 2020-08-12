@@ -1,7 +1,7 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Field, Float, ID, Int, ObjectType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
-import { plainToClass, Type } from "class-transformer";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { ClientAvgAggregateOutputType } from "../outputs/ClientAvgAggregateOutputType";
 import { ClientMaxAggregateOutputType } from "../outputs/ClientMaxAggregateOutputType";
 import { ClientMinAggregateOutputType } from "../outputs/ClientMinAggregateOutputType";
@@ -18,28 +18,28 @@ export class AggregateClient {
   })
   count!: number;
 
-  @Type(() => ClientAvgAggregateOutputType)
+  @ClassTransformer__Type(() => ClientAvgAggregateOutputType)
   @Field(() => ClientAvgAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   avg?: ClientAvgAggregateOutputType | undefined;
 
-  @Type(() => ClientSumAggregateOutputType)
+  @ClassTransformer__Type(() => ClientSumAggregateOutputType)
   @Field(() => ClientSumAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   sum?: ClientSumAggregateOutputType | undefined;
 
-  @Type(() => ClientMinAggregateOutputType)
+  @ClassTransformer__Type(() => ClientMinAggregateOutputType)
   @Field(() => ClientMinAggregateOutputType, {
     nullable: true,
     description: undefined
   })
   min?: ClientMinAggregateOutputType | undefined;
 
-  @Type(() => ClientMaxAggregateOutputType)
+  @ClassTransformer__Type(() => ClientMaxAggregateOutputType)
   @Field(() => ClientMaxAggregateOutputType, {
     nullable: true,
     description: undefined
