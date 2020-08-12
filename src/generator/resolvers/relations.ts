@@ -1,5 +1,5 @@
 import { OptionalKind, MethodDeclarationStructure, Project } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { camelCase, pascalCase, cleanDocsString } from '../helpers';
 import generateArgsTypeClassFromArgs from '../args-class';
@@ -145,8 +145,17 @@ const generateRelationsResolverClassesFromModel = async (
               arguments: [
                 `() => ${field.typeGraphQLType}`,
                 `{
-                  nullable: ${!field.isRequired},
-                  description: ${fieldDocs ? `"${fieldDocs}"` : 'undefined'},
+                  ${[
+                    `nullable: ${!field.isRequired}`,
+                    `description: ${
+                      fieldDocs ? `"${fieldDocs}"` : 'undefined'
+                    }`,
+                    ...(!argsTypeName
+                      ? [`complexity: 1 * options.childComplexity`]
+                      : [
+                          `complexity: (options) => (options.args as ${argsTypeName}).take ?? 1 * options.childComplexity`,
+                        ]),
+                  ].join(',')}
                 }`,
               ],
             },

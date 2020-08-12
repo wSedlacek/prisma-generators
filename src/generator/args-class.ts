@@ -70,7 +70,7 @@ const generateArgsTypeClassFromArgs = async (
             ...(arg.selectedInputType.kind === 'object'
               ? [
                   {
-                    name: 'Type',
+                    name: 'ClassTransformer__Type',
                     arguments: [`() => ${arg.selectedInputType.type}`],
                   },
                 ]
@@ -79,7 +79,10 @@ const generateArgsTypeClassFromArgs = async (
               name: 'Field',
               arguments: [
                 `() => ${arg.typeGraphQLType}`,
-                `{ nullable: ${isOptional} }`,
+                `{ ${[
+                  `nullable: ${isOptional}`,
+                  ...(arg.typeName === 'take' ? ['defaultValue: 20'] : []),
+                ].join(',')} }`,
               ],
             },
           ],
