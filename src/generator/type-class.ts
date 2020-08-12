@@ -170,6 +170,14 @@ export const generateInputTypeClassFromType = async (
         decorators: field.hasMappedName
           ? []
           : [
+              ...(field.selectedInputType.kind === 'object'
+                ? [
+                    {
+                      name: 'ClassTransformer__Type',
+                      arguments: [`() => ${field.selectedInputType.type}`],
+                    },
+                  ]
+                : []),
               {
                 name: 'Field',
                 arguments: [

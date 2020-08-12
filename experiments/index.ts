@@ -27,7 +27,7 @@ import {
   MovieRelationsResolver,
   FindManyClientArgs,
 } from './prisma/generated/nestjs';
-import { PrismaClient } from './prisma/generated/client';
+import { PrismaClient, FindManyUserArgs } from './prisma/generated/client';
 import { plainToClass } from 'class-transformer';
 import { ComplexityPlugin } from './complexity.plugin';
 
@@ -53,7 +53,10 @@ class ClientResolver {
     @Args() args: FindManyClientArgs,
     @Context() { prisma }: ContextType
   ) {
-    return plainToClass(Client, await prisma.user.findMany(args));
+    return plainToClass(
+      Client,
+      await prisma.user.findMany(args as FindManyUserArgs)
+    );
   }
 
   @ResolveField()

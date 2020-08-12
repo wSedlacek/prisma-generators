@@ -76,6 +76,7 @@ export class ClientWhereInput {
   })
   NOT?: ClientWhereInput[] | undefined;
 
+  @ClassTransformer__Type(() => NullableStringFilter)
   @Field(() => NullableStringFilter, {
     nullable: true,
     description: undefined
@@ -88,6 +89,7 @@ export class ClientWhereInput {
     this.name = name;
   }
 
+  @ClassTransformer__Type(() => FloatFilter)
   @Field(() => FloatFilter, {
     nullable: true,
     description: undefined
@@ -100,6 +102,7 @@ export class ClientWhereInput {
     this.balance = balance;
   }
 
+  @ClassTransformer__Type(() => PostFilter)
   @Field(() => PostFilter, {
     nullable: true,
     description: undefined

@@ -187,8 +187,8 @@ export class AggregateUserArgs {
   @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
-  @Field(() => UserOrderByInput, { nullable: true })
-  orderBy?: UserOrderByInput | undefined;
+  @Field(() => [UserOrderByInput], { nullable: true })
+  orderBy?: UserOrderByInput[] | undefined;
 
   @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
@@ -253,8 +253,8 @@ export class FindManyUserArgs {
   @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
-  @Field(() => UserOrderByInput, { nullable: true })
-  orderBy?: UserOrderByInput | undefined;
+  @Field(() => [UserOrderByInput], { nullable: true })
+  orderBy?: UserOrderByInput[] | undefined;
 
   @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
@@ -884,8 +884,8 @@ export class AggregateClientArgs {
   @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @Field(() => ClientOrderByInput, { nullable: true })
-  orderBy?: ClientOrderByInput | undefined;
+  @Field(() => [ClientOrderByInput], { nullable: true })
+  orderBy?: ClientOrderByInput[] | undefined;
 
   @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;
@@ -950,8 +950,8 @@ export class FindManyClientArgs {
   @Field(() => ClientWhereInput, { nullable: true })
   where?: ClientWhereInput | undefined;
 
-  @Field(() => ClientOrderByInput, { nullable: true })
-  orderBy?: ClientOrderByInput | undefined;
+  @Field(() => [ClientOrderByInput], { nullable: true })
+  orderBy?: ClientOrderByInput[] | undefined;
 
   @Field(() => ClientWhereUniqueInput, { nullable: true })
   cursor?: ClientWhereUniqueInput | undefined;

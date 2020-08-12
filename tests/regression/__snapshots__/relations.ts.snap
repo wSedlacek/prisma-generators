@@ -109,8 +109,8 @@ export class UserPostsArgs {
   @Field(() => PostWhereInput, { nullable: true })
   where?: PostWhereInput | undefined;
 
-  @Field(() => PostOrderByInput, { nullable: true })
-  orderBy?: PostOrderByInput | undefined;
+  @Field(() => [PostOrderByInput], { nullable: true })
+  orderBy?: PostOrderByInput[] | undefined;
 
   @Field(() => PostWhereUniqueInput, { nullable: true })
   cursor?: PostWhereUniqueInput | undefined;

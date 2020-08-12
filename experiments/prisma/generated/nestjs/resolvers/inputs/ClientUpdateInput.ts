@@ -64,6 +64,7 @@ export class ClientUpdateInput {
     this.balance = balance;
   }
 
+  @ClassTransformer__Type(() => PostUpdateManyWithoutAuthorInput)
   @Field(() => PostUpdateManyWithoutAuthorInput, {
     nullable: true,
     description: undefined

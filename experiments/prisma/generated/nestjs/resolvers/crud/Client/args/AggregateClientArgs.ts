@@ -3,7 +3,7 @@ import { ClientOrderByInput } from "../../../inputs/ClientOrderByInput";
 import { ClientWhereInput } from "../../../inputs/ClientWhereInput";
 import { ClientWhereUniqueInput } from "../../../inputs/ClientWhereUniqueInput";
 import { Type as ClassTransformer__Type } from "class-transformer";
-import { UserDistinctFieldEnum } from "../../../../enums/UserDistinctFieldEnum";
+import { ClientDistinctFieldEnum } from "../../../../enums/ClientDistinctFieldEnum";
 
 @ArgsType()
 export class AggregateClientArgs {
@@ -25,6 +25,6 @@ export class AggregateClientArgs {
   @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @Field(() => [UserDistinctFieldEnum], { nullable: true })
-  distinct?: Array<keyof typeof UserDistinctFieldEnum> | undefined;
+  @Field(() => [ClientDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ClientDistinctFieldEnum> | undefined;
 }

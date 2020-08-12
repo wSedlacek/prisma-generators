@@ -64,6 +64,7 @@ export class ClientCreateInput {
     this.balance = balance;
   }
 
+  @ClassTransformer__Type(() => PostCreateManyWithoutAuthorInput)
   @Field(() => PostCreateManyWithoutAuthorInput, {
     nullable: true,
     description: undefined
