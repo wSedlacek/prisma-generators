@@ -8,7 +8,7 @@ import {
   Root,
 } from 'type-graphql';
 import { ApolloServer } from 'apollo-server';
-import path from 'path';
+import * as path from 'path';
 import { PrismaClient } from '@prisma/client';
 
 import {
