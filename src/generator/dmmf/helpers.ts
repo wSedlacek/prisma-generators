@@ -1,6 +1,6 @@
 // TODO: support not string args
-export const modelAttributeRegex = /(@@TypeGraphQL\.)+([A-z])+(\(")+([A-z])+("\))+/;
-export const fieldAttributeRegex = /(@TypeGraphQL\.)+([A-z])+(\(")+([A-z])+("\))+/;
+export const modelAttributeRegex = /(@@NestJS\.)+([A-z])+(\(")+([A-z])+("\))+/;
+export const fieldAttributeRegex = /(@NestJS\.)+([A-z])+(\(")+([A-z])+("\))+/;
 export const attributeNameRegex = /(?:\.)+([A-Za-z])+(?:\()+/;
 export const attributeArgsRegex = /(?:\(")+([A-Za-z])+(?:"\))+/;
 
