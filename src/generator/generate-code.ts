@@ -201,7 +201,8 @@ const generateCode = async (
           model,
           mapping,
           outputType,
-          dmmfDocument
+          dmmfDocument,
+          options
         );
       })
   );

@@ -73,6 +73,7 @@ export const generateOutputTypeClassFromType = async (
           field.args,
           field.argsTypeName,
           dmmfDocument,
+          options,
           2
         );
       }

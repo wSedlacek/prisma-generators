@@ -6,12 +6,12 @@ import {
   generateNestJSArgImport,
   generateInputsImports,
   generateEnumsImports,
-  generateGraphQLScalarImport,
   generateClassTransformerDTOImport,
 } from './imports';
 import saveSourceFile from '../utils/saveSourceFile';
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { DMMF } from './dmmf/types';
+import { GenerateCodeOptions } from './options';
 
 const generateArgsTypeClassFromArgs = async (
   project: Project,
@@ -19,6 +19,7 @@ const generateArgsTypeClassFromArgs = async (
   fields: DMMF.SchemaArg[],
   argsTypeName: string,
   dmmfDocument: DmmfDocument,
+  options: GenerateCodeOptions,
   inputImportsLevel = 3
 ) => {
   const dirPath = path.resolve(generateDirPath, argsFolderName);
@@ -80,7 +81,9 @@ const generateArgsTypeClassFromArgs = async (
                 `() => ${arg.typeGraphQLType}`,
                 `{ ${[
                   `nullable: ${isOptional}`,
-                  ...(arg.typeName === 'take' ? ['defaultValue: 20'] : []),
+                  ...(arg.typeName === 'take'
+                    ? [`defaultValue: ${options.defaultTake ?? 20}`]
+                    : []),
                 ].join(',')} }`,
               ],
             },

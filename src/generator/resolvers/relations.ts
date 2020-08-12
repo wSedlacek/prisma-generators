@@ -19,6 +19,7 @@ import { GeneratedResolverData } from '../types';
 import saveSourceFile from '../../utils/saveSourceFile';
 import { DmmfDocument } from '../dmmf/dmmf-document';
 import { DMMF } from '../dmmf/types';
+import { GenerateCodeOptions } from '../options';
 
 const generateRelationsResolverClassesFromModel = async (
   project: Project,
@@ -26,7 +27,8 @@ const generateRelationsResolverClassesFromModel = async (
   model: DMMF.Model,
   mapping: DMMF.Mapping,
   outputType: DMMF.OutputType,
-  dmmfDocument: DmmfDocument
+  dmmfDocument: DmmfDocument,
+  options: GenerateCodeOptions
 ): Promise<GeneratedResolverData> => {
   const resolverName = `${model.typeName}RelationsResolver`;
   const rootArgName = camelCase(model.typeName);
@@ -69,7 +71,8 @@ const generateRelationsResolverClassesFromModel = async (
           resolverDirPath,
           outputTypeField.args,
           `${model.typeName}${pascalCase(field.name)}Args`,
-          dmmfDocument
+          dmmfDocument,
+          options
         );
       }
       return { field, fieldDocs, argsTypeName };

@@ -26,7 +26,7 @@ import {
   DirectorRelationsResolver,
   MovieRelationsResolver,
   FindManyClientArgs,
-} from './prisma/generated/type-graphql';
+} from './prisma/generated/nestjs';
 import { PrismaClient } from './prisma/generated/client';
 import { plainToClass } from 'class-transformer';
 import { ComplexityPlugin } from './complexity.plugin';

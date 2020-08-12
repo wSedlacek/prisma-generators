@@ -81,7 +81,8 @@ const generateCrudResolverClassFromMapping = async (
           `${pascalCase(
             `${action.kind}${dmmfDocument.getModelTypeName(mapping.model)}`
           )}Args`,
-          dmmfDocument
+          dmmfDocument,
+          options
         );
       }
 

@@ -4,4 +4,5 @@ export interface GenerateCodeOptions {
   useOriginalMapping?: boolean;
   relativePrismaOutputPath: string;
   absolutePrismaOutputPath?: string;
+  defaultTake?: number;
 }

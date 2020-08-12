@@ -12,10 +12,11 @@ generator client {
   previewFeatures = ["aggregateApi", "distinct", "connectOrCreate"]
 }
 
-generator typegraphql {
-  provider = "node ../src/cli/dev.ts"
-  output   = "../prisma/generated/type-graphql"
-  emitDMMF = true
+generator nestjs {
+  provider    = "node ../src/cli/dev.ts"
+  output      = "../prisma/generated/nestjs"
+  emitDMMF    = true
+  defaultTake = 20
 }
 
 // Role enum comment
