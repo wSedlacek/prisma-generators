@@ -1,5 +1,5 @@
 import { OptionalKind, MethodDeclarationStructure, Project } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { camelCase, pascalCase } from '../helpers';
 import { GeneratedResolverData } from '../types';

@@ -1,5 +1,5 @@
 import { SourceFile, OptionalKind, ExportDeclarationStructure } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import {
   modelsFolderName,
@@ -41,7 +41,7 @@ export const generateNestJSGraphQLImport = (sourceFile: SourceFile) => {
 export const generateGraphQLFieldsImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'graphql-fields',
-    defaultImport: 'graphqlFields',
+    namespaceImport: 'graphqlFields',
   });
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'graphql',
@@ -76,7 +76,10 @@ export const generatePrismaJsonTypeImport = (
 export const generateClassTransformerImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'class-transformer',
-    namedImports: ['plainToClass', 'Type'],
+    namedImports: [
+      'plainToClass',
+      { name: 'Type', alias: 'ClassTransformer__Type' },
+    ],
   });
 };
 

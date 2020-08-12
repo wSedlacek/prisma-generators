@@ -1,4 +1,4 @@
-import path from 'path';
+import * as path from 'path';
 import { promises as fs } from 'fs';
 
 const removeDir = async (dirPath: string, onlyContent: boolean) => {

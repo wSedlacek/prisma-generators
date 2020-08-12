@@ -10,11 +10,13 @@
     "importHelpers": true,
     "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
     "./src/**/*.ts"
+  ],
+  "exclude": [
+    "./**/__snapshots__/**/*.ts"
   ]
 }

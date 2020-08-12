@@ -4,7 +4,7 @@ import {
   Project,
   GetAccessorDeclarationStructure,
 } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { cleanDocsString } from './helpers';
 import {
@@ -90,7 +90,7 @@ const generateObjectTypeClassFromModel = async (
                   ...(field.kind === 'object'
                     ? [
                         {
-                          name: 'Type',
+                          name: 'ClassTransformer__Type',
                           arguments: [`() => ${field.type}`],
                         },
                       ]
@@ -128,7 +128,7 @@ const generateObjectTypeClassFromModel = async (
             ...(field.kind === 'object'
               ? [
                   {
-                    name: 'Type',
+                    name: 'ClassTransformer__Type',
                     arguments: [`() => ${field.type}`],
                   },
                 ]

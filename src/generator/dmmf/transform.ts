@@ -10,7 +10,7 @@ import {
   pascalCase,
 } from '../helpers';
 import { DmmfDocument } from './dmmf-document';
-import pluralize from 'pluralize';
+import * as pluralize from 'pluralize';
 import { GenerateCodeOptions } from '../options';
 import { supportedQueryActions, supportedMutationActions } from '../config';
 

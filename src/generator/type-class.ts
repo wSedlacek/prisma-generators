@@ -6,7 +6,7 @@ import {
   GetAccessorDeclarationStructure,
   SetAccessorDeclarationStructure,
 } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { camelCase } from './helpers';
 import { outputsFolderName, inputsFolderName } from './config';
@@ -110,7 +110,7 @@ export const generateOutputTypeClassFromType = async (
             ...(field.outputType.kind === 'object'
               ? [
                   {
-                    name: 'Type',
+                    name: 'ClassTransformer__Type',
                     arguments: [`() => ${field.outputType.type}`],
                   },
                 ]
@@ -252,7 +252,7 @@ export const generateInputTypeClassFromType = async (
                 ...(field.selectedInputType.kind === 'object'
                   ? [
                       {
-                        name: 'Type',
+                        name: 'ClassTransformer__Type',
                         arguments: [`() => ${field.selectedInputType.type}`],
                       },
                     ]

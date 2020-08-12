@@ -1,5 +1,5 @@
 import { Project } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { pascalCase } from '../helpers';
 import { resolversFolderName, crudResolversFolderName } from '../config';

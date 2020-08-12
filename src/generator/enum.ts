@@ -1,5 +1,5 @@
 import { EnumMemberStructure, OptionalKind, Project } from 'ts-morph';
-import path from 'path';
+import * as path from 'path';
 
 import { generateNestJSGraphQLImport } from './imports';
 import { enumsFolderName } from './config';
