@@ -1,6 +1,6 @@
 {
   "name": "nestjs-prisma-generator",
-  "version": "0.4.1-alpha12",
+  "version": "0.4.1-alpha13",
   "scripts": {
     "build": "tsc",
     "check:type": "tsc --noEmit",
