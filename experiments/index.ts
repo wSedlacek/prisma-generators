@@ -29,6 +29,7 @@ import {
 } from './prisma/generated/type-graphql';
 import { PrismaClient } from './prisma/generated/client';
 import { plainToClass } from 'class-transformer';
+import { ComplexityPlugin } from './complexity.plugin';
 
 // @ObjectType()
 // class User extends BaseUser {}
@@ -95,6 +96,7 @@ const prisma = new PrismaClient({ log: ['query'] });
     MovieRelationsResolver,
     DirectorCrudResolver,
     DirectorRelationsResolver,
+    ComplexityPlugin,
   ],
 })
 class AppModule {}
