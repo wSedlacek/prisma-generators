@@ -2,13 +2,11 @@ import {
   PropertyDeclarationStructure,
   OptionalKind,
   Project,
-  MethodDeclarationStructure,
   GetAccessorDeclarationStructure,
   SetAccessorDeclarationStructure,
 } from 'ts-morph';
 import * as path from 'path';
 
-import { camelCase } from './helpers';
 import { outputsFolderName, inputsFolderName } from './config';
 import {
   generateNestJSModelImport,
@@ -48,13 +46,6 @@ export const generateOutputTypeClassFromType = async (
   generatePrismaJsonTypeImport(sourceFile, options, 2);
   generateClassTransformerDTOImport(sourceFile);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
-  // generateInputsImports(
-  //   sourceFile,
-  //   inputType.fields
-  //     .filter(field => field.selectedInputType.kind === "object")
-  //     .map(field => field.selectedInputType.type)
-  //     .filter(fieldType => fieldType !== inputType.typeName),
-  // );
   generateOutputsImports(
     sourceFile,
     type.fields
@@ -80,9 +71,6 @@ export const generateOutputTypeClassFromType = async (
     })
   );
 
-  // const propertyFields = type.name.includes("Aggregate") ? [] : type.fields;
-  // const methodFields = type.name.includes("Aggregate") ? type.fields : [];
-
   sourceFile.addClass({
     name: type.typeName,
     isExported: true,
@@ -97,7 +85,6 @@ export const generateOutputTypeClassFromType = async (
         ],
       },
     ],
-    // properties: propertyFields.map<OptionalKind<PropertyDeclarationStructure>>(
     properties: type.fields.map<OptionalKind<PropertyDeclarationStructure>>(
       (field) => {
         const isRequired = field.outputType.isRequired;
@@ -131,51 +118,6 @@ export const generateOutputTypeClassFromType = async (
         };
       }
     ),
-    // methods: methodFields
-    //   // TODO: allow also for other fields args
-    //   .map<OptionalKind<MethodDeclarationStructure>>(field => {
-    //     const isRequired = field.outputType.isRequired;
-    //     const collectionName = camelCase(type.modelName);
-    //   return {
-    //     name: fieldInfo.name,
-    //     type: getFieldTSType(
-    //       fieldInfo.outputType as DMMFTypeInfo,
-    //       dmmfDocument,
-    //     ),
-    //     trailingTrivia: "\r\n",
-    //     decorators: [
-    //       {
-    //         name: "Field",
-    //         arguments: [
-    //           `() => ${getTypeGraphQLType(
-    //             fieldInfo.outputType as DMMFTypeInfo,
-    //             dmmfDocument,
-    //           )}`,
-    //           `{
-    //             nullable: ${!isRequired},
-    //             description: undefined
-    //           }`,
-    //         ],
-    //       },
-    //     ],
-    //     parameters: [
-    //       {
-    //         name: "ctx",
-    //         // TODO: import custom `ContextType`
-    //         type: "any",
-    //         decorators: [{ name: "Context", arguments: [] }],
-    //       },
-    //       {
-    //         name: "args",
-    //         type: fieldInfo.argsTypeName,
-    //         decorators: [{ name: "Args", arguments: [] }],
-    //       },
-    //     ],
-    //     statements: [
-    //       `return ctx.prisma.${collectionName}.${fieldInfo.name}(args);`,
-    //     ],
-    //   };
-    // }),
   });
 
   await saveSourceFile(sourceFile);
