@@ -4,17 +4,13 @@ import * as path from 'path';
 import { camelCase, pascalCase } from '../helpers';
 import { GeneratedResolverData } from '../types';
 import {
-  baseKeys,
-  ModelKeys,
-  supportedMutationActions,
-  supportedQueryActions,
   resolversFolderName,
   crudResolversFolderName,
   argsFolderName,
 } from '../config';
 import generateArgsTypeClassFromArgs from '../args-class';
 import {
-  generateNestJSGraphQLImport,
+  generateNestJSCrudImport,
   generateArgsImports,
   generateModelsImports,
   generateOutputsImports,
@@ -53,7 +49,7 @@ const generateCrudResolverClassFromMapping = async (
     overwrite: true,
   });
 
-  generateNestJSGraphQLImport(sourceFile);
+  generateNestJSCrudImport(sourceFile);
   generateGraphQLFieldsImport(sourceFile);
 
   const methodsInfo = await Promise.all(

@@ -9,7 +9,7 @@ import {
   argsFolderName,
 } from '../config';
 import {
-  generateNestJSGraphQLImport,
+  generateNestJSRelationsImport,
   generateArgsImports,
   generateModelsImports,
   generateArgsBarrelFile,
@@ -89,7 +89,7 @@ const generateRelationsResolverClassesFromModel = async (
     await saveSourceFile(barrelExportSourceFile);
   }
 
-  generateNestJSGraphQLImport(sourceFile);
+  generateNestJSRelationsImport(sourceFile);
   generateModelsImports(
     sourceFile,
     [...relationFields.map((field) => field.type), model.name].map((typeName) =>
@@ -151,11 +151,13 @@ const generateRelationsResolverClassesFromModel = async (
                       fieldDocs ? `"${fieldDocs}"` : 'undefined'
                     }`,
                     ...(!argsTypeName
-                      ? [`complexity: 1 * options.childComplexity`]
+                      ? [
+                          `complexity: ({ childComplexity }) => 1 * childComplexity`,
+                        ]
                       : [
-                          `complexity: (options) => (options.args as ${argsTypeName}).take ?? 1 * options.childComplexity`,
+                          `complexity: ({ args, childComplexity }) => ((args as ${argsTypeName}).take ?? 1) * childComplexity`,
                         ]),
-                  ].join(',')}
+                  ].join(',\n')}
                 }`,
               ],
             },

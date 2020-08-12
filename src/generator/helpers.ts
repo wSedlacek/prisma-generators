@@ -77,7 +77,7 @@ export const getGraphQLType = (
 ) => {
   let GraphQLType: string;
   if (typeInfo.kind === 'scalar') {
-    GraphQLType = mapScalarToTypeGraphQLType(typeInfo.type);
+    GraphQLType = mapScalarToType(typeInfo.type);
   } else if (typeInfo.kind === 'object') {
     if (dmmfDocument.isModelName(typeInfo.type)) {
       GraphQLType = dmmfDocument.getModelTypeName(typeInfo.type)!;
@@ -96,7 +96,7 @@ export const getGraphQLType = (
   return GraphQLType;
 };
 
-export const mapScalarToTypeGraphQLType = (scalar: string) => {
+export const mapScalarToType = (scalar: string) => {
   switch (scalar) {
     case 'DateTime': {
       return 'Date';

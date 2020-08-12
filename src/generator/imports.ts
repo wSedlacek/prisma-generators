@@ -14,27 +14,45 @@ import {
 import { GeneratedResolverData } from './types';
 import { GenerateCodeOptions } from './options';
 
-export const generateNestJSGraphQLImport = (sourceFile: SourceFile) => {
+export const generateNestJSArgImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: '@nestjs/graphql',
-    namedImports: [
-      'Resolver',
-      'ResolveField',
-      'Root',
-      'Context',
-      'Query',
-      'Mutation',
-      'Args',
-      'registerEnumType',
-      'ObjectType',
-      'Field',
-      'Int',
-      'Float',
-      'ID',
-      'InputType',
-      'ArgsType',
-      'Info',
-    ].sort(),
+    namedImports: ['ArgsType', 'Field', 'Int'],
+  });
+};
+
+export const generateNestJSCrudImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: '@nestjs/graphql',
+    namedImports: ['Args', 'Context', 'Info', 'Query', 'Mutation', 'Resolver'],
+  });
+};
+
+export const generateNestJSEnumImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: '@nestjs/graphql',
+    namedImports: ['registerEnumType'],
+  });
+};
+
+export const generateNestJSInputImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: '@nestjs/graphql',
+    namedImports: ['Field', 'Float', 'ID', 'InputType', 'Int'],
+  });
+};
+
+export const generateNestJSModelImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: '@nestjs/graphql',
+    namedImports: ['Field', 'Float', 'ID', 'Int', 'ObjectType'],
+  });
+};
+
+export const generateNestJSRelationsImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: '@nestjs/graphql',
+    namedImports: ['Args', 'Context', 'ResolveField', 'Resolver', 'Root'],
   });
 };
 
@@ -76,10 +94,14 @@ export const generatePrismaJsonTypeImport = (
 export const generateClassTransformerImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'class-transformer',
-    namedImports: [
-      'plainToClass',
-      { name: 'Type', alias: 'ClassTransformer__Type' },
-    ],
+    namedImports: ['plainToClass'],
+  });
+};
+
+export const generateClassTransformerDTOImport = (sourceFile: SourceFile) => {
+  sourceFile.addImportDeclaration({
+    moduleSpecifier: 'class-transformer',
+    namedImports: [{ name: 'Type', alias: 'ClassTransformer__Type' }],
   });
 };
 

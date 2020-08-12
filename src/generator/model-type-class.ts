@@ -8,12 +8,11 @@ import * as path from 'path';
 
 import { cleanDocsString } from './helpers';
 import {
-  generateNestJSGraphQLImport,
+  generateNestJSModelImport,
   generateModelsImports,
   generateEnumsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
-  generateClassTransformerImport,
 } from './imports';
 import { modelsFolderName } from './config';
 import saveSourceFile from '../utils/saveSourceFile';
@@ -34,7 +33,7 @@ const generateObjectTypeClassFromModel = async (
     overwrite: true,
   });
 
-  generateNestJSGraphQLImport(sourceFile);
+  generateNestJSModelImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 1);
   generateModelsImports(
@@ -48,7 +47,6 @@ const generateObjectTypeClassFromModel = async (
           : field.type
       )
   );
-  generateClassTransformerImport(sourceFile);
   generateEnumsImports(
     sourceFile,
     model.fields
@@ -87,14 +85,6 @@ const generateObjectTypeClassFromModel = async (
             ...(field.relationName || field.typeFieldAlias
               ? []
               : [
-                  ...(field.kind === 'object'
-                    ? [
-                        {
-                          name: 'ClassTransformer__Type',
-                          arguments: [`() => ${field.type}`],
-                        },
-                      ]
-                    : []),
                   {
                     name: 'Field',
                     arguments: [
@@ -125,14 +115,6 @@ const generateObjectTypeClassFromModel = async (
           returnType: field.fieldTSType,
           trailingTrivia: '\r\n',
           decorators: [
-            ...(field.kind === 'object'
-              ? [
-                  {
-                    name: 'ClassTransformer__Type',
-                    arguments: [`() => ${field.type}`],
-                  },
-                ]
-              : []),
             {
               name: 'Field',
               arguments: [

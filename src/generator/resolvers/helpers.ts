@@ -34,8 +34,10 @@ export const generateCrudResolverClassMethodDeclaration = (
             typeName
           )}`,
           `{
-            nullable: ${!method.outputType.isRequired},
-            description: undefined
+            ${[
+              `nullable: ${!method.outputType.isRequired}`,
+              `description: undefined`,
+            ].join(',\n')}
           }`,
         ],
       },
@@ -94,7 +96,12 @@ export const generateCrudResolverClassMethodDeclaration = (
                 ''
               )}, await ctx.prisma.${collectionName}.${action.kind}(${
               argsTypeName ? 'args' : ''
-            }) as ${returnTSType.replace('| undefined', '')});`,
+            }) as ${getGraphQLType(
+              method.outputType,
+              dmmfDocument,
+              mapping.model,
+              typeName
+            )});`,
           ],
   };
 };

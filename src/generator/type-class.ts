@@ -11,14 +11,15 @@ import * as path from 'path';
 import { camelCase } from './helpers';
 import { outputsFolderName, inputsFolderName } from './config';
 import {
-  generateNestJSGraphQLImport,
+  generateNestJSModelImport,
+  generateNestJSInputImport,
   generateInputsImports,
   generateEnumsImports,
   generateArgsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
   generateOutputsImports,
-  generateClassTransformerImport,
+  generateClassTransformerDTOImport,
 } from './imports';
 import saveSourceFile from '../utils/saveSourceFile';
 import generateArgsTypeClassFromArgs from './args-class';
@@ -42,10 +43,10 @@ export const generateOutputTypeClassFromType = async (
     .filter((it) => it.argsTypeName)
     .map((it) => it.argsTypeName!);
 
-  generateNestJSGraphQLImport(sourceFile);
+  generateNestJSModelImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 2);
-  generateClassTransformerImport(sourceFile);
+  generateClassTransformerDTOImport(sourceFile);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   // generateInputsImports(
   //   sourceFile,
@@ -195,10 +196,10 @@ export const generateInputTypeClassFromType = async (
     overwrite: true,
   });
 
-  generateNestJSGraphQLImport(sourceFile);
+  generateNestJSInputImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 2);
-  generateClassTransformerImport(sourceFile);
+  generateClassTransformerDTOImport(sourceFile);
   generateInputsImports(
     sourceFile,
     inputType.fields
