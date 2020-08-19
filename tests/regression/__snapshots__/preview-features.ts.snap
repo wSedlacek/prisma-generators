@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`preview features when \`connectOrCreate\` is enabled should properly generate input type classes for connectOrCreate: UserCreateOneWithoutPostsFieldInput 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { UserCreateOrConnectWithoutPostInput } from \\"../inputs/UserCreateOrConnectWithoutPostInput\\";
 import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
 import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
@@ -13,18 +14,21 @@ import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
   description: undefined,
 })
 export class UserCreateOneWithoutPostsFieldInput {
+  @ClassTransformer__Type(() => UserCreateWithoutPostsFieldInput)
   @Field(() => UserCreateWithoutPostsFieldInput, {
     nullable: true,
     description: undefined
   })
   create?: UserCreateWithoutPostsFieldInput | undefined;
 
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
   @Field(() => UserWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
   connect?: UserWhereUniqueInput | undefined;
 
+  @ClassTransformer__Type(() => UserCreateOrConnectWithoutPostInput)
   @Field(() => UserCreateOrConnectWithoutPostInput, {
     nullable: true,
     description: undefined
@@ -35,9 +39,10 @@ export class UserCreateOneWithoutPostsFieldInput {
 `;
 
 exports[`preview features when \`connectOrCreate\` is enabled should properly generate input type classes for connectOrCreate: UserCreateOrConnectWithoutPostInput 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
 import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
 
@@ -46,12 +51,14 @@ import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
   description: undefined,
 })
 export class UserCreateOrConnectWithoutPostInput {
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
   @Field(() => UserWhereUniqueInput, {
     nullable: false,
     description: undefined
   })
   where!: UserWhereUniqueInput;
 
+  @ClassTransformer__Type(() => UserCreateWithoutPostsFieldInput)
   @Field(() => UserCreateWithoutPostsFieldInput, {
     nullable: false,
     description: undefined
@@ -62,9 +69,10 @@ export class UserCreateOrConnectWithoutPostInput {
 `;
 
 exports[`preview features when \`connectOrCreate\` is enabled should properly generate input type classes for connectOrCreate: UserUpdateOneRequiredWithoutPostsFieldInput 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { UserCreateOrConnectWithoutPostInput } from \\"../inputs/UserCreateOrConnectWithoutPostInput\\";
 import { UserCreateWithoutPostsFieldInput } from \\"../inputs/UserCreateWithoutPostsFieldInput\\";
 import { UserUpdateWithoutPostsFieldDataInput } from \\"../inputs/UserUpdateWithoutPostsFieldDataInput\\";
@@ -76,30 +84,35 @@ import { UserWhereUniqueInput } from \\"../inputs/UserWhereUniqueInput\\";
   description: undefined,
 })
 export class UserUpdateOneRequiredWithoutPostsFieldInput {
+  @ClassTransformer__Type(() => UserCreateWithoutPostsFieldInput)
   @Field(() => UserCreateWithoutPostsFieldInput, {
     nullable: true,
     description: undefined
   })
   create?: UserCreateWithoutPostsFieldInput | undefined;
 
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
   @Field(() => UserWhereUniqueInput, {
     nullable: true,
     description: undefined
   })
   connect?: UserWhereUniqueInput | undefined;
 
+  @ClassTransformer__Type(() => UserUpdateWithoutPostsFieldDataInput)
   @Field(() => UserUpdateWithoutPostsFieldDataInput, {
     nullable: true,
     description: undefined
   })
   update?: UserUpdateWithoutPostsFieldDataInput | undefined;
 
+  @ClassTransformer__Type(() => UserUpsertWithoutPostsFieldInput)
   @Field(() => UserUpsertWithoutPostsFieldInput, {
     nullable: true,
     description: undefined
   })
   upsert?: UserUpsertWithoutPostsFieldInput | undefined;
 
+  @ClassTransformer__Type(() => UserCreateOrConnectWithoutPostInput)
   @Field(() => UserCreateOrConnectWithoutPostInput, {
     nullable: true,
     description: undefined
@@ -145,25 +158,28 @@ export { UserWhereUniqueInput } from \\"./UserWhereUniqueInput\\";
 `;
 
 exports[`preview features when \`distinct\` is enabled should properly generate args classes for model actions resolvers: AggregateUserArgs 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { UserDistinctFieldEnum } from \\"../../../../enums/UserDistinctFieldEnum\\";
 
 @ArgsType()
 export class AggregateUserArgs {
+  @ClassTransformer__Type(() => UserWhereInput)
   @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
+  @ClassTransformer__Type(() => UserOrderByInput)
   @Field(() => [UserOrderByInput], { nullable: true })
   orderBy?: UserOrderByInput[] | undefined;
 
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
   @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })
@@ -176,25 +192,28 @@ export class AggregateUserArgs {
 `;
 
 exports[`preview features when \`distinct\` is enabled should properly generate args classes for model actions resolvers: FindManyUserArgs 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
 import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
 import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
 import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { UserDistinctFieldEnum } from \\"../../../../enums/UserDistinctFieldEnum\\";
 
 @ArgsType()
 export class FindManyUserArgs {
+  @ClassTransformer__Type(() => UserWhereInput)
   @Field(() => UserWhereInput, { nullable: true })
   where?: UserWhereInput | undefined;
 
+  @ClassTransformer__Type(() => UserOrderByInput)
   @Field(() => [UserOrderByInput], { nullable: true })
   orderBy?: UserOrderByInput[] | undefined;
 
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
   @Field(() => UserWhereUniqueInput, { nullable: true })
   cursor?: UserWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })
@@ -207,7 +226,7 @@ export class FindManyUserArgs {
 `;
 
 exports[`preview features when \`distinct\` is enabled should properly generate model distinct enum when model field is renamed: SampleModelDistinctFieldEnum 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum SampleModelDistinctFieldEnum {
   intIdField = \\"intIdField\\",
@@ -222,14 +241,14 @@ registerEnumType(SampleModelDistinctFieldEnum, {
 `;
 
 exports[`preview features when \`distinct\` is enabled should properly generate model distinct enum when model is renamed: ExampleModelDistinctFieldEnum 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum ExampleModelDistinctFieldEnum {
   intIdField = \\"intIdField\\",
   stringField = \\"stringField\\",
   intField = \\"intField\\"
 }
-TypeGraphQL.registerEnumType(ExampleModelDistinctFieldEnum, {
+registerEnumType(ExampleModelDistinctFieldEnum, {
   name: \\"ExampleModelDistinctFieldEnum\\",
   description: undefined,
 });
@@ -243,14 +262,14 @@ export { SortOrder } from \\"./SortOrder\\";
 `;
 
 exports[`preview features when \`distinct\` is enabled should properly generate model distinct field enum: SampleModelDistinctFieldEnum 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum SampleModelDistinctFieldEnum {
   intIdField = \\"intIdField\\",
   stringField = \\"stringField\\",
   intField = \\"intField\\"
 }
-TypeGraphQL.registerEnumType(SampleModelDistinctFieldEnum, {
+registerEnumType(SampleModelDistinctFieldEnum, {
   name: \\"SampleModelDistinctFieldEnum\\",
   description: undefined,
 });
@@ -264,31 +283,34 @@ export { SortOrder } from \\"./SortOrder\\";
 `;
 
 exports[`preview features when both distinct and aggregations features are enabled should properly generate distinct enum arg field and import when model is renamed: AggregateExampleModelArgs 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
 import { ExampleModelOrderByInput } from \\"../../../inputs/ExampleModelOrderByInput\\";
 import { ExampleModelWhereInput } from \\"../../../inputs/ExampleModelWhereInput\\";
 import { ExampleModelWhereUniqueInput } from \\"../../../inputs/ExampleModelWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 import { ExampleModelDistinctFieldEnum } from \\"../../../../enums/ExampleModelDistinctFieldEnum\\";
 
-@TypeGraphQL.ArgsType()
+@ArgsType()
 export class AggregateExampleModelArgs {
-  @TypeGraphQL.Field(_type => ExampleModelWhereInput, { nullable: true })
+  @ClassTransformer__Type(() => ExampleModelWhereInput)
+  @Field(() => ExampleModelWhereInput, { nullable: true })
   where?: ExampleModelWhereInput | undefined;
 
-  @TypeGraphQL.Field(_type => [ExampleModelOrderByInput], { nullable: true })
+  @ClassTransformer__Type(() => ExampleModelOrderByInput)
+  @Field(() => [ExampleModelOrderByInput], { nullable: true })
   orderBy?: ExampleModelOrderByInput[] | undefined;
 
-  @TypeGraphQL.Field(_type => ExampleModelWhereUniqueInput, { nullable: true })
+  @ClassTransformer__Type(() => ExampleModelWhereUniqueInput)
+  @Field(() => ExampleModelWhereUniqueInput, { nullable: true })
   cursor?: ExampleModelWhereUniqueInput | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
-  @TypeGraphQL.Field(_type => TypeGraphQL.Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   skip?: number | undefined;
 
-  @TypeGraphQL.Field(_type => [ExampleModelDistinctFieldEnum], { nullable: true })
+  @Field(() => [ExampleModelDistinctFieldEnum], { nullable: true })
   distinct?: Array<keyof typeof ExampleModelDistinctFieldEnum> | undefined;
 }
 "

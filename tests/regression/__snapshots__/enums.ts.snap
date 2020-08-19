@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`enums should properly generate code for enum with docs 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 /** Role enum doc */
 export enum Role {
@@ -16,7 +16,7 @@ registerEnumType(Role, {
 `;
 
 exports[`enums should properly generate code for normal enum 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum Color {
   RED = \\"RED\\",
@@ -31,13 +31,13 @@ registerEnumType(Color, {
 `;
 
 exports[`enums should properly generate sort order enum: SortOrder 1`] = `
-"import * as TypeGraphQL from \\"type-graphql\\";
+"import { registerEnumType } from \\"@nestjs/graphql\\";
 
 export enum SortOrder {
   asc = \\"asc\\",
   desc = \\"desc\\"
 }
-TypeGraphQL.registerEnumType(SortOrder, {
+registerEnumType(SortOrder, {
   name: \\"SortOrder\\",
   description: undefined,
 });

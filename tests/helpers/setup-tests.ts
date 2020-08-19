@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+import * as path from 'path';
+import { promises as fs } from 'fs';
 
 import removeDir from '../../src/utils/removeDir';
 import ensurePrismaEngine from './ensure-engine';
@@ -7,10 +7,13 @@ import ensurePrismaEngine from './ensure-engine';
 const setupTests = async () => {
   const artifactsDirPath = path.join(__dirname, '../artifacts');
 
-  if (fs.existsSync(artifactsDirPath)) {
-    console.log('cleaning artifacts dir...');
+  try {
+    await fs.access(artifactsDirPath);
+    console.log('Cleaning artifacts dir...');
     await removeDir(path.join(__dirname, '../artifacts'), true);
-    console.log('cleaned!');
+    console.log('Cleaned!');
+  } catch {
+    console.log('Could not find artifacts dir. Skipping cleaning...');
   }
 
   await ensurePrismaEngine();

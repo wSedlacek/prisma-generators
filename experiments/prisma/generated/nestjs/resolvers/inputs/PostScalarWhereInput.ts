@@ -2,83 +2,19 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
-import { BooleanFilter } from "../inputs/BooleanFilter";
+import { BoolFilter } from "../inputs/BoolFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { EnumPostKindNullableFilter } from "../inputs/EnumPostKindNullableFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { JsonFilter } from "../inputs/JsonFilter";
-import { NullablePostKindFilter } from "../inputs/NullablePostKindFilter";
-import { NullableStringFilter } from "../inputs/NullableStringFilter";
 import { StringFilter } from "../inputs/StringFilter";
-import { UUIDFilter } from "../inputs/UUIDFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @InputType({
   isAbstract: true,
   description: undefined,
 })
 export class PostScalarWhereInput {
-  @ClassTransformer__Type(() => UUIDFilter)
-  @Field(() => UUIDFilter, {
-    nullable: true,
-    description: undefined
-  })
-  uuid?: UUIDFilter | undefined;
-
-  @ClassTransformer__Type(() => DateTimeFilter)
-  @Field(() => DateTimeFilter, {
-    nullable: true,
-    description: undefined
-  })
-  createdAt?: DateTimeFilter | undefined;
-
-  @ClassTransformer__Type(() => DateTimeFilter)
-  @Field(() => DateTimeFilter, {
-    nullable: true,
-    description: undefined
-  })
-  updatedAt?: DateTimeFilter | undefined;
-
-  @ClassTransformer__Type(() => BooleanFilter)
-  @Field(() => BooleanFilter, {
-    nullable: true,
-    description: undefined
-  })
-  published?: BooleanFilter | undefined;
-
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  title?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => NullableStringFilter)
-  @Field(() => NullableStringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  content?: NullableStringFilter | undefined;
-
-  @ClassTransformer__Type(() => IntFilter)
-  @Field(() => IntFilter, {
-    nullable: true,
-    description: undefined
-  })
-  authorId?: IntFilter | undefined;
-
-  @ClassTransformer__Type(() => NullablePostKindFilter)
-  @Field(() => NullablePostKindFilter, {
-    nullable: true,
-    description: undefined
-  })
-  kind?: NullablePostKindFilter | undefined;
-
-  @ClassTransformer__Type(() => JsonFilter)
-  @Field(() => JsonFilter, {
-    nullable: true,
-    description: undefined
-  })
-  metadata?: JsonFilter | undefined;
-
   @ClassTransformer__Type(() => PostScalarWhereInput)
   @Field(() => [PostScalarWhereInput], {
     nullable: true,
@@ -99,4 +35,67 @@ export class PostScalarWhereInput {
     description: undefined
   })
   NOT?: PostScalarWhereInput[] | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uuid?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => DateTimeFilter)
+  @Field(() => DateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  createdAt?: DateTimeFilter | undefined;
+
+  @ClassTransformer__Type(() => DateTimeFilter)
+  @Field(() => DateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  updatedAt?: DateTimeFilter | undefined;
+
+  @ClassTransformer__Type(() => BoolFilter)
+  @Field(() => BoolFilter, {
+    nullable: true,
+    description: undefined
+  })
+  published?: BoolFilter | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  title?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => StringNullableFilter)
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+    description: undefined
+  })
+  content?: StringNullableFilter | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  authorId?: IntFilter | undefined;
+
+  @ClassTransformer__Type(() => EnumPostKindNullableFilter)
+  @Field(() => EnumPostKindNullableFilter, {
+    nullable: true,
+    description: undefined
+  })
+  kind?: EnumPostKindNullableFilter | undefined;
+
+  @ClassTransformer__Type(() => JsonFilter)
+  @Field(() => JsonFilter, {
+    nullable: true,
+    description: undefined
+  })
+  metadata?: JsonFilter | undefined;
 }

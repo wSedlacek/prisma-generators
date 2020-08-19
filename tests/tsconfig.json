@@ -3,5 +3,6 @@
   "compilerOptions": {
     "rootDir": "../"
   },
-  "include": ["./artifacts", "./functional", "./helpers", "./regression", "../src"]
+  "include": [ "./functional", "./helpers", "./regression", "../src"],
+  "exclude": ["./artifacts"]
 }

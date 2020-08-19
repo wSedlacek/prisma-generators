@@ -74,6 +74,7 @@ class PostResolver {
 }
 
 const prisma = new PrismaClient({ log: ['query'] });
+prisma.category.findMany({ where: { name: {} } });
 
 @Module({
   imports: [

@@ -11,6 +11,6 @@ export const writeDmmf = async (cwd: string, dmmfJSONPath: string) => {
     console.log('Writing dmmf...');
     await fs.writeFile(dmmfJSONPath, JSON.stringify(dmmf, null, 2));
   } catch (err) {
-    console.error('something went wrong:', err);
+    console.error('Something went wrong:', err);
   }
 };

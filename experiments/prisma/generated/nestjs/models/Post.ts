@@ -1,5 +1,6 @@
 import { Field, Float, ID, Int, ObjectType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { JsonValue, InputJsonValue } from "../../client";
 import { Client } from "../models/Client";
 import { PostKind } from "../enums/PostKind";
@@ -15,12 +16,14 @@ export class Post {
   })
   uuid!: string;
 
+  @ClassTransformer__Type(() => Date)
   @Field(() => Date, {
     nullable: false,
     description: undefined,
   })
   createdAt!: Date;
 
+  @ClassTransformer__Type(() => Date)
   @Field(() => Date, {
     nullable: false,
     description: undefined,

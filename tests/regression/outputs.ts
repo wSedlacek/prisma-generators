@@ -45,7 +45,7 @@ describe('outputs', () => {
 
   it('should properly generate aggregate classes for renamed model', async () => {
     const schema = /* prisma */ `
-      /// @@TypeGraphQL.type("Example")
+      /// @@NestJS.type("Example")
       model Sample {
         intIdField    Int       @id @default(autoincrement())
         stringField   String

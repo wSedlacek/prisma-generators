@@ -1,18 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`relations resolvers generation should properly generate relation resolver class for model with multi id keys with relation: MovieRelationsResolver 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
+import { plainToClass } from \\"class-transformer\\";
 
 @Resolver(() => Movie)
 export class MovieRelationsResolver {
   @ResolveField(() => Director, {
     nullable: false,
     description: undefined,
+    complexity: ({ childComplexity }) => 1 * childComplexity
   })
   async director(@Root() movie: Movie, @Context() ctx: any): Promise<Director> {
-    return ctx.prisma.movie.findOne({
+    return plainToClass(Director, await ctx.prisma.movie.findOne({
       where: {
         directorFirstName_directorLastName_title: {
           directorFirstName: movie.directorFirstName,
@@ -20,16 +22,17 @@ export class MovieRelationsResolver {
           title: movie.title,
         },
       },
-    }).director({});
+    }).director({}) as Director);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate relation resolver class for model with unique fields: DirectorRelationsResolver 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Director } from \\"../../../models/Director\\";
 import { Movie } from \\"../../../models/Movie\\";
+import { plainToClass } from \\"class-transformer\\";
 import { DirectorMoviesArgs } from \\"./args/DirectorMoviesArgs\\";
 
 @Resolver(() => Director)
@@ -37,47 +40,51 @@ export class DirectorRelationsResolver {
   @ResolveField(() => [Movie], {
     nullable: true,
     description: undefined,
+    complexity: ({ args, childComplexity }) => ((args as DirectorMoviesArgs).take ?? 1) * childComplexity
   })
   async movies(@Root() director: Director, @Context() ctx: any, @Args() args: DirectorMoviesArgs): Promise<Movie[] | undefined> {
-    return ctx.prisma.director.findOne({
+    return plainToClass(Movie, await ctx.prisma.director.findOne({
       where: {
         firstName_lastName: {
           firstName: director.firstName,
           lastName: director.lastName,
         },
       },
-    }).movies(args);
+    }).movies(args) as [Movie]);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: Post 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 
 @Resolver(() => Post)
 export class PostRelationsResolver {
   @ResolveField(() => User, {
     nullable: true,
     description: \\"author field doc\\",
+    complexity: ({ childComplexity }) => 1 * childComplexity
   })
   async postAuthor(@Root() post: Post, @Context() ctx: any): Promise<User | undefined> {
-    return ctx.prisma.post.findOne({
+    return plainToClass(User, await ctx.prisma.post.findOne({
       where: {
         uuid: post.uuid,
       },
-    }).author({});
+    }).author({}) as User);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate relation resolvers classes for models with renamed relation fields: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
 @Resolver(() => User)
@@ -85,37 +92,41 @@ export class UserRelationsResolver {
   @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
+    complexity: ({ args, childComplexity }) => ((args as UserPostsArgs).take ?? 1) * childComplexity
   })
   async userPosts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
-    return ctx.prisma.user.findOne({
+    return plainToClass(Post, await ctx.prisma.user.findOne({
       where: {
         id: user.id,
       },
-    }).posts(args);
+    }).posts(args) as [Post]);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserPostsArgs 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
-import GraphQLJSON from \\"graphql-type-json\\";
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
 import { PostOrderByInput } from \\"../../../inputs/PostOrderByInput\\";
 import { PostWhereInput } from \\"../../../inputs/PostWhereInput\\";
 import { PostWhereUniqueInput } from \\"../../../inputs/PostWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ArgsType()
 export class UserPostsArgs {
+  @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => PostWhereInput, { nullable: true })
   where?: PostWhereInput | undefined;
 
+  @ClassTransformer__Type(() => PostOrderByInput)
   @Field(() => [PostOrderByInput], { nullable: true })
   orderBy?: PostOrderByInput[] | undefined;
 
+  @ClassTransformer__Type(() => PostWhereUniqueInput)
   @Field(() => PostWhereUniqueInput, { nullable: true })
   cursor?: PostWhereUniqueInput | undefined;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
   take?: number | undefined;
 
   @Field(() => Int, { nullable: true })
@@ -125,9 +136,10 @@ export class UserPostsArgs {
 `;
 
 exports[`relations resolvers generation should properly generate resolver and args class for array relation resolvers: UserRelationsResolver 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
 @Resolver(() => User)
@@ -135,66 +147,72 @@ export class UserRelationsResolver {
   @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
+    complexity: ({ args, childComplexity }) => ((args as UserPostsArgs).take ?? 1) * childComplexity
   })
   async posts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
-    return ctx.prisma.user.findOne({
+    return plainToClass(Post, await ctx.prisma.user.findOne({
       where: {
         id: user.id,
       },
-    }).posts(args);
+    }).posts(args) as [Post]);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate resolver class for single relation resolvers: UserRelationsResolver 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Address } from \\"../../../models/Address\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 
 @Resolver(() => User)
 export class UserRelationsResolver {
   @ResolveField(() => Address, {
     nullable: true,
     description: undefined,
+    complexity: ({ childComplexity }) => 1 * childComplexity
   })
   async address(@Root() user: User, @Context() ctx: any): Promise<Address | undefined> {
-    return ctx.prisma.user.findOne({
+    return plainToClass(Address, await ctx.prisma.user.findOne({
       where: {
         id: user.id,
       },
-    }).address({});
+    }).address({}) as Address);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: Post 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 
 @Resolver(() => Post)
 export class PostRelationsResolver {
   @ResolveField(() => User, {
     nullable: true,
     description: \\"author field doc\\",
+    complexity: ({ childComplexity }) => 1 * childComplexity
   })
   async author(@Root() post: Post, @Context() ctx: any): Promise<User | undefined> {
-    return ctx.prisma.post.findOne({
+    return plainToClass(User, await ctx.prisma.post.findOne({
       where: {
         uuid: post.uuid,
       },
-    }).author({});
+    }).author({}) as User);
   }
 }
 "
 `;
 
 exports[`relations resolvers generation should properly generate resolvers classes for prisma models with cyclic relations: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Args, Context, ResolveField, Resolver, Root } from \\"@nestjs/graphql\\";
 import { Post } from \\"../../../models/Post\\";
 import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
 import { UserPostsArgs } from \\"./args/UserPostsArgs\\";
 
 @Resolver(() => User)
@@ -202,13 +220,14 @@ export class UserRelationsResolver {
   @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
+    complexity: ({ args, childComplexity }) => ((args as UserPostsArgs).take ?? 1) * childComplexity
   })
   async posts(@Root() user: User, @Context() ctx: any, @Args() args: UserPostsArgs): Promise<Post[] | undefined> {
-    return ctx.prisma.user.findOne({
+    return plainToClass(Post, await ctx.prisma.user.findOne({
       where: {
         id: user.id,
       },
-    }).posts(args);
+    }).posts(args) as [Post]);
   }
 }
 "

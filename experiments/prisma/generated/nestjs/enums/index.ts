@@ -5,5 +5,6 @@ export { MovieDistinctFieldEnum } from "./MovieDistinctFieldEnum";
 export { PatientDistinctFieldEnum } from "./PatientDistinctFieldEnum";
 export { PostDistinctFieldEnum } from "./PostDistinctFieldEnum";
 export { PostKind } from "./PostKind";
+export { QueryMode } from "./QueryMode";
 export { Role } from "./Role";
 export { SortOrder } from "./SortOrder";

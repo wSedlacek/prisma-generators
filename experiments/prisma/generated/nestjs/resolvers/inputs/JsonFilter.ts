@@ -2,6 +2,7 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
+import { NestedJsonFilter } from "../inputs/NestedJsonFilter";
 
 @InputType({
   isAbstract: true,
@@ -14,9 +15,10 @@ export class JsonFilter {
   })
   equals?: InputJsonValue | undefined;
 
-  @Field(() => GraphQLJSON, {
+  @ClassTransformer__Type(() => NestedJsonFilter)
+  @Field(() => NestedJsonFilter, {
     nullable: true,
     description: undefined
   })
-  not?: InputJsonValue | undefined;
+  not?: NestedJsonFilter | undefined;
 }

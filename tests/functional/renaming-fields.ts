@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { promises as fs } from 'fs';
-import { buildSchema } from 'type-graphql';
 import { graphql } from 'graphql';
 
 import generateArtifactsDirPath from '../helpers/artifacts-dir';
@@ -19,7 +18,7 @@ describe('crud resolvers execution', () => {
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
-        /// @TypeGraphQL.field("firstName")
+        /// @NestJS.field("firstName")
         name         String
       }
     `;
@@ -62,7 +61,7 @@ describe('crud resolvers execution', () => {
       model User {
         id           Int       @id @default(autoincrement())
         dateOfBirth  DateTime
-        /// @TypeGraphQL.field("firstName")
+        /// @NestJS.field("firstName")
         name         String
       }
     `;

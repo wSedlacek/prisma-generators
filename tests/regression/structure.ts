@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import directoryTree from 'directory-tree';
+import * as directoryTree from 'directory-tree';
 
 import generateArtifactsDirPath from '../helpers/artifacts-dir';
 import { stringifyDirectoryTrees } from '../helpers/structure';
@@ -54,14 +54,14 @@ describe('structure', () => {
         BLUE
       }
 
-      /// @@TypeGraphQL.type("RenamedUser")
+      /// @@NestJS.type("RenamedUser")
       model User {
         id    Int      @id @default(autoincrement())
         name  String?
         posts Post[]
       }
 
-      /// @@TypeGraphQL.type("RenamedPost")
+      /// @@NestJS.type("RenamedPost")
       model Post {
         uuid      String  @id @default(cuid())
         content   String

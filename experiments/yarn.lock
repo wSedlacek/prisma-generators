@@ -113,10 +113,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@nestjs/common@^7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-7.4.1.tgz#8f53ca00f156b98db43e8d063636d0eddb257e9e"
-  integrity sha512-FheSDi3y1QNchdAEe00TFszQyzNSbPyO21QjDc9DCkg6DTv+gKJ1w8Z0CNgKXpFf6C1lYeXa4pmC5hnXURBDjA==
+"@nestjs/common@^7.4.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-7.4.2.tgz#f1ceff01a7b2c77094726944f55d907a2196bfe1"
+  integrity sha512-gHfoUPPufBDLUdkBdhC60rgMwyiOKIFVmxCnFNHsMH1mrbt1DcXQD+5nefZm0XaLY20QeBoqZjJDc4KdvE444w==
   dependencies:
     axios "0.19.2"
     cli-color "2.0.0"
@@ -124,10 +124,10 @@
     tslib "2.0.0"
     uuid "8.3.0"
 
-"@nestjs/core@^7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-7.4.1.tgz#2d4dd2a3e8c77b6c553c5b67f8551d060c940c18"
-  integrity sha512-CeiWa6qsYg1m+fZ+TwFq17t2O7zHKaOjP52WM/fSeSoe7zCqLwR8ua1eVkUeqWbxZqGVE4SbGpUUIKxnZOIvgQ==
+"@nestjs/core@^7.4.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-7.4.2.tgz#a2a0640eea658dfbd6de8e3079fffc5a0878ff5a"
+  integrity sha512-zLWVY+qj5RRIuDaL2J6a7f/Tn8wPMYOUHDZhXdRZFqonuY96dH9yc6DU9cWyX7fnmCIAxqdu5B7qd/S7VPHxow==
   dependencies:
     "@nuxtjs/opencollective" "0.2.2"
     fast-safe-stringify "2.0.7"
@@ -161,10 +161,10 @@
   resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.0.5.tgz#0c3462de4125eea0e85e3a520f0de4e7e8dcfa40"
   integrity sha512-QjZCSMHHy8IW4UUTS49QJQ0NrA8MHv6XevNrPLJwh4n3lN7wY9aSRwd1+cBIUDBXEHRKngcYdPtC4oG0fimw+A==
 
-"@nestjs/platform-express@^7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.4.1.tgz#dc36fa6525419bf2dcd6a1851aa3cd65a850652a"
-  integrity sha512-ecAj4u/BsN9QDIiDVECNBrKzyWp9wkKu4XzNVZlSV8QMl8zkhgZsvQoHRTnW+OgWQPUIB8QakWnoW+O4H4cpyg==
+"@nestjs/platform-express@^7.4.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.4.2.tgz#fbda43faa482531f54619d70a1f9d1ed67ad6436"
+  integrity sha512-pbwmUaKpAyLwp8iTfChvFqY/40wHXuqIPX2HGkHU0dbofd7sUpLJMlJCsOepR06/L+voRhmNC86yQm1EDAG7ag==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
@@ -209,15 +209,15 @@
     consola "^2.3.0"
     node-fetch "^2.3.0"
 
-"@prisma/cli@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.4.1.tgz#95f6cae48ff19c6177bb9f85816b27e1ffe5af53"
-  integrity sha512-vAOBnouBgCYndXmTcGxanfmhVWUCpwr3akBXiQH+ZKzTYf/pwSsWYpeaXNQfVtUEJEQ0kumfLGdq6ZXnfX//aA==
+"@prisma/cli@~2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@prisma/cli/-/cli-2.5.0.tgz#a6d8c0ebd79230900d44d2eebcf62f02b3612214"
+  integrity sha512-yqGhDYH8lxIfT/1gjg6VVb2THS+k0cAbnoR8UENNrAAUWGzroZSvz+ECMsVinKshTUHJkD69yzi9i/nDqAODSw==
 
-"@prisma/client@~2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.4.1.tgz#840d0905e9d05d84313e333a3e0370df3b9815fe"
-  integrity sha512-13aphZb34ws8GuRxVsmgiQmUJRfcnnb5/Jy78/ZkpLyCk5ZpchO/Rr1KNiF/cfLHprdKOjSvUzthcx+tubaA2A==
+"@prisma/client@~2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.5.0.tgz#dba5ee40497f458dc0f1057fa4a0b6675548e443"
+  integrity sha512-rsgbImSVMBATLSSZEgP7pWpqV2iylDJWM2zjmL980IjTBgy63alDr0RyoOkdt8oVw4OyJW0uYpxAU2Z9bXZU9A==
   dependencies:
     pkg-up "^3.1.0"
 
@@ -470,7 +470,7 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@^14.0.27":
+"@types/node@*":
   version "14.0.27"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
   integrity sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
@@ -479,6 +479,11 @@
   version "10.17.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.28.tgz#0e36d718a29355ee51cec83b42d921299200f6d9"
   integrity sha512-dzjES1Egb4c1a89C7lKwQh8pwjYmlOAG9dW1pBgxEk57tMrLnssOfEthz8kdkNaBd7lIqQx7APm5+mZ619IiCQ==
+
+"@types/node@^14.6.0":
+  version "14.6.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.6.0.tgz#7d4411bf5157339337d7cff864d9ff45f177b499"
+  integrity sha512-mikldZQitV94akrc4sCcSjtJfsTKt4p+e/s0AGscVA6XArQ9kFclP+ZiYUMnq987rc6QlYxXv/EivqlfSLxpKA==
 
 "@types/qs@*":
   version "6.9.4"
@@ -1501,10 +1506,10 @@ graphql-fields@^2.0.3:
   resolved "https://registry.yarnpkg.com/graphql-fields/-/graphql-fields-2.0.3.tgz#5e68dff7afbb202be4f4f40623e983b22c96ab8f"
   integrity sha512-x3VE5lUcR4XCOxPIqaO4CE+bTK8u6gVouOdpQX9+EKHr+scqtK5Pp/l8nIGqIpN1TUlkKE6jDCCycm/WtLRAwA==
 
-graphql-query-complexity@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/graphql-query-complexity/-/graphql-query-complexity-0.6.0.tgz#522f452212eb0ffab66601097251bbf411c3cd11"
-  integrity sha512-xYLLvN7PSeSYtiQ2nR53B7B/C6iGOWVPBrzcpbheVxE78GYdiNZffDRNCoMvYGCOAY0eQTpsnTfwncVszQsOJw==
+graphql-query-complexity@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/graphql-query-complexity/-/graphql-query-complexity-0.7.0.tgz#16e3dbd1baf89ee925baec93b451858a7628156e"
+  integrity sha512-nl/aOzRdQ1Opj/sND9Wx+/FHnsU4SFA0wePWJzyZajyht43nP9/1edP6YaoupXfNeUocHFXsmAOOFVTwTLu/6A==
   dependencies:
     lodash.get "^4.4.2"
 
@@ -2376,10 +2381,10 @@ run-parallel@^1.1.9:
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
   integrity sha512-DEqnSRTDw/Tc3FXf49zedI638Z9onwUotBMiUFKmrO2sdFKIbXamXGQ3Axd4qgphxKB4kw/qP1w5kTxnfU1B9Q==
 
-rxjs@^6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.0.tgz#af2901eedf02e3a83ffa7f886240ff9018bbec84"
-  integrity sha512-3HMA8z/Oz61DUHe+SdOiQyzIf4tOx5oQHmMir7IZEu6TMqCLHT4LRcmNaUS0NwOz8VLvmmBduMsoaUvMaIiqzg==
+rxjs@^6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.2.tgz#8096a7ac03f2cc4fe5860ef6e572810d9e01c0d2"
+  integrity sha512-BHdBMVoWC2sL26w//BCu3YzKT4s2jip/WhwsGEDmeKYBhKDZeYezVUnHatYB7L85v5xs0BAQmg6BEYJEKxBabg==
   dependencies:
     tslib "^1.9.0"
 

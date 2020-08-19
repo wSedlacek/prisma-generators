@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`outputs should properly generate aggregate classes for model with lowercase name: AggregateExample 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -26,9 +27,10 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs should properly generate aggregate classes for renamed model: AggregateExample 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -51,9 +53,10 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -70,9 +73,10 @@ export class AggregateSample {
 `;
 
 exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -95,9 +99,10 @@ export { BatchPayload } from \\"./BatchPayload\\";
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleAvgAggregateOutputType 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -120,9 +125,10 @@ export class SampleAvgAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleMaxAggregateOutputType 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -145,9 +151,10 @@ export class SampleMaxAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleMinAggregateOutputType 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,
@@ -170,9 +177,10 @@ export class SampleMinAggregateOutputType {
 `;
 
 exports[`outputs when experimental feature \`aggregateApi\` is enabled  should properly generate aggregate output types classes: SampleSumAggregateOutputType 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
 
 @ObjectType({
   isAbstract: true,

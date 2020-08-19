@@ -2,6 +2,8 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
+import { NestedStringFilter } from "../inputs/NestedStringFilter";
+import { QueryMode } from "../../enums/QueryMode";
 
 @InputType({
   isAbstract: true,
@@ -13,12 +15,6 @@ export class StringFilter {
     description: undefined
   })
   equals?: string | undefined;
-
-  @Field(() => String, {
-    nullable: true,
-    description: undefined
-  })
-  not?: string | undefined;
 
   @Field(() => [String], {
     nullable: true,
@@ -73,4 +69,17 @@ export class StringFilter {
     description: undefined
   })
   endsWith?: string | undefined;
+
+  @Field(() => QueryMode, {
+    nullable: true,
+    description: undefined
+  })
+  mode?: keyof typeof QueryMode | undefined;
+
+  @ClassTransformer__Type(() => NestedStringFilter)
+  @Field(() => NestedStringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedStringFilter | undefined;
 }

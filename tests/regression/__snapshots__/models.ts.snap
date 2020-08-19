@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`models should properly generate object type class for prisma model with descriptions: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
@@ -38,7 +38,7 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with different scalar fields types: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 
@@ -99,7 +99,7 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with enum and alias fields types: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Sample } from \\"../enums/Sample\\";
@@ -131,7 +131,7 @@ export class User {
 `;
 
 exports[`models should properly generate object type class for prisma model with renamed fields: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
@@ -181,7 +181,7 @@ export class User {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Article 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Client } from \\"../models/Client\\";
@@ -209,7 +209,7 @@ export class Article {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations when models are renamed: Client 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Article } from \\"../models/Article\\";
@@ -231,7 +231,7 @@ export class Client {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: Post 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { User } from \\"../models/User\\";
@@ -259,7 +259,7 @@ export class Post {
 `;
 
 exports[`models should properly generate object type classes for prisma models with cyclic relations: User 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 import { Post } from \\"../models/Post\\";
@@ -281,7 +281,7 @@ export class User {
 `;
 
 exports[`models should properly generate object type classes for prisma models with self relations: Service 1`] = `
-"import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from \\"@nestjs/graphql\\";
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
 import GraphQLJSON from \\"graphql-type-json\\";
 import { JsonValue, InputJsonValue } from \\"../../../helpers/prisma-client-mock\\";
 

@@ -295,7 +295,7 @@ describe('inputs', () => {
 
   it('should properly generate input type classes when model is renamed', async () => {
     const schema = /* prisma */ `
-      /// @@TypeGraphQL.type("Example")
+      /// @@NestJS.type("Example")
       model SampleModel {
         intIdField    Int       @id @default(autoincrement())
         stringField   String    @unique
@@ -334,7 +334,7 @@ describe('inputs', () => {
     const schema = /* prisma */ `
       model Sample {
         idField         Int     @id @default(autoincrement())
-        /// @TypeGraphQL.field("mappedFieldName")
+        /// @NestJS.field("mappedFieldName")
         modelFieldName  String
       }
     `;

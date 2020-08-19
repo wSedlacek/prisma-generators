@@ -1,10 +1,9 @@
 import 'reflect-metadata';
-import { promises as fs } from 'fs';
+import fs from 'fs/promises';
 import directoryTree from 'directory-tree';
-import path from 'path';
+import * as path from 'path';
 import util from 'util';
 import childProcess from 'child_process';
-import { buildSchema } from 'type-graphql';
 import { graphql } from 'graphql';
 import pg from 'pg';
 

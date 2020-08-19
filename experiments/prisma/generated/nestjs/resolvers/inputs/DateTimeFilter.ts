@@ -2,6 +2,7 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
+import { NestedDateTimeFilter } from "../inputs/NestedDateTimeFilter";
 
 @InputType({
   isAbstract: true,
@@ -13,12 +14,6 @@ export class DateTimeFilter {
     description: undefined
   })
   equals?: Date | undefined;
-
-  @Field(() => Date, {
-    nullable: true,
-    description: undefined
-  })
-  not?: Date | undefined;
 
   @Field(() => [Date], {
     nullable: true,
@@ -55,4 +50,11 @@ export class DateTimeFilter {
     description: undefined
   })
   gte?: Date | undefined;
+
+  @ClassTransformer__Type(() => NestedDateTimeFilter)
+  @Field(() => NestedDateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedDateTimeFilter | undefined;
 }

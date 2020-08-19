@@ -7,18 +7,12 @@ import { Type as ClassTransformer__Type } from "class-transformer";
   isAbstract: true,
   description: undefined,
 })
-export class UUIDFilter {
+export class NestedStringFilter {
   @Field(() => String, {
     nullable: true,
     description: undefined
   })
   equals?: string | undefined;
-
-  @Field(() => String, {
-    nullable: true,
-    description: undefined
-  })
-  not?: string | undefined;
 
   @Field(() => [String], {
     nullable: true,
@@ -73,4 +67,11 @@ export class UUIDFilter {
     description: undefined
   })
   endsWith?: string | undefined;
+
+  @ClassTransformer__Type(() => NestedStringFilter)
+  @Field(() => NestedStringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedStringFilter | undefined;
 }

@@ -157,7 +157,7 @@ const generateRelationsResolverClassesFromModel = async (
                           `complexity: ({ childComplexity }) => 1 * childComplexity`,
                         ]
                       : [
-                          `complexity: ({ args, childComplexity }) => ((args as ${argsTypeName}).take ?? 1) * childComplexity`,
+                          `complexity: ({ args, childComplexity }) => ((args.take + (args.skip ?? 0)) ?? 1) * childComplexity`,
                         ]),
                   ].join(',\n')}
                 }`,

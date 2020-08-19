@@ -10,27 +10,6 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class CategoryWhereInput {
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  name?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  slug?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => IntFilter)
-  @Field(() => IntFilter, {
-    nullable: true,
-    description: undefined
-  })
-  number?: IntFilter | undefined;
-
   @ClassTransformer__Type(() => CategoryWhereInput)
   @Field(() => [CategoryWhereInput], {
     nullable: true,
@@ -51,4 +30,25 @@ export class CategoryWhereInput {
     description: undefined
   })
   NOT?: CategoryWhereInput[] | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  name?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  slug?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  number?: IntFilter | undefined;
 }

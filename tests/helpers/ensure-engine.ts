@@ -1,6 +1,6 @@
 import { download } from '@prisma/fetch-engine';
-import path from 'path';
-import fs from 'fs';
+import * as path from 'path';
+import { promises as fs } from 'fs';
 
 const prismaClientRuntimeDir = path.join(
   __dirname,
@@ -8,19 +8,20 @@ const prismaClientRuntimeDir = path.join(
 );
 
 const ensurePrismaEngine = async () => {
-  if (!fs.existsSync(prismaClientRuntimeDir)) {
+  try {
+    await fs.access(prismaClientRuntimeDir);
+    await download({
+      binaries: {
+        'query-engine': prismaClientRuntimeDir,
+      },
+      showProgress: true,
+      version: require('@prisma/cli/package.json').prisma.version,
+    });
+  } catch {
     throw new Error(
       'Missing PrismaClient directory: ' + prismaClientRuntimeDir
     );
   }
-
-  await download({
-    binaries: {
-      'query-engine': prismaClientRuntimeDir,
-    },
-    showProgress: true,
-    version: require('@prisma/cli/package.json').prisma.version,
-  });
 };
 
 export default ensurePrismaEngine;

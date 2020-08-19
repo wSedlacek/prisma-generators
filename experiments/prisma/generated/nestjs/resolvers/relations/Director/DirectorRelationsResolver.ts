@@ -9,7 +9,7 @@ export class DirectorRelationsResolver {
   @ResolveField(() => [Movie], {
     nullable: true,
     description: undefined,
-    complexity: ({ args, childComplexity }) => ((args as DirectorMoviesArgs).take ?? 1) * childComplexity
+    complexity: ({ args, childComplexity }) => ((args.take + (args.skip ?? 0)) ?? 1) * childComplexity
   })
   async movies(@Root() director: Director, @Context() ctx: any, @Args() args: DirectorMoviesArgs): Promise<Movie[] | undefined> {
     return plainToClass(Movie, await ctx.prisma.director.findOne({

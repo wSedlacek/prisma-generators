@@ -8,7 +8,7 @@ import { PostWhereInput } from "../inputs/PostWhereInput";
   isAbstract: true,
   description: undefined,
 })
-export class PostFilter {
+export class PostListRelationFilter {
   @ClassTransformer__Type(() => PostWhereInput)
   @Field(() => PostWhereInput, {
     nullable: true,

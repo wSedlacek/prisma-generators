@@ -9,27 +9,6 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class MovieScalarWhereInput {
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  directorFirstName?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  directorLastName?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  title?: StringFilter | undefined;
-
   @ClassTransformer__Type(() => MovieScalarWhereInput)
   @Field(() => [MovieScalarWhereInput], {
     nullable: true,
@@ -50,4 +29,25 @@ export class MovieScalarWhereInput {
     description: undefined
   })
   NOT?: MovieScalarWhereInput[] | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorFirstName?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorLastName?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  title?: StringFilter | undefined;
 }

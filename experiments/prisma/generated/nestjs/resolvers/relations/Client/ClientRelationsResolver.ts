@@ -9,7 +9,7 @@ export class ClientRelationsResolver {
   @ResolveField(() => [Post], {
     nullable: true,
     description: undefined,
-    complexity: ({ args, childComplexity }) => ((args as ClientPostsArgs).take ?? 1) * childComplexity
+    complexity: ({ args, childComplexity }) => ((args.take + (args.skip ?? 0)) ?? 1) * childComplexity
   })
   async clientPosts(@Root() client: Client, @Context() ctx: any, @Args() args: ClientPostsArgs): Promise<Post[] | undefined> {
     return plainToClass(Post, await ctx.prisma.user.findOne({

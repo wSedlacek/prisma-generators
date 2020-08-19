@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`picking prisma actions should expose in GraphQL schema only actions chosen by single resolvers: graphQLSchemaSDL 1`] = `
+"type Query {
+  users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int = 20, skip: Int): [User!]!
+}
+
+type User {
+  intIdField: Int!
+  uniqueStringField: String!
+  optionalStringField: String
+  dateField: DateTime!
+}
+
+\\"\\"\\"
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+\\"\\"\\"
+scalar DateTime
+
+input UserWhereInput {
+  intIdField: IntFilter
+  uniqueStringField: StringFilter
+  optionalStringField: NullableStringFilter
+  dateField: DateTimeFilter
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input IntFilter {
+  equals: Int
+  not: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+}
+
+input StringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+input NullableStringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  not: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+}
+
+input UserOrderByInput {
+  intIdField: SortOrder
+  uniqueStringField: SortOrder
+  optionalStringField: SortOrder
+  dateField: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input UserWhereUniqueInput {
+  intIdField: Int
+  uniqueStringField: String
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+}
+
+input UserCreateInput {
+  uniqueStringField: String!
+  optionalStringField: String
+  dateField: DateTime!
+}
+"
+`;

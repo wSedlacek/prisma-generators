@@ -1,18 +1,27 @@
-import 'reflect-metadata';
+import { NestApplication } from '@nestjs/core';
+import { Test } from '@nestjs/testing';
+import {
+  ApolloServerTestClient,
+  createTestClient,
+} from 'apollo-server-testing';
+import gql from 'graphql-tag';
 import { promises as fs } from 'fs';
-import { buildSchema, Query, Resolver } from 'type-graphql';
-import { graphql, GraphQLSchema } from 'graphql';
 
-import generateArtifactsDirPath from '../helpers/artifacts-dir';
 import { generateCodeFromSchema } from '../helpers/generate-code';
+import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { Resolver, Query, GraphQLModule } from '@nestjs/graphql';
 
 describe('relations resolvers execution', () => {
-  describe('single primary key', () => {
-    let outputDirPath: string;
-    let graphQLSchema: GraphQLSchema;
+  const findOnePostMock = jest.fn();
+  const findOneUserMock = jest.fn();
+  const findOneUserPostsMock = jest.fn();
 
+  let app: NestApplication;
+  let apolloClient: ApolloServerTestClient;
+
+  describe('single primary key', () => {
     beforeAll(async () => {
-      outputDirPath = generateArtifactsDirPath('functional-relations');
+      const outputDirPath = generateArtifactsDirPath('functional-relations');
       await fs.mkdir(outputDirPath, { recursive: true });
       const prismaSchema = /* prisma */ `
         enum Color {
@@ -29,6 +38,7 @@ describe('relations resolvers execution', () => {
 
         model Post {
           uuid      String  @id @default(cuid())
+          title     String
           content   String
           author    User    @relation(fields: [authorId], references: [id])
           authorId  Int
@@ -42,9 +52,10 @@ describe('relations resolvers execution', () => {
         User,
         Post,
       } = require(outputDirPath);
+
       @Resolver()
       class CustomResolver {
-        @Query((_returns) => [User])
+        @Query(() => [User])
         users(): any[] {
           return [
             {
@@ -57,7 +68,8 @@ describe('relations resolvers execution', () => {
             },
           ];
         }
-        @Query((_returns) => [Post])
+
+        @Query(() => [Post])
         posts(): any[] {
           return [
             {
@@ -72,38 +84,46 @@ describe('relations resolvers execution', () => {
         }
       }
 
-      graphQLSchema = await buildSchema({
-        resolvers: [
+      const moduleFixture = await Test.createTestingModule({
+        imports: [
+          GraphQLModule.forRoot({
+            autoSchemaFile: true,
+            context: {
+              prisma: {
+                post: {
+                  findOne: findOnePostMock,
+                },
+                user: {
+                  findOne: findOneUserMock,
+                },
+              },
+            },
+          }),
+        ],
+        providers: [
           CustomResolver,
           UserRelationsResolver,
           PostRelationsResolver,
         ],
-        validate: false,
-      });
+      }).compile();
+
+      app = moduleFixture.createNestApplication();
+      await app.init();
+
+      const graphqlModule = moduleFixture.get(GraphQLModule);
+      apolloClient = createTestClient((graphqlModule as any).apolloServer);
+    });
+
+    afterAll(async () => {
+      await app.close();
     });
 
     it('should properly call PrismaClient on fetching array relations', async () => {
-      const document = /* graphql */ `
-        query {
-          users {
-            name
-            posts {
-              uuid
-              color
-            }
-          }
-        }
-      `;
-      const findOneUserMock = jest.fn();
-      const prismaMock = {
-        user: {
-          findOne: findOneUserMock,
-        },
-      };
-      findOneUserMock.mockReturnValueOnce({
+      findOneUserMock.mockReturnValue({
         posts: jest.fn().mockResolvedValue(null),
       });
-      findOneUserMock.mockReturnValueOnce({
+
+      findOneUserMock.mockReturnValue({
         posts: jest.fn().mockResolvedValue([
           {
             uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
@@ -116,40 +136,28 @@ describe('relations resolvers execution', () => {
         ]),
       });
 
-      const { data, errors } = await graphql(graphQLSchema, document, null, {
-        prisma: prismaMock,
+      const { data, errors } = await apolloClient.query({
+        query: gql`
+          query {
+            users {
+              name
+              posts {
+                uuid
+                color
+              }
+            }
+          }
+        `,
       });
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot('users with posts mocked response');
-      expect(prismaMock.user.findOne.mock.calls).toMatchSnapshot(
+      expect(findOneUserMock.mock.calls).toMatchSnapshot(
         'findOneUser relations call args'
       );
     });
 
     it('should properly call PrismaClient on fetching array relations with args', async () => {
-      const document = /* graphql */ `
-        query {
-          users {
-            name
-            posts(skip: 1, take: 1, where: {
-              content: {
-                startsWith: "test"
-              }
-            }) {
-              uuid
-              color
-            }
-          }
-        }
-      `;
-      const findOneUserMock = jest.fn();
-      const findOneUserPostsMock = jest.fn();
-      const prismaMock = {
-        user: {
-          findOne: findOneUserMock,
-        },
-      };
       findOneUserMock.mockReturnValueOnce({
         posts: jest.fn().mockResolvedValue(null),
       });
@@ -167,13 +175,27 @@ describe('relations resolvers execution', () => {
         },
       ]);
 
-      const { data, errors } = await graphql(graphQLSchema, document, null, {
-        prisma: prismaMock,
+      const { data, errors } = await apolloClient.query({
+        query: gql`
+          query {
+            users {
+              name
+              posts(
+                skip: 1
+                take: 1
+                where: { content: { startsWith: "test" } }
+              ) {
+                uuid
+                color
+              }
+            }
+          }
+        `,
       });
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot('users with posts mocked response');
-      expect(prismaMock.user.findOne.mock.calls).toMatchSnapshot(
+      expect(findOneUserMock.mock.calls).toMatchSnapshot(
         'findOneUser relations call args'
       );
       expect(findOneUserPostsMock.mock.calls).toMatchSnapshot(
@@ -182,23 +204,6 @@ describe('relations resolvers execution', () => {
     });
 
     it('should properly call PrismaClient on fetching single relation', async () => {
-      const document = /* graphql */ `
-        query {
-          posts {
-            uuid
-            author {
-              id
-              name
-            }
-          }
-        }
-      `;
-      const findOnePostMock = jest.fn();
-      const prismaMock = {
-        post: {
-          findOne: findOnePostMock,
-        },
-      };
       findOnePostMock.mockReturnValue({
         author: jest.fn().mockResolvedValue({
           id: 1,
@@ -206,24 +211,31 @@ describe('relations resolvers execution', () => {
         }),
       });
 
-      const { data, errors } = await graphql(graphQLSchema, document, null, {
-        prisma: prismaMock,
+      const { data, errors } = await apolloClient.query({
+        query: gql`
+          query {
+            posts {
+              uuid
+              author {
+                id
+                name
+              }
+            }
+          }
+        `,
       });
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot('posts with authors mocked response');
-      expect(prismaMock.post.findOne.mock.calls).toMatchSnapshot(
+      expect(findOnePostMock.mock.calls).toMatchSnapshot(
         'findOnePost relations call args'
       );
     });
   });
 
   describe('composite unique key', () => {
-    let outputDirPath: string;
-    let graphQLSchema: GraphQLSchema;
-
     beforeAll(async () => {
-      outputDirPath = generateArtifactsDirPath('functional-relations');
+      const outputDirPath = generateArtifactsDirPath('functional-relations');
       await fs.mkdir(outputDirPath, { recursive: true });
       const prismaSchema = /* prisma */ `
         enum Color {
@@ -247,12 +259,13 @@ describe('relations resolvers execution', () => {
 
           @@unique([title, color])
         }
-      `;
+        `;
+
       await generateCodeFromSchema(prismaSchema, { outputDirPath });
       const { PostRelationsResolver, Post } = require(outputDirPath);
       @Resolver()
       class CustomResolver {
-        @Query((_returns) => Post)
+        @Query(() => Post)
         post(): any {
           return {
             title: 'Post 1',
@@ -262,32 +275,37 @@ describe('relations resolvers execution', () => {
         }
       }
 
-      graphQLSchema = await buildSchema({
-        resolvers: [CustomResolver, PostRelationsResolver],
-        validate: false,
-      });
+      const moduleFixture = await Test.createTestingModule({
+        imports: [
+          GraphQLModule.forRoot({
+            autoSchemaFile: true,
+            context: {
+              prisma: {
+                post: {
+                  findOne: findOnePostMock,
+                },
+                user: {
+                  findOne: findOneUserMock,
+                },
+              },
+            },
+          }),
+        ],
+        providers: [CustomResolver, PostRelationsResolver],
+      }).compile();
+
+      const app = moduleFixture.createNestApplication();
+      await app.init();
+
+      const graphqlModule = moduleFixture.get(GraphQLModule);
+      apolloClient = createTestClient((graphqlModule as any).apolloServer);
+    });
+
+    afterAll(async () => {
+      await app.close();
     });
 
     it('should properly call PrismaClient on fetching array relations', async () => {
-      const document = /* graphql */ `
-        query {
-          post {
-            title
-            color
-            text
-            author {
-              id
-              name
-            }
-          }
-        }
-      `;
-      const findOnePostMock = jest.fn();
-      const prismaMock = {
-        post: {
-          findOne: findOnePostMock,
-        },
-      };
       findOnePostMock.mockReturnValueOnce({
         author: jest.fn().mockResolvedValue({
           id: 1,
@@ -295,13 +313,25 @@ describe('relations resolvers execution', () => {
         }),
       });
 
-      const { data, errors } = await graphql(graphQLSchema, document, null, {
-        prisma: prismaMock,
+      const { data, errors } = await apolloClient.query({
+        query: gql`
+          query {
+            post {
+              title
+              color
+              text
+              author {
+                id
+                name
+              }
+            }
+          }
+        `,
       });
 
       expect(errors).toBeUndefined();
       expect(data).toMatchSnapshot('post with author mocked response');
-      expect(prismaMock.post.findOne.mock.calls).toMatchSnapshot(
+      expect(findOnePostMock.mock.calls).toMatchSnapshot(
         'findOnePost relations call args'
       );
     });

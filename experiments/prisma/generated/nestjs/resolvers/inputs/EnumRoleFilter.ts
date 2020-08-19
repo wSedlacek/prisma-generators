@@ -2,24 +2,19 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
+import { NestedEnumRoleFilter } from "../inputs/NestedEnumRoleFilter";
 import { Role } from "../../enums/Role";
 
 @InputType({
   isAbstract: true,
   description: undefined,
 })
-export class RoleFilter {
+export class EnumRoleFilter {
   @Field(() => Role, {
     nullable: true,
     description: undefined
   })
   equals?: keyof typeof Role | undefined;
-
-  @Field(() => Role, {
-    nullable: true,
-    description: undefined
-  })
-  not?: keyof typeof Role | undefined;
 
   @Field(() => [Role], {
     nullable: true,
@@ -32,4 +27,11 @@ export class RoleFilter {
     description: undefined
   })
   notIn?: Array<keyof typeof Role> | undefined;
+
+  @ClassTransformer__Type(() => NestedEnumRoleFilter)
+  @Field(() => NestedEnumRoleFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedEnumRoleFilter | undefined;
 }

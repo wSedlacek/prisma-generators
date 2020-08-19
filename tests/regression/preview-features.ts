@@ -76,7 +76,7 @@ describe('preview features', () => {
           provider = "postgresql"
           url      = env("DATABASE_URL")
         }
-        /// @@TypeGraphQL.type("ExampleModel")
+        /// @@NestJS.type("ExampleModel")
         model SampleModel {
           intIdField   Int     @id @default(autoincrement())
           stringField  String  @unique
@@ -107,7 +107,7 @@ describe('preview features', () => {
         }
         model SampleModel {
           intIdField   Int     @id @default(autoincrement())
-          /// @TypeGraphQL.field("mappedFieldName")
+          /// @NestJS.field("mappedFieldName")
           stringField  String  @unique
           intField     Int
         }
@@ -134,7 +134,7 @@ describe('preview features', () => {
           provider = "postgresql"
           url      = env("DATABASE_URL")
         }
-        /// @@TypeGraphQL.type("ExampleModel")
+        /// @@NestJS.type("ExampleModel")
         model SampleModel {
           intIdField   Int     @id @default(autoincrement())
           stringField  String  @unique

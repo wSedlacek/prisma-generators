@@ -1,29 +1,29 @@
-# Example use NestJS + Prisma2 + Typegraphql
+# Example use NestJS + Prisma2
 
 <https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example>
 
 ![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
 
-# TypeGraphQL & Prisma 2.0 integration
+# NestJS & Prisma 2.0 integration
 
-Prisma 2.0 generator to emit TypeGraphQL type classes and resolvers
+Prisma 2.0 generator to emit NestJS type classes and resolvers
 
 ## Installation
 
 Fist of all, you have to install the generator, as a dev dependency:
 
 ```sh
-npm i -D typegraphql-prisma-nestjs
+npm i -D nestjs-prisma-generator
 ```
 
-Futhermore, `typegraphql-prisma` to work properly requires `prisma` to be, so please install prisma dependencies if you don't have it already installed:
+Futhermore, `nestjs-prisma-generator` to work properly requires `prisma` to be, so please install prisma dependencies if you don't have it already installed:
 
 ```sh
 npm i -D @prisma/cli
 npm i @prisma/client
 ```
 
-> `typegraphql-prisma` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `~2.4.1`!
+> `nestjs-prisma-generator` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `~2.4.1`!
 
 You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
 
@@ -58,7 +58,7 @@ generator client {
 }
 
 generator typegraphql {
-  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
+  provider = "nestjs-prisma-generator"
 }
 ```
 
@@ -93,32 +93,32 @@ It will generate a `User` class in the output folder, with TypeGraphQL decorator
 
 ```ts
 export enum PostKind {
-  BLOG = "BLOG",
-  ADVERT = "ADVERT",
+  BLOG = 'BLOG',
+  ADVERT = 'ADVERT',
 }
 TypeGraphQL.registerEnumType(PostKind, {
-  name: "PostKind",
+  name: 'PostKind',
   description: undefined,
 });
 
-@TypeGraphQL.ObjectType({
+@NestJS.ObjectType({
   isAbstract: true,
   description: undefined,
 })
 export class User {
-  @TypeGraphQL.Field(_type => String, {
+  @NestJS.Field((_type) => String, {
     nullable: false,
     description: undefined,
   })
   id!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @NestJS.Field((_type) => String, {
     nullable: false,
     description: undefined,
   })
   email!: string;
 
-  @TypeGraphQL.Field(_type => String, {
+  @NestJS.Field((_type) => String, {
     nullable: true,
     description: undefined,
   })
@@ -151,7 +151,7 @@ import {
   User,
   UserRelationsResolver,
   UserCrudResolver,
-} from "@generated/type-graphql";
+} from '@generated/type-graphql';
 
 const schema = await buildSchema({
   resolvers: [CustomUserResolver, UserRelationsResolver, UserCrudResolver],
@@ -162,7 +162,7 @@ const schema = await buildSchema({
 When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
 
 ```ts
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 const server = new ApolloServer({
@@ -187,10 +187,10 @@ You can also add custom queries and mutations to the schema as always, using the
 ```ts
 @Resolver()
 export class CustomUserResolver {
-  @Query(returns => User, { nullable: true })
+  @Query((returns) => User, { nullable: true })
   async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
     return await prisma.user.findOne({
-      where: { email: "bob@prisma.io" },
+      where: { email: 'bob@prisma.io' },
     });
   }
 }
@@ -201,12 +201,12 @@ export class CustomUserResolver {
 If you want to add a field to the generated type like `User`, you have to add a proper `@FieldResolver` for that:
 
 ```ts
-@Resolver(of => User)
+@Resolver((of) => User)
 export class CustomUserResolver {
-  @FieldResolver(type => Post, { nullable: true })
+  @FieldResolver((type) => Post, { nullable: true })
   async favoritePost(
     @Root() user: User,
-    @Ctx() { prisma }: Context,
+    @Ctx() { prisma }: Context
   ): Promise<Post | undefined> {
     const [favoritePost] = await prisma.user
       .findOne({ where: { id: user.id } })
@@ -228,7 +228,7 @@ import {
   UserRelationsResolver,
   FindManyUserResolver,
   CreateUserResolver,
-} from "@generated/type-graphql";
+} from '@generated/type-graphql';
 
 const schema = await buildSchema({
   resolvers: [
@@ -244,10 +244,10 @@ const schema = await buildSchema({
 #### Changing exposed model type name
 
 You can also change the name of the model types exposed in GraphQL Schema.
-To achieve this, just put the `@@TypeGraphQL.type` doc line above the model definition in `schema.prisma` file, e.g:
+To achieve this, just put the `@@NestJS.type` doc line above the model definition in `schema.prisma` file, e.g:
 
 ```prisma
-/// @@TypeGraphQL.type("Client")
+/// @@NestJS.type("Client")
 model User {
   id     Int     @default(autoincrement()) @id
   email  String  @unique
@@ -266,12 +266,12 @@ type Mutation {
 #### Changing exposed model type field name
 
 You can also change the name of the model type fields exposed in GraphQL Schema.
-To achieve this, just put the `@TypeGraphQL.field` doc line above the model field definition in `schema.prisma` file, e.g:
+To achieve this, just put the `@NestJS.field` doc line above the model field definition in `schema.prisma` file, e.g:
 
 ```prisma
 model User {
   id     Int     @default(autoincrement()) @id
-  /// @TypeGraphQL.field("emailAddress")
+  /// @NestJS.field("emailAddress")
   email  String  @unique
   posts  Post[]
 }

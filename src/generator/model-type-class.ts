@@ -12,6 +12,7 @@ import {
   generateEnumsImports,
   generateGraphQLScalarImport,
   generatePrismaJsonTypeImport,
+  generateClassTransformerDTOImport,
 } from './imports';
 import { modelsFolderName } from './config';
 import saveSourceFile from '../utils/saveSourceFile';
@@ -34,6 +35,7 @@ const generateObjectTypeClassFromModel = async (
 
   generateNestJSModelImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
+  generateClassTransformerDTOImport(sourceFile);
   generatePrismaJsonTypeImport(sourceFile, options, 1);
   generateModelsImports(
     sourceFile,
@@ -81,6 +83,14 @@ const generateObjectTypeClassFromModel = async (
             ...(field.relationName || field.typeFieldAlias
               ? []
               : [
+                  ...(field.type === 'DateTime'
+                    ? [
+                        {
+                          name: 'ClassTransformer__Type',
+                          arguments: [`() => ${field.typeGraphQLType}`],
+                        },
+                      ]
+                    : []),
                   {
                     name: 'Field',
                     arguments: [

@@ -1,5 +1,6 @@
 import { Field, Float, ID, Int, ObjectType } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
+import { Type as ClassTransformer__Type } from "class-transformer";
 import { JsonValue, InputJsonValue } from "../../client";
 import { Director } from "../models/Director";
 

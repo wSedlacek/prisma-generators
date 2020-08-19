@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom resolvers execution should be possible to use generated inputs, args and types to build own resolvers: custom posts resolver mocked response 1`] = `
+Object {
+  "customFindManyPost": Array [
+    Object {
+      "color": "RED",
+      "uuid": "b0c0d78e-4dff-4cdd-ba23-9b417dc684e2",
+    },
+    Object {
+      "color": "BLUE",
+      "uuid": "72c8a188-3d46-45b3-b23f-7d420aa282f1",
+    },
+  ],
+}
+`;
+
+exports[`custom resolvers execution should be possible to use generated inputs, args and types to build own resolvers: findManyPost call args 1`] = `
+Array [
+  Array [
+    Object {
+      "orderBy": Array [
+        Object {
+          "color": "desc",
+        },
+      ],
+      "skip": 1,
+      "take": 1,
+      "where": Object {
+        "content": Object {
+          "startsWith": "Test",
+        },
+      },
+    },
+  ],
+]
+`;
+
+exports[`custom resolvers execution should produce a SDL: graphQLSchemaSDL 1`] = `
+"# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  customFindManyPost(where: PostWhereInput, orderBy: [PostOrderByInput!], cursor: PostWhereUniqueInput, take: Int = 20, skip: Int): [Post!]!
+}
+
+type Post {
+  uuid: String!
+  content: String!
+  color: Color!
+}
+
+enum Color {
+  RED
+  GREEN
+  BLUE
+}
+
+input PostWhereInput {
+  uuid: StringFilter
+  content: StringFilter
+  color: ColorFilter
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+}
+
+input StringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+input ColorFilter {
+  equals: Color
+  not: Color
+  in: [Color!]
+  notIn: [Color!]
+}
+
+input PostOrderByInput {
+  uuid: SortOrder
+  content: SortOrder
+  color: SortOrder
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input PostWhereUniqueInput {
+  uuid: String
+}
+"
+`;

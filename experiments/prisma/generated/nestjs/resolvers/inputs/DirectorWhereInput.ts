@@ -2,7 +2,7 @@ import { Field, Float, ID, InputType, Int } from "@nestjs/graphql";
 import GraphQLJSON from "graphql-type-json";
 import { JsonValue, InputJsonValue } from "../../../client";
 import { Type as ClassTransformer__Type } from "class-transformer";
-import { MovieFilter } from "../inputs/MovieFilter";
+import { MovieListRelationFilter } from "../inputs/MovieListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 
 @InputType({
@@ -10,27 +10,6 @@ import { StringFilter } from "../inputs/StringFilter";
   description: undefined,
 })
 export class DirectorWhereInput {
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  firstName?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => StringFilter)
-  @Field(() => StringFilter, {
-    nullable: true,
-    description: undefined
-  })
-  lastName?: StringFilter | undefined;
-
-  @ClassTransformer__Type(() => MovieFilter)
-  @Field(() => MovieFilter, {
-    nullable: true,
-    description: undefined
-  })
-  movies?: MovieFilter | undefined;
-
   @ClassTransformer__Type(() => DirectorWhereInput)
   @Field(() => [DirectorWhereInput], {
     nullable: true,
@@ -51,4 +30,25 @@ export class DirectorWhereInput {
     description: undefined
   })
   NOT?: DirectorWhereInput[] | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstName?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  lastName?: StringFilter | undefined;
+
+  @ClassTransformer__Type(() => MovieListRelationFilter)
+  @Field(() => MovieListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  movies?: MovieListRelationFilter | undefined;
 }
