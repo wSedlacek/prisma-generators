@@ -1,5 +1,5 @@
 import { Args, Context, Info, Query, Mutation, Resolver } from "@nestjs/graphql";
-import * as graphqlFields from "graphql-fields";
+import graphqlFields from "graphql-fields";
 import { GraphQLResolveInfo } from "graphql";
 import { AggregateMovieArgs } from "./args/AggregateMovieArgs";
 import { CreateMovieArgs } from "./args/CreateMovieArgs";

@@ -1,5 +1,5 @@
 import { EnumMemberStructure, OptionalKind, Project } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import { generateNestJSEnumImport } from './imports';
 import { enumsFolderName } from './config';

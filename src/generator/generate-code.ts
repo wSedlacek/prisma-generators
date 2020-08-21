@@ -1,6 +1,6 @@
 import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
 import { Project } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import { noop } from './helpers';
 import generateEnumFromDef from './enum';

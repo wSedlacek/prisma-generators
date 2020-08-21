@@ -1,5 +1,5 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import fs from 'fs/promises';
+import path from 'path';
 
 export const getDatamodel = async (cwd: string): Promise<string> => {
   const datamodelPath = await (async () => {

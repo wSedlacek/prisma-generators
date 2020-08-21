@@ -1,7 +1,7 @@
 import { GeneratorOptions } from '@prisma/generator-helper';
 import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
 import { promises as asyncFs } from 'fs';
-import * as path from 'path';
+import path from 'path';
 
 import generateCode from '../generator/generate-code';
 import removeDir from '../utils/removeDir';

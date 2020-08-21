@@ -1,5 +1,5 @@
 import { PropertyDeclarationStructure, OptionalKind, Project } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import { argsFolderName } from './config';
 import {

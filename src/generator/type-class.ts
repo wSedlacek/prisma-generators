@@ -5,7 +5,7 @@ import {
   GetAccessorDeclarationStructure,
   SetAccessorDeclarationStructure,
 } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import { outputsFolderName, inputsFolderName } from './config';
 import {

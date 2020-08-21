@@ -1,5 +1,5 @@
 import { OptionalKind, MethodDeclarationStructure, Project } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import { camelCase, pascalCase, cleanDocsString } from '../helpers';
 import generateArgsTypeClassFromArgs from '../args-class';

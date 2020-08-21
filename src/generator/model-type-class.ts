@@ -4,7 +4,7 @@ import {
   Project,
   GetAccessorDeclarationStructure,
 } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import {
   generateNestJSModelImport,

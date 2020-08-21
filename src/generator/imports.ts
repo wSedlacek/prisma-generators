@@ -1,5 +1,5 @@
 import { SourceFile, OptionalKind, ExportDeclarationStructure } from 'ts-morph';
-import * as path from 'path';
+import path from 'path';
 
 import {
   modelsFolderName,
@@ -59,7 +59,7 @@ export const generateNestJSRelationsImport = (sourceFile: SourceFile) => {
 export const generateGraphQLFieldsImport = (sourceFile: SourceFile) => {
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'graphql-fields',
-    namespaceImport: 'graphqlFields',
+    defaultImport: 'graphqlFields',
   });
   sourceFile.addImportDeclaration({
     moduleSpecifier: 'graphql',

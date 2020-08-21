@@ -96,7 +96,7 @@ export enum PostKind {
   BLOG = 'BLOG',
   ADVERT = 'ADVERT',
 }
-TypeGraphQL.registerEnumType(PostKind, {
+registerEnumType(PostKind, {
   name: 'PostKind',
   description: undefined,
 });

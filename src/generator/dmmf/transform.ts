@@ -11,7 +11,7 @@ import {
   cleanDocsString,
 } from '../helpers';
 import { DmmfDocument } from './dmmf-document';
-import * as pluralize from 'pluralize';
+import pluralize from 'pluralize';
 import { GenerateCodeOptions } from '../options';
 import { supportedQueryActions, supportedMutationActions } from '../config';
 
