@@ -1,8 +1,4 @@
-tsconfig*.json
-lib/**/*
-package/**/*
-tests/artifacts
-coverage
-**/prisma/generated/**/*
-**/prisma/migrations/**/*
-.graphqlconfig
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage

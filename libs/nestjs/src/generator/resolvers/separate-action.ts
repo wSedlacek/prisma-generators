@@ -1,0 +1,85 @@
+import path from 'path';
+import { Project } from 'ts-morph';
+
+import { saveSourceFile } from '../../utils';
+import { crudResolversFolderName, resolversFolderName } from '../config';
+import { DmmfDocument } from '../dmmf/dmmf-document';
+import { DMMF } from '../dmmf/types';
+import { pascalCase } from '../helpers';
+import {
+  generateArgsImports,
+  generateClassTransformerImport,
+  generateGraphQLFieldsImport,
+  generateModelsImports,
+  generateNestJSCrudImport,
+  generateOutputsImports,
+} from '../imports';
+import { generateCrudResolverClassMethodDeclaration } from './helpers';
+
+export const generateActionResolverClass = async (
+  project: Project,
+  baseDirPath: string,
+  model: DMMF.Model,
+  action: DMMF.Action,
+  modelNames: string[],
+  mapping: DMMF.Mapping,
+  dmmfDocument: DmmfDocument
+): Promise<string> => {
+  const actionResolverName = `${pascalCase(action.kind)}${
+    model.typeName
+  }Resolver`;
+  const resolverDirPath = path.resolve(
+    baseDirPath,
+    resolversFolderName,
+    crudResolversFolderName,
+    model.typeName
+  );
+  const filePath = path.resolve(resolverDirPath, `${actionResolverName}.ts`);
+  const sourceFile = project.createSourceFile(filePath, undefined, {
+    overwrite: true,
+  });
+
+  generateNestJSCrudImport(sourceFile);
+  if (action.kind === DMMF.ModelAction.aggregate) {
+    generateGraphQLFieldsImport(sourceFile);
+  }
+  if (action.argsTypeName) {
+    generateArgsImports(sourceFile, [action.argsTypeName], 0);
+  }
+  generateModelsImports(
+    sourceFile,
+    [model.name, action.outputTypeName]
+      .filter((name) => modelNames.includes(name))
+      .map((typeName) => dmmfDocument.getModelTypeName(typeName) ?? typeName),
+    3
+  );
+  generateClassTransformerImport(sourceFile);
+  generateOutputsImports(
+    sourceFile,
+    [action.outputTypeName].filter((name) => !modelNames.includes(name)),
+    2
+  );
+
+  sourceFile.addClass({
+    name: actionResolverName,
+    isExported: true,
+    decorators: [
+      {
+        name: 'Resolver',
+        arguments: [`() => ${model.typeName}`],
+      },
+    ],
+    methods: [
+      generateCrudResolverClassMethodDeclaration(
+        action,
+        model.typeName,
+        dmmfDocument,
+        mapping
+      ),
+    ],
+  });
+
+  await saveSourceFile(sourceFile);
+
+  return actionResolverName;
+};

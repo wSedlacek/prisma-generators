@@ -1,0 +1,22 @@
+{
+  "name": "@prisma-generators/nestjs",
+  "version": "0.4.3",
+  "peerDependencies": {
+    "@nestjs/graphql": ">=7",
+    "@prisma/cli": "~2.5.1",
+    "@prisma/client": "~2.5.1",
+    "@types/graphql-fields": "^1.3.3",
+    "@types/node": "*",
+    "class-transformer": "*",
+    "graphql-type-json": "^0.3.2",
+    "tslib": "*"
+  },
+  "dependencies": {
+    "@prisma/generator-helper": "~2.5.1",
+    "@prisma/sdk": "~2.5.1",
+    "graphql-fields": "^2.0.3",
+    "pluralize": "^8.0.0",
+    "ts-morph": "^8.0.0",
+    "ts-dedent": "^1.1.1"
+  }
+}

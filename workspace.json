@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "projects": {
+    "nestjs": {
+      "root": "libs/nestjs",
+      "sourceRoot": "libs/nestjs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/nestjs/tsconfig.lib.json",
+              "libs/nestjs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/nestjs/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/nestjs/jest.config.js",
+            "tsConfig": "libs/nestjs/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/nestjs",
+            "tsConfig": "libs/nestjs/tsconfig.lib.json",
+            "packageJson": "libs/nestjs/package.json",
+            "main": "libs/nestjs/src/index.ts",
+            "assets": ["libs/nestjs/*.md"]
+          }
+        }
+      }
+    },
+    "nestjs-examples-1-basic": {
+      "root": "apps/nestjs/examples/1-basic",
+      "sourceRoot": "apps/nestjs/examples/1-basic/src",
+      "projectType": "application",
+      "prefix": "nestjs-examples-1-basic",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/nestjs/examples/1-basic",
+            "main": "apps/nestjs/examples/1-basic/src/main.ts",
+            "tsConfig": "apps/nestjs/examples/1-basic/tsconfig.app.json",
+            "assets": ["apps/nestjs/examples/1-basic/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nestjs/examples/1-basic/src/environments/environment.ts",
+                  "with": "apps/nestjs/examples/1-basic/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "nestjs-examples-1-basic:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nestjs/examples/1-basic/tsconfig.app.json",
+              "apps/nestjs/examples/1-basic/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/nestjs/examples/1-basic/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nestjs/examples/1-basic/jest.config.js",
+            "tsConfig": "apps/nestjs/examples/1-basic/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "nestjs-examples-2-picking-actions": {
+      "root": "apps/nestjs/examples/2-picking-actions",
+      "sourceRoot": "apps/nestjs/examples/2-picking-actions/src",
+      "projectType": "application",
+      "prefix": "nestjs-examples-2-picking-actions",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/nestjs/examples/2-picking-actions",
+            "main": "apps/nestjs/examples/2-picking-actions/src/main.ts",
+            "tsConfig": "apps/nestjs/examples/2-picking-actions/tsconfig.app.json",
+            "assets": ["apps/nestjs/examples/2-picking-actions/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/nestjs/examples/2-picking-actions/src/environments/environment.ts",
+                  "with": "apps/nestjs/examples/2-picking-actions/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "nestjs-examples-2-picking-actions:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nestjs/examples/2-picking-actions/tsconfig.app.json",
+              "apps/nestjs/examples/2-picking-actions/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/nestjs/examples/2-picking-actions/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nestjs/examples/2-picking-actions/jest.config.js",
+            "tsConfig": "apps/nestjs/examples/2-picking-actions/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "nestjs-examples-1-basic"
+}

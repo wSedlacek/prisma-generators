@@ -1,315 +1,90 @@
-# Example use NestJS + Prisma2
+# PrismaGenerators
 
-<https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example>
+This project was generated using [Nx](https://nx.dev).
 
-![integration logo](https://raw.githubusercontent.com/EndyKaufman/typegraphql-prisma-nestjs/prisma/img/integration.png)
+<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
-# NestJS & Prisma 2.0 integration
+🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
 
-Prisma 2.0 generator to emit NestJS type classes and resolvers
+## Adding capabilities to your workspace
 
-## Installation
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-Fist of all, you have to install the generator, as a dev dependency:
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-```sh
-npm i -D nestjs-prisma-generator
-```
+Below are our core plugins:
 
-Futhermore, `nestjs-prisma-generator` to work properly requires `prisma` to be, so please install prisma dependencies if you don't have it already installed:
+- [React](https://reactjs.org)
+  - `npm install --save-dev @nrwl/react`
+- Web (no framework frontends)
+  - `npm install --save-dev @nrwl/web`
+- [Angular](https://angular.io)
+  - `npm install --save-dev @nrwl/angular`
+- [Nest](https://nestjs.com)
+  - `npm install --save-dev @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `npm install --save-dev @nrwl/express`
+- [Node](https://nodejs.org)
+  - `npm install --save-dev @nrwl/node`
 
-```sh
-npm i -D @prisma/cli
-npm i @prisma/client
-```
+There are also many [community plugins](https://nx.dev/nx-community) you could add.
 
-> `nestjs-prisma-generator` is designed to work with a selected version of `prisma` (or newer), so please make sure you use `@prisma/cli` and `@prisma/client` of version `~2.4.1`!
+## Generate an application
 
-You also need to install the GraphQL JSON scalar library (to support the Prisma `Json` scalar):
+Run `nx g @nrwl/react:app my-app` to generate an application.
 
-```sh
-npm i graphql-type-json
-```
+> You can use any of the plugins above to generate applications as well.
 
-as well as the `graphql-fields` that is used to properly support the aggregations queries:
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-```sh
-npm i graphql-fields @types/graphql-fields
-```
+## Generate a library
 
-Also, be aware that due to usage of some ES2019 and newer Node.js features, you also have to use **Node.js v12.4.0 or newer**.
+Run `nx g @nrwl/react:lib my-lib` to generate a library.
 
-## Configuration
+> You can also use any of the plugins above to generate libraries as well.
 
-After installation, you need to update your `schema.prisma` file and enable the experimental feature called `aggregateApi`:
+Libraries are sharable across libraries and applications. They can be imported from `@prisma-generators/mylib`.
 
-```prisma
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["aggregateApi"]
-}
-```
+## Development server
 
-and then add a new generator section below the `client` one:
+Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-```prisma
-generator client {
-  // ...
-}
+## Code scaffolding
 
-generator typegraphql {
-  provider = "nestjs-prisma-generator"
-}
-```
+Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
 
-Then after running `npx prisma generate`, this will emit the generated TypeGraphQL classes to `@generated/typegraphql-prisma-nestjs` in `node_modules` folder. You can also configure the default output folder, e.g.:
+## Build
 
-```prisma
-generator typegraphql {
-  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
-  output   = "../prisma/generated/type-graphql"
-}
-```
+Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Usage
+## Running unit tests
 
-Given that you have this part of datamodel definitions:
+Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
-```prisma
-enum PostKind {
-  BLOG
-  ADVERT
-}
+Run `nx affected:test` to execute the unit tests affected by a change.
 
-model User {
-  id    String  @default(cuid()) @id @unique
-  email String  @unique
-  name  String?
-  posts Post[]
-}
-```
+## Running end-to-end tests
 
-It will generate a `User` class in the output folder, with TypeGraphQL decorators, and an enum - you can import them and use normally as a type or an explicit type in your resolvers:
+Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
-```ts
-export enum PostKind {
-  BLOG = 'BLOG',
-  ADVERT = 'ADVERT',
-}
-registerEnumType(PostKind, {
-  name: 'PostKind',
-  description: undefined,
-});
-
-@NestJS.ObjectType({
-  isAbstract: true,
-  description: undefined,
-})
-export class User {
-  @NestJS.Field((_type) => String, {
-    nullable: false,
-    description: undefined,
-  })
-  id!: string;
-
-  @NestJS.Field((_type) => String, {
-    nullable: false,
-    description: undefined,
-  })
-  email!: string;
-
-  @NestJS.Field((_type) => String, {
-    nullable: true,
-    description: undefined,
-  })
-  name?: string | null;
-
-  posts?: Post[] | null;
-}
-```
-
-It will also generates a whole bunch of stuffs based on your `schema.prisma` file - models classes, enums, as well as CRUD resolvers and relations resolver.
-
-CRUD resolvers supports this following methods with args that are 1:1 matching with the `PrismaClient` API:
-
-- findOne
-- create
-- update
-- delete
-- findMany
-- updateMany
-- deleteMany
-- upsert
-
-By default, the method names will be mapped to a GraphQL idiomatic ones (like `findManyUser` -> `users`).
-You can opt-in to use original names by providing `useOriginalMapping = true` generator option.
-
-Also, if you want to have relations like `User -> posts` emitted in schema, you need to import the relations resolvers and register them in your `buildSchema` call:
-
-```ts
-import {
-  User,
-  UserRelationsResolver,
-  UserCrudResolver,
-} from '@generated/type-graphql';
-
-const schema = await buildSchema({
-  resolvers: [CustomUserResolver, UserRelationsResolver, UserCrudResolver],
-  validate: false,
-});
-```
-
-When using the generated resolvers, you have to first provide the `PrismaClient` instance into the context under `prisma` key, to make it available for the crud and relations resolvers:
-
-```ts
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-const server = new ApolloServer({
-  schema,
-  playground: true,
-  context: (): Context => ({ prisma }),
-});
-```
-
-### Nest JS
-
-In order to use generated types and resolvers classes in NestJS, you need to use the [official `typegraphql-nestjs` package](https://github.com/MichalLytek/typegraphql-nestjs). This module allows for basic integration of TypeGraphQL with NestJS. You can find an example in the [`examples/3-nest-js` folder](https://github.com/MichalLytek/type-graphql/tree/prisma/examples/3-nest-js).
-
-Due to difference between TypeGraphQL and NestJS decorators, `typegraphql-prisma` doesn't work anymore with `@nestjs/graphql` from version 7.0.
-
-### Advanced usage
-
-#### Custom operations
-
-You can also add custom queries and mutations to the schema as always, using the generated `PrismaClient` client:
-
-```ts
-@Resolver()
-export class CustomUserResolver {
-  @Query((returns) => User, { nullable: true })
-  async bestUser(@Ctx() { prisma }: Context): Promise<User | null> {
-    return await prisma.user.findOne({
-      where: { email: 'bob@prisma.io' },
-    });
-  }
-}
-```
-
-#### Adding fields to model type
-
-If you want to add a field to the generated type like `User`, you have to add a proper `@FieldResolver` for that:
-
-```ts
-@Resolver((of) => User)
-export class CustomUserResolver {
-  @FieldResolver((type) => Post, { nullable: true })
-  async favoritePost(
-    @Root() user: User,
-    @Ctx() { prisma }: Context
-  ): Promise<Post | undefined> {
-    const [favoritePost] = await prisma.user
-      .findOne({ where: { id: user.id } })
-      .posts({ first: 1 });
-
-    return favoritePost;
-  }
-}
-```
-
-#### Exposing selected Prisma actions
-
-If you want to expose only certain Prisma actions, like `findManyUser` or `createOneUser`, you can import resolver classes only for them, instead of the whole model `CrudResolver`.
-Then you just have to put them into the `buildSchema`:
-
-```ts
-import {
-  User,
-  UserRelationsResolver,
-  FindManyUserResolver,
-  CreateUserResolver,
-} from '@generated/type-graphql';
-
-const schema = await buildSchema({
-  resolvers: [
-    CustomUserResolver,
-    UserRelationsResolver,
-    FindManyUserResolver,
-    CreateUserResolver,
-  ],
-  validate: false,
-});
-```
-
-#### Changing exposed model type name
-
-You can also change the name of the model types exposed in GraphQL Schema.
-To achieve this, just put the `@@NestJS.type` doc line above the model definition in `schema.prisma` file, e.g:
-
-```prisma
-/// @@NestJS.type("Client")
-model User {
-  id     Int     @default(autoincrement()) @id
-  email  String  @unique
-  posts  Post[]
-}
-```
-
-Be aware that this feature changes the name everywhere in the schema, so you can import `FindManyClientResolver` (not `FindManyUserResolver`), as well as only `ClientUpdateInput` is available (not `UserUpdateInput`), which means that the GraphQL queries/mutations will also be renamed, e.g.:
-
-```graphql
-type Mutation {
-  createClient(data: ClientCreateInput!): Client!
-}
-```
-
-#### Changing exposed model type field name
-
-You can also change the name of the model type fields exposed in GraphQL Schema.
-To achieve this, just put the `@NestJS.field` doc line above the model field definition in `schema.prisma` file, e.g:
-
-```prisma
-model User {
-  id     Int     @default(autoincrement()) @id
-  /// @NestJS.field("emailAddress")
-  email  String  @unique
-  posts  Post[]
-}
-```
-
-This will result in the following GraphQL schema representation:
-
-```graphql
-type User {
-  id: Int!
-  emailAddress: String!
-  posts: [Post!]!
-}
-```
-
-All generated CRUD and relations resolvers fully support this feature and they map under the hood the original prisma property to the renamed field exposed in schema.
-
-The same goes to the resolvers input types - they will also be emitted with changed field name, e.g.:
-
-```graphql
-input UserCreateInput {
-  emailAddress: String!
-  posts: PostCreateManyWithoutAuthorInput
-}
-```
-
-The emitted input type classes automatically map the provided renamed field values from GraphQL query into proper Prisma input properties out of the box.
-
-## Examples
-
-You can check out some integration examples on this repo:
-
-<https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example>
-
-## Feedback
-
-Currently released version `0.x` is just a preview of the upcoming integration. For now it lacks customization option - picking/omitting fields of object types to expose in the schema, as well as picking exposed args fields.
-
-However, the base functionality is working well, so I strongly encourage you to give it a try and play with it. Any feedback about the developers experience, bug reports or ideas about new features or enhancements are very welcome - please feel free to put your two cents into [discussion in the issue](https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues/476).
-
-In near feature, when Prisma SDK will be ready, the `typegraphql-prisma-nestjs` integration will also allow to use a code-first approach to build a `schema.prisma` and GraphQL schema at once, using classes with decorators as a single source of truth. Stay tuned! :muscle:
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+
+## Understand your workspace
+
+Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+
+## Further help
+
+Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## ☁ Nx Cloud
+
+### Computation Memoization in the Cloud
+
+<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+
+Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+
+Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+
+Visit [Nx Cloud](https://nx.app/) to learn more.

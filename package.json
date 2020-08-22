@@ -1,118 +1,67 @@
 {
-  "name": "nestjs-prisma-generator",
-  "version": "0.4.3-alpha0",
+  "name": "prisma-generators",
+  "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "check:type": "tsc --noEmit",
-    "check:format": "prettier --check ./**/*.{js,json,ts,tsx}",
-    "test": "ts-node ./tests/helpers/setup-tests.ts && jest --watch --verbose",
-    "test:integration": "ts-node ./tests/helpers/setup-tests.ts && env-cmd jest --watch --verbose --config ./jest.config.integration.js",
-    "test:ci": "ts-node ./tests/helpers/setup-tests.ts && jest --coverage --verbose --runInBand && jest --coverage --verbose --runInBand --config ./jest.config.integration.js",
-    "format": "prettier --write ./**/*.{js,json,ts,tsx}",
-    "prepublish": "yarn build"
+    "nx": "nx",
+    "start": "nx serve",
+    "build": "nx build",
+    "test": "nx test",
+    "lint": "nx workspace-lint && nx lint",
+    "e2e": "nx e2e",
+    "affected:apps": "nx affected:apps",
+    "affected:libs": "nx affected:libs",
+    "affected:build": "nx affected:build",
+    "affected:e2e": "nx affected:e2e",
+    "affected:test": "nx affected:test",
+    "affected:lint": "nx affected:lint",
+    "affected:dep-graph": "nx affected:dep-graph",
+    "affected": "nx affected",
+    "format": "nx format:write",
+    "format:write": "nx format:write",
+    "format:check": "nx format:check",
+    "update": "nx migrate latest",
+    "workspace-schematic": "nx workspace-schematic",
+    "dep-graph": "nx dep-graph",
+    "help": "nx help"
   },
-  "peerDependencies": {
-    "@nestjs/graphql": ">=7",
-    "@prisma/cli": "~2.5.1",
-    "@prisma/client": "~2.5.1",
-    "@types/graphql-fields": "^1.3.3",
-    "@types/node": "*",
-    "graphql-type-json": "^0.3.2"
-  },
+  "private": true,
   "dependencies": {
-    "@nestjs/graphql": "^7.6.0",
-    "@prisma/generator-helper": "~2.5.1",
-    "@prisma/sdk": "~2.5.1",
-    "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
-    "graphql-fields": "^2.0.3",
+    "@angular/compiler": "^10.0.11",
+    "@angular/core": "^10.0.11",
+    "@prisma/client": "^2.5.1",
+    "@prisma/generator-helper": "^2.5.1",
     "pluralize": "^8.0.0",
-    "supertest": "^4.0.2",
+    "rxjs": "^6.6.2",
+    "ts-dedent": "^1.1.1",
     "ts-morph": "^8.0.0",
-    "tslib": "^2.0.1"
+    "tslint-override": "^1.0.1",
+    "zone.js": "~0.10.3",
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/platform-express": "^7.0.0",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.4.2",
-    "@nestjs/core": "^7.4.2",
-    "@nestjs/platform-express": "^7.4.2",
-    "@nestjs/testing": "^7.4.2",
-    "@prisma/cli": "~2.5.1",
-    "@prisma/client": "~2.5.1",
-    "@types/graphql-fields": "^1.3.3",
-    "@types/graphql-type-json": "^0.3.2",
-    "@types/jest": "^26.0.10",
+    "@nrwl/jest": "^10.1.0",
+    "@nrwl/nest": "^10.1.0",
+    "@nrwl/node": "10.1.0",
+    "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "10.1.0",
+    "@prisma/cli": "^2.5.1",
+    "@types/jest": "26.0.10",
     "@types/node": "^14.6.0",
-    "@types/pg": "^7.14.4",
-    "@types/pluralize": "0.0.29",
-    "apollo-server-express": "^2.16.1",
-    "apollo-server-testing": "^2.16.1",
-    "directory-tree": "^2.2.4",
-    "env-cmd": "^10.1.0",
-    "graphql": "^14.7.0",
-    "graphql-fields": "^2.0.3",
-    "graphql-tag": "^2.11.0",
-    "graphql-type-json": "^0.3.2",
-    "husky": "^4.2.5",
-    "jest": "^26.4.1",
-    "lint-staged": "^10.2.11",
-    "pg": "^8.3.2",
-    "prettier": "^2.0.5",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.6.2",
-    "ts-jest": "~26.2.0",
-    "ts-node": "^8.10.2",
-    "typescript": "~3.9.7"
-  },
-  "license": "MIT",
-  "engines": {
-    "node": ">=12.4"
-  },
-  "author": {
-    "name": "Micha?� Lytek",
-    "url": "https://github.com/MichalLytek"
-  },
-  "contributors": [
-    {
-      "name": "wSedlacek",
-      "url": "https://github.com/wSedlacek"
-    },
-    {
-      "name": "EndyKaufman",
-      "url": "https://github.com/EndyKaufman"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wSedlacek/nestjs-prisma.git"
-  },
-  "bugs": {
-    "url": "https://github.com/wSedlacek/nestjs-prisma/issues"
-  },
-  "keywords": [
-    "nestjs",
-    "type-graphql",
-    "typegraphql",
-    "prisma",
-    "prisma2",
-    "prisma-framework",
-    "graphql",
-    "generator"
-  ],
-  "files": [
-    "lib"
-  ],
-  "bin": "lib/index.js",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx}": [
-      "prettier --write"
-    ],
-    "**/*.{js,json}": [
-      "prettier --write"
-    ]
+    "@types/pluralize": "^0.0.29",
+    "dotenv": "8.2.0",
+    "eslint": "7.7.0",
+    "jest": "26.4.1",
+    "prettier": "2.0.5",
+    "ts-jest": "26.2.0",
+    "ts-node": "^9.0.0",
+    "tslint": "^5.20.1",
+    "tslint-config-suiyobi": "^0.1.5",
+    "typescript": "~3.9.3",
+    "@nestjs/schematics": "^7.0.0",
+    "@nestjs/testing": "^7.0.0"
   }
 }

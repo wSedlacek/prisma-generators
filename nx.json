@@ -1,0 +1,38 @@
+{
+  "npmScope": "prisma-generators",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "YmJiNmEwZWYtOGE4YS00NGQ1LTgwZjMtODVhNzc5ZWNmYTlifHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "nestjs": {
+      "tags": []
+    },
+    "nestjs-examples-1-basic": {
+      "tags": []
+    },
+    "nestjs-examples-2-picking-actions": {
+      "tags": []
+    }
+  }
+}

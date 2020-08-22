@@ -24,15 +24,15 @@ jobs:
 
       - name: Setup project
         run: |
-          npm install
+          yarn install
 
       - name: Check codebase
         run: |
-          npm run check:format
-          npm run check:type
+          yarn check:format
+          yarn check:type
 
       - name: Run tests
         run: |
-          npm run test:ci
+          yarn test:ci
         env:
           CI: true
