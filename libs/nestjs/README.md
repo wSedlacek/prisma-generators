@@ -288,7 +288,7 @@ Example
 
 ## Examples
 
-Examples can be found in the [apps/examples](apps/examples) directory.
+Examples can be found in the [apps/nestjs/examples](apps/nestjs/examples) directory.
 
 ## Feedback
 

@@ -1,6 +1,6 @@
 {
   "name": "@prisma-generators/nestjs",
-  "version": "0.6.0-alpha1",
+  "version": "0.6.0-alpha2",
   "author": "wSedlacek",
   "repository": "https://github.com/wSedlacek/prisma-generators",
   "bugs": "https://github.com/wSedlacek/prisma-generators/issues",
