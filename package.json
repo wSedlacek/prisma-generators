@@ -2,6 +2,7 @@
   "name": "prisma-generators",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
@@ -11,6 +12,7 @@
     "prepare-test": "nx prepare-test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
+    "deploy": "nx deploy",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:build": "nx affected:build",
@@ -27,7 +29,6 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help"
   },
-  "private": true,
   "dependencies": {
     "@angular/compiler": "^10.0.14",
     "@angular/core": "^10.0.14",
@@ -53,7 +54,11 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1000.8",
     "@angular-devkit/build-angular": "^0.1000.8",
+    "@angular-devkit/core": "^10.0.8",
+    "@angular-devkit/schematics": "^10.0.8",
+    "@angular/cli": "^10.0.8",
     "@angular/compiler-cli": "^10.0.14",
     "@nestjs/schematics": "^7.1.1",
     "@nestjs/testing": "^7.4.4",

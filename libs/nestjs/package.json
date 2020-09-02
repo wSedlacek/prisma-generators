@@ -1,6 +1,6 @@
 {
   "name": "@prisma-generators/nestjs",
-  "version": "0.6.0",
+  "version": "0.6.0-alpha0",
   "peerDependencies": {
     "@nestjs/graphql": ">=7",
     "@prisma/cli": "~2.6.0",
