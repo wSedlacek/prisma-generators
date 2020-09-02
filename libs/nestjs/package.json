@@ -1,6 +1,9 @@
 {
   "name": "@prisma-generators/nestjs",
-  "version": "0.6.0-alpha0",
+  "version": "0.6.0-alpha1",
+  "author": "wSedlacek",
+  "repository": "https://github.com/wSedlacek/prisma-generators",
+  "bugs": "https://github.com/wSedlacek/prisma-generators/issues",
   "peerDependencies": {
     "@nestjs/graphql": ">=7",
     "@prisma/cli": "~2.6.0",
