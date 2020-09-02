@@ -1,7 +1,6 @@
 import path from 'path';
 import { OptionalKind, Project, PropertyDeclarationStructure } from 'ts-morph';
 
-import { saveSourceFile } from '../utils';
 import { argsFolderName } from './config';
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { DMMF } from './dmmf/types';
@@ -11,15 +10,13 @@ import {
   generateInputsImports,
   generateNestJSArgImport,
 } from './imports';
-import { GenerateCodeOptions } from './options';
 
-export const generateArgsTypeClassFromArgs = async (
+export const generateArgsTypeClassFromArgs = (
   project: Project,
   generateDirPath: string,
   fields: DMMF.SchemaArg[],
   argsTypeName: string,
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions,
   inputImportsLevel = 3
 ) => {
   const dirPath = path.resolve(generateDirPath, argsFolderName);
@@ -62,7 +59,7 @@ export const generateArgsTypeClassFromArgs = async (
         const fieldOptions = [
           `nullable: ${isOptional}`,
           ...(arg.typeName === 'take'
-            ? [`defaultValue: ${options.defaultTake ?? 20}`]
+            ? [`defaultValue: ${dmmfDocument.options.defaultTake ?? 20}`]
             : []),
         ].join(',');
 
@@ -84,7 +81,7 @@ export const generateArgsTypeClassFromArgs = async (
             {
               name: 'Field',
               arguments: [
-                `() => ${arg.typeGraphQLType}`,
+                `() => ${arg.nestGraphQLType}`,
                 `{ ${fieldOptions} }`,
               ],
             },
@@ -93,8 +90,4 @@ export const generateArgsTypeClassFromArgs = async (
       }
     ),
   });
-
-  await saveSourceFile(sourceFile);
-
-  return argsTypeName;
 };

@@ -74,13 +74,13 @@ const transformField = (dmmfDocument: DmmfDocument) => {
     );
     const typeFieldAlias = attributeArgs?.slice(1, -1);
     const fieldTSType = getFieldTSType(field, dmmfDocument, false);
-    const typeGraphQLType = getGraphQLType(field, dmmfDocument);
+    const nestGraphQLType = getGraphQLType(field, dmmfDocument);
 
     return {
       ...field,
       typeFieldAlias,
       fieldTSType,
-      typeGraphQLType,
+      nestGraphQLType,
       docs: cleanDocsString(field.documentation),
     };
   };
@@ -104,7 +104,7 @@ const transformInputType = (dmmfDocument: DmmfDocument) => {
         const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
           field.inputType
         );
-        const typeGraphQLType = getGraphQLType(selectedInputType, dmmfDocument);
+        const nestGraphQLType = getGraphQLType(selectedInputType, dmmfDocument);
         const fieldTSType = getFieldTSType(
           selectedInputType,
           dmmfDocument,
@@ -115,7 +115,7 @@ const transformInputType = (dmmfDocument: DmmfDocument) => {
           ...field,
           selectedInputType,
           typeName,
-          typeGraphQLType,
+          nestGraphQLType,
           fieldTSType,
           hasMappedName: field.name !== typeName,
         };
@@ -147,12 +147,12 @@ const transformOutputType = (dmmfDocument: DmmfDocument) => {
           dmmfDocument,
           false
         );
-        const typeGraphQLType = getGraphQLType(fieldOutputType, dmmfDocument);
+        const nestGraphQLType = getGraphQLType(fieldOutputType, dmmfDocument);
         const args = field.args.map<DMMF.SchemaArg>((arg) => {
           const selectedInputType = selectInputTypeFromTypes(dmmfDocument)(
             arg.inputType
           );
-          const argTypeGraphQLType = getGraphQLType(
+          const argNestJSGraphQLType = getGraphQLType(
             selectedInputType,
             dmmfDocument
           );
@@ -166,7 +166,7 @@ const transformOutputType = (dmmfDocument: DmmfDocument) => {
             ...arg,
             selectedInputType,
             fieldTSType: argFieldTSType,
-            typeGraphQLType: argTypeGraphQLType,
+            nestGraphQLType: argNestJSGraphQLType,
             hasMappedName: arg.name !== typeName,
             // TODO: add proper mapping in the future if needed
             typeName: arg.name,
@@ -180,7 +180,7 @@ const transformOutputType = (dmmfDocument: DmmfDocument) => {
         return {
           ...field,
           fieldTSType,
-          typeGraphQLType,
+          nestGraphQLType,
           args,
           argsTypeName,
           outputType: fieldOutputType,
@@ -221,10 +221,10 @@ const transformMapping = (
 ) => {
   return (mapping: PrismaDMMF.Mapping): DMMF.Mapping => {
     const { model, plural, ...availableActions } = mapping;
+    const modelTypeName = dmmfDocument.getModelTypeName(model) ?? model;
     const actions = Object.entries(availableActions).map<DMMF.Action>(
       ([modelAction, fieldName]) => {
         const kind = modelAction as DMMF.ModelAction;
-        const modelName = dmmfDocument.getModelTypeName(model) ?? model;
         const method = dmmfDocument.schema.outputTypes
           .flatMap(({ fields }) => fields)
           .find((field) => field.name === fieldName);
@@ -243,6 +243,9 @@ const transformMapping = (
             ? `${pascalCase(methodName)}Args`
             : undefined;
         const outputTypeName = method?.outputType.type;
+        const actionResolverName = `${pascalCase(
+          kind
+        )}${modelTypeName}Resolver`;
 
         return {
           fieldName,
@@ -250,16 +253,20 @@ const transformMapping = (
           method,
           argsTypeName,
           outputTypeName,
-          name: getMappedActionName(kind, modelName, options),
+          actionResolverName,
+          name: getMappedActionName(kind, modelTypeName, options),
           operation: getOperationKindName(kind),
         };
       }
     );
 
+    const resolverName = `${modelTypeName}CrudResolver`;
+
     return {
       model,
       plural,
       actions,
+      resolverName,
       collectionName: camelCase(mapping.model),
     };
   };
@@ -348,6 +355,39 @@ export const transformEnums = (dmmfDocument: DmmfDocument) => {
           (modelName && dmmfDocument.getModelFieldAlias(modelName, value)) ||
           value,
       })),
+    };
+  };
+};
+
+export const generateRelationModel = (dmmfDocument: DmmfDocument) => {
+  return (model: DMMF.Model): DMMF.RelationModel => {
+    const outputType = dmmfDocument.schema.outputTypes.find(
+      (type) => type.name === model.name
+    ) as DMMF.OutputType;
+    const resolverName = `${model.typeName}RelationsResolver`;
+    const relationFields = model.fields
+      .filter((field) => field.relationName)
+      .map<DMMF.RelationField>((field) => {
+        const outputTypeField = outputType.fields.find(
+          (it) => it.name === field.name
+        ) as DMMF.OutputSchemaField;
+        const argsTypeName =
+          outputTypeField.args.length > 0
+            ? `${model.typeName}${pascalCase(field.name)}Args`
+            : undefined;
+
+        return {
+          ...field,
+          outputTypeField,
+          argsTypeName,
+        };
+      });
+
+    return {
+      model,
+      outputType,
+      relationFields,
+      resolverName,
     };
   };
 };

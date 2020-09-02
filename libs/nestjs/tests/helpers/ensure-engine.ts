@@ -1,13 +1,13 @@
 import { download } from '@prisma/fetch-engine';
-import * as path from 'path';
 import { promises as fs } from 'fs';
+import * as path from 'path';
 
 const prismaClientRuntimeDir = path.join(
   __dirname,
-  '../../node_modules/@prisma/client'
+  '../../../../node_modules/@prisma/client'
 );
 
-const ensurePrismaEngine = async () => {
+export const ensurePrismaEngine = async () => {
   try {
     await fs.access(prismaClientRuntimeDir);
     await download({
@@ -15,13 +15,14 @@ const ensurePrismaEngine = async () => {
         'query-engine': prismaClientRuntimeDir,
       },
       showProgress: true,
-      version: require('@prisma/cli/package.json').prisma.version,
+      version: await import('@prisma/cli/package.json').then(
+        ({ prisma }) => prisma.version
+      ),
     });
-  } catch {
+  } catch (e) {
+    console.log(e);
     throw new Error(
-      'Missing PrismaClient directory: ' + prismaClientRuntimeDir
+      `Missing PrismaClient directory: ${prismaClientRuntimeDir}`
     );
   }
 };
-
-export default ensurePrismaEngine;

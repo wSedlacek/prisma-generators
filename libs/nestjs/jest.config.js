@@ -12,4 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
   coverageDirectory: '../../coverage/libs/nestjs',
+  setupFiles: ['<rootDir>/tests/setup-tests.ts'],
 };

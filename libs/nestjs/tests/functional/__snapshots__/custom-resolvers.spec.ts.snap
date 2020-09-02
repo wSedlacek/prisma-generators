@@ -41,34 +41,28 @@ exports[`custom resolvers execution should produce a SDL: graphQLSchemaSDL 1`] =
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Query {
-  customFindManyPost(where: PostWhereInput, orderBy: [PostOrderByInput!], cursor: PostWhereUniqueInput, take: Int = 20, skip: Int): [Post!]!
-}
-
-type Post {
-  uuid: String!
-  content: String!
-  color: Color!
-}
-
 enum Color {
   RED
   GREEN
   BLUE
 }
 
-input PostWhereInput {
-  uuid: StringFilter
-  content: StringFilter
-  color: ColorFilter
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
+input EnumColorFilter {
+  equals: Color
+  in: [Color!]
+  notIn: [Color!]
+  not: NestedEnumColorFilter
 }
 
-input StringFilter {
+input NestedEnumColorFilter {
+  equals: Color
+  in: [Color!]
+  notIn: [Color!]
+  not: NestedEnumColorFilter
+}
+
+input NestedStringFilter {
   equals: String
-  not: String
   in: [String!]
   notIn: [String!]
   lt: String
@@ -78,13 +72,19 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  not: NestedStringFilter
 }
 
-input ColorFilter {
-  equals: Color
-  not: Color
-  in: [Color!]
-  notIn: [Color!]
+type Post {
+  uuid: String!
+  content: String!
+  color: Color!
+}
+
+enum PostDistinctFieldEnum {
+  uuid
+  content
+  color
 }
 
 input PostOrderByInput {
@@ -93,13 +93,40 @@ input PostOrderByInput {
   color: SortOrder
 }
 
+input PostWhereInput {
+  AND: [PostWhereInput!]
+  OR: [PostWhereInput!]
+  NOT: [PostWhereInput!]
+  uuid: StringFilter
+  content: StringFilter
+  color: EnumColorFilter
+}
+
+input PostWhereUniqueInput {
+  uuid: String
+}
+
+type Query {
+  customFindManyPost(where: PostWhereInput, orderBy: [PostOrderByInput!], cursor: PostWhereUniqueInput, take: Int = 20, skip: Int, distinct: [PostDistinctFieldEnum!]): [Post!]!
+}
+
 enum SortOrder {
   asc
   desc
 }
 
-input PostWhereUniqueInput {
-  uuid: String
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
 }
 "
 `;

@@ -1,6 +1,7 @@
 import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
 import { GenerateCodeOptions } from '../options';
 import {
+  generateRelationModel,
   transformBareModel,
   transformEnums,
   transformMappings,
@@ -19,9 +20,11 @@ export class DmmfDocument implements DMMF.Document {
   @Override()
   public mappings: DMMF.Mapping[];
 
+  public relationModels: DMMF.RelationModel[];
+
   constructor(
     { datamodel, schema, mappings }: PrismaDMMF.Document,
-    options: GenerateCodeOptions
+    public options: GenerateCodeOptions
   ) {
     // transform bare model without fields
     this.models = datamodel.models.map(transformBareModel);
@@ -38,6 +41,11 @@ export class DmmfDocument implements DMMF.Document {
       enums: this.enums,
     };
     this.mappings = transformMappings(mappings, this, options);
+    this.relationModels = this.models
+      .filter((model) =>
+        model.fields.some((field) => field.relationName !== undefined)
+      )
+      .map(generateRelationModel(this));
   }
 
   public getModelTypeName(modelName: string): string | undefined {
@@ -52,6 +60,10 @@ export class DmmfDocument implements DMMF.Document {
 
   public isModelName(typeName: string): boolean {
     return this.models.some((it) => it.name === typeName);
+  }
+
+  public isModelTypeName(typeName: string): boolean {
+    return this.models.some((it) => it.typeName === typeName);
   }
 
   public getModelFieldAlias(

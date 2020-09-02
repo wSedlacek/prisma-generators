@@ -1,8 +1,8 @@
 import { DMMF as PrismaDMMF } from '@prisma/client/runtime/dmmf-types';
 import path from 'path';
-import { Project } from 'ts-morph';
+import { CompilerOptions, ModuleKind, Project, ScriptTarget } from 'ts-morph';
 
-import { isDefined, saveSourceFile } from '../utils';
+import { isDefined } from '../utils';
 import { generateArgsTypeClassFromArgs } from './args-class';
 import {
   argsFolderName,
@@ -31,10 +31,18 @@ import { generateObjectTypeClassFromModel } from './model-type-class';
 import { GenerateCodeOptions } from './options';
 import { generateCrudResolverClassFromMapping } from './resolvers/full-crud';
 import { generateRelationsResolverClassesFromModel } from './resolvers/relations';
+import { generateActionResolverClass } from './resolvers/separate-action';
 import {
   generateInputTypeClassFromType,
   generateOutputTypeClassFromType,
 } from './type-class';
+
+const baseCompilerOptions: CompilerOptions = {
+  target: ScriptTarget.ES2019,
+  module: ModuleKind.CommonJS,
+  emitDecoratorMetadata: true,
+  experimentalDecorators: true,
+};
 
 export const generateCode = async (
   dmmf: PrismaDMMF.Document,
@@ -42,7 +50,15 @@ export const generateCode = async (
   log: (msg: string) => void = noop
 ) => {
   const baseDirPath = options.outputDirPath;
-  const project = new Project();
+  const emitTranspiledCode =
+    options.emitTranspiledCode ??
+    options.outputDirPath.includes('node_modules');
+  const project = new Project({
+    compilerOptions: {
+      ...baseCompilerOptions,
+      ...(emitTranspiledCode ? { declaration: true } : {}),
+    },
+  });
   const resolversDirPath = path.resolve(baseDirPath, resolversFolderName);
   const modelNames = dmmf.datamodel.models.map((model) => model.name);
 
@@ -53,17 +69,13 @@ export const generateCode = async (
   const datamodelEnumNames = dmmfDocument.datamodel.enums.map(
     (enumDef) => enumDef.typeName
   );
-  await Promise.all(
-    dmmfDocument.datamodel.enums.map((enumDef) =>
-      generateEnumFromDef(project, baseDirPath, enumDef)
-    )
+  dmmfDocument.datamodel.enums.forEach((enumDef) =>
+    generateEnumFromDef(project, baseDirPath, enumDef)
   );
-  await Promise.all(
-    dmmfDocument.schema.enums
-      // skip enums from datamodel
-      .filter((enumDef) => !datamodelEnumNames.includes(enumDef.typeName))
-      .map((enumDef) => generateEnumFromDef(project, baseDirPath, enumDef))
-  );
+  dmmfDocument.schema.enums
+    // skip enums from datamodel
+    .filter((enumDef) => !datamodelEnumNames.includes(enumDef.typeName))
+    .forEach((enumDef) => generateEnumFromDef(project, baseDirPath, enumDef));
   const emittedEnumNames = [
     ...new Set([
       ...dmmfDocument.schema.enums.map((it) => it.typeName),
@@ -76,19 +88,10 @@ export const generateCode = async (
     { overwrite: true }
   );
   generateEnumsBarrelFile(enumsBarrelExportSourceFile, emittedEnumNames);
-  await saveSourceFile(enumsBarrelExportSourceFile);
 
   log('Generating models...');
-  await Promise.all(
-    dmmfDocument.datamodel.models.map((model) =>
-      generateObjectTypeClassFromModel(
-        project,
-        baseDirPath,
-        model,
-        dmmfDocument,
-        options
-      )
-    )
+  dmmfDocument.datamodel.models.forEach((model) =>
+    generateObjectTypeClassFromModel(project, baseDirPath, model, dmmfDocument)
   );
   const modelsBarrelExportSourceFile = project.createSourceFile(
     path.resolve(baseDirPath, modelsFolderName, 'index.ts'),
@@ -99,7 +102,6 @@ export const generateCode = async (
     modelsBarrelExportSourceFile,
     dmmfDocument.datamodel.models.map((it) => it.typeName)
   );
-  await saveSourceFile(modelsBarrelExportSourceFile);
 
   log('Generating output types...');
   const rootTypes = dmmfDocument.schema.outputTypes.filter((type) =>
@@ -113,15 +115,12 @@ export const generateCode = async (
     .map((it) => it.fields)
     .reduce((a, b) => a.concat(b), [])
     .filter((it): it is Required<DMMF.OutputSchemaField> => !!it.argsTypeName);
-  await Promise.all(
-    outputTypesToGenerate.map((type) =>
-      generateOutputTypeClassFromType(
-        project,
-        resolversDirPath,
-        type,
-        dmmfDocument,
-        options
-      )
+  outputTypesToGenerate.forEach((type) =>
+    generateOutputTypeClassFromType(
+      project,
+      resolversDirPath,
+      type,
+      dmmfDocument
     )
   );
   const outputsBarrelExportSourceFile = project.createSourceFile(
@@ -139,23 +138,20 @@ export const generateCode = async (
     outputTypesToGenerate.map((it) => it.typeName),
     outputTypesFieldsArgsToGenerate.length > 0
   );
-  await saveSourceFile(outputsBarrelExportSourceFile);
 
   if (outputTypesFieldsArgsToGenerate.length > 0) {
     log('Generating output types args...');
-    await Promise.all(
-      outputTypesFieldsArgsToGenerate.map(async (field) => {
-        await generateArgsTypeClassFromArgs(
-          project,
-          path.resolve(resolversDirPath, outputsFolderName),
-          field.args,
-          field.argsTypeName,
-          dmmfDocument,
-          options,
-          2
-        );
-      })
-    );
+    outputTypesFieldsArgsToGenerate.forEach((field) => {
+      generateArgsTypeClassFromArgs(
+        project,
+        path.resolve(resolversDirPath, outputsFolderName),
+        field.args,
+        field.argsTypeName,
+        dmmfDocument,
+        2
+      );
+    });
+
     const outputsArgsBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -173,21 +169,19 @@ export const generateCode = async (
         .map((it) => it.argsTypeName)
         .filter(isDefined)
     );
-    await saveSourceFile(outputsArgsBarrelExportSourceFile);
   }
 
   log('Generating input types...');
-  await Promise.all(
-    dmmfDocument.schema.inputTypes.map((type) =>
-      generateInputTypeClassFromType(
-        project,
-        resolversDirPath,
-        type,
-        dmmfDocument,
-        options
-      )
+
+  dmmfDocument.schema.inputTypes.forEach((type) =>
+    generateInputTypeClassFromType(
+      project,
+      resolversDirPath,
+      type,
+      dmmfDocument
     )
   );
+
   const inputsBarrelExportSourceFile = project.createSourceFile(
     path.resolve(
       baseDirPath,
@@ -202,36 +196,19 @@ export const generateCode = async (
     inputsBarrelExportSourceFile,
     dmmfDocument.schema.inputTypes.map((it) => it.typeName)
   );
-  await saveSourceFile(inputsBarrelExportSourceFile);
 
-  log('Generating relation resolvers...');
-  const relationResolversData = await Promise.all(
-    dmmfDocument.datamodel.models
-      .filter((model) => model.fields.some((field) => field.relationName))
-      .map(async (model) => {
-        const outputType = dmmfDocument.schema.outputTypes.find(
-          (type) => type.name === model.name
-        );
-        const mapping = dmmfDocument.mappings.find(
-          (it) => it.model === model.name
-        );
+  if (dmmfDocument.relationModels.length > 0) {
+    log('Generating relation resolvers...');
 
-        if (!outputType || !mapping) {
-          throw new Error('Could not determine resolver data');
-        }
+    dmmfDocument.relationModels.forEach((relationModel) =>
+      generateRelationsResolverClassesFromModel(
+        project,
+        baseDirPath,
+        dmmfDocument,
+        relationModel
+      )
+    );
 
-        return generateRelationsResolverClassesFromModel(
-          project,
-          baseDirPath,
-          model,
-          mapping,
-          outputType,
-          dmmfDocument,
-          options
-        );
-      })
-  );
-  if (relationResolversData.length > 0) {
     const relationResolversBarrelExportSourceFile = project.createSourceFile(
       path.resolve(
         baseDirPath,
@@ -245,33 +222,78 @@ export const generateCode = async (
     generateResolversBarrelFile(
       'relations',
       relationResolversBarrelExportSourceFile,
-      relationResolversData
+      dmmfDocument.relationModels.map((relationModel) => ({
+        resolverName: relationModel.resolverName,
+        modelName: relationModel.model.typeName,
+        hasSomeArgs: relationModel.relationFields.some(
+          (field) => field.argsTypeName !== undefined
+        ),
+      }))
     );
-    await saveSourceFile(relationResolversBarrelExportSourceFile);
+
+    log('Generating relation resolver args...');
+    dmmfDocument.relationModels.forEach((relationModelData) => {
+      const resolverDirPath = path.resolve(
+        baseDirPath,
+        resolversFolderName,
+        relationsResolversFolderName,
+        relationModelData.model.typeName
+      );
+
+      relationModelData.relationFields
+        .filter((field) => field.argsTypeName)
+        .forEach((field) => {
+          generateArgsTypeClassFromArgs(
+            project,
+            resolverDirPath,
+            field.outputTypeField.args,
+            field.argsTypeName as string,
+            dmmfDocument
+          );
+        });
+
+      const argTypeNames = relationModelData.relationFields
+        .filter((it) => it.argsTypeName !== undefined)
+        .map((it) => it.argsTypeName)
+        .filter(isDefined);
+
+      if (argTypeNames.length) {
+        const barrelExportSourceFile = project.createSourceFile(
+          path.resolve(resolverDirPath, argsFolderName, 'index.ts'),
+          undefined,
+          { overwrite: true }
+        );
+        generateArgsBarrelFile(barrelExportSourceFile, argTypeNames);
+      }
+    });
   }
 
   log('Generating crud resolvers...');
-  const crudResolversData = await Promise.all(
-    dmmfDocument.mappings.map(async (mapping) => {
-      const model = dmmfDocument.datamodel.models.find(
+  dmmfDocument.mappings.forEach((mapping) => {
+    const model = dmmfDocument.datamodel.models.find(
+      (it) => it.name === mapping.model
+    ) as DMMF.Model;
+    generateCrudResolverClassFromMapping(
+      project,
+      baseDirPath,
+      mapping,
+      model,
+      dmmfDocument
+    );
+    mapping.actions.forEach((action) => {
+      const actionModel = dmmfDocument.datamodel.models.find(
         (it) => it.name === mapping.model
-      );
-
-      if (!model) {
-        throw new Error('Could not determine resolver data');
-      }
-
-      return generateCrudResolverClassFromMapping(
+      ) as DMMF.Model;
+      generateActionResolverClass(
         project,
         baseDirPath,
+        actionModel,
+        action,
         mapping,
-        model,
-        modelNames,
-        options,
         dmmfDocument
       );
-    })
-  );
+    });
+  });
   const crudResolversBarrelExportSourceFile = project.createSourceFile(
     path.resolve(
       baseDirPath,
@@ -285,9 +307,58 @@ export const generateCode = async (
   generateResolversBarrelFile(
     'crud',
     crudResolversBarrelExportSourceFile,
-    crudResolversData
+    dmmfDocument.mappings.map((mapping) => {
+      const model = dmmfDocument.datamodel.models.find(
+        (it) => it.name === mapping.model
+      ) as DMMF.Model;
+
+      return {
+        modelName: model.typeName,
+        resolverName: mapping.resolverName,
+        actionResolverNames: mapping.actions.map((it) => it.actionResolverName),
+        hasSomeArgs: mapping.actions.some(
+          (action) => action.argsTypeName !== undefined
+        ),
+      };
+    })
   );
-  await saveSourceFile(crudResolversBarrelExportSourceFile);
+
+  log('Generating crud resolvers args...');
+  dmmfDocument.mappings.forEach((mapping) => {
+    const actionsWithArgs = mapping.actions.filter(
+      (it) => it.argsTypeName !== undefined
+    );
+
+    if (actionsWithArgs.length) {
+      const model = dmmfDocument.datamodel.models.find(
+        (it) => it.name === mapping.model
+      ) as DMMF.Model;
+      const resolverDirPath = path.resolve(
+        baseDirPath,
+        resolversFolderName,
+        crudResolversFolderName,
+        model.typeName
+      );
+      actionsWithArgs.forEach((action) => {
+        generateArgsTypeClassFromArgs(
+          project,
+          resolverDirPath,
+          action.method.args,
+          action.argsTypeName as string,
+          dmmfDocument
+        );
+      });
+      const barrelExportSourceFile = project.createSourceFile(
+        path.resolve(resolverDirPath, argsFolderName, 'index.ts'),
+        undefined,
+        { overwrite: true }
+      );
+      generateArgsBarrelFile(
+        barrelExportSourceFile,
+        actionsWithArgs.map((it) => it.argsTypeName).filter(isDefined)
+      );
+    }
+  });
 
   log('Generating index file');
   const indexSourceFile = project.createSourceFile(
@@ -295,6 +366,15 @@ export const generateCode = async (
     undefined,
     { overwrite: true }
   );
-  generateIndexFile(indexSourceFile, relationResolversData.length > 0);
-  await saveSourceFile(indexSourceFile);
+  generateIndexFile(indexSourceFile, dmmfDocument.relationModels.length > 0);
+
+  log('Emitting generated code files');
+  if (emitTranspiledCode) {
+    await project.emit();
+  } else {
+    for (const file of project.getSourceFiles()) {
+      file.formatText({ indentSize: 2 });
+    }
+    await project.save();
+  }
 };

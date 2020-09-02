@@ -1,11 +1,11 @@
 import { promises as fs } from 'fs';
-import path from 'path';
+import { join } from 'path';
 
 export const removeDir = async (dirPath: string, onlyContent: boolean) => {
   const dirEntries = await fs.readdir(dirPath, { withFileTypes: true });
   await Promise.all(
     dirEntries.map(async (dirEntry) => {
-      const fullPath = path.join(dirPath, dirEntry.name);
+      const fullPath = join(dirPath, dirEntry.name);
 
       return dirEntry.isDirectory()
         ? removeDir(fullPath, false)

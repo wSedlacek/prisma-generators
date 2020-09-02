@@ -2,38 +2,25 @@ import path from 'path';
 import { dedent } from 'ts-dedent';
 import { MethodDeclarationStructure, OptionalKind, Project } from 'ts-morph';
 
-import { isDefined, saveSourceFile } from '../../utils';
-import { generateArgsTypeClassFromArgs } from '../args-class';
-import {
-  argsFolderName,
-  relationsResolversFolderName,
-  resolversFolderName,
-} from '../config';
+import { isDefined } from '../../utils';
+import { relationsResolversFolderName, resolversFolderName } from '../config';
 import { DmmfDocument } from '../dmmf/dmmf-document';
 import { DMMF } from '../dmmf/types';
-import { camelCase, pascalCase } from '../helpers';
+import { camelCase } from '../helpers';
 import {
-  generateArgsBarrelFile,
   generateArgsImports,
   generateClassTransformerImport,
   generateModelsImports,
   generateNestJSRelationsImport,
 } from '../imports';
-import { GenerateCodeOptions } from '../options';
-import { GeneratedResolverData } from '../types';
 
-export const generateRelationsResolverClassesFromModel = async (
+export const generateRelationsResolverClassesFromModel = (
   project: Project,
   baseDirPath: string,
-  model: DMMF.Model,
-  mapping: DMMF.Mapping,
-  outputType: DMMF.OutputType,
   dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions
-): Promise<GeneratedResolverData> => {
-  const resolverName = `${model.typeName}RelationsResolver`;
+  { model, relationFields, resolverName }: DMMF.RelationModel
+) => {
   const rootArgName = camelCase(model.typeName);
-  const relationFields = model.fields.filter((field) => field.relationName);
   const singleIdField = model.fields.find((field) => field.isId);
   const singleUniqueField = model.fields.find((field) => field.isUnique);
   const singleFilterField = singleIdField ?? singleUniqueField;
@@ -58,49 +45,6 @@ export const generateRelationsResolverClassesFromModel = async (
     overwrite: true,
   });
 
-  const methodsInfo = await Promise.all(
-    relationFields.map(async (field) => {
-      const outputTypeField = outputType.fields.find(
-        (it) => it.name === field.name
-      );
-
-      if (!outputTypeField) {
-        throw new Error('Could not generate Args Type');
-      }
-
-      let argsTypeName: string | undefined;
-      if (outputTypeField.args.length > 0) {
-        argsTypeName = await generateArgsTypeClassFromArgs(
-          project,
-          resolverDirPath,
-          outputTypeField.args,
-          `${model.typeName}${pascalCase(field.name)}Args`,
-          dmmfDocument,
-          options
-        );
-      }
-
-      return {
-        field,
-        argsTypeName,
-        fieldDocs: field.docs,
-      };
-    })
-  );
-  const argTypeNames = methodsInfo
-    .map((it) => it.argsTypeName)
-    .filter(isDefined);
-
-  const barrelExportSourceFile = project.createSourceFile(
-    path.resolve(resolverDirPath, argsFolderName, 'index.ts'),
-    undefined,
-    { overwrite: true }
-  );
-  if (argTypeNames.length) {
-    generateArgsBarrelFile(barrelExportSourceFile, argTypeNames);
-    await saveSourceFile(barrelExportSourceFile);
-  }
-
   generateNestJSRelationsImport(sourceFile);
   generateModelsImports(
     sourceFile,
@@ -110,6 +54,10 @@ export const generateRelationsResolverClassesFromModel = async (
     3
   );
   generateClassTransformerImport(sourceFile);
+
+  const argTypeNames = relationFields
+    .map((it) => it.argsTypeName)
+    .filter(isDefined);
   generateArgsImports(sourceFile, argTypeNames, 0);
 
   sourceFile.addClass({
@@ -121,8 +69,8 @@ export const generateRelationsResolverClassesFromModel = async (
         arguments: [`() => ${model.typeName}`],
       },
     ],
-    methods: methodsInfo.map<OptionalKind<MethodDeclarationStructure>>(
-      ({ field, fieldDocs, argsTypeName }) => {
+    methods: relationFields.map<OptionalKind<MethodDeclarationStructure>>(
+      (field) => {
         let whereConditionString = '';
         // TODO: refactor to AST
         if (singleFilterField) {
@@ -146,11 +94,11 @@ export const generateRelationsResolverClassesFromModel = async (
           );
         }
 
-        const description = fieldDocs ? `"${fieldDocs}"` : 'undefined';
+        const description = field.docs ? `"${field.docs}"` : 'undefined';
         const resolveFieldOptions = [
           `nullable: ${!field.isRequired}`,
           `description: ${description}`,
-          ...(!argsTypeName
+          ...(!field.argsTypeName
             ? [`complexity: ({ childComplexity }) => 1 * childComplexity`]
             : [
                 `complexity: ({ args, childComplexity }) => ((args.take + (args.skip ?? 0)) ?? 1) * childComplexity`,
@@ -165,7 +113,7 @@ export const generateRelationsResolverClassesFromModel = async (
             {
               name: 'ResolveField',
               arguments: [
-                `() => ${field.typeGraphQLType}`,
+                `() => ${field.nestGraphQLType}`,
                 dedent`{
                   ${resolveFieldOptions}
                 }`,
@@ -184,37 +132,29 @@ export const generateRelationsResolverClassesFromModel = async (
               type: 'any',
               decorators: [{ name: 'Context', arguments: [] }],
             },
-            ...(!argsTypeName
+            ...(!field.argsTypeName
               ? []
               : [
                   {
                     name: 'args',
-                    type: argsTypeName,
+                    type: field.argsTypeName,
                     decorators: [{ name: 'Args', arguments: [] }],
                   },
                 ]),
           ],
           // TODO: refactor to AST
           statements: [
-            `return plainToClass(${field.typeGraphQLType.replace(
+            `return plainToClass(${field.nestGraphQLType.replace(
               /\[|\]/g,
               ''
             )}, await ctx.prisma.${camelCase(model.name)}.findOne({
               where: {${whereConditionString}},
-            }).${field.name}(${argsTypeName ? 'args' : '{}'}) as ${
-              field.typeGraphQLType
+            }).${field.name}(${field.argsTypeName ? 'args' : '{}'}) as ${
+              field.nestGraphQLType
             });`,
           ],
         };
       }
     ),
   });
-
-  await saveSourceFile(sourceFile);
-
-  return {
-    resolverName,
-    argTypeNames,
-    modelName: model.typeName,
-  };
 };

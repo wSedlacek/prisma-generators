@@ -6,7 +6,6 @@ import {
   PropertyDeclarationStructure,
 } from 'ts-morph';
 
-import { saveSourceFile } from '../utils';
 import { modelsFolderName } from './config';
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { DMMF } from './dmmf/types';
@@ -18,14 +17,12 @@ import {
   generateNestJSModelImport,
   generatePrismaJsonTypeImport,
 } from './imports';
-import { GenerateCodeOptions } from './options';
 
-export const generateObjectTypeClassFromModel = async (
+export const generateObjectTypeClassFromModel = (
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
-  dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions
+  dmmfDocument: DmmfDocument
 ) => {
   const dirPath = path.resolve(baseDirPath, modelsFolderName);
   const filePath = path.resolve(dirPath, `${model.typeName}.ts`);
@@ -36,7 +33,7 @@ export const generateObjectTypeClassFromModel = async (
   generateNestJSModelImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
   generateClassTransformerDTOImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, options, 1);
+  generatePrismaJsonTypeImport(sourceFile, dmmfDocument.options, 1);
   generateModelsImports(
     sourceFile,
     model.fields
@@ -85,14 +82,14 @@ export const generateObjectTypeClassFromModel = async (
                     ? [
                         {
                           name: 'ClassTransformer__Type',
-                          arguments: [`() => ${field.typeGraphQLType}`],
+                          arguments: [`() => ${field.nestGraphQLType}`],
                         },
                       ]
                     : []),
                   {
                     name: 'Field',
                     arguments: [
-                      `() => ${field.typeGraphQLType}`,
+                      `() => ${field.nestGraphQLType}`,
                       `{
                         nullable: ${isOptional},
                         description: ${fieldDescription},
@@ -125,7 +122,7 @@ export const generateObjectTypeClassFromModel = async (
             {
               name: 'Field',
               arguments: [
-                `() => ${field.typeGraphQLType}`,
+                `() => ${field.nestGraphQLType}`,
                 `{
                   nullable: ${!field.isRequired},
                   description: ${fieldDescription},
@@ -147,6 +144,4 @@ export const generateObjectTypeClassFromModel = async (
         }
       : undefined),
   });
-
-  await saveSourceFile(sourceFile);
 };

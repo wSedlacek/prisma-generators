@@ -13,7 +13,7 @@ import {
   resolversFolderName,
 } from './config';
 import { GenerateCodeOptions } from './options';
-import { GeneratedResolverData } from './types';
+import { GenerateMappingData } from './types';
 
 const NESTJS_GRAPHQL = '@nestjs/graphql';
 export const generateNestJSArgImport = (sourceFile: SourceFile) => {
@@ -204,12 +204,19 @@ export const generateIndexFile = (
 export const generateResolversBarrelFile = (
   type: 'crud' | 'relations',
   sourceFile: SourceFile,
-  relationResolversData: GeneratedResolverData[]
+  resolversData: GenerateMappingData[]
 ) => {
-  [...relationResolversData]
-    .sort()
+  [...resolversData]
+    .sort((a, b) =>
+      a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0
+    )
     .forEach(
-      ({ modelName, resolverName, actionResolverNames, argTypeNames }) => {
+      ({
+        modelName,
+        resolverName,
+        actionResolverNames,
+        hasSomeArgs: hasArgs,
+      }) => {
         sourceFile.addImportDeclaration({
           moduleSpecifier: `./${modelName}/${resolverName}`,
           namedImports: [resolverName].sort(),
@@ -226,7 +233,7 @@ export const generateResolversBarrelFile = (
             });
           });
         }
-        if (argTypeNames.length) {
+        if (hasArgs) {
           sourceFile.addExportDeclaration({
             moduleSpecifier: `./${modelName}/args`,
           });
@@ -236,8 +243,10 @@ export const generateResolversBarrelFile = (
 
   const moduleName =
     type === 'crud' ? 'CrudResolversModule' : 'RelationsResolversModule';
-  const providers = [...relationResolversData]
-    .sort()
+  const providers = [...resolversData]
+    .sort((a, b) =>
+      a.modelName > b.modelName ? 1 : a.modelName < b.modelName ? -1 : 0
+    )
     .map(({ resolverName }) => resolverName);
   sourceFile.addImportDeclaration({
     moduleSpecifier: '@nestjs/common',

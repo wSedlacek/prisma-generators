@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`enums should properly generate code for enum with docs 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+/** Role enum doc */
+export enum Role {
+  USER = \\"USER\\",
+  ADMIN = \\"ADMIN\\"
+}
+registerEnumType(Role, {
+  name: \\"Role\\",
+  description: \\"Role enum doc\\",
+});
+"
+`;
+
+exports[`enums should properly generate code for enum with docs: enums index 1`] = `
+"export { Role } from \\"./Role\\";
+"
+`;
+
+exports[`enums should properly generate code for normal enum 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+export enum Color {
+  RED = \\"RED\\",
+  GREEN = \\"GREEN\\",
+  BLUE = \\"BLUE\\"
+}
+registerEnumType(Color, {
+  name: \\"Color\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate model distinct enum when model field is renamed: SampleModelDistinctFieldEnum 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+export enum SampleModelDistinctFieldEnum {
+  intIdField = \\"intIdField\\",
+  mappedFieldName = \\"stringField\\",
+  intField = \\"intField\\"
+}
+registerEnumType(SampleModelDistinctFieldEnum, {
+  name: \\"SampleModelDistinctFieldEnum\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate model distinct enum when model field is renamed: enums index 1`] = `
+"export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+"
+`;
+
+exports[`enums should properly generate model distinct enum when model is renamed: ExampleModelDistinctFieldEnum 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+export enum ExampleModelDistinctFieldEnum {
+  intIdField = \\"intIdField\\",
+  stringField = \\"stringField\\",
+  intField = \\"intField\\"
+}
+registerEnumType(ExampleModelDistinctFieldEnum, {
+  name: \\"ExampleModelDistinctFieldEnum\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate model distinct enum when model is renamed: enums index 1`] = `
+"export { ExampleModelDistinctFieldEnum } from \\"./ExampleModelDistinctFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+"
+`;
+
+exports[`enums should properly generate model distinct field enum: SampleModelDistinctFieldEnum 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+export enum SampleModelDistinctFieldEnum {
+  intIdField = \\"intIdField\\",
+  stringField = \\"stringField\\",
+  intField = \\"intField\\"
+}
+registerEnumType(SampleModelDistinctFieldEnum, {
+  name: \\"SampleModelDistinctFieldEnum\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate model distinct field enum: enums index 1`] = `
+"export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+"
+`;
+
+exports[`enums should properly generate sort order enum: SortOrder 1`] = `
+"import { registerEnumType } from \\"@nestjs/graphql\\";
+
+export enum SortOrder {
+  asc = \\"asc\\",
+  desc = \\"desc\\"
+}
+registerEnumType(SortOrder, {
+  name: \\"SortOrder\\",
+  description: undefined,
+});
+"
+`;
+
+exports[`enums should properly generate sort order enum: enums index 1`] = `
+"export { SampleModelDistinctFieldEnum } from \\"./SampleModelDistinctFieldEnum\\";
+export { SortOrder } from \\"./SortOrder\\";
+"
+`;

@@ -63,7 +63,7 @@ describe('generator integration', () => {
     );
   });
 
-  it('should generates TypeGraphQL classes files to output folder by running `prisma generate`', async () => {
+  it('should generates NestJS classes files to output folder by running `prisma generate`', async () => {
     const prismaGenerateResult = await exec('npx prisma generate', {
       cwd: cwdDirPath,
     });
@@ -82,7 +82,7 @@ describe('generator integration', () => {
     expect(directoryStructureString).toMatchSnapshot('files structure');
   }, 60000);
 
-  it('should be able to use generate TypeGraphQL classes files to generate GraphQL schema', async () => {
+  it('should be able to use generate NestJS classes files to generate GraphQL schema', async () => {
     const prismaGenerateResult = await exec('npx prisma generate', {
       cwd: cwdDirPath,
     });
@@ -113,7 +113,7 @@ describe('generator integration', () => {
     expect(graphQLSchemaSDL).toMatchSnapshot('graphQLSchemaSDL');
   }, 60000);
 
-  it('should be able to generate TypeGraphQL classes files without any type errors', async () => {
+  it('should be able to generate NestJS classes files without any type errors', async () => {
     const tsconfigContent = {
       compilerOptions: {
         target: 'es2019',

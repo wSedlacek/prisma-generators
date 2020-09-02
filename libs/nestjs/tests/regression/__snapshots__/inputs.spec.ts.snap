@@ -1,0 +1,3216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`inputs should properly generate input type class for filtering by enums values: EnumColorFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedEnumColorFilter } from \\"../inputs/NestedEnumColorFilter\\";
+import { Color } from \\"../../enums/Color\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class EnumColorFilter {
+  @Field(() => Color, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: keyof typeof Color | null | undefined;
+
+  @Field(() => [Color], {
+    nullable: true,
+    description: undefined
+  })
+  in?: Array<keyof typeof Color> | null | undefined;
+
+  @Field(() => [Color], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: Array<keyof typeof Color> | null | undefined;
+
+  @ClassTransformer__Type(() => NestedEnumColorFilter)
+  @Field(() => NestedEnumColorFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedEnumColorFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type class for filtering by enums values: NestedEnumColorFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { Color } from \\"../../enums/Color\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedEnumColorFilter {
+  @Field(() => Color, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: keyof typeof Color | null | undefined;
+
+  @Field(() => [Color], {
+    nullable: true,
+    description: undefined
+  })
+  in?: Array<keyof typeof Color> | null | undefined;
+
+  @Field(() => [Color], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: Array<keyof typeof Color> | null | undefined;
+
+  @ClassTransformer__Type(() => NestedEnumColorFilter)
+  @Field(() => NestedEnumColorFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedEnumColorFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type class for filtering by enums values: index 1`] = `
+"export { EnumColorFieldUpdateOperationsInput } from \\"./EnumColorFieldUpdateOperationsInput\\";
+export { EnumColorFilter } from \\"./EnumColorFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedEnumColorFilter } from \\"./NestedEnumColorFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
+export { SampleModelOrderByInput } from \\"./SampleModelOrderByInput\\";
+export { SampleModelUpdateInput } from \\"./SampleModelUpdateInput\\";
+export { SampleModelUpdateManyMutationInput } from \\"./SampleModelUpdateManyMutationInput\\";
+export { SampleModelWhereInput } from \\"./SampleModelWhereInput\\";
+export { SampleModelWhereUniqueInput } from \\"./SampleModelWhereUniqueInput\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by fields: SampleModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { BoolFilter } from \\"../inputs/BoolFilter\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { JsonFilter } from \\"../inputs/JsonFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+import { StringNullableFilter } from \\"../inputs/StringNullableFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleModelWhereInput {
+  @ClassTransformer__Type(() => SampleModelWhereInput)
+  @Field(() => [SampleModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SampleModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleModelWhereInput)
+  @Field(() => [SampleModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SampleModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleModelWhereInput)
+  @Field(() => [SampleModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SampleModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  intIdField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  stringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringNullableFilter)
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+    description: undefined
+  })
+  optionalStringField?: StringNullableFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  intField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => BoolFilter)
+  @Field(() => BoolFilter, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField?: BoolFilter | null | undefined;
+
+  @ClassTransformer__Type(() => DateTimeFilter)
+  @Field(() => DateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  dateField?: DateTimeFilter | null | undefined;
+
+  @ClassTransformer__Type(() => JsonFilter)
+  @Field(() => JsonFilter, {
+    nullable: true,
+    description: undefined
+  })
+  jsonField?: JsonFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by fields: SampleModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  intIdField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by fields: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { JsonFieldUpdateOperationsInput } from \\"./JsonFieldUpdateOperationsInput\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringNullableFilter } from \\"./NestedStringNullableFilter\\";
+export { NullableStringFieldUpdateOperationsInput } from \\"./NullableStringFieldUpdateOperationsInput\\";
+export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
+export { SampleModelOrderByInput } from \\"./SampleModelOrderByInput\\";
+export { SampleModelUpdateInput } from \\"./SampleModelUpdateInput\\";
+export { SampleModelUpdateManyMutationInput } from \\"./SampleModelUpdateManyMutationInput\\";
+export { SampleModelWhereInput } from \\"./SampleModelWhereInput\\";
+export { SampleModelWhereUniqueInput } from \\"./SampleModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringNullableFilter } from \\"./StringNullableFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: FirstModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: FirstModelScalarWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelScalarWhereInput {
+  @ClassTransformer__Type(() => FirstModelScalarWhereInput)
+  @Field(() => [FirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: FirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelScalarWhereInput)
+  @Field(() => [FirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: FirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelScalarWhereInput)
+  @Field(() => [FirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: FirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: FirstModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { SecondModelListRelationFilter } from \\"../inputs/SecondModelListRelationFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelWhereInput {
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelListRelationFilter)
+  @Field(() => SecondModelListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  secondModelsField?: SecondModelListRelationFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: FirstModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by many to many relation fields: index 1`] = `
+"export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
+export { FirstModelCreateManyWithoutSecondModelsFieldInput } from \\"./FirstModelCreateManyWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelListRelationFilter } from \\"./FirstModelListRelationFilter\\";
+export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
+export { FirstModelScalarWhereInput } from \\"./FirstModelScalarWhereInput\\";
+export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
+export { FirstModelUpdateManyDataInput } from \\"./FirstModelUpdateManyDataInput\\";
+export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
+export { FirstModelUpdateManyWithWhereNestedInput } from \\"./FirstModelUpdateManyWithWhereNestedInput\\";
+export { FirstModelUpdateManyWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateManyWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
+export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
+export { SecondModelCreateManyWithoutFirstModelsFieldInput } from \\"./SecondModelCreateManyWithoutFirstModelsFieldInput\\";
+export { SecondModelCreateWithoutFirstModelsFieldInput } from \\"./SecondModelCreateWithoutFirstModelsFieldInput\\";
+export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
+export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
+export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
+export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
+export { SecondModelUpdateManyDataInput } from \\"./SecondModelUpdateManyDataInput\\";
+export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
+export { SecondModelUpdateManyWithWhereNestedInput } from \\"./SecondModelUpdateManyWithWhereNestedInput\\";
+export { SecondModelUpdateManyWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelsFieldInput\\";
+export { SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { SecondModelUpdateWithoutFirstModelsFieldDataInput } from \\"./SecondModelUpdateWithoutFirstModelsFieldDataInput\\";
+export { SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
+export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: FirstModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: FirstModelRelationFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FirstModelWhereInput } from \\"../inputs/FirstModelWhereInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelRelationFilter {
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => FirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  is?: FirstModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => FirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  isNot?: FirstModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: FirstModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { SecondModelListRelationFilter } from \\"../inputs/SecondModelListRelationFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelWhereInput {
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => [FirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: FirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelListRelationFilter)
+  @Field(() => SecondModelListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  secondModelsField?: SecondModelListRelationFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: FirstModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: SecondModelListRelationFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SecondModelWhereInput } from \\"../inputs/SecondModelWhereInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SecondModelListRelationFilter {
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => SecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  every?: SecondModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => SecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  some?: SecondModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => SecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  none?: SecondModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: SecondModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SecondModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: SecondModelScalarWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SecondModelScalarWhereInput {
+  @ClassTransformer__Type(() => SecondModelScalarWhereInput)
+  @Field(() => [SecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelScalarWhereInput)
+  @Field(() => [SecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelScalarWhereInput)
+  @Field(() => [SecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: IntFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: SecondModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FirstModelWhereInput } from \\"../inputs/FirstModelWhereInput\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SecondModelWhereInput {
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => [SecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => [SecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SecondModelWhereInput)
+  @Field(() => [SecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FirstModelWhereInput)
+  @Field(() => FirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelField?: FirstModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: SecondModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SecondModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering models by one to many relation fields: index 1`] = `
+"export { FirstModelCreateInput } from \\"./FirstModelCreateInput\\";
+export { FirstModelCreateOneWithoutSecondModelsFieldInput } from \\"./FirstModelCreateOneWithoutSecondModelsFieldInput\\";
+export { FirstModelCreateWithoutSecondModelsFieldInput } from \\"./FirstModelCreateWithoutSecondModelsFieldInput\\";
+export { FirstModelOrderByInput } from \\"./FirstModelOrderByInput\\";
+export { FirstModelRelationFilter } from \\"./FirstModelRelationFilter\\";
+export { FirstModelUpdateInput } from \\"./FirstModelUpdateInput\\";
+export { FirstModelUpdateManyMutationInput } from \\"./FirstModelUpdateManyMutationInput\\";
+export { FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./FirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
+export { FirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./FirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { FirstModelUpsertWithoutSecondModelsFieldInput } from \\"./FirstModelUpsertWithoutSecondModelsFieldInput\\";
+export { FirstModelWhereInput } from \\"./FirstModelWhereInput\\";
+export { FirstModelWhereUniqueInput } from \\"./FirstModelWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SecondModelCreateInput } from \\"./SecondModelCreateInput\\";
+export { SecondModelCreateManyWithoutFirstModelFieldInput } from \\"./SecondModelCreateManyWithoutFirstModelFieldInput\\";
+export { SecondModelCreateWithoutFirstModelFieldInput } from \\"./SecondModelCreateWithoutFirstModelFieldInput\\";
+export { SecondModelListRelationFilter } from \\"./SecondModelListRelationFilter\\";
+export { SecondModelOrderByInput } from \\"./SecondModelOrderByInput\\";
+export { SecondModelScalarWhereInput } from \\"./SecondModelScalarWhereInput\\";
+export { SecondModelUpdateInput } from \\"./SecondModelUpdateInput\\";
+export { SecondModelUpdateManyDataInput } from \\"./SecondModelUpdateManyDataInput\\";
+export { SecondModelUpdateManyMutationInput } from \\"./SecondModelUpdateManyMutationInput\\";
+export { SecondModelUpdateManyWithWhereNestedInput } from \\"./SecondModelUpdateManyWithWhereNestedInput\\";
+export { SecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./SecondModelUpdateManyWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelUpdateWithoutFirstModelFieldDataInput } from \\"./SecondModelUpdateWithoutFirstModelFieldDataInput\\";
+export { SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./SecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { SecondModelWhereInput } from \\"./SecondModelWhereInput\\";
+export { SecondModelWhereUniqueInput } from \\"./SecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: BoolFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedBoolFilter } from \\"../inputs/NestedBoolFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class BoolFilter {
+  @Field(() => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: boolean | null | undefined;
+
+  @ClassTransformer__Type(() => NestedBoolFilter)
+  @Field(() => NestedBoolFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedBoolFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: DateTimeFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedDateTimeFilter } from \\"../inputs/NestedDateTimeFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DateTimeFilter {
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: Date | null | undefined;
+
+  @Field(() => [Date], {
+    nullable: true,
+    description: undefined
+  })
+  in?: Date[] | null | undefined;
+
+  @Field(() => [Date], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: Date[] | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: Date | null | undefined;
+
+  @ClassTransformer__Type(() => NestedDateTimeFilter)
+  @Field(() => NestedDateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedDateTimeFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: FloatFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedFloatFilter } from \\"../inputs/NestedFloatFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FloatFilter {
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: number | null | undefined;
+
+  @Field(() => [Float], {
+    nullable: true,
+    description: undefined
+  })
+  in?: number[] | null | undefined;
+
+  @Field(() => [Float], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: number[] | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: number | null | undefined;
+
+  @ClassTransformer__Type(() => NestedFloatFilter)
+  @Field(() => NestedFloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedFloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: IntFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedIntFilter } from \\"../inputs/NestedIntFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class IntFilter {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: number | null | undefined;
+
+  @Field(() => [Int], {
+    nullable: true,
+    description: undefined
+  })
+  in?: number[] | null | undefined;
+
+  @Field(() => [Int], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: number[] | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: number | null | undefined;
+
+  @ClassTransformer__Type(() => NestedIntFilter)
+  @Field(() => NestedIntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedIntFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: JsonFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedJsonFilter } from \\"../inputs/NestedJsonFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class JsonFilter {
+  @Field(() => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: InputJsonValue | null | undefined;
+
+  @ClassTransformer__Type(() => NestedJsonFilter)
+  @Field(() => NestedJsonFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedJsonFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedBoolFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedBoolFilter {
+  @Field(() => Boolean, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: boolean | null | undefined;
+
+  @ClassTransformer__Type(() => NestedBoolFilter)
+  @Field(() => NestedBoolFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedBoolFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedDateTimeFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedDateTimeFilter {
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: Date | null | undefined;
+
+  @Field(() => [Date], {
+    nullable: true,
+    description: undefined
+  })
+  in?: Date[] | null | undefined;
+
+  @Field(() => [Date], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: Date[] | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: Date | null | undefined;
+
+  @Field(() => Date, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: Date | null | undefined;
+
+  @ClassTransformer__Type(() => NestedDateTimeFilter)
+  @Field(() => NestedDateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedDateTimeFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedFloatFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedFloatFilter {
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: number | null | undefined;
+
+  @Field(() => [Float], {
+    nullable: true,
+    description: undefined
+  })
+  in?: number[] | null | undefined;
+
+  @Field(() => [Float], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: number[] | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: number | null | undefined;
+
+  @Field(() => Float, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: number | null | undefined;
+
+  @ClassTransformer__Type(() => NestedFloatFilter)
+  @Field(() => NestedFloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedFloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedIntFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedIntFilter {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: number | null | undefined;
+
+  @Field(() => [Int], {
+    nullable: true,
+    description: undefined
+  })
+  in?: number[] | null | undefined;
+
+  @Field(() => [Int], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: number[] | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: number | null | undefined;
+
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: number | null | undefined;
+
+  @ClassTransformer__Type(() => NestedIntFilter)
+  @Field(() => NestedIntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedIntFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedJsonFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedJsonFilter {
+  @Field(() => GraphQLJSON, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: InputJsonValue | null | undefined;
+
+  @ClassTransformer__Type(() => NestedJsonFilter)
+  @Field(() => NestedJsonFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedJsonFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: NestedStringNullableFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class NestedStringNullableFilter {
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: string | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  in?: string[] | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: string[] | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  contains?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  startsWith?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  endsWith?: string | null | undefined;
+
+  @ClassTransformer__Type(() => NestedStringNullableFilter)
+  @Field(() => NestedStringNullableFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedStringNullableFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: StringFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedStringFilter } from \\"../inputs/NestedStringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class StringFilter {
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: string | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  in?: string[] | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: string[] | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  contains?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  startsWith?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  endsWith?: string | null | undefined;
+
+  @ClassTransformer__Type(() => NestedStringFilter)
+  @Field(() => NestedStringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedStringFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: StringNullableFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { NestedStringNullableFilter } from \\"../inputs/NestedStringNullableFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class StringNullableFilter {
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  equals?: string | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  in?: string[] | null | undefined;
+
+  @Field(() => [String], {
+    nullable: true,
+    description: undefined
+  })
+  notIn?: string[] | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  lte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gt?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  gte?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  contains?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  startsWith?: string | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  endsWith?: string | null | undefined;
+
+  @ClassTransformer__Type(() => NestedStringNullableFilter)
+  @Field(() => NestedStringNullableFilter, {
+    nullable: true,
+    description: undefined
+  })
+  not?: NestedStringNullableFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for filtering scalar fields: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { BoolNullableFilter } from \\"./BoolNullableFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { DateTimeNullableFilter } from \\"./DateTimeNullableFilter\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { FloatNullableFilter } from \\"./FloatNullableFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { IntNullableFilter } from \\"./IntNullableFilter\\";
+export { JsonFieldUpdateOperationsInput } from \\"./JsonFieldUpdateOperationsInput\\";
+export { JsonFilter } from \\"./JsonFilter\\";
+export { JsonNullableFilter } from \\"./JsonNullableFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedBoolNullableFilter } from \\"./NestedBoolNullableFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedDateTimeNullableFilter } from \\"./NestedDateTimeNullableFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedFloatNullableFilter } from \\"./NestedFloatNullableFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedIntNullableFilter } from \\"./NestedIntNullableFilter\\";
+export { NestedJsonFilter } from \\"./NestedJsonFilter\\";
+export { NestedJsonNullableFilter } from \\"./NestedJsonNullableFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { NestedStringNullableFilter } from \\"./NestedStringNullableFilter\\";
+export { NullableBoolFieldUpdateOperationsInput } from \\"./NullableBoolFieldUpdateOperationsInput\\";
+export { NullableDateTimeFieldUpdateOperationsInput } from \\"./NullableDateTimeFieldUpdateOperationsInput\\";
+export { NullableFloatFieldUpdateOperationsInput } from \\"./NullableFloatFieldUpdateOperationsInput\\";
+export { NullableIntFieldUpdateOperationsInput } from \\"./NullableIntFieldUpdateOperationsInput\\";
+export { NullableJsonFieldUpdateOperationsInput } from \\"./NullableJsonFieldUpdateOperationsInput\\";
+export { NullableStringFieldUpdateOperationsInput } from \\"./NullableStringFieldUpdateOperationsInput\\";
+export { SampleModelCreateInput } from \\"./SampleModelCreateInput\\";
+export { SampleModelOrderByInput } from \\"./SampleModelOrderByInput\\";
+export { SampleModelUpdateInput } from \\"./SampleModelUpdateInput\\";
+export { SampleModelUpdateManyMutationInput } from \\"./SampleModelUpdateManyMutationInput\\";
+export { SampleModelWhereInput } from \\"./SampleModelWhereInput\\";
+export { SampleModelWhereUniqueInput } from \\"./SampleModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+export { StringNullableFilter } from \\"./StringNullableFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with composite unique index: DirectorOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DirectorOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  firstName?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  lastName?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  age?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with composite unique index: DirectorWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { MovieListRelationFilter } from \\"../inputs/MovieListRelationFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DirectorWhereInput {
+  @ClassTransformer__Type(() => DirectorWhereInput)
+  @Field(() => [DirectorWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: DirectorWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => DirectorWhereInput)
+  @Field(() => [DirectorWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: DirectorWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => DirectorWhereInput)
+  @Field(() => [DirectorWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: DirectorWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  lastName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  age?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => MovieListRelationFilter)
+  @Field(() => MovieListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  movies?: MovieListRelationFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with composite unique index: DirectorWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FirstNameLastNameCompoundUniqueInput } from \\"../inputs/FirstNameLastNameCompoundUniqueInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DirectorWhereUniqueInput {
+  @ClassTransformer__Type(() => FirstNameLastNameCompoundUniqueInput)
+  @Field(() => FirstNameLastNameCompoundUniqueInput, {
+    nullable: true,
+    description: undefined
+  })
+  firstName_lastName?: FirstNameLastNameCompoundUniqueInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with composite unique index: FirstNameLastNameCompoundUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class FirstNameLastNameCompoundUniqueInput {
+  @Field(() => String, {
+    nullable: false,
+    description: undefined
+  })
+  firstName!: string;
+
+  @Field(() => String, {
+    nullable: false,
+    description: undefined
+  })
+  lastName!: string;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with composite unique index: index 1`] = `
+"export { DirectorCreateInput } from \\"./DirectorCreateInput\\";
+export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
+export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
+export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
+export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
+export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
+export { DirectorUpdateManyMutationInput } from \\"./DirectorUpdateManyMutationInput\\";
+export { DirectorUpdateOneRequiredWithoutMoviesInput } from \\"./DirectorUpdateOneRequiredWithoutMoviesInput\\";
+export { DirectorUpdateWithoutMoviesDataInput } from \\"./DirectorUpdateWithoutMoviesDataInput\\";
+export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
+export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
+export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
+export { FirstNameLastNameCompoundUniqueInput } from \\"./FirstNameLastNameCompoundUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { MovieCreateInput } from \\"./MovieCreateInput\\";
+export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
+export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
+export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
+export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
+export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";
+export { MovieUpdateInput } from \\"./MovieUpdateInput\\";
+export { MovieUpdateManyDataInput } from \\"./MovieUpdateManyDataInput\\";
+export { MovieUpdateManyMutationInput } from \\"./MovieUpdateManyMutationInput\\";
+export { MovieUpdateManyWithWhereNestedInput } from \\"./MovieUpdateManyWithWhereNestedInput\\";
+export { MovieUpdateManyWithoutDirectorInput } from \\"./MovieUpdateManyWithoutDirectorInput\\";
+export { MovieUpdateWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpdateWithWhereUniqueWithoutDirectorInput\\";
+export { MovieUpdateWithoutDirectorDataInput } from \\"./MovieUpdateWithoutDirectorDataInput\\";
+export { MovieUpsertWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpsertWithWhereUniqueWithoutDirectorInput\\";
+export { MovieWhereInput } from \\"./MovieWhereInput\\";
+export { MovieWhereUniqueInput } from \\"./MovieWhereUniqueInput\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput {
+  @Field(() => String, {
+    nullable: false,
+    description: undefined
+  })
+  directorFirstName!: string;
+
+  @Field(() => String, {
+    nullable: false,
+    description: undefined
+  })
+  directorLastName!: string;
+
+  @Field(() => String, {
+    nullable: false,
+    description: undefined
+  })
+  title!: string;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: MovieOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class MovieOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  directorFirstName?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  directorLastName?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  title?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  rating?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: MovieScalarWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class MovieScalarWhereInput {
+  @ClassTransformer__Type(() => MovieScalarWhereInput)
+  @Field(() => [MovieScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: MovieScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => MovieScalarWhereInput)
+  @Field(() => [MovieScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: MovieScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => MovieScalarWhereInput)
+  @Field(() => [MovieScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: MovieScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorFirstName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorLastName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  title?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  rating?: FloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: MovieWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { DirectorWhereInput } from \\"../inputs/DirectorWhereInput\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class MovieWhereInput {
+  @ClassTransformer__Type(() => MovieWhereInput)
+  @Field(() => [MovieWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: MovieWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => MovieWhereInput)
+  @Field(() => [MovieWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: MovieWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => MovieWhereInput)
+  @Field(() => [MovieWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: MovieWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorFirstName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  directorLastName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => DirectorWhereInput)
+  @Field(() => DirectorWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  director?: DirectorWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  title?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  rating?: FloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: MovieWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"../inputs/DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class MovieWhereUniqueInput {
+  @ClassTransformer__Type(() => DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput)
+  @Field(() => DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput, {
+    nullable: true,
+    description: undefined
+  })
+  directorFirstName_directorLastName_title?: DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes for model with id keys with relation: index 1`] = `
+"export { DirectorCreateInput } from \\"./DirectorCreateInput\\";
+export { DirectorCreateOneWithoutMoviesInput } from \\"./DirectorCreateOneWithoutMoviesInput\\";
+export { DirectorCreateWithoutMoviesInput } from \\"./DirectorCreateWithoutMoviesInput\\";
+export { DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput } from \\"./DirectorFirstNameDirectorLastNameTitleCompoundUniqueInput\\";
+export { DirectorOrderByInput } from \\"./DirectorOrderByInput\\";
+export { DirectorRelationFilter } from \\"./DirectorRelationFilter\\";
+export { DirectorUpdateInput } from \\"./DirectorUpdateInput\\";
+export { DirectorUpdateManyMutationInput } from \\"./DirectorUpdateManyMutationInput\\";
+export { DirectorUpdateOneRequiredWithoutMoviesInput } from \\"./DirectorUpdateOneRequiredWithoutMoviesInput\\";
+export { DirectorUpdateWithoutMoviesDataInput } from \\"./DirectorUpdateWithoutMoviesDataInput\\";
+export { DirectorUpsertWithoutMoviesInput } from \\"./DirectorUpsertWithoutMoviesInput\\";
+export { DirectorWhereInput } from \\"./DirectorWhereInput\\";
+export { DirectorWhereUniqueInput } from \\"./DirectorWhereUniqueInput\\";
+export { FirstNameLastNameCompoundUniqueInput } from \\"./FirstNameLastNameCompoundUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFieldUpdateOperationsInput } from \\"./IntFieldUpdateOperationsInput\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { MovieCreateInput } from \\"./MovieCreateInput\\";
+export { MovieCreateManyWithoutDirectorInput } from \\"./MovieCreateManyWithoutDirectorInput\\";
+export { MovieCreateWithoutDirectorInput } from \\"./MovieCreateWithoutDirectorInput\\";
+export { MovieListRelationFilter } from \\"./MovieListRelationFilter\\";
+export { MovieOrderByInput } from \\"./MovieOrderByInput\\";
+export { MovieScalarWhereInput } from \\"./MovieScalarWhereInput\\";
+export { MovieUpdateInput } from \\"./MovieUpdateInput\\";
+export { MovieUpdateManyDataInput } from \\"./MovieUpdateManyDataInput\\";
+export { MovieUpdateManyMutationInput } from \\"./MovieUpdateManyMutationInput\\";
+export { MovieUpdateManyWithWhereNestedInput } from \\"./MovieUpdateManyWithWhereNestedInput\\";
+export { MovieUpdateManyWithoutDirectorInput } from \\"./MovieUpdateManyWithoutDirectorInput\\";
+export { MovieUpdateWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpdateWithWhereUniqueWithoutDirectorInput\\";
+export { MovieUpdateWithoutDirectorDataInput } from \\"./MovieUpdateWithoutDirectorDataInput\\";
+export { MovieUpsertWithWhereUniqueWithoutDirectorInput } from \\"./MovieUpsertWithWhereUniqueWithoutDirectorInput\\";
+export { MovieWhereInput } from \\"./MovieWhereInput\\";
+export { MovieWhereUniqueInput } from \\"./MovieWhereUniqueInput\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs should properly generate input type classes when model field is renamed: SampleOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  modelFieldName?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  get mappedFieldName() {
+    return this.modelFieldName;
+  }
+
+  set mappedFieldName(modelFieldName: keyof typeof SortOrder | null | undefined) {
+    this.modelFieldName = modelFieldName;
+  }
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes when model field is renamed: SampleWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleWhereInput {
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  modelFieldName?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  get mappedFieldName() {
+    return this.modelFieldName;
+  }
+
+  set mappedFieldName(modelFieldName: StringFilter | null | undefined) {
+    this.modelFieldName = modelFieldName;
+  }
+}
+"
+`;
+
+exports[`inputs should properly generate input type classes when model field is renamed: index 1`] = `
+"export { IntFilter } from \\"./IntFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SampleCreateInput } from \\"./SampleCreateInput\\";
+export { SampleOrderByInput } from \\"./SampleOrderByInput\\";
+export { SampleUpdateInput } from \\"./SampleUpdateInput\\";
+export { SampleUpdateManyMutationInput } from \\"./SampleUpdateManyMutationInput\\";
+export { SampleWhereInput } from \\"./SampleWhereInput\\";
+export { SampleWhereUniqueInput } from \\"./SampleWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: RenamedFirstModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: RenamedFirstModelScalarWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelScalarWhereInput {
+  @ClassTransformer__Type(() => RenamedFirstModelScalarWhereInput)
+  @Field(() => [RenamedFirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: RenamedFirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelScalarWhereInput)
+  @Field(() => [RenamedFirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: RenamedFirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelScalarWhereInput)
+  @Field(() => [RenamedFirstModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: RenamedFirstModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: RenamedFirstModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { RenamedSecondModelListRelationFilter } from \\"../inputs/RenamedSecondModelListRelationFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelWhereInput {
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelListRelationFilter)
+  @Field(() => RenamedSecondModelListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  secondModelsField?: RenamedSecondModelListRelationFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: RenamedFirstModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by many to many relation fields: index 1`] = `
+"export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { RenamedFirstModelCreateInput } from \\"./RenamedFirstModelCreateInput\\";
+export { RenamedFirstModelCreateManyWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateManyWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelCreateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelListRelationFilter } from \\"./RenamedFirstModelListRelationFilter\\";
+export { RenamedFirstModelOrderByInput } from \\"./RenamedFirstModelOrderByInput\\";
+export { RenamedFirstModelScalarWhereInput } from \\"./RenamedFirstModelScalarWhereInput\\";
+export { RenamedFirstModelUpdateInput } from \\"./RenamedFirstModelUpdateInput\\";
+export { RenamedFirstModelUpdateManyDataInput } from \\"./RenamedFirstModelUpdateManyDataInput\\";
+export { RenamedFirstModelUpdateManyMutationInput } from \\"./RenamedFirstModelUpdateManyMutationInput\\";
+export { RenamedFirstModelUpdateManyWithWhereNestedInput } from \\"./RenamedFirstModelUpdateManyWithWhereNestedInput\\";
+export { RenamedFirstModelUpdateManyWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateManyWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { RenamedFirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpsertWithWhereUniqueWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelWhereInput } from \\"./RenamedFirstModelWhereInput\\";
+export { RenamedFirstModelWhereUniqueInput } from \\"./RenamedFirstModelWhereUniqueInput\\";
+export { RenamedSecondModelCreateInput } from \\"./RenamedSecondModelCreateInput\\";
+export { RenamedSecondModelCreateManyWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelCreateManyWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelCreateWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelCreateWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelListRelationFilter } from \\"./RenamedSecondModelListRelationFilter\\";
+export { RenamedSecondModelOrderByInput } from \\"./RenamedSecondModelOrderByInput\\";
+export { RenamedSecondModelScalarWhereInput } from \\"./RenamedSecondModelScalarWhereInput\\";
+export { RenamedSecondModelUpdateInput } from \\"./RenamedSecondModelUpdateInput\\";
+export { RenamedSecondModelUpdateManyDataInput } from \\"./RenamedSecondModelUpdateManyDataInput\\";
+export { RenamedSecondModelUpdateManyMutationInput } from \\"./RenamedSecondModelUpdateManyMutationInput\\";
+export { RenamedSecondModelUpdateManyWithWhereNestedInput } from \\"./RenamedSecondModelUpdateManyWithWhereNestedInput\\";
+export { RenamedSecondModelUpdateManyWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateManyWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelUpdateWithoutFirstModelsFieldDataInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelsFieldDataInput\\";
+export { RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput } from \\"./RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelsFieldInput\\";
+export { RenamedSecondModelWhereInput } from \\"./RenamedSecondModelWhereInput\\";
+export { RenamedSecondModelWhereUniqueInput } from \\"./RenamedSecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedFirstModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedFirstModelRelationFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { RenamedFirstModelWhereInput } from \\"../inputs/RenamedFirstModelWhereInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelRelationFilter {
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => RenamedFirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  is?: RenamedFirstModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => RenamedFirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  isNot?: RenamedFirstModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedFirstModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { RenamedSecondModelListRelationFilter } from \\"../inputs/RenamedSecondModelListRelationFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelWhereInput {
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => [RenamedFirstModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: RenamedFirstModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelListRelationFilter)
+  @Field(() => RenamedSecondModelListRelationFilter, {
+    nullable: true,
+    description: undefined
+  })
+  secondModelsField?: RenamedSecondModelListRelationFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedFirstModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedFirstModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedSecondModelListRelationFilter 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { RenamedSecondModelWhereInput } from \\"../inputs/RenamedSecondModelWhereInput\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedSecondModelListRelationFilter {
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => RenamedSecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  every?: RenamedSecondModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => RenamedSecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  some?: RenamedSecondModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => RenamedSecondModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  none?: RenamedSecondModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedSecondModelOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedSecondModelOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedSecondModelScalarWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedSecondModelScalarWhereInput {
+  @ClassTransformer__Type(() => RenamedSecondModelScalarWhereInput)
+  @Field(() => [RenamedSecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: RenamedSecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelScalarWhereInput)
+  @Field(() => [RenamedSecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: RenamedSecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelScalarWhereInput)
+  @Field(() => [RenamedSecondModelScalarWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: RenamedSecondModelScalarWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: IntFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedSecondModelWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { RenamedFirstModelWhereInput } from \\"../inputs/RenamedFirstModelWhereInput\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedSecondModelWhereInput {
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => [RenamedSecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: RenamedSecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => [RenamedSecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: RenamedSecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedSecondModelWhereInput)
+  @Field(() => [RenamedSecondModelWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: RenamedSecondModelWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelFieldId?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => RenamedFirstModelWhereInput)
+  @Field(() => RenamedFirstModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  firstModelField?: RenamedFirstModelWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: RenamedSecondModelWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class RenamedSecondModelWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  uniqueStringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes for filtering models by one to many relation fields: index 1`] = `
+"export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { RenamedFirstModelCreateInput } from \\"./RenamedFirstModelCreateInput\\";
+export { RenamedFirstModelCreateOneWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateOneWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelCreateWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelCreateWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelOrderByInput } from \\"./RenamedFirstModelOrderByInput\\";
+export { RenamedFirstModelRelationFilter } from \\"./RenamedFirstModelRelationFilter\\";
+export { RenamedFirstModelUpdateInput } from \\"./RenamedFirstModelUpdateInput\\";
+export { RenamedFirstModelUpdateManyMutationInput } from \\"./RenamedFirstModelUpdateManyMutationInput\\";
+export { RenamedFirstModelUpdateOneRequiredWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpdateOneRequiredWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput } from \\"./RenamedFirstModelUpdateWithoutSecondModelsFieldDataInput\\";
+export { RenamedFirstModelUpsertWithoutSecondModelsFieldInput } from \\"./RenamedFirstModelUpsertWithoutSecondModelsFieldInput\\";
+export { RenamedFirstModelWhereInput } from \\"./RenamedFirstModelWhereInput\\";
+export { RenamedFirstModelWhereUniqueInput } from \\"./RenamedFirstModelWhereUniqueInput\\";
+export { RenamedSecondModelCreateInput } from \\"./RenamedSecondModelCreateInput\\";
+export { RenamedSecondModelCreateManyWithoutFirstModelFieldInput } from \\"./RenamedSecondModelCreateManyWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelCreateWithoutFirstModelFieldInput } from \\"./RenamedSecondModelCreateWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelListRelationFilter } from \\"./RenamedSecondModelListRelationFilter\\";
+export { RenamedSecondModelOrderByInput } from \\"./RenamedSecondModelOrderByInput\\";
+export { RenamedSecondModelScalarWhereInput } from \\"./RenamedSecondModelScalarWhereInput\\";
+export { RenamedSecondModelUpdateInput } from \\"./RenamedSecondModelUpdateInput\\";
+export { RenamedSecondModelUpdateManyDataInput } from \\"./RenamedSecondModelUpdateManyDataInput\\";
+export { RenamedSecondModelUpdateManyMutationInput } from \\"./RenamedSecondModelUpdateManyMutationInput\\";
+export { RenamedSecondModelUpdateManyWithWhereNestedInput } from \\"./RenamedSecondModelUpdateManyWithWhereNestedInput\\";
+export { RenamedSecondModelUpdateManyWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateManyWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpdateWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelUpdateWithoutFirstModelFieldDataInput } from \\"./RenamedSecondModelUpdateWithoutFirstModelFieldDataInput\\";
+export { RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput } from \\"./RenamedSecondModelUpsertWithWhereUniqueWithoutFirstModelFieldInput\\";
+export { RenamedSecondModelWhereInput } from \\"./RenamedSecondModelWhereInput\\";
+export { RenamedSecondModelWhereUniqueInput } from \\"./RenamedSecondModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes when model is renamed: ExampleOrderByInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SortOrder } from \\"../../enums/SortOrder\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleOrderByInput {
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  intIdField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  stringField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  dateField?: keyof typeof SortOrder | null | undefined;
+
+  @Field(() => SortOrder, {
+    nullable: true,
+    description: undefined
+  })
+  otherId?: keyof typeof SortOrder | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes when model is renamed: ExampleWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { BoolFilter } from \\"../inputs/BoolFilter\\";
+import { DateTimeFilter } from \\"../inputs/DateTimeFilter\\";
+import { FloatFilter } from \\"../inputs/FloatFilter\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { OtherModelWhereInput } from \\"../inputs/OtherModelWhereInput\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleWhereInput {
+  @ClassTransformer__Type(() => ExampleWhereInput)
+  @Field(() => [ExampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: ExampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleWhereInput)
+  @Field(() => [ExampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: ExampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleWhereInput)
+  @Field(() => [ExampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: ExampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  intIdField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  stringField?: StringFilter | null | undefined;
+
+  @ClassTransformer__Type(() => FloatFilter)
+  @Field(() => FloatFilter, {
+    nullable: true,
+    description: undefined
+  })
+  floatField?: FloatFilter | null | undefined;
+
+  @ClassTransformer__Type(() => BoolFilter)
+  @Field(() => BoolFilter, {
+    nullable: true,
+    description: undefined
+  })
+  booleanField?: BoolFilter | null | undefined;
+
+  @ClassTransformer__Type(() => DateTimeFilter)
+  @Field(() => DateTimeFilter, {
+    nullable: true,
+    description: undefined
+  })
+  dateField?: DateTimeFilter | null | undefined;
+
+  @ClassTransformer__Type(() => OtherModelWhereInput)
+  @Field(() => OtherModelWhereInput, {
+    nullable: true,
+    description: undefined
+  })
+  other?: OtherModelWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  otherId?: IntFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes when model is renamed: ExampleWhereUniqueInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleWhereUniqueInput {
+  @Field(() => Int, {
+    nullable: true,
+    description: undefined
+  })
+  intIdField?: number | null | undefined;
+
+  @Field(() => String, {
+    nullable: true,
+    description: undefined
+  })
+  stringField?: string | null | undefined;
+}
+"
+`;
+
+exports[`inputs when model is renamed should properly generate input type classes when model is renamed: index 1`] = `
+"export { BoolFieldUpdateOperationsInput } from \\"./BoolFieldUpdateOperationsInput\\";
+export { BoolFilter } from \\"./BoolFilter\\";
+export { DateTimeFieldUpdateOperationsInput } from \\"./DateTimeFieldUpdateOperationsInput\\";
+export { DateTimeFilter } from \\"./DateTimeFilter\\";
+export { ExampleCreateInput } from \\"./ExampleCreateInput\\";
+export { ExampleCreateManyWithoutOtherInput } from \\"./ExampleCreateManyWithoutOtherInput\\";
+export { ExampleCreateWithoutOtherInput } from \\"./ExampleCreateWithoutOtherInput\\";
+export { ExampleListRelationFilter } from \\"./ExampleListRelationFilter\\";
+export { ExampleOrderByInput } from \\"./ExampleOrderByInput\\";
+export { ExampleScalarWhereInput } from \\"./ExampleScalarWhereInput\\";
+export { ExampleUpdateInput } from \\"./ExampleUpdateInput\\";
+export { ExampleUpdateManyDataInput } from \\"./ExampleUpdateManyDataInput\\";
+export { ExampleUpdateManyMutationInput } from \\"./ExampleUpdateManyMutationInput\\";
+export { ExampleUpdateManyWithWhereNestedInput } from \\"./ExampleUpdateManyWithWhereNestedInput\\";
+export { ExampleUpdateManyWithoutOtherInput } from \\"./ExampleUpdateManyWithoutOtherInput\\";
+export { ExampleUpdateWithWhereUniqueWithoutOtherInput } from \\"./ExampleUpdateWithWhereUniqueWithoutOtherInput\\";
+export { ExampleUpdateWithoutOtherDataInput } from \\"./ExampleUpdateWithoutOtherDataInput\\";
+export { ExampleUpsertWithWhereUniqueWithoutOtherInput } from \\"./ExampleUpsertWithWhereUniqueWithoutOtherInput\\";
+export { ExampleWhereInput } from \\"./ExampleWhereInput\\";
+export { ExampleWhereUniqueInput } from \\"./ExampleWhereUniqueInput\\";
+export { FloatFieldUpdateOperationsInput } from \\"./FloatFieldUpdateOperationsInput\\";
+export { FloatFilter } from \\"./FloatFilter\\";
+export { IntFilter } from \\"./IntFilter\\";
+export { NestedBoolFilter } from \\"./NestedBoolFilter\\";
+export { NestedDateTimeFilter } from \\"./NestedDateTimeFilter\\";
+export { NestedFloatFilter } from \\"./NestedFloatFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { OtherModelCreateInput } from \\"./OtherModelCreateInput\\";
+export { OtherModelCreateOneWithoutSampleModelInput } from \\"./OtherModelCreateOneWithoutSampleModelInput\\";
+export { OtherModelCreateWithoutSampleModelInput } from \\"./OtherModelCreateWithoutSampleModelInput\\";
+export { OtherModelOrderByInput } from \\"./OtherModelOrderByInput\\";
+export { OtherModelRelationFilter } from \\"./OtherModelRelationFilter\\";
+export { OtherModelUpdateInput } from \\"./OtherModelUpdateInput\\";
+export { OtherModelUpdateManyMutationInput } from \\"./OtherModelUpdateManyMutationInput\\";
+export { OtherModelUpdateOneRequiredWithoutSampleModelInput } from \\"./OtherModelUpdateOneRequiredWithoutSampleModelInput\\";
+export { OtherModelUpdateWithoutSampleModelDataInput } from \\"./OtherModelUpdateWithoutSampleModelDataInput\\";
+export { OtherModelUpsertWithoutSampleModelInput } from \\"./OtherModelUpsertWithoutSampleModelInput\\";
+export { OtherModelWhereInput } from \\"./OtherModelWhereInput\\";
+export { OtherModelWhereUniqueInput } from \\"./OtherModelWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;
+
+exports[`inputs when prisma client is generated into node_modules should properly generate prisma client imports in input type class files: SampleWhereInput 1`] = `
+"import { Field, Float, ID, InputType, Int } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"@prisma/client\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { IntFilter } from \\"../inputs/IntFilter\\";
+import { StringFilter } from \\"../inputs/StringFilter\\";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleWhereInput {
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  AND?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  OR?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => SampleWhereInput)
+  @Field(() => [SampleWhereInput], {
+    nullable: true,
+    description: undefined
+  })
+  NOT?: SampleWhereInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => IntFilter)
+  @Field(() => IntFilter, {
+    nullable: true,
+    description: undefined
+  })
+  idField?: IntFilter | null | undefined;
+
+  @ClassTransformer__Type(() => StringFilter)
+  @Field(() => StringFilter, {
+    nullable: true,
+    description: undefined
+  })
+  modelFieldName?: StringFilter | null | undefined;
+}
+"
+`;
+
+exports[`inputs when prisma client is generated into node_modules should properly generate prisma client imports in input type class files: index 1`] = `
+"export { IntFilter } from \\"./IntFilter\\";
+export { NestedIntFilter } from \\"./NestedIntFilter\\";
+export { NestedStringFilter } from \\"./NestedStringFilter\\";
+export { SampleCreateInput } from \\"./SampleCreateInput\\";
+export { SampleOrderByInput } from \\"./SampleOrderByInput\\";
+export { SampleUpdateInput } from \\"./SampleUpdateInput\\";
+export { SampleUpdateManyMutationInput } from \\"./SampleUpdateManyMutationInput\\";
+export { SampleWhereInput } from \\"./SampleWhereInput\\";
+export { SampleWhereUniqueInput } from \\"./SampleWhereUniqueInput\\";
+export { StringFieldUpdateOperationsInput } from \\"./StringFieldUpdateOperationsInput\\";
+export { StringFilter } from \\"./StringFilter\\";
+"
+`;

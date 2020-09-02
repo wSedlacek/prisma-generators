@@ -1,7 +1,8 @@
 {
   "extends": "../../tslint.json",
-  "linterOptions": { "exclude": ["!**/*"] },
+  "linterOptions": { "exclude": ["!**/*", "tests"] },
   "rules": {
-    "no-import-side-effect": [true, "./cli/generator"]
+    "no-import-side-effect": [true, "./cli/generator"],
+    "no-big-function": false
   }
 }

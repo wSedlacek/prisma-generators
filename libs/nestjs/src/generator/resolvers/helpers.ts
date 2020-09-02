@@ -1,4 +1,5 @@
 import tsDedent from 'ts-dedent';
+import { MethodDeclarationStructure, OptionalKind } from 'ts-morph';
 
 import { DmmfDocument } from '../dmmf/dmmf-document';
 import { DMMF } from '../dmmf/types';
@@ -9,7 +10,8 @@ export const generateCrudResolverClassMethodDeclaration = (
   typeName: string,
   dmmfDocument: DmmfDocument,
   mapping: DMMF.Mapping
-) => {
+): OptionalKind<MethodDeclarationStructure> => {
+  // TODO: move to DMMF transform step
   const returnTSType = getFieldTSType(
     action.method.outputType,
     dmmfDocument,

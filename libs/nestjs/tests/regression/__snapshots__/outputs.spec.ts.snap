@@ -1,0 +1,519 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: AggregateExample 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { ExampleAvgAggregateOutputType } from \\"../outputs/ExampleAvgAggregateOutputType\\";
+import { ExampleMaxAggregateOutputType } from \\"../outputs/ExampleMaxAggregateOutputType\\";
+import { ExampleMinAggregateOutputType } from \\"../outputs/ExampleMinAggregateOutputType\\";
+import { ExampleSumAggregateOutputType } from \\"../outputs/ExampleSumAggregateOutputType\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class AggregateExample {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+
+  @ClassTransformer__Type(() => ExampleAvgAggregateOutputType)
+  @Field(() => ExampleAvgAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  avg?: ExampleAvgAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleSumAggregateOutputType)
+  @Field(() => ExampleSumAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  sum?: ExampleSumAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleMinAggregateOutputType)
+  @Field(() => ExampleMinAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  min?: ExampleMinAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleMaxAggregateOutputType)
+  @Field(() => ExampleMaxAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  max?: ExampleMaxAggregateOutputType | null | undefined;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleAvgAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleAvgAggregateOutputType {
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleMaxAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleMaxAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleMinAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleMinAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: ExampleSumAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleSumAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for model with lowercase name: outputs index 1`] = `
+"export { AggregateExample } from \\"./AggregateExample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export { ExampleAvgAggregateOutputType } from \\"./ExampleAvgAggregateOutputType\\";
+export { ExampleMaxAggregateOutputType } from \\"./ExampleMaxAggregateOutputType\\";
+export { ExampleMinAggregateOutputType } from \\"./ExampleMinAggregateOutputType\\";
+export { ExampleSumAggregateOutputType } from \\"./ExampleSumAggregateOutputType\\";
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: AggregateExample 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { ExampleAvgAggregateOutputType } from \\"../outputs/ExampleAvgAggregateOutputType\\";
+import { ExampleMaxAggregateOutputType } from \\"../outputs/ExampleMaxAggregateOutputType\\";
+import { ExampleMinAggregateOutputType } from \\"../outputs/ExampleMinAggregateOutputType\\";
+import { ExampleSumAggregateOutputType } from \\"../outputs/ExampleSumAggregateOutputType\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class AggregateExample {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+
+  @ClassTransformer__Type(() => ExampleAvgAggregateOutputType)
+  @Field(() => ExampleAvgAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  avg?: ExampleAvgAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleSumAggregateOutputType)
+  @Field(() => ExampleSumAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  sum?: ExampleSumAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleMinAggregateOutputType)
+  @Field(() => ExampleMinAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  min?: ExampleMinAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => ExampleMaxAggregateOutputType)
+  @Field(() => ExampleMaxAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  max?: ExampleMaxAggregateOutputType | null | undefined;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: ExampleAvgAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleAvgAggregateOutputType {
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: ExampleMaxAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleMaxAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: ExampleMinAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleMinAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: ExampleSumAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class ExampleSumAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate aggregate classes for renamed model: outputs index 1`] = `
+"export { AggregateExample } from \\"./AggregateExample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export { ExampleAvgAggregateOutputType } from \\"./ExampleAvgAggregateOutputType\\";
+export { ExampleMaxAggregateOutputType } from \\"./ExampleMaxAggregateOutputType\\";
+export { ExampleMinAggregateOutputType } from \\"./ExampleMinAggregateOutputType\\";
+export { ExampleSumAggregateOutputType } from \\"./ExampleSumAggregateOutputType\\";
+"
+`;
+
+exports[`outputs should properly generate output type classes: AggregateSample 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { SampleAvgAggregateOutputType } from \\"../outputs/SampleAvgAggregateOutputType\\";
+import { SampleMaxAggregateOutputType } from \\"../outputs/SampleMaxAggregateOutputType\\";
+import { SampleMinAggregateOutputType } from \\"../outputs/SampleMinAggregateOutputType\\";
+import { SampleSumAggregateOutputType } from \\"../outputs/SampleSumAggregateOutputType\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class AggregateSample {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+
+  @ClassTransformer__Type(() => SampleAvgAggregateOutputType)
+  @Field(() => SampleAvgAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  avg?: SampleAvgAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => SampleSumAggregateOutputType)
+  @Field(() => SampleSumAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  sum?: SampleSumAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => SampleMinAggregateOutputType)
+  @Field(() => SampleMinAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  min?: SampleMinAggregateOutputType | null | undefined;
+
+  @ClassTransformer__Type(() => SampleMaxAggregateOutputType)
+  @Field(() => SampleMaxAggregateOutputType, {
+    nullable: true,
+    description: undefined
+  })
+  max?: SampleMaxAggregateOutputType | null | undefined;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: BatchPayload 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class BatchPayload {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  count!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: SampleAvgAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleAvgAggregateOutputType {
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: SampleMaxAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleMaxAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: SampleMinAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleMinAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: SampleSumAggregateOutputType 1`] = `
+"import { Field, Float, ID, Int, ObjectType } from \\"@nestjs/graphql\\";
+import GraphQLJSON from \\"graphql-type-json\\";
+import { JsonValue, InputJsonValue } from \\"../../../../helpers/prisma-client-mock\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ObjectType({
+  isAbstract: true,
+  description: undefined,
+})
+export class SampleSumAggregateOutputType {
+  @Field(() => Int, {
+    nullable: false,
+    description: undefined
+  })
+  intIdField!: number;
+
+  @Field(() => Float, {
+    nullable: false,
+    description: undefined
+  })
+  floatField!: number;
+}
+"
+`;
+
+exports[`outputs should properly generate output type classes: outputs index 1`] = `
+"export { AggregateSample } from \\"./AggregateSample\\";
+export { BatchPayload } from \\"./BatchPayload\\";
+export { SampleAvgAggregateOutputType } from \\"./SampleAvgAggregateOutputType\\";
+export { SampleMaxAggregateOutputType } from \\"./SampleMaxAggregateOutputType\\";
+export { SampleMinAggregateOutputType } from \\"./SampleMinAggregateOutputType\\";
+export { SampleSumAggregateOutputType } from \\"./SampleSumAggregateOutputType\\";
+"
+`;

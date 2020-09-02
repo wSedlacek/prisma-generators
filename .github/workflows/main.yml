@@ -1,4 +1,4 @@
-name: TypeGraphQL Prisma 2 integration
+name: NestJS Prisma 2 integration
 
 on:
   push:

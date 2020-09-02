@@ -1,15 +1,16 @@
 import { NestApplication } from '@nestjs/core';
-import { Resolver, Query, GraphQLModule, Args, Context } from '@nestjs/graphql';
+import { Args, Context, GraphQLModule, Query, Resolver } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
 import {
   ApolloServerTestClient,
   createTestClient,
 } from 'apollo-server-testing';
-import gql from 'graphql-tag';
 import { promises as fs } from 'fs';
 
+import { generateArtifactsDirPath } from '../helpers/artifacts-dir';
 import { generateCodeFromSchema } from '../helpers/generate-code';
-import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { gql } from '../helpers/graphql-template';
+import { prisma } from '../helpers/prisma-template';
 
 describe('custom resolvers execution', () => {
   let outputDirPath: string;
@@ -22,7 +23,7 @@ describe('custom resolvers execution', () => {
   beforeAll(async () => {
     outputDirPath = generateArtifactsDirPath('functional-custom-resolvers');
     await fs.mkdir(outputDirPath, { recursive: true });
-    const prismaSchema = /* prisma */ `
+    const prismaSchema = prisma`
       enum Color {
         RED
         GREEN
@@ -42,18 +43,18 @@ describe('custom resolvers execution', () => {
     @Resolver()
     class CustomResolver {
       @Query((_returns) => [Post])
-      async customFindManyPost(
+      public async customFindManyPost(
         @Args({ type: () => FindManyPostArgs }) args: any,
         @Context() { prisma }: any
-      ) {
-        return await prisma.post.findMany(args);
+      ): Promise<typeof Post[]> {
+        return prisma.post.findMany(args);
       }
     }
 
     const moduleFixture = await Test.createTestingModule({
       imports: [
         GraphQLModule.forRoot({
-          autoSchemaFile: outputDirPath + '/schema.graphql',
+          autoSchemaFile: `${outputDirPath}/schema.graphql`,
           context: {
             prisma: {
               post: {
@@ -72,10 +73,6 @@ describe('custom resolvers execution', () => {
     const graphqlModule = moduleFixture.get(GraphQLModule);
     apolloClient = createTestClient((graphqlModule as any).apolloServer);
   }, 10000);
-
-  afterAll(async () => {
-    await app.close();
-  });
 
   it('should be possible to use generated inputs, args and types to build own resolvers', async () => {
     findManyPostMock.mockResolvedValue([
@@ -114,7 +111,7 @@ describe('custom resolvers execution', () => {
 
   it('should produce a SDL', async () => {
     const graphQLSchemaSDL = await fs.readFile(
-      outputDirPath + '/schema.graphql',
+      `${outputDirPath}/schema.graphql`,
       { encoding: 'utf8' }
     );
     expect(graphQLSchemaSDL).toMatchSnapshot('graphQLSchemaSDL');

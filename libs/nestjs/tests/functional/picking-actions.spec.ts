@@ -4,11 +4,12 @@ import {
   GraphQLSchemaFactory,
 } from '@nestjs/graphql';
 import { Test } from '@nestjs/testing';
-import { GraphQLSchema, printSchema } from 'graphql';
 import { promises as fs } from 'fs';
+import { GraphQLSchema, printSchema } from 'graphql';
 
-import generateArtifactsDirPath from '../helpers/artifacts-dir';
+import { generateArtifactsDirPath } from '../helpers/artifacts-dir';
 import { generateCodeFromSchema } from '../helpers/generate-code';
+import { prisma } from '../helpers/prisma-template';
 
 describe('picking prisma actions', () => {
   let app: NestApplication;
@@ -19,7 +20,7 @@ describe('picking prisma actions', () => {
       'functional-picking-actions'
     );
     await fs.mkdir(outputDirPath, { recursive: true });
-    const prismaSchema = /* prisma */ `
+    const prismaSchema = prisma`
       model User {
         intIdField          Int     @id @default(autoincrement())
         uniqueStringField   String  @unique
@@ -47,7 +48,7 @@ describe('picking prisma actions', () => {
     await app.close();
   });
 
-  it('should expose in GraphQL schema only actions chosen by single resolvers', async () => {
+  it('should expose in GraphQL schema only actions chosen by single resolvers', () => {
     expect(printSchema(graphQLSchemaSDL)).toMatchSnapshot('graphQLSchemaSDL');
   });
 });

@@ -58,7 +58,7 @@ export namespace DMMF {
     // [key: string]: any;
     // additional props
     typeFieldAlias?: string;
-    typeGraphQLType: string;
+    nestGraphQLType: string;
     fieldTSType: string;
     docs?: string;
   }
@@ -103,7 +103,7 @@ export namespace DMMF {
     // additional props
     selectedInputType: SchemaArgInputType;
     typeName: string;
-    typeGraphQLType: string;
+    nestGraphQLType: string;
     fieldTSType: string;
     hasMappedName: boolean;
   }
@@ -117,17 +117,19 @@ export namespace DMMF {
   }
   export interface SchemaField {
     name: string;
-    outputType: {
-      // type: string | OutputType | Enum;
-      type: string;
-      isList: boolean;
-      isRequired: boolean;
-      kind: FieldKind;
-    };
+    outputType: TypeInfo;
     args: SchemaArg[];
     // additional props
-    typeGraphQLType: string;
+    nestGraphQLType: string;
     fieldTSType: string;
+  }
+  // named subtype of SchemaField->outputType
+  export interface TypeInfo {
+    // type: string | OutputType | Enum;
+    type: string;
+    isList: boolean;
+    isRequired: boolean;
+    kind: FieldKind;
   }
   // additional type
   export interface OutputSchemaField extends SchemaField {
@@ -159,6 +161,7 @@ export namespace DMMF {
     // additional props
     actions: Action[];
     collectionName: string;
+    resolverName: string;
   }
   // additional type
   export interface Action {
@@ -169,6 +172,7 @@ export namespace DMMF {
     method: OutputSchemaField;
     argsTypeName?: string;
     outputTypeName: string;
+    actionResolverName: string;
   }
   export enum ModelAction {
     findOne = 'findOne',
@@ -181,6 +185,18 @@ export namespace DMMF {
     deleteMany = 'deleteMany',
     // additional props
     aggregate = 'aggregate',
+  }
+  // additional type
+  export interface RelationModel {
+    model: Model;
+    outputType: OutputType;
+    relationFields: RelationField[];
+    resolverName: string;
+  }
+  // additional type
+  export interface RelationField extends Field {
+    outputTypeField: OutputSchemaField;
+    argsTypeName?: string;
   }
 }
 

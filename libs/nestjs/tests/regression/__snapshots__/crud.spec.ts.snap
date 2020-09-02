@@ -1,0 +1,1228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`crud should properly generate actions resolver classes for prisma model: CreateOneUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class CreateUserResolver {
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.create(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: DeleteManyUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => User)
+export class DeleteManyUserResolver {
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: DeleteUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class DeleteUserResolver {
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.delete(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: FindManyUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class FindManyUserResolver {
+  @Query(() => [User], {
+    nullable: false,
+    description: undefined
+  })
+  async users(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
+    return plainToClass(User, await ctx.prisma.user.findMany(args) as [User]);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: FindOneUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class FindOneUserResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async user(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: Index 1`] = `
+"import { UserCrudResolver } from \\"./User/UserCrudResolver\\";
+import { Module } from \\"@nestjs/common\\";
+
+export { UserCrudResolver } from \\"./User/UserCrudResolver\\";
+export { FindOneUserResolver } from \\"./User/FindOneUserResolver\\";
+export { FindManyUserResolver } from \\"./User/FindManyUserResolver\\";
+export { CreateUserResolver } from \\"./User/CreateUserResolver\\";
+export { DeleteUserResolver } from \\"./User/DeleteUserResolver\\";
+export { UpdateUserResolver } from \\"./User/UpdateUserResolver\\";
+export { DeleteManyUserResolver } from \\"./User/DeleteManyUserResolver\\";
+export { UpdateManyUserResolver } from \\"./User/UpdateManyUserResolver\\";
+export { UpsertUserResolver } from \\"./User/UpsertUserResolver\\";
+export { AggregateUserResolver } from \\"./User/AggregateUserResolver\\";
+export * from \\"./User/args\\";
+
+@Module({
+  providers: [
+    UserCrudResolver
+  ],
+  exports: [
+    UserCrudResolver
+  ]
+})
+export class CrudResolversModule {
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: UpdateManyUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => User)
+export class UpdateManyUserResolver {
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: UpdateUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class UpdateUserResolver {
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.update(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate actions resolver classes for prisma model: UpsertUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class UpsertUserResolver {
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.upsert(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: AggregateUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { UserDistinctFieldEnum } from \\"../../../../enums/UserDistinctFieldEnum\\";
+
+@ArgsType()
+export class AggregateUserArgs {
+  @ClassTransformer__Type(() => UserWhereInput)
+  @Field(() => UserWhereInput, { nullable: true })
+  where?: UserWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => UserOrderByInput)
+  @Field(() => [UserOrderByInput], { nullable: true })
+  orderBy?: UserOrderByInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: true })
+  cursor?: UserWhereUniqueInput | null | undefined;
+
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
+  take?: number | null | undefined;
+
+  @Field(() => Int, { nullable: true })
+  skip?: number | null | undefined;
+
+  @Field(() => [UserDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof UserDistinctFieldEnum> | null | undefined;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: CreateUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class CreateUserArgs {
+  @ClassTransformer__Type(() => UserCreateInput)
+  @Field(() => UserCreateInput, { nullable: false })
+  data!: UserCreateInput;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: DeleteManyUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class DeleteManyUserArgs {
+  @ClassTransformer__Type(() => UserWhereInput)
+  @Field(() => UserWhereInput, { nullable: true })
+  where?: UserWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: DeleteUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class DeleteUserArgs {
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  where!: UserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: FindManyUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserOrderByInput } from \\"../../../inputs/UserOrderByInput\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { UserDistinctFieldEnum } from \\"../../../../enums/UserDistinctFieldEnum\\";
+
+@ArgsType()
+export class FindManyUserArgs {
+  @ClassTransformer__Type(() => UserWhereInput)
+  @Field(() => UserWhereInput, { nullable: true })
+  where?: UserWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => UserOrderByInput)
+  @Field(() => [UserOrderByInput], { nullable: true })
+  orderBy?: UserOrderByInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: true })
+  cursor?: UserWhereUniqueInput | null | undefined;
+
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
+  take?: number | null | undefined;
+
+  @Field(() => Int, { nullable: true })
+  skip?: number | null | undefined;
+
+  @Field(() => [UserDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof UserDistinctFieldEnum> | null | undefined;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: FindOneUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class FindOneUserArgs {
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  where!: UserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: Index 1`] = `
+"export { AggregateUserArgs } from \\"./AggregateUserArgs\\";
+export { CreateUserArgs } from \\"./CreateUserArgs\\";
+export { DeleteManyUserArgs } from \\"./DeleteManyUserArgs\\";
+export { DeleteUserArgs } from \\"./DeleteUserArgs\\";
+export { FindManyUserArgs } from \\"./FindManyUserArgs\\";
+export { FindOneUserArgs } from \\"./FindOneUserArgs\\";
+export { UpdateManyUserArgs } from \\"./UpdateManyUserArgs\\";
+export { UpdateUserArgs } from \\"./UpdateUserArgs\\";
+export { UpsertUserArgs } from \\"./UpsertUserArgs\\";
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: UpdateManyUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserUpdateManyMutationInput } from \\"../../../inputs/UserUpdateManyMutationInput\\";
+import { UserWhereInput } from \\"../../../inputs/UserWhereInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpdateManyUserArgs {
+  @ClassTransformer__Type(() => UserUpdateManyMutationInput)
+  @Field(() => UserUpdateManyMutationInput, { nullable: false })
+  data!: UserUpdateManyMutationInput;
+
+  @ClassTransformer__Type(() => UserWhereInput)
+  @Field(() => UserWhereInput, { nullable: true })
+  where?: UserWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: UpdateUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpdateUserArgs {
+  @ClassTransformer__Type(() => UserUpdateInput)
+  @Field(() => UserUpdateInput, { nullable: false })
+  data!: UserUpdateInput;
+
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  where!: UserWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud should properly generate args classes for every method of crud resolver: UpsertUserArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { UserCreateInput } from \\"../../../inputs/UserCreateInput\\";
+import { UserUpdateInput } from \\"../../../inputs/UserUpdateInput\\";
+import { UserWhereUniqueInput } from \\"../../../inputs/UserWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpsertUserArgs {
+  @ClassTransformer__Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput, { nullable: false })
+  where!: UserWhereUniqueInput;
+
+  @ClassTransformer__Type(() => UserCreateInput)
+  @Field(() => UserCreateInput, { nullable: false })
+  create!: UserCreateInput;
+
+  @ClassTransformer__Type(() => UserUpdateInput)
+  @Field(() => UserUpdateInput, { nullable: false })
+  update!: UserUpdateInput;
+}
+"
+`;
+
+exports[`crud should properly generate resolver class for single prisma model: UserCrudResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { plainToClass } from \\"class-transformer\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
+import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
+import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
+import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
+import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
+import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
+import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => User)
+export class UserCrudResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async user(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+
+  @Query(() => [User], {
+    nullable: false,
+    description: undefined
+  })
+  async users(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
+    return plainToClass(User, await ctx.prisma.user.findMany(args) as [User]);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.create(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.delete(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.update(args) as User);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.upsert(args) as User);
+  }
+
+  @Query(() => AggregateUser, {
+    nullable: false,
+    description: undefined
+  })
+  async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith(\\"_\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud should properly generate resolver class when cannot pluralize model name: StaffCrudResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { plainToClass } from \\"class-transformer\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateStaffArgs } from \\"./args/AggregateStaffArgs\\";
+import { CreateStaffArgs } from \\"./args/CreateStaffArgs\\";
+import { DeleteManyStaffArgs } from \\"./args/DeleteManyStaffArgs\\";
+import { DeleteStaffArgs } from \\"./args/DeleteStaffArgs\\";
+import { FindManyStaffArgs } from \\"./args/FindManyStaffArgs\\";
+import { FindOneStaffArgs } from \\"./args/FindOneStaffArgs\\";
+import { UpdateManyStaffArgs } from \\"./args/UpdateManyStaffArgs\\";
+import { UpdateStaffArgs } from \\"./args/UpdateStaffArgs\\";
+import { UpsertStaffArgs } from \\"./args/UpsertStaffArgs\\";
+import { Staff } from \\"../../../models/Staff\\";
+import { AggregateStaff } from \\"../../outputs/AggregateStaff\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => Staff)
+export class StaffCrudResolver {
+  @Query(() => Staff, {
+    nullable: true,
+    description: undefined
+  })
+  async findOneStaff(@Context() ctx: any, @Args() args: FindOneStaffArgs): Promise<Staff | null | undefined> {
+    return plainToClass(Staff, await ctx.prisma.staff.findOne(args) as Staff);
+  }
+
+  @Query(() => [Staff], {
+    nullable: false,
+    description: undefined
+  })
+  async findManyStaff(@Context() ctx: any, @Args() args: FindManyStaffArgs): Promise<Staff[]> {
+    return plainToClass(Staff, await ctx.prisma.staff.findMany(args) as [Staff]);
+  }
+
+  @Mutation(() => Staff, {
+    nullable: false,
+    description: undefined
+  })
+  async createStaff(@Context() ctx: any, @Args() args: CreateStaffArgs): Promise<Staff> {
+    return plainToClass(Staff, await ctx.prisma.staff.create(args) as Staff);
+  }
+
+  @Mutation(() => Staff, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteStaff(@Context() ctx: any, @Args() args: DeleteStaffArgs): Promise<Staff | null | undefined> {
+    return plainToClass(Staff, await ctx.prisma.staff.delete(args) as Staff);
+  }
+
+  @Mutation(() => Staff, {
+    nullable: true,
+    description: undefined
+  })
+  async updateStaff(@Context() ctx: any, @Args() args: UpdateStaffArgs): Promise<Staff | null | undefined> {
+    return plainToClass(Staff, await ctx.prisma.staff.update(args) as Staff);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyStaff(@Context() ctx: any, @Args() args: DeleteManyStaffArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.staff.deleteMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyStaff(@Context() ctx: any, @Args() args: UpdateManyStaffArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.staff.updateMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => Staff, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertStaff(@Context() ctx: any, @Args() args: UpsertStaffArgs): Promise<Staff> {
+    return plainToClass(Staff, await ctx.prisma.staff.upsert(args) as Staff);
+  }
+
+  @Query(() => AggregateStaff, {
+    nullable: false,
+    description: undefined
+  })
+  async aggregateStaff(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateStaffArgs): Promise<AggregateStaff> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith(\\"_\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.staff.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud should properly generate resolver class when useOriginalMapping is used: FindOneUserResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => User)
+export class FindOneUserResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async findOneUser(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud should properly generate resolver class when useOriginalMapping is used: UserCrudResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { plainToClass } from \\"class-transformer\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateUserArgs } from \\"./args/AggregateUserArgs\\";
+import { CreateUserArgs } from \\"./args/CreateUserArgs\\";
+import { DeleteManyUserArgs } from \\"./args/DeleteManyUserArgs\\";
+import { DeleteUserArgs } from \\"./args/DeleteUserArgs\\";
+import { FindManyUserArgs } from \\"./args/FindManyUserArgs\\";
+import { FindOneUserArgs } from \\"./args/FindOneUserArgs\\";
+import { UpdateManyUserArgs } from \\"./args/UpdateManyUserArgs\\";
+import { UpdateUserArgs } from \\"./args/UpdateUserArgs\\";
+import { UpsertUserArgs } from \\"./args/UpsertUserArgs\\";
+import { User } from \\"../../../models/User\\";
+import { AggregateUser } from \\"../../outputs/AggregateUser\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => User)
+export class UserCrudResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async findOneUser(@Context() ctx: any, @Args() args: FindOneUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+
+  @Query(() => [User], {
+    nullable: false,
+    description: undefined
+  })
+  async findManyUser(@Context() ctx: any, @Args() args: FindManyUserArgs): Promise<User[]> {
+    return plainToClass(User, await ctx.prisma.user.findMany(args) as [User]);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async createUser(@Context() ctx: any, @Args() args: CreateUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.create(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteUser(@Context() ctx: any, @Args() args: DeleteUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.delete(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async updateUser(@Context() ctx: any, @Args() args: UpdateUserArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.update(args) as User);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyUser(@Context() ctx: any, @Args() args: DeleteManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyUser(@Context() ctx: any, @Args() args: UpdateManyUserArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertUser(@Context() ctx: any, @Args() args: UpsertUserArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.upsert(args) as User);
+  }
+
+  @Query(() => AggregateUser, {
+    nullable: false,
+    description: undefined
+  })
+  async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith(\\"_\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: CreateOneClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { CreateClientArgs } from \\"./args/CreateClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class CreateClientResolver {
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.create(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { DeleteClientArgs } from \\"./args/DeleteClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class DeleteClientResolver {
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.delete(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: DeleteManyClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => Client)
+export class DeleteManyClientResolver {
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindManyClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class FindManyClientResolver {
+  @Query(() => [User], {
+    nullable: false,
+    description: undefined
+  })
+  async clients(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<User[]> {
+    return plainToClass(User, await ctx.prisma.user.findMany(args) as [User]);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: FindOneClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { FindOneClientArgs } from \\"./args/FindOneClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class FindOneClientResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async client(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: Index 1`] = `
+"import { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
+import { Module } from \\"@nestjs/common\\";
+
+export { ClientCrudResolver } from \\"./Client/ClientCrudResolver\\";
+export { FindOneClientResolver } from \\"./Client/FindOneClientResolver\\";
+export { FindManyClientResolver } from \\"./Client/FindManyClientResolver\\";
+export { CreateClientResolver } from \\"./Client/CreateClientResolver\\";
+export { DeleteClientResolver } from \\"./Client/DeleteClientResolver\\";
+export { UpdateClientResolver } from \\"./Client/UpdateClientResolver\\";
+export { DeleteManyClientResolver } from \\"./Client/DeleteManyClientResolver\\";
+export { UpdateManyClientResolver } from \\"./Client/UpdateManyClientResolver\\";
+export { UpsertClientResolver } from \\"./Client/UpsertClientResolver\\";
+export { AggregateClientResolver } from \\"./Client/AggregateClientResolver\\";
+export * from \\"./Client/args\\";
+
+@Module({
+  providers: [
+    ClientCrudResolver
+  ],
+  exports: [
+    ClientCrudResolver
+  ]
+})
+export class CrudResolversModule {
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class UpdateClientResolver {
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.update(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpdateManyClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => Client)
+export class UpdateManyClientResolver {
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate actions resolver classes for prisma model: UpsertClientResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { plainToClass } from \\"class-transformer\\";
+
+@Resolver(() => Client)
+export class UpsertClientResolver {
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.upsert(args) as User);
+  }
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: AggregateClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
+import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { ClientDistinctFieldEnum } from \\"../../../../enums/ClientDistinctFieldEnum\\";
+
+@ArgsType()
+export class AggregateClientArgs {
+  @ClassTransformer__Type(() => ClientWhereInput)
+  @Field(() => ClientWhereInput, { nullable: true })
+  where?: ClientWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => ClientOrderByInput)
+  @Field(() => [ClientOrderByInput], { nullable: true })
+  orderBy?: ClientOrderByInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: true })
+  cursor?: ClientWhereUniqueInput | null | undefined;
+
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
+  take?: number | null | undefined;
+
+  @Field(() => Int, { nullable: true })
+  skip?: number | null | undefined;
+
+  @Field(() => [ClientDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ClientDistinctFieldEnum> | null | undefined;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: CreateClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class CreateClientArgs {
+  @ClassTransformer__Type(() => ClientCreateInput)
+  @Field(() => ClientCreateInput, { nullable: false })
+  data!: ClientCreateInput;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class DeleteClientArgs {
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
+  where!: ClientWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: DeleteManyClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class DeleteManyClientArgs {
+  @ClassTransformer__Type(() => ClientWhereInput)
+  @Field(() => ClientWhereInput, { nullable: true })
+  where?: ClientWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindManyClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientOrderByInput } from \\"../../../inputs/ClientOrderByInput\\";
+import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+import { ClientDistinctFieldEnum } from \\"../../../../enums/ClientDistinctFieldEnum\\";
+
+@ArgsType()
+export class FindManyClientArgs {
+  @ClassTransformer__Type(() => ClientWhereInput)
+  @Field(() => ClientWhereInput, { nullable: true })
+  where?: ClientWhereInput | null | undefined;
+
+  @ClassTransformer__Type(() => ClientOrderByInput)
+  @Field(() => [ClientOrderByInput], { nullable: true })
+  orderBy?: ClientOrderByInput[] | null | undefined;
+
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: true })
+  cursor?: ClientWhereUniqueInput | null | undefined;
+
+  @Field(() => Int, { nullable: true, defaultValue: 20 })
+  take?: number | null | undefined;
+
+  @Field(() => Int, { nullable: true })
+  skip?: number | null | undefined;
+
+  @Field(() => [ClientDistinctFieldEnum], { nullable: true })
+  distinct?: Array<keyof typeof ClientDistinctFieldEnum> | null | undefined;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: FindOneClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class FindOneClientArgs {
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
+  where!: ClientWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: Index 1`] = `
+"export { AggregateClientArgs } from \\"./AggregateClientArgs\\";
+export { CreateClientArgs } from \\"./CreateClientArgs\\";
+export { DeleteClientArgs } from \\"./DeleteClientArgs\\";
+export { DeleteManyClientArgs } from \\"./DeleteManyClientArgs\\";
+export { FindManyClientArgs } from \\"./FindManyClientArgs\\";
+export { FindOneClientArgs } from \\"./FindOneClientArgs\\";
+export { UpdateClientArgs } from \\"./UpdateClientArgs\\";
+export { UpdateManyClientArgs } from \\"./UpdateManyClientArgs\\";
+export { UpsertClientArgs } from \\"./UpsertClientArgs\\";
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpdateClientArgs {
+  @ClassTransformer__Type(() => ClientUpdateInput)
+  @Field(() => ClientUpdateInput, { nullable: false })
+  data!: ClientUpdateInput;
+
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
+  where!: ClientWhereUniqueInput;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpdateManyClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientUpdateManyMutationInput } from \\"../../../inputs/ClientUpdateManyMutationInput\\";
+import { ClientWhereInput } from \\"../../../inputs/ClientWhereInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpdateManyClientArgs {
+  @ClassTransformer__Type(() => ClientUpdateManyMutationInput)
+  @Field(() => ClientUpdateManyMutationInput, { nullable: false })
+  data!: ClientUpdateManyMutationInput;
+
+  @ClassTransformer__Type(() => ClientWhereInput)
+  @Field(() => ClientWhereInput, { nullable: true })
+  where?: ClientWhereInput | null | undefined;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate args classes for every method of crud resolver: UpsertClientArgs 1`] = `
+"import { ArgsType, Field, Int } from \\"@nestjs/graphql\\";
+import { ClientCreateInput } from \\"../../../inputs/ClientCreateInput\\";
+import { ClientUpdateInput } from \\"../../../inputs/ClientUpdateInput\\";
+import { ClientWhereUniqueInput } from \\"../../../inputs/ClientWhereUniqueInput\\";
+import { Type as ClassTransformer__Type } from \\"class-transformer\\";
+
+@ArgsType()
+export class UpsertClientArgs {
+  @ClassTransformer__Type(() => ClientWhereUniqueInput)
+  @Field(() => ClientWhereUniqueInput, { nullable: false })
+  where!: ClientWhereUniqueInput;
+
+  @ClassTransformer__Type(() => ClientCreateInput)
+  @Field(() => ClientCreateInput, { nullable: false })
+  create!: ClientCreateInput;
+
+  @ClassTransformer__Type(() => ClientUpdateInput)
+  @Field(() => ClientUpdateInput, { nullable: false })
+  update!: ClientUpdateInput;
+}
+"
+`;
+
+exports[`crud when model is renamed should properly generate resolver class for single prisma model: ClientCrudResolver 1`] = `
+"import { Args, Context, Info, Query, Mutation, Resolver } from \\"@nestjs/graphql\\";
+import { plainToClass } from \\"class-transformer\\";
+import graphqlFields from \\"graphql-fields\\";
+import { GraphQLResolveInfo } from \\"graphql\\";
+import { AggregateClientArgs } from \\"./args/AggregateClientArgs\\";
+import { CreateClientArgs } from \\"./args/CreateClientArgs\\";
+import { DeleteClientArgs } from \\"./args/DeleteClientArgs\\";
+import { DeleteManyClientArgs } from \\"./args/DeleteManyClientArgs\\";
+import { FindManyClientArgs } from \\"./args/FindManyClientArgs\\";
+import { FindOneClientArgs } from \\"./args/FindOneClientArgs\\";
+import { UpdateClientArgs } from \\"./args/UpdateClientArgs\\";
+import { UpdateManyClientArgs } from \\"./args/UpdateManyClientArgs\\";
+import { UpsertClientArgs } from \\"./args/UpsertClientArgs\\";
+import { Client } from \\"../../../models/Client\\";
+import { AggregateClient } from \\"../../outputs/AggregateClient\\";
+import { BatchPayload } from \\"../../outputs/BatchPayload\\";
+
+@Resolver(() => Client)
+export class ClientCrudResolver {
+  @Query(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async findOneClient(@Context() ctx: any, @Args() args: FindOneClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.findOne(args) as User);
+  }
+
+  @Query(() => [User], {
+    nullable: false,
+    description: undefined
+  })
+  async findManyClient(@Context() ctx: any, @Args() args: FindManyClientArgs): Promise<User[]> {
+    return plainToClass(User, await ctx.prisma.user.findMany(args) as [User]);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async createClient(@Context() ctx: any, @Args() args: CreateClientArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.create(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async deleteClient(@Context() ctx: any, @Args() args: DeleteClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.delete(args) as User);
+  }
+
+  @Mutation(() => User, {
+    nullable: true,
+    description: undefined
+  })
+  async updateClient(@Context() ctx: any, @Args() args: UpdateClientArgs): Promise<User | null | undefined> {
+    return plainToClass(User, await ctx.prisma.user.update(args) as User);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async deleteManyClient(@Context() ctx: any, @Args() args: DeleteManyClientArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.deleteMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => BatchPayload, {
+    nullable: false,
+    description: undefined
+  })
+  async updateManyClient(@Context() ctx: any, @Args() args: UpdateManyClientArgs): Promise<BatchPayload> {
+    return plainToClass(BatchPayload, await ctx.prisma.user.updateMany(args) as BatchPayload);
+  }
+
+  @Mutation(() => User, {
+    nullable: false,
+    description: undefined
+  })
+  async upsertClient(@Context() ctx: any, @Args() args: UpsertClientArgs): Promise<User> {
+    return plainToClass(User, await ctx.prisma.user.upsert(args) as User);
+  }
+
+  @Query(() => AggregateClient, {
+    nullable: false,
+    description: undefined
+  })
+  async aggregateClient(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateClientArgs): Promise<AggregateClient> {
+    const transformFields = (fields: Record<string, any>): Record<string, any> => {
+      return Object.fromEntries(
+        Object.entries(fields)
+          .filter(([key, value]) => !key.startsWith(\\"_\\"))
+          .map<[string, any]>(([key, value]) => {
+            if (Object.keys(value).length === 0) {
+              return [key, true];
+            }
+            return [key, transformFields(value)];
+          }),
+      );
+    }
+
+    return ctx.prisma.user.aggregate({
+      ...args,
+      ...transformFields(graphqlFields(info as any)),
+    });
+  }
+}
+"
+`;

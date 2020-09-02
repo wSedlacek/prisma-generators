@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
+  "exclude": ["tests/artifacts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

@@ -1,11 +1,10 @@
 import path from 'path';
 import { Project } from 'ts-morph';
 
-import { saveSourceFile } from '../../utils';
+import { isDefined } from '../../utils';
 import { crudResolversFolderName, resolversFolderName } from '../config';
 import { DmmfDocument } from '../dmmf/dmmf-document';
 import { DMMF } from '../dmmf/types';
-import { pascalCase } from '../helpers';
 import {
   generateArgsImports,
   generateClassTransformerImport,
@@ -16,28 +15,25 @@ import {
 } from '../imports';
 import { generateCrudResolverClassMethodDeclaration } from './helpers';
 
-export const generateActionResolverClass = async (
+export const generateActionResolverClass = (
   project: Project,
   baseDirPath: string,
   model: DMMF.Model,
   action: DMMF.Action,
-  modelNames: string[],
   mapping: DMMF.Mapping,
   dmmfDocument: DmmfDocument
-): Promise<string> => {
-  const actionResolverName = `${pascalCase(action.kind)}${
-    model.typeName
-  }Resolver`;
-  const resolverDirPath = path.resolve(
-    baseDirPath,
-    resolversFolderName,
-    crudResolversFolderName,
-    model.typeName
+) => {
+  const sourceFile = project.createSourceFile(
+    path.resolve(
+      baseDirPath,
+      resolversFolderName,
+      crudResolversFolderName,
+      model.typeName,
+      `${action.actionResolverName}.ts`
+    ),
+    undefined,
+    { overwrite: true }
   );
-  const filePath = path.resolve(resolverDirPath, `${actionResolverName}.ts`);
-  const sourceFile = project.createSourceFile(filePath, undefined, {
-    overwrite: true,
-  });
 
   generateNestJSCrudImport(sourceFile);
   if (action.kind === DMMF.ModelAction.aggregate) {
@@ -49,19 +45,22 @@ export const generateActionResolverClass = async (
   generateModelsImports(
     sourceFile,
     [model.name, action.outputTypeName]
-      .filter((name) => modelNames.includes(name))
-      .map((typeName) => dmmfDocument.getModelTypeName(typeName) ?? typeName),
+      .filter((typeName) => dmmfDocument.isModelName(typeName))
+      .map((typeName) => dmmfDocument.getModelTypeName(typeName))
+      .filter(isDefined),
     3
   );
   generateClassTransformerImport(sourceFile);
   generateOutputsImports(
     sourceFile,
-    [action.outputTypeName].filter((name) => !modelNames.includes(name)),
+    [action.outputTypeName].filter(
+      (typeName) => !dmmfDocument.isModelName(typeName)
+    ),
     2
   );
 
   sourceFile.addClass({
-    name: actionResolverName,
+    name: action.actionResolverName,
     isExported: true,
     decorators: [
       {
@@ -78,8 +77,4 @@ export const generateActionResolverClass = async (
       ),
     ],
   });
-
-  await saveSourceFile(sourceFile);
-
-  return actionResolverName;
 };

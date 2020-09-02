@@ -4,12 +4,35 @@ import {
   ApolloServerTestClient,
   createTestClient,
 } from 'apollo-server-testing';
-import gql from 'graphql-tag';
 import { promises as fs } from 'fs';
 
+import { GraphQLModule, Query, Resolver } from '@nestjs/graphql';
+import { generateArtifactsDirPath } from '../helpers/artifacts-dir';
 import { generateCodeFromSchema } from '../helpers/generate-code';
-import generateArtifactsDirPath from '../helpers/artifacts-dir';
-import { Resolver, Query, GraphQLModule } from '@nestjs/graphql';
+import { gql } from '../helpers/graphql-template';
+import { prisma } from '../helpers/prisma-template';
+
+const postsData = [
+  {
+    uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
+    color: 'RED',
+  },
+  {
+    uuid: '72c8a188-3d46-45b3-b23f-7d420aa282f1',
+    color: 'BLUE',
+  },
+];
+
+const usersData = [
+  {
+    id: 1,
+    name: 'Test 1',
+  },
+  {
+    id: 2,
+    name: 'Test 2',
+  },
+];
 
 describe('relations resolvers execution', () => {
   const findOnePostMock = jest.fn();
@@ -23,7 +46,7 @@ describe('relations resolvers execution', () => {
     beforeAll(async () => {
       const outputDirPath = generateArtifactsDirPath('functional-relations');
       await fs.mkdir(outputDirPath, { recursive: true });
-      const prismaSchema = /* prisma */ `
+      const prismaSchema = prisma`
         enum Color {
           RED
           GREEN
@@ -56,31 +79,13 @@ describe('relations resolvers execution', () => {
       @Resolver()
       class CustomResolver {
         @Query(() => [User])
-        users(): any[] {
-          return [
-            {
-              id: 1,
-              name: 'Test 1',
-            },
-            {
-              id: 2,
-              name: 'Test 2',
-            },
-          ];
+        public users(): any[] {
+          return usersData;
         }
 
         @Query(() => [Post])
-        posts(): any[] {
-          return [
-            {
-              uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
-              color: 'RED',
-            },
-            {
-              uuid: '72c8a188-3d46-45b3-b23f-7d420aa282f1',
-              color: 'BLUE',
-            },
-          ];
+        public posts(): any[] {
+          return postsData;
         }
       }
 
@@ -124,16 +129,7 @@ describe('relations resolvers execution', () => {
       });
 
       findOneUserMock.mockReturnValue({
-        posts: jest.fn().mockResolvedValue([
-          {
-            uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
-            color: 'RED',
-          },
-          {
-            uuid: '72c8a188-3d46-45b3-b23f-7d420aa282f1',
-            color: 'BLUE',
-          },
-        ]),
+        posts: jest.fn().mockResolvedValue(postsData),
       });
 
       const { data, errors } = await apolloClient.query({
@@ -164,16 +160,7 @@ describe('relations resolvers execution', () => {
       findOneUserMock.mockReturnValueOnce({
         posts: findOneUserPostsMock,
       });
-      findOneUserPostsMock.mockResolvedValue([
-        {
-          uuid: 'b0c0d78e-4dff-4cdd-ba23-9b417dc684e2',
-          color: 'RED',
-        },
-        {
-          uuid: '72c8a188-3d46-45b3-b23f-7d420aa282f1',
-          color: 'BLUE',
-        },
-      ]);
+      findOneUserPostsMock.mockResolvedValue(postsData);
 
       const { data, errors } = await apolloClient.query({
         query: gql`
@@ -237,7 +224,7 @@ describe('relations resolvers execution', () => {
     beforeAll(async () => {
       const outputDirPath = generateArtifactsDirPath('functional-relations');
       await fs.mkdir(outputDirPath, { recursive: true });
-      const prismaSchema = /* prisma */ `
+      const prismaSchema = prisma`
         enum Color {
           RED
           GREEN
@@ -266,7 +253,7 @@ describe('relations resolvers execution', () => {
       @Resolver()
       class CustomResolver {
         @Query(() => Post)
-        post(): any {
+        public post(): any {
           return {
             title: 'Post 1',
             color: 'BLUE',

@@ -1,0 +1,12 @@
+{
+  "extends": "../tslint.json",
+  "linterOptions": { "exclude": ["!**/*"] },
+  "rules": {
+    "no-import-side-effect": [true, "./cli/generator"],
+    "no-big-function": false,
+    "max-classes-per-file": false,
+    "no-shadowed-variable": false,
+    "no-duplicate-string": false,
+    "max-file-line-count": false
+  }
+}

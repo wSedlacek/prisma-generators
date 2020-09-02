@@ -7,7 +7,7 @@ import {
   SetAccessorDeclarationStructure,
 } from 'ts-morph';
 
-import { isDefined, saveSourceFile } from '../utils';
+import { isDefined } from '../utils';
 import { inputsFolderName, outputsFolderName } from './config';
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { DMMF } from './dmmf/types';
@@ -24,12 +24,11 @@ import {
 } from './imports';
 import { GenerateCodeOptions } from './options';
 
-export const generateOutputTypeClassFromType = async (
+export const generateOutputTypeClassFromType = (
   project: Project,
   dirPath: string,
   type: DMMF.OutputType,
-  _dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions
+  dmmfDocument: DmmfDocument
 ) => {
   const fileDirPath = path.resolve(dirPath, outputsFolderName);
   const filePath = path.resolve(fileDirPath, `${type.typeName}.ts`);
@@ -42,7 +41,7 @@ export const generateOutputTypeClassFromType = async (
 
   generateNestJSModelImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, options, 2);
+  generatePrismaJsonTypeImport(sourceFile, dmmfDocument.options, 2);
   generateClassTransformerDTOImport(sourceFile);
   generateArgsImports(sourceFile, fieldArgsTypeNames, 0);
   generateOutputsImports(
@@ -89,7 +88,7 @@ export const generateOutputTypeClassFromType = async (
             {
               name: 'Field',
               arguments: [
-                `() => ${field.typeGraphQLType}`,
+                `() => ${field.nestGraphQLType}`,
                 `{
                   nullable: ${!isRequired},
                   description: undefined
@@ -101,17 +100,14 @@ export const generateOutputTypeClassFromType = async (
       }
     ),
   });
-
-  await saveSourceFile(sourceFile);
 };
 
-export const generateInputTypeClassFromType = async (
+export const generateInputTypeClassFromType = (
   project: Project,
   dirPath: string,
   inputType: DMMF.InputType,
-  _dmmfDocument: DmmfDocument,
-  options: GenerateCodeOptions
-): Promise<void> => {
+  dmmfDocument: DmmfDocument
+) => {
   const filePath = path.resolve(
     dirPath,
     inputsFolderName,
@@ -123,7 +119,7 @@ export const generateInputTypeClassFromType = async (
 
   generateNestJSInputImport(sourceFile);
   generateGraphQLScalarImport(sourceFile);
-  generatePrismaJsonTypeImport(sourceFile, options, 2);
+  generatePrismaJsonTypeImport(sourceFile, dmmfDocument.options, 2);
   generateClassTransformerDTOImport(sourceFile);
   generateInputsImports(
     sourceFile,
@@ -182,7 +178,7 @@ export const generateInputTypeClassFromType = async (
               {
                 name: 'Field',
                 arguments: [
-                  `() => ${field.typeGraphQLType}`,
+                  `() => ${field.nestGraphQLType}`,
                   `{
                       nullable: ${isOptional},
                       description: undefined
@@ -214,7 +210,7 @@ export const generateInputTypeClassFromType = async (
           {
             name: 'Field',
             arguments: [
-              `() => ${field.typeGraphQLType}`,
+              `() => ${field.nestGraphQLType}`,
               `{
                   nullable: ${!field.selectedInputType.isRequired},
                   description: undefined
@@ -238,6 +234,4 @@ export const generateInputTypeClassFromType = async (
       };
     }),
   });
-
-  await saveSourceFile(sourceFile);
 };

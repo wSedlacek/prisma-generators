@@ -1,8 +1,8 @@
-import generateCode from '../../src/generator/generate-code';
-import getPrismaClientDmmfFromPrismaSchema from './dmmf';
+import { generateCode } from '../../src/generator/generate-code';
 import { GenerateCodeOptions } from '../../src/generator/options';
+import { getPrismaClientDmmfFromPrismaSchema } from './dmmf';
 
-type SupportedPreviewFeatures = 'aggregations' | 'distinct' | 'connectOrCreate';
+type SupportedPreviewFeatures = 'connectOrCreate';
 
 interface GenerateCodeFromSchemaOptions
   extends Omit<GenerateCodeOptions, 'relativePrismaOutputPath'> {

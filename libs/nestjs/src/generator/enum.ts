@@ -1,13 +1,11 @@
 import path from 'path';
 import { EnumMemberStructure, OptionalKind, Project } from 'ts-morph';
 
-import { saveSourceFile } from '../utils';
 import { enumsFolderName } from './config';
 import { DMMF } from './dmmf/types';
-import { cleanDocsString } from './helpers';
 import { generateNestJSEnumImport } from './imports';
 
-export const generateEnumFromDef = async (
+export const generateEnumFromDef = (
   project: Project,
   baseDirPath: string,
   enumDef: DMMF.Enum
@@ -45,6 +43,4 @@ export const generateEnumFromDef = async (
       description: ${description},
     });`,
   ]);
-
-  await saveSourceFile(sourceFile);
 };

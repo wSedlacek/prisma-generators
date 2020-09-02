@@ -1,11 +1,11 @@
 import { DmmfDocument } from './dmmf/dmmf-document';
 import { fieldAttributeRegex, modelAttributeRegex } from './dmmf/helpers';
-import { DMMFTypeInfo } from './types';
+import { DMMF } from './dmmf/types';
 
 export const noop = () => {};
 
 export const getFieldTSType = (
-  typeInfo: DMMFTypeInfo,
+  typeInfo: DMMF.TypeInfo,
   dmmfDocument: DmmfDocument,
   isInputType: boolean,
   modelName?: string,
@@ -33,8 +33,8 @@ export const getFieldTSType = (
   }
   if (!typeInfo.isRequired) {
     // FIXME: use properly null for output and undefined for input
-    // TSType += " | null | undefined";
-    TSType += ' | undefined';
+    // TSType += ' | undefined';
+    TSType += ' | null | undefined';
   }
 
   return TSType;
@@ -67,7 +67,7 @@ export const mapScalarToTSType = (scalar: string, isInputType: boolean) => {
 };
 
 export const getGraphQLType = (
-  typeInfo: DMMFTypeInfo,
+  typeInfo: DMMF.TypeInfo,
   dmmfDocument: DmmfDocument,
   modelName?: string,
   typeName?: string
@@ -133,6 +133,8 @@ const getInputKeywordPhrasePosition = (inputTypeName: string) => {
     'Upsert',
     'ScalarWhere',
     'Where',
+    'ListRelationFilter',
+    'RelationFilter',
     'Filter',
   ]
     .map((inputKeyword) => inputTypeName.search(inputKeyword))

@@ -1,3 +1,6 @@
 {
-  "extends": "tslint-config-suiyobi"
+  "extends": "tslint-config-suiyobi",
+  "rules": {
+    "strict-comparisons": [true, { "allow-string-order-comparison": true }]
+  }
 }

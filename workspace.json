@@ -17,12 +17,23 @@
             "exclude": ["**/node_modules/**", "!libs/nestjs/**/*"]
           }
         },
+        "prepare-test": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "ts-node -P libs/nestjs/tsconfig.spec.json libs/nestjs/tests/helpers/prepare-tests.ts"
+              }
+            ]
+          }
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/nestjs/jest.config.js",
             "tsConfig": "libs/nestjs/tsconfig.spec.json",
-            "passWithNoTests": true
+            "passWithNoTests": true,
+            "runInBand": true
           }
         },
         "build": {
@@ -50,7 +61,8 @@
             "outputPath": "dist/apps/nestjs/examples/1-basic",
             "main": "apps/nestjs/examples/1-basic/src/main.ts",
             "tsConfig": "apps/nestjs/examples/1-basic/tsconfig.app.json",
-            "assets": ["apps/nestjs/examples/1-basic/src/assets"]
+            "assets": ["apps/nestjs/examples/1-basic/src/assets"],
+            "showCircularDependencies": false
           },
           "configurations": {
             "production": {
@@ -92,6 +104,31 @@
             "tsConfig": "apps/nestjs/examples/1-basic/tsconfig.spec.json",
             "passWithNoTests": true
           }
+        },
+        "generate": {
+          "builder": "@nx-tools/nx-prisma:generate",
+          "options": {
+            "schema": "apps/nestjs/examples/1-basic/prisma/schema.prisma"
+          }
+        },
+        "migrations": {
+          "builder": "@nx-tools/nx-prisma:migrations",
+          "options": {
+            "schema": "apps/nestjs/examples/1-basic/prisma/schema.prisma"
+          }
+        },
+        "rollback": {
+          "builder": "@nx-tools/nx-prisma:rollback",
+          "options": {
+            "schema": "apps/nestjs/examples/1-basic/prisma/schema.prisma"
+          }
+        },
+        "seed": {
+          "builder": "@nx-tools/nx-prisma:seed",
+          "options": {
+            "script": "apps/nestjs/examples/1-basic/prisma/seed.ts",
+            "tsConfig": "apps/nestjs/examples/1-basic/tsconfig.tools.json"
+          }
         }
       }
     },
@@ -108,7 +145,8 @@
             "outputPath": "dist/apps/nestjs/examples/2-picking-actions",
             "main": "apps/nestjs/examples/2-picking-actions/src/main.ts",
             "tsConfig": "apps/nestjs/examples/2-picking-actions/tsconfig.app.json",
-            "assets": ["apps/nestjs/examples/2-picking-actions/src/assets"]
+            "assets": ["apps/nestjs/examples/2-picking-actions/src/assets"],
+            "showCircularDependencies": false
           },
           "configurations": {
             "production": {
@@ -149,6 +187,31 @@
             "jestConfig": "apps/nestjs/examples/2-picking-actions/jest.config.js",
             "tsConfig": "apps/nestjs/examples/2-picking-actions/tsconfig.spec.json",
             "passWithNoTests": true
+          }
+        },
+        "generate": {
+          "builder": "@nx-tools/nx-prisma:generate",
+          "options": {
+            "schema": "apps/nestjs/examples/2-picking-actions/prisma/schema.prisma"
+          }
+        },
+        "migrations": {
+          "builder": "@nx-tools/nx-prisma:migrations",
+          "options": {
+            "schema": "apps/nestjs/examples/2-picking-actions/prisma/schema.prisma"
+          }
+        },
+        "rollback": {
+          "builder": "@nx-tools/nx-prisma:rollback",
+          "options": {
+            "schema": "apps/nestjs/examples/2-picking-actions/prisma/schema.prisma"
+          }
+        },
+        "seed": {
+          "builder": "@nx-tools/nx-prisma:seed",
+          "options": {
+            "script": "apps/nestjs/examples/2-picking-actions/prisma/seed.ts",
+            "tsConfig": "apps/nestjs/examples/2-picking-actions/tsconfig.tools.json"
           }
         }
       }
