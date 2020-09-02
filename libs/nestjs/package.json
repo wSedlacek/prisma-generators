@@ -1,7 +1,11 @@
 {
   "name": "@prisma-generators/nestjs",
-  "version": "0.6.0-alpha2",
+  "version": "0.6.0-alpha4",
   "author": "wSedlacek",
+  "license": "MIT",
+  "bin": {
+    "prisma-nestjs": "./src/index.js"
+  },
   "repository": "https://github.com/wSedlacek/prisma-generators",
   "bugs": "https://github.com/wSedlacek/prisma-generators/issues",
   "peerDependencies": {

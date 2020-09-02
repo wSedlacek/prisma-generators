@@ -40,7 +40,7 @@ Once installed the next step is to add a generator to your `schema.prisma` then 
 
 ```prisma
 generator nestjs {
-  provider    = "@prisma-generators/nestjs"
+  provider    = "prisma-nestjs"
   defaultTake = 20
 }
 ```
